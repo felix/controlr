@@ -1,0 +1,27 @@
+%h1 Listing servers
+
+%table
+  %tr
+    %th Name
+    %th Active
+    %th Created at
+    %th Updated at
+    %th Deleted at
+    %th
+    %th
+    %th
+
+  - @servers.each do |server|
+    %tr
+      %td= server.name
+      %td= server.active
+      %td= server.created_at
+      %td= server.updated_at
+      %td= server.deleted_at
+      %td= link_to 'Show', server
+      %td= link_to 'Edit', edit_server_path(server)
+      %td= link_to 'Destroy', server, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Server', new_server_path

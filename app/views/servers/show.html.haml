@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @server.name
+%p
+  %b Active:
+  = @server.active
+%p
+  %b Created at:
+  = @server.created_at
+%p
+  %b Updated at:
+  = @server.updated_at
+%p
+  %b Deleted at:
+  = @server.deleted_at
+
+= link_to 'Edit', edit_server_path(@server)
+\|
+= link_to 'Back', servers_path
