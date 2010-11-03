@@ -2,7 +2,12 @@ require 'test_helper'
 
 class ServersControllerTest < ActionController::TestCase
   setup do
-    @server = Server.new(:name => 'server1', :active => true)
+    @valid_attributes = {
+      :name => 'server',
+      :active => true
+    }
+    @server = Server.create(@valid_attributes.merge(:name => 'server1'))
+    @server2 = Server.create(@valid_attributes.merge(:name => 'server2'))
   end
 
   test "should get index" do
@@ -18,7 +23,7 @@ class ServersControllerTest < ActionController::TestCase
 
   test "should create server" do
     assert_difference('Server.count') do
-      post :create, :server => @server.attributes
+      post :create, :server => @valid_attributes
     end
 
     assert_redirected_to server_path(assigns(:server))

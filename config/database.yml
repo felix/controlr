@@ -2,7 +2,7 @@ defaults: &defaults
   adapter: sqlite
 
 development:
-  database: db/controlr_development.db
+  database: db/controlr_development.sqlite3
   <<: *defaults
 
   # Add more repositories
@@ -17,8 +17,9 @@ development:
   #     ...
 
 test:
-  database: db/controlr_test.db
+  database: ":memory:"
   <<: *defaults
 production:
-  database: db/controlr_production.db
+  adapter: mysql
+  database: controlr_production
   <<: *defaults
