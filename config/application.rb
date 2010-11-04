@@ -44,5 +44,9 @@ module Controlr
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    config.generators do |g|
+      g.stylesheets false
+      g.test_framework :test_unit, :fixture => false
+    end
   end
 end

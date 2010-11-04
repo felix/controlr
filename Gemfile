@@ -43,10 +43,12 @@ gem 'haml-rails'
 
 group(:development, :test) do
 
+  gem 'test-unit'
   gem 'dm-sqlite-adapter',    DM_VERSION
   gem 'autotest'
   gem 'autotest-rails-pure'
   #gem 'autotest-notification'
+  gem 'test_notifier'
 
   gem 'dm-sweatshop',         DM_VERSION
 

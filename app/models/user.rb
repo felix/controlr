@@ -1,14 +1,15 @@
-class Service
+class User
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String, :required => true
+  property :email, String, :required => true, :unique => true
+  property :firstname, String
+  property :surname, String
   property :active, Boolean
-  property :type, Discriminator
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  has n, :service_instances
-  has n, :servers, :through => :service_instances
+  belongs_to :account
+
 end

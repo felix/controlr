@@ -1,0 +1,25 @@
+%h1 Listing clients
+
+%table
+  %tr
+    %th Name
+    %th Created at
+    %th Updated at
+    %th Deleted at
+    %th
+    %th
+    %th
+
+  - @clients.each do |client|
+    %tr
+      %td= client.name
+      %td= client.created_at
+      %td= client.updated_at
+      %td= client.deleted_at
+      %td= link_to 'Show', client
+      %td= link_to 'Edit', edit_client_path(client)
+      %td= link_to 'Destroy', client, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Client', new_client_path

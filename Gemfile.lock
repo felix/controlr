@@ -134,6 +134,8 @@ GEM
       ParseTree
     sexp_processor (3.0.5)
     stringex (1.1.0)
+    test-unit (2.1.1)
+    test_notifier (0.3.4)
     thor (0.14.3)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
@@ -165,3 +167,5 @@ DEPENDENCIES
   haml-rails
   rails (~> 3.0.1)
   rails3-generators
+  test-unit
+  test_notifier

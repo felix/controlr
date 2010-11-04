@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
+require 'test_notifier/runner/test_unit'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
@@ -13,5 +14,5 @@ class ActiveSupport::TestCase
 end
 
 Dir[File.join(Rails.root, "app", "models", "*")].each {|f| require f}
-Dir[File.join(Rails.root, 'test','fixtures','*.rb')].each {|f| require f}
+require 'test_fixtures.rb'
 DataMapper.auto_migrate!

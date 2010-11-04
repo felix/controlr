@@ -1,5 +1,11 @@
 Controlr::Application.routes.draw do
-  resources :addresses
+  resources :users
+
+  resources :clients
+
+  resources :accounts
+
+  resources :ip_addresses
 
   resources :services
 
