@@ -1,4 +1,6 @@
 Controlr::Application.routes.draw do
+  resources :addresses
+
   resources :services
 
   resources :servers

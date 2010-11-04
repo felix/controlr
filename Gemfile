@@ -44,7 +44,11 @@ gem 'haml-rails'
 group(:development, :test) do
 
   gem 'dm-sqlite-adapter',    DM_VERSION
-  gem 'test-unit'
+  gem 'autotest'
+  gem 'autotest-rails-pure'
+  #gem 'autotest-notification'
+
+  gem 'dm-sweatshop',         DM_VERSION
 
   # gem 'rspec-rails', '~> 2.0.1'
 

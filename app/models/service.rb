@@ -9,5 +9,4 @@ class Service
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-
 end
