@@ -1,0 +1,29 @@
+%h1 Listing services
+
+%table
+  %tr
+    %th Name
+    %th Active
+    %th Type
+    %th Created at
+    %th Updated at
+    %th Deleted at
+    %th
+    %th
+    %th
+
+  - @services.each do |service|
+    %tr
+      %td= service.name
+      %td= service.active
+      %td= service.type
+      %td= service.created_at
+      %td= service.updated_at
+      %td= service.deleted_at
+      %td= link_to 'Show', service
+      %td= link_to 'Edit', edit_service_path(service)
+      %td= link_to 'Destroy', service, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Service', new_service_path

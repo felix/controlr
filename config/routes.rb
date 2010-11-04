@@ -1,4 +1,6 @@
 Controlr::Application.routes.draw do
+  resources :services
+
   resources :servers
 
   # The priority is based upon order of creation:

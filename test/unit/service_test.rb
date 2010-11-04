@@ -1,9 +1,9 @@
 require 'test_helper'
 
-class ServerTest < ActiveSupport::TestCase
+class ServiceTest < ActiveSupport::TestCase
 
   test 'requires a name' do
-    s = Server.new
+    s = Service.new
     assert !s.valid?
     assert_not_nil s.errors[:name]
   end

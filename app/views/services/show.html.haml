@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @service.name
+%p
+  %b Active:
+  = @service.active
+%p
+  %b Type:
+  = @service.type
+%p
+  %b Created at:
+  = @service.created_at
+%p
+  %b Updated at:
+  = @service.updated_at
+%p
+  %b Deleted at:
+  = @service.deleted_at
+
+= link_to 'Edit', edit_service_path(@service)
+\|
+= link_to 'Back', services_path
