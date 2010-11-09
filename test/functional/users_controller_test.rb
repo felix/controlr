@@ -3,8 +3,8 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @client = Client.gen
-    @account = @client.accounts.first
-    @user = @account.users.first
+    @account = Account.gen(:client => @client)
+    @user = User.gen(:account => @account)
   end
 
   test "should get index" do

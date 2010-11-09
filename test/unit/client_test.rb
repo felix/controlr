@@ -1,8 +1,12 @@
 require 'test_helper'
 
 class ClientTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+  test 'requires a name' do
+    c = Client.gen(:name => nil)
+    assert !c.valid?
+    assert_not_nil c.errors[:name]
+    c.name = /\w+/.gen
+    assert c.valid?
+    assert c.errors[:name].empty?
   end
 end

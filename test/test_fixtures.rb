@@ -2,20 +2,18 @@ User.fixture {{
   :email => DataMapper::Sweatshop.unique(:email){/\w+@example\.com/.gen},
   :firstname => /\w+/.gen,
   :surname => /\w+/.gen,
-  :active => true
+  :active => true,
+  :created_at => Time.now
 }}
 
 Client.fixture {{
   :name => /\w+/.gen,
-
-  :accounts => 2.of {Account.make}
+  :created_at => Time.now
 }}
 
 Account.fixture {{
-  :name => /\w+/.gen,
-  :created_at => Time.now,
-
-  :users => 2.of {User.make}
+  :name => DataMapper::Sweatshop.unique(:name) {/\w+/.gen},
+  :created_at => Time.now
 }}
 
 
@@ -27,12 +25,9 @@ IpAddress.fixture {{
 }}
 
 Server.fixture {{
-  :name       => 'Server1',
+  :name => DataMapper::Sweatshop.unique(:name) {/\w+/.gen},
   :active     => true,
-  :created_at => Time.now,
-
-  :ip_addresses => 2.of {IpAddress.make},
-  :services   => 3.of {Service.make}
+  :created_at => Time.now
 }}
 
 Service.fixture {{

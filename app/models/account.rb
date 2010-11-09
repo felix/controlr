@@ -8,6 +8,6 @@ class Account
   property :deleted_at, ParanoidDateTime
 
   belongs_to :client
-  has n, :users
+  has n, :users, :constraint => :protect
 
 end
