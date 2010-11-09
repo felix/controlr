@@ -43,7 +43,10 @@ gem 'haml-rails'
 
 group(:development, :test) do
 
+  # needed for test/unit/ui/console/testrunner
   gem 'test-unit'
+  # not needed for ruby 1.9
+  gem 'minitest'
   gem 'dm-sqlite-adapter',    DM_VERSION
   gem 'autotest'
   gem 'autotest-rails-pure'
@@ -51,6 +54,7 @@ group(:development, :test) do
   gem 'test_notifier'
 
   gem 'dm-sweatshop',         DM_VERSION
+  #gem 'dm-sweatshop', :git => '/home/felix/Source/dm-sweatshop'
 
   # gem 'rspec-rails', '~> 2.0.1'
 

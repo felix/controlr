@@ -1,0 +1,3 @@
+class Postfix < Service
+
+end

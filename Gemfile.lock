@@ -38,7 +38,7 @@ GEM
     arel (1.0.1)
       activesupport (~> 3.0.0)
     autotest (4.4.2)
-    autotest-rails-pure (4.1.0)
+    autotest-rails-pure (4.1.2)
     builder (2.1.2)
     data_objects (0.10.2)
       addressable (~> 2.1)
@@ -109,6 +109,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    minitest (1.7.2)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -165,6 +166,7 @@ DEPENDENCIES
   dm-validations (~> 1.0.2)
   haml
   haml-rails
+  minitest
   rails (~> 3.0.1)
   rails3-generators
   test-unit

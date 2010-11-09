@@ -30,9 +30,11 @@ Server.fixture {{
   :created_at => Time.now
 }}
 
-Service.fixture {{
-  :name => 'Service',
+Postfix.fixture {{
+  :name => 'Postfix',
   :active => false,
+  :start_cmd => '/etc/init.d/postfix start',
+  :stop_cmd => '/etc/init.d/postfix reload',
   :created_at => Time.now
 }}
 

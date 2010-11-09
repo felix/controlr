@@ -1,7 +1,12 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+#require 'minitest/unit'
+#require 'minitest/spec'
+# this should pull the previous
+require 'minitest/autorun'
 require 'rails/test_help'
 require 'test_notifier/runner/test_unit'
+require 'test_notifier/runner/autotest'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
