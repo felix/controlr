@@ -7,7 +7,8 @@ class Account
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  belongs_to :client
-  has n, :users, :constraint => :protect
+  belongs_to :client, :required => true
+  has n, :users
+  has n, :ip_addresses
 
 end

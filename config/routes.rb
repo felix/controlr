@@ -8,6 +8,7 @@ Controlr::Application.routes.draw do
   resources :ip_addresses
 
   resources :services
+  #resources :postfixes, :as => :services, :controller => :services
 
   resources :servers
 

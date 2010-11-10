@@ -45,16 +45,14 @@ group(:development, :test) do
 
   # needed for test/unit/ui/console/testrunner
   gem 'test-unit'
-  # not needed for ruby 1.9
-  gem 'minitest'
+  gem 'minitest' #, '2.0.0.beta', :git => 'git://github.com/seattlerb/minitest.git'
   gem 'dm-sqlite-adapter',    DM_VERSION
   gem 'autotest'
   gem 'autotest-rails-pure'
-  #gem 'autotest-notification'
   gem 'test_notifier'
 
   #gem 'dm-sweatshop',         DM_VERSION
-  gem 'dm-sweatshop', :git => '/home/felix/Source/dm-sweatshop', :branch => 'noparsetree'
+  gem 'dm-sweatshop', :git => 'git@github.com:felix/dm-sweatshop.git', :branch => 'noparsetree'
 
   # gem 'rspec-rails', '~> 2.0.1'
 

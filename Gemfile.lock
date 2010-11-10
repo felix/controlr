@@ -1,6 +1,6 @@
 GIT
-  remote: /home/felix/Source/dm-sweatshop
-  revision: 1987d9ddc555f8d19c89043e9e5a087bb1899a98
+  remote: git@github.com:felix/dm-sweatshop.git
+  revision: 7e5ef0755f8e3d058c6b1bf870fa19b64419636f
   branch: noparsetree
   specs:
     dm-sweatshop (1.0.2)

@@ -2,11 +2,10 @@ require 'test_helper'
 
 class AccountsControllerTest < ActionController::TestCase
   setup do
-    @client = Client.gen
-    @account = Account.gen(
-      :client => @client,
-      :users => 2.of {User.gen}
-    )
+    Client.auto_migrate!
+    Account.auto_migrate!
+    @client = Client.gen(:accounts)
+    @account = @client.accounts.first
   end
 
   test "should get index" do
@@ -44,6 +43,7 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test 'should not destroy an account with users' do
+    User.gen(:account => @account)
     assert_no_difference('Account.count') do
       delete :destroy, :id => @account.to_param
     end
@@ -51,9 +51,8 @@ class AccountsControllerTest < ActionController::TestCase
   end
 
   test "should destroy an account with no users" do
-    acc = Account.create(@account.attributes.merge(:id => nil))
     assert_difference('Account.count', -1) do
-      delete :destroy, :id => acc.to_param
+      delete :destroy, :id => @account.to_param
     end
 
     assert_redirected_to accounts_path

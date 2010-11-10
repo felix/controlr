@@ -1,10 +1,12 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
+# this needs to go before minitest???!
+require 'rails/test_help'
+
 #require 'minitest/unit'
 #require 'minitest/spec'
-# this should pull the previous
+# or just this
 require 'minitest/autorun'
-require 'rails/test_help'
 require 'test_notifier/runner/test_unit'
 require 'test_notifier/runner/autotest'
 

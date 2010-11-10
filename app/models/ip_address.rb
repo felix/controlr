@@ -9,5 +9,6 @@ class IpAddress
   property :updated_at, DateTime
 
   belongs_to :server, :required => false
+  belongs_to :account, :required => false
 
 end

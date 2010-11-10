@@ -1,12 +1,9 @@
 require 'test_helper'
 
 describe Account do
-  def setup
-    @client = Client.gen
-  end
 
   it 'must require a name' do
-    a = Account.gen(:name => nil, :client => @client)
+    a = Account.gen(:name => nil)
     assert !a.valid?
     refute_nil a.errors[:name]
     a.name = /\w+/.gen
@@ -18,13 +15,13 @@ describe Account do
     a = Account.gen(:client => nil)
     assert !a.valid?
     refute_nil a.errors[:client]
-    a.client = @client
+    a.client = Client.gen
     assert a.valid?
     assert_empty a.errors[:client]
   end
 
   it 'must not require a user' do
-    a = Account.gen(:client => @client)
+    a = Account.gen
     assert a.valid?
     a.users = []
     assert a.valid?

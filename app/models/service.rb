@@ -17,4 +17,15 @@ class Service
 
   belongs_to :server, :required => true
 
+  # for STI and actionpack
+  # http://code.alexreisner.com/articles/single-table-inheritance-in-rails.html
+  def self.model_name
+    name = 'service'
+    name.instance_eval do
+      def plural;   pluralize;   end
+      def singular; singularize; end
+      def human;    singularize; end # only for Rails 3
+    end
+    return name
+  end
 end

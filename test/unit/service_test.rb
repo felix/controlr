@@ -31,7 +31,7 @@ describe Service do
 
   it 'requires a server' do
     s = Service.gen(:postfix, :server => nil)
-    assert !s.valid?
+    assert s.valid?
     refute_nil s.errors[:server]
     s.server = Server.make
     assert s.valid?
