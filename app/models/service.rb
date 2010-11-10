@@ -15,6 +15,6 @@ class Service
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  belongs_to :server
+  belongs_to :server, :required => true
 
 end

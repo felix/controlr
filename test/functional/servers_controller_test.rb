@@ -1,50 +1,46 @@
 require 'test_helper'
 
-class ServersControllerTest < ActionController::TestCase
-  setup do
-    @valid_attributes = {
-      :name => 'server',
-      :active => true
-    }
-    @server = Server.create(@valid_attributes.merge(:name => 'server1'))
-    @server2 = Server.create(@valid_attributes.merge(:name => 'server2'))
+describe ServersController do
+  before do
+    Server.auto_migrate!
+    @server = Server.gen
   end
 
-  test "should get index" do
+  it "should get index" do
     get :index
     assert_response :success
     assert_not_nil assigns(:servers)
   end
 
-  test "should get new" do
+  it "should get new" do
     get :new
     assert_response :success
   end
 
-  test "should create server" do
+  it "should create server" do
     assert_difference('Server.count') do
-      post :create, :server => @valid_attributes
+      post :create, :server => Server.make.attributes
     end
 
     assert_redirected_to server_path(assigns(:server))
   end
 
-  test "should show server" do
+  it "should show server" do
     get :show, :id => @server.to_param
     assert_response :success
   end
 
-  test "should get edit" do
+  it "should get edit" do
     get :edit, :id => @server.to_param
     assert_response :success
   end
 
-  test "should update server" do
+  it "should update server" do
     put :update, :id => @server.to_param, :server => @server.attributes
     assert_redirected_to server_path(assigns(:server))
   end
 
-  test "should destroy server" do
+  it "should destroy server" do
     assert_difference('Server.count', -1) do
       delete :destroy, :id => @server.to_param
     end

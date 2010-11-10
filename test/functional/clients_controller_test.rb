@@ -3,9 +3,7 @@ require 'test_helper'
 class ClientsControllerTest < ActionController::TestCase
   setup do
     Client.auto_migrate!
-    @client = Client.gen(
-      :accounts => 1.of {Account.gen}
-    )
+    @client = Client.gen(:accounts)
   end
 
   test "should get index" do
@@ -51,7 +49,8 @@ class ClientsControllerTest < ActionController::TestCase
   end
 
   test 'should destroy client with no accounts' do
-    client = Client.gen(:accounts => [])
+    client = Client.create(Client.make.attributes.merge(:id => nil))
+    assert client.valid?
     assert_difference('Client.count', -1) do
       delete :destroy, :id => client.to_param
     end

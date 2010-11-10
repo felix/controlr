@@ -10,10 +10,20 @@ Client.fixture {{
   :name => /\w+/.gen,
   :created_at => Time.now
 }}
+Client.fixture(:accounts) {{
+  :name => /\w+/.gen,
+  :created_at => Time.now,
+  :accounts => 2.of {Account.make}
+}}
 
 Account.fixture {{
-  :name => DataMapper::Sweatshop.unique(:name) {/\w+/.gen},
+  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
   :created_at => Time.now
+}}
+Account.fixture(:users) {{
+  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
+  :created_at => Time.now,
+  :users => 2.of {User.make}
 }}
 
 
@@ -30,8 +40,11 @@ Server.fixture {{
   :created_at => Time.now
 }}
 
-Postfix.fixture {{
+Service.fixture {{
+}}
+Service.fixture(:postfix) {{
   :name => 'Postfix',
+  :type => 'Postfix',
   :active => false,
   :start_cmd => '/etc/init.d/postfix start',
   :stop_cmd => '/etc/init.d/postfix reload',

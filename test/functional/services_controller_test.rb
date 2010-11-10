@@ -2,12 +2,8 @@ require 'test_helper'
 
 class ServicesControllerTest < ActionController::TestCase
   setup do
-    @valid_attributes = {
-      :name => 'service',
-      :active => true
-    }
-    @service = Service.create(@valid_attributes)
-    @service1 = Service.new(@valid_attributes.merge(:name => 'service1'))
+    Service.auto_migrate!
+    @service = Service.gen(:postfix)
   end
 
   test "should get index" do
@@ -23,7 +19,7 @@ class ServicesControllerTest < ActionController::TestCase
 
   test "should create service" do
     assert_difference('Service.count') do
-      post :create, :service => @service1.attributes
+      post :create, :service => Service.make(:postfix).attributes
     end
 
     assert_redirected_to service_path(assigns(:service))

@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class ServerTest < ActiveSupport::TestCase
+describe Server do
 
-  test 'requires a name' do
+  it 'must require a name' do
     s = Server.gen(:name => nil)
     assert !s.valid?
-    assert_not_nil s.errors[:name]
+    refute_nil s.errors[:name]
   end
 
 end

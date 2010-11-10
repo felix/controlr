@@ -53,8 +53,8 @@ group(:development, :test) do
   #gem 'autotest-notification'
   gem 'test_notifier'
 
-  gem 'dm-sweatshop',         DM_VERSION
-  #gem 'dm-sweatshop', :git => '/home/felix/Source/dm-sweatshop'
+  #gem 'dm-sweatshop',         DM_VERSION
+  gem 'dm-sweatshop', :git => '/home/felix/Source/dm-sweatshop', :branch => 'noparsetree'
 
   # gem 'rspec-rails', '~> 2.0.1'
 

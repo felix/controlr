@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class IpAddressTest < ActiveSupport::TestCase
+describe IpAddress do
 
-  test 'requires an address' do
+  it 'must require an address' do
     a = IpAddress.gen(:address => nil)
     assert !a.valid?
-    assert_not_nil a.errors[:address]
+    refute_nil a.errors[:address]
   end
 
 end
