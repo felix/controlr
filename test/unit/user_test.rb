@@ -26,5 +26,7 @@ class UserTest < Test::Unit::TestCase
       assert !@user.errors[:account].nil?
     end
 
+    should allow_value('felix@home.org').for(:email)
+    should_not allow_value('felix@home').for(:email)
   end
 end

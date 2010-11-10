@@ -31,6 +31,7 @@ class AccountTest < Test::Unit::TestCase
       @account.users = []
       assert @account.valid?
     end
+
   end
 
 end

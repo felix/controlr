@@ -59,6 +59,13 @@ IpAddress.fixture(:server) {{
 }}
 
 Service.fixture {{
+  :name => 'Foo',
+  :type => nil,
+  :active => false,
+  :start_cmd => '/etc/init.d/foo start',
+  :stop_cmd => '/etc/init.d/foo reload',
+  :created_at => Time.now,
+  :server => Server.make
 }}
 Service.fixture(:postfix) {{
   :name => 'Postfix',

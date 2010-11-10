@@ -8,7 +8,11 @@ class ServiceTest < Test::Unit::TestCase
       @service = Service.gen(:postfix)
     end
 
-    should 'requires a name' do
+    should 'be valid' do
+      assert @service.valid?
+    end
+
+    should 'require a name' do
       @service.name = nil
       assert !@service.valid?
       assert !@service.errors[:name].nil?
@@ -17,7 +21,7 @@ class ServiceTest < Test::Unit::TestCase
       assert @service.errors[:name].empty?
     end
 
-    should 'requires a start command' do
+    should 'require a start command' do
       @service.start_cmd = nil
       assert !@service.valid?
       assert !@service.errors[:start_cmd].nil?
@@ -26,8 +30,8 @@ class ServiceTest < Test::Unit::TestCase
       assert @service.errors[:start_cmd].empty?
     end
 
-    should 'requires a stop command' do
-      @service = Service.gen(:postfix, :stop_cmd => nil)
+    should 'require a stop command' do
+      @service.stop_cmd = nil
       assert !@service.valid?
       assert !@service.errors[:stop_cmd].nil?
       @service.stop_cmd = '/etc/init.d/postfix stop'
@@ -35,9 +39,9 @@ class ServiceTest < Test::Unit::TestCase
       assert @service.errors[:stop_cmd].empty?
     end
 
-    should 'requires a server' do
-      @service = Service.gen(:postfix, :server => nil)
-      assert @service.valid?
+    should 'require a server' do
+      @service.server.clear
+      assert !@service.valid?
       assert !@service.errors[:server].nil?
       @service.server = Server.make
       assert @service.valid?

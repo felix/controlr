@@ -13,8 +13,8 @@ class AccountsControllerTest < ActionController::TestCase
       get :index
     end
 
-    should assign_to(:accounts)
     should respond_with(:success)
+    should assign_to(:accounts)
   end
 
   context 'on GET to :new' do

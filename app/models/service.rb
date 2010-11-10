@@ -4,6 +4,7 @@ class Service
   property :id, Serial
   property :name, String, :required => true
   property :active, Boolean
+  # for STI
   property :type, Discriminator
   property :start_cmd, String, :required => true
   property :stop_cmd, String, :required => true
@@ -19,6 +20,7 @@ class Service
 
   # for STI and actionpack
   # http://code.alexreisner.com/articles/single-table-inheritance-in-rails.html
+  #
   def self.model_name
     name = 'service'
     name.instance_eval do
