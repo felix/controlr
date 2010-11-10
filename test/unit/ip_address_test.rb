@@ -1,21 +1,25 @@
 require 'test_helper'
 
-describe IpAddress do
-  before do
-    IpAddress.auto_migrate!
-  end
+class IpAddressTest < Test::Unit::TestCase
 
-  it 'must require an address' do
-    a = IpAddress.gen(:address => nil)
-    assert !a.valid?
-    refute_nil a.errors[:address]
-  end
+  context 'an IpAddress instance' do
 
-  it 'must have a unique public address' do
-    a = IpAddress.gen(:private => false)
-    b = IpAddress.gen(:private => false, :address => a.address)
-    assert !b.valid?
-    refute_nil b.errors[:address]
-  end
+    setup do
+      @address = IpAddress.gen
+    end
 
+    should 'require an address' do
+      @address.address = nil
+      assert !@address.valid?
+      assert !@address.errors[:address].empty?
+    end
+
+    should 'have a unique public address' do
+      @address.private = false
+      b = IpAddress.gen(:private => false, :address => @address.address)
+      assert !b.valid?
+      assert !b.errors[:address].empty?
+    end
+
+  end
 end

@@ -1,24 +1,30 @@
 require 'test_helper'
 
-describe Client do
+class ClienTest < Test::Unit::TestCase
 
-  it 'must require a name' do
-    c = Client.gen(:name => nil)
-    assert !c.valid?
-    refute_nil c.errors[:name]
-    c.name = /\w+/.gen
-    assert c.valid?
-    assert_empty c.errors[:name]
+  context 'a Client instance' do
+
+    setup do
+      @client = Client.gen
+    end
+
+    should 'require a name' do
+      @client.name = nil
+      assert !@client.valid?
+      assert !@client.errors[:name].nil?
+      @client.name = /\w+/.gen
+      assert @client.valid?
+      assert @client.errors[:name].empty?
+    end
+
+    should 'have a unique name' do
+      d = Client.gen(:name => @client.name)
+      assert !d.valid?
+      assert !d.errors[:name].nil?
+      d.name = 'foo123'
+      assert d.valid?
+      assert d.errors[:name].empty?
+    end
+
   end
-
-  it 'must have a unique name' do
-    c = Client.gen
-    d = Client.gen(:name => c.name)
-    assert !d.valid?
-    refute_nil d.errors[:name]
-    d.name = 'foo123'
-    assert d.valid?
-    assert_empty d.errors[:name]
-  end
-
 end

@@ -8,15 +8,22 @@ class AccountsControllerTest < ActionController::TestCase
     @account = @client.accounts.first
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:accounts)
+  context 'on index load' do
+    setup do
+      get :index
+    end
+
+    should assign_to(:accounts)
+    should respond_with(:success)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
+  context 'on GET to :new' do
+    setup do
+      get :new
+    end
+
+    should respond_with(:success)
+    should assign_to(:account)
   end
 
   test "should create account" do

@@ -1,9 +1,18 @@
 require 'test_helper'
 
-describe User do
-  it 'requires an email' do
-    u = User.gen(:email => nil)
-    assert !u.valid?
-    refute_nil u.errors[:email]
+class UserTest < Test::Unit::TestCase
+
+  context 'an User instance' do
+
+    setup do
+      @user = User.gen
+    end
+
+    should 'require an email' do
+      @user.email = nil
+      assert !@user.valid?
+      assert !@user.errors[:email].nil?
+    end
+
   end
 end

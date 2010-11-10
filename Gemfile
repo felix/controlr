@@ -45,7 +45,8 @@ group(:development, :test) do
 
   # needed for test/unit/ui/console/testrunner
   gem 'test-unit'
-  gem 'minitest' #, '2.0.0.beta', :git => 'git://github.com/seattlerb/minitest.git'
+  gem 'shoulda'
+  #gem 'minitest' #, '2.0.0.beta', :git => 'git://github.com/seattlerb/minitest.git'
   gem 'dm-sqlite-adapter',    DM_VERSION
   gem 'autotest'
   gem 'autotest-rails-pure'

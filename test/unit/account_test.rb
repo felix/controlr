@@ -1,30 +1,36 @@
 require 'test_helper'
 
-describe Account do
+class AccountTest < Test::Unit::TestCase
 
-  it 'must require a name' do
-    a = Account.gen(:name => nil)
-    assert !a.valid?
-    refute_nil a.errors[:name]
-    a.name = /\w+/.gen
-    assert a.valid?
-    assert_empty a.errors[:name]
-  end
+  context 'an Account instance' do
 
-  it 'must require a client' do
-    a = Account.gen(:client => nil)
-    assert !a.valid?
-    refute_nil a.errors[:client]
-    a.client = Client.gen
-    assert a.valid?
-    assert_empty a.errors[:client]
-  end
+    setup do
+      @account = Account.gen
+    end
 
-  it 'must not require a user' do
-    a = Account.gen
-    assert a.valid?
-    a.users = []
-    assert a.valid?
+    should 'require a name' do
+      @account.name = nil
+      assert !@account.valid?
+      assert !@account.errors[:name].nil?
+      @account.name = /\w+/.gen
+      assert @account.valid?
+      assert @account.errors[:name].empty?
+    end
+
+    should 'must require a client' do
+      @account.client = nil
+      assert !@account.valid?
+      assert !@account.errors[:client].nil?
+      @account.client = Client.gen
+      assert @account.valid?
+      assert @account.errors[:client].empty?
+    end
+
+    should 'must not require a user' do
+      assert @account.valid?
+      @account.users = []
+      assert @account.valid?
+    end
   end
 
 end

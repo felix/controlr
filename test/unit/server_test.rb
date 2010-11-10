@@ -1,11 +1,23 @@
 require 'test_helper'
 
-describe Server do
+class ServerTest < Test::Unit::TestCase
 
-  it 'must require a name' do
-    s = Server.gen(:name => nil)
-    assert !s.valid?
-    refute_nil s.errors[:name]
+  context 'a Server instance' do
+
+    setup do
+      @server = Server.gen
+    end
+
+    should 'be valid' do
+      assert @server.valid?
+    end
+
+    should 'require a name' do
+      @server.name = nil
+      assert !@server.valid?
+      assert !@server.errors[:name].empty?
+    end
+
   end
 
 end
