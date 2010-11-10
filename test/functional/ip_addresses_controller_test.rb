@@ -5,10 +5,13 @@ class IpAddressesControllerTest < ActionController::TestCase
     @ip_address = IpAddress.gen
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:ip_addresses)
+  context 'on GET to :index' do
+    setup do
+      get :index
+    end
+
+    should respond_with(:success)
+    should assign_to(:ip_addresses)
   end
 
   test "should get new" do
@@ -18,11 +21,10 @@ class IpAddressesControllerTest < ActionController::TestCase
 
   test "should create ip_address" do
     assert_difference('IpAddress.count') do
-      post :create, :ip_address => IpAddress.gen(:address => '10.7.6.5').attributes
+      post :create, :ip_address => IpAddress.make.attributes
     end
 
-    assert_response :success
-    #assert_redirected_to ip_address_path(assigns(:ip_address))
+    assert_redirected_to ip_address_path(assigns(:ip_address))
   end
 
   test "should show ip_address" do

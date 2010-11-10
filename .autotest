@@ -4,7 +4,7 @@ require 'autotest/rcov' if ENV['RCOV']
 Autotest.add_hook :initialize do |at|
   #at.add_exception '.diff'
   at.testlib = "minitest/autorun"
-  #at.unit_diff = "unit_diff -u -b"
+  at.unit_diff = "unit_diff -u -b"
 end
 
 #  vim: set ts=2 sw=2 tw=80 ft=ruby fdm=syntax et fen :

@@ -41,14 +41,18 @@ Server.fixture {{
 IpAddress.fixture {{
   :address => DataMapper::Sweatshop.unique(:ip) {/100\.\d\.\d\.\d/.gen}.to_s,
   :active => true,
-  :private => false,
+  :created_at => Time.now,
+  :account => Account.make
+}}
+IpAddress.fixture(:private) {{
+  :address => DataMapper::Sweatshop.unique(:ip) {/192\.168\.\d\.\d/.gen}.to_s,
+  :active => true,
   :created_at => Time.now,
   :account => Account.make
 }}
 IpAddress.fixture(:server) {{
   :address => DataMapper::Sweatshop.unique(:ip) {/100\.\d\.\d\.\d/.gen}.to_s,
   :active => true,
-  :private => false,
   :created_at => Time.now,
   :account => Account.make,
   :server => Server.make

@@ -14,5 +14,17 @@ class UserTest < Test::Unit::TestCase
       assert !@user.errors[:email].nil?
     end
 
+    should 'require a first name' do
+      @user.firstname = nil
+      assert !@user.valid?
+      assert !@user.errors[:firstname].nil?
+    end
+
+    should 'belong to an account' do
+      @user.account = nil
+      assert !@user.valid?
+      assert !@user.errors[:account].nil?
+    end
+
   end
 end

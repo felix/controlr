@@ -3,7 +3,7 @@ class User
 
   property :id, Serial
   property :email, String, :required => true, :unique => true
-  property :firstname, String
+  property :firstname, String, :required => true
   property :surname, String
   property :active, Boolean
   property :created_at, DateTime

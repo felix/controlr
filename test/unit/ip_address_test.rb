@@ -15,10 +15,18 @@ class IpAddressTest < Test::Unit::TestCase
     end
 
     should 'have a unique public address' do
-      @address.private = false
-      b = IpAddress.gen(:private => false, :address => @address.address)
+      b = IpAddress.gen(:address => @address.address)
       assert !b.valid?
       assert !b.errors[:address].empty?
+    end
+
+    should 'can have duplicate private addresses' do
+      a = IpAddress.gen(:private)
+      b = IpAddress.gen(
+        :address => a.address
+      )
+      assert b.valid?
+      assert b.errors[:address].empty?
     end
 
   end
