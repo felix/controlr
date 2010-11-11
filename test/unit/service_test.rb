@@ -40,7 +40,7 @@ class ServiceTest < Test::Unit::TestCase
     end
 
     should 'require a server' do
-      @service.server.clear
+      @service.server = nil
       assert !@service.valid?
       assert !@service.errors[:server].nil?
       @service.server = Server.make

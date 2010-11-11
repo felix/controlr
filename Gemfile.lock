@@ -1,11 +1,4 @@
 GIT
-  remote: /home/felix/Source/shoulda
-  revision: d6672e1fb84ea3a7b3639d6d202b4f655d797d31
-  branch: datamapper
-  specs:
-    shoulda (2.11.3)
-
-GIT
   remote: git@github.com:felix/dm-sweatshop.git
   revision: 7e5ef0755f8e3d058c6b1bf870fa19b64419636f
   branch: noparsetree
@@ -146,6 +139,7 @@ GEM
     randexp (0.1.5)
       ParseTree
     sexp_processor (3.0.5)
+    shoulda (2.11.3)
     stringex (1.1.0)
     test-unit (2.1.1)
     test_notifier (0.3.4)
@@ -180,6 +174,6 @@ DEPENDENCIES
   haml-rails
   rails (~> 3.0.1)
   rails3-generators
-  shoulda!
+  shoulda
   test-unit
   test_notifier

@@ -16,7 +16,7 @@ class Service
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  belongs_to :server, :required => true
+  belongs_to :server
 
   # for STI and actionpack
   # http://code.alexreisner.com/articles/single-table-inheritance-in-rails.html
