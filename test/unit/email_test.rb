@@ -14,22 +14,15 @@ class EmailTest < Test::Unit::TestCase
       assert !@email.errors[:address].nil?
     end
 
-    should 'require a destination' do
-      @email.destination = nil
-      assert !@email.valid?
-      assert !@email.errors[:destination].nil?
-    end
-
     should 'return an array for destinations' do
-      assert @email.destination.class == Array
+      assert @email.destinations.class == Array
       @email.store = true
-      assert @email.destination.class == Array
+      assert @email.destinations.class == Array
       @email.destination = ''
-      assert @email.destination.class == Array
+      assert @email.destinations.class == Array
     end
 
     should 'enable storing' do
-      @email.destination = ''
       @email.store = true
       assert @email.destination = @email.address
       assert @email.store

@@ -1,39 +1,42 @@
 class Email
   include DataMapper::Resource
 
-  attr_accessor :store
+  attr_accessor :store, :destinations
 
   property :id, Serial
   property :address, String, :required => true
   property :active, Boolean
-  property :destination, Text, :required => true
+  property :destination, Text
   property :created_at, DateTime
   property :modified_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  def destination
+  def destinations
     @destination.split(%r{,\n+}).uniq.compact
   end
 
   def destination=(emails)
-    emails = [] if emails.nil?
-    if emails.class == Array
-      @destination = emails.uniq.compact.join(',')
+    if emails.nil?
+      @destination = ''
     else
-      @destination = emails.split(%r{,\n+}).uniq.compact.join(',')
+      if emails.class == Array
+        @destination = emails.uniq.compact.join(',')
+      else
+        @destination = emails.split(%r{,\n+}).uniq.compact.join(',')
+      end
     end
   end
 
   def store=(store)
     if store
-      self.destination.unshift(@address)
+      self.destination = self.destinations.unshift(@address)
     else
-      self.destination.delete(@address)
+      self.destination = self.destinations.delete(@address)
     end
   end
 
   def store
-    self.destination.include? @address
+    self.destinations.include? @address
   end
 
 end
