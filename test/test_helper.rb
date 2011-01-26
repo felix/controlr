@@ -7,12 +7,7 @@ require 'test_fixtures.rb'
 # this needs to go before minitest???!
 require 'rails/test_help'
 
-#require 'minitest/unit'
-#require 'minitest/spec'
-# or just this
-#require 'minitest/autorun'
-require 'test_notifier/runner/test_unit'
-require 'test_notifier/runner/autotest'
+#require 'test_notifier/runner/test_unit'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
@@ -23,5 +18,5 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
-TestNotifier.default_notifier = :notify_send
+Notifier.default_notifier = :notify_send
 DataMapper.auto_migrate!

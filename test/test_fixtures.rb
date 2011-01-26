@@ -83,3 +83,10 @@ Domain.fixture {{
   :created_at => Time.now,
   :account => Account.make,
 }}
+
+Email.fixture {{
+  :address => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  :destination => 'test@example.com',
+  :created_at => Time.now
+}}
+

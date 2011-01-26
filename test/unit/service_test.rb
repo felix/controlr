@@ -39,6 +39,7 @@ class ServiceTest < Test::Unit::TestCase
       assert @postfix.errors[:stop_cmd].empty?
     end
 
+=begin
     should 'require a server' do
       @postfix.server = nil
       assert !@postfix.valid?
@@ -47,6 +48,7 @@ class ServiceTest < Test::Unit::TestCase
       assert @postfix.valid?
       assert @postfix.errors[:server].empty?
     end
+=end
 
   end
 end

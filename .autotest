@@ -1,8 +1,9 @@
 require 'autotest/restart'
 require 'autotest/rcov' if ENV['RCOV']
+require 'test_notifier/runner/autotest'
 
 Autotest.add_hook :initialize do |at|
-  #at.add_exception '.diff'
+  at.add_exception '.diff'
   #at.testlib = "minitest/autorun"
 end
 
