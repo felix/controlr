@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Address:
+  = @email.address
+%p
+  %b Destination:
+  = @email.destination
+%p
+  %b Active:
+  = @email.active
+%p
+  %b Created at:
+  = @email.created_at
+%p
+  %b Modified at:
+  = @email.modified_at
+%p
+  %b Deleted at:
+  = @email.deleted_at
+
+= link_to 'Edit', edit_email_path(@email)
+\|
+= link_to 'Back', emails_path

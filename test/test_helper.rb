@@ -23,5 +23,5 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
 end
-
+TestNotifier.default_notifier = :notify_send
 DataMapper.auto_migrate!

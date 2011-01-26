@@ -77,4 +77,9 @@ Service.fixture(:postfix) {{
   :server => Server.make
 }}
 
-
+Domain.fixture {{
+  :name => DataMapper::Sweatshop.unique {/\w+\.\w\.com/.gen},
+  :active => true,
+  :created_at => Time.now,
+  :account => Account.make,
+}}

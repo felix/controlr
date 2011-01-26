@@ -1,4 +1,10 @@
 Controlr::Application.routes.draw do
+  resources :emails
+
+  resources :domain_records
+
+  resources :domains
+
   resources :users
 
   resources :clients
