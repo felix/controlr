@@ -1,4 +1,4 @@
-class Email
+class EmailAddress
   include DataMapper::Resource
 
   attr_accessor :store, :destinations
@@ -11,12 +11,14 @@ class Email
   property :modified_at, DateTime
   property :deleted_at, ParanoidDateTime
 
+  belongs_to :domain
+
   def destinations
     @destination.split(%r{,\n+}).uniq.compact
   end
 
   def destination=(emails)
-    if emails.nil?
+    if emails.nil? || emails.empty?
       @destination = ''
     else
       if emails.class == Array

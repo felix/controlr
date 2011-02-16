@@ -51,6 +51,7 @@ group(:development, :test) do
   gem 'dm-sqlite-adapter',    DM_VERSION
   gem 'autotest'
   gem 'autotest-rails-pure'
+#  gem 'redgreen'
   gem 'test_notifier'
 
   #gem 'dm-sweatshop',         DM_VERSION

@@ -1,15 +1,14 @@
-class Account
+class Mailbox
   include DataMapper::Resource
 
   property :id, Serial
-  property :name, String, :required => true
+  property :email, String, :required => true
+  property :maildir, String
+  property :active, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  belongs_to :client, :required => true
-  has n, :users
-  has n, :ip_addresses
-  has n, :mailboxes
+  belongs_to :domain
 
 end
