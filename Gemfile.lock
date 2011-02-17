@@ -48,9 +48,14 @@ GEM
     autotest (4.4.6)
       ZenTest (>= 4.4.1)
     autotest-rails-pure (4.1.2)
+    bcrypt-ruby (2.1.4)
     builder (2.1.2)
+    cancan (1.5.1)
     data_objects (0.10.3)
       addressable (~> 2.1)
+    devise (1.1.7)
+      bcrypt-ruby (~> 2.1.2)
+      warden (~> 1.0.2)
     dm-active_model (1.0.3)
       activemodel (~> 3.0.0)
       dm-core (~> 1.0.2)
@@ -62,6 +67,15 @@ GEM
     dm-core (1.0.2)
       addressable (~> 2.2)
       extlib (~> 0.9.15)
+    dm-devise (1.1.8)
+      bcrypt-ruby (~> 2.1.2)
+      devise (~> 1.1.0)
+      dm-core (~> 1.0.0)
+      dm-migrations (~> 1.0.0)
+      dm-rails (>= 1.0.3)
+      dm-serializer (~> 1.0.0)
+      dm-timestamps (~> 1.0.0)
+      sugar-high (~> 0.2.10)
     dm-do-adapter (1.0.2)
       data_objects (~> 0.10.2)
       dm-core (~> 1.0.2)
@@ -78,6 +92,10 @@ GEM
       dm-active_model (~> 1.0.3)
       dm-core (~> 1.0.0)
       railties (~> 3.0.0)
+    dm-serializer (1.0.2)
+      dm-core (~> 1.0.2)
+      fastercsv (~> 1.5.3)
+      json_pure (~> 1.4)
     dm-sqlite-adapter (1.0.2)
       dm-do-adapter (~> 1.0.2)
       do_sqlite3 (~> 0.10.2)
@@ -115,6 +133,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mocha (0.9.12)
     notifier (0.1.2)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -140,9 +159,13 @@ GEM
     rake (0.8.7)
     randexp (0.1.5)
       ParseTree
+    require_all (1.2.0)
     sexp_processor (3.0.5)
     shoulda (2.11.3)
     stringex (1.1.0)
+    sugar-high (0.2.12)
+      mocha (~> 0.9.8)
+      require_all (~> 1.2.0)
     test-unit (2.2.0)
     test_notifier (0.3.6)
       notifier
@@ -151,6 +174,8 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (0.3.24)
     uuidtools (2.1.2)
+    warden (1.0.3)
+      rack (>= 1.0.0)
 
 PLATFORMS
   ruby
@@ -161,8 +186,11 @@ DEPENDENCIES
   activesupport (~> 3.0.4)
   autotest
   autotest-rails-pure
+  cancan
+  devise
   dm-aggregates (~> 1.0.2)
   dm-constraints (~> 1.0.2)
+  dm-devise
   dm-migrations (~> 1.0.2)
   dm-mysql-adapter (~> 1.0.2)
   dm-observer (~> 1.0.2)
