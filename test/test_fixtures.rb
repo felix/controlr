@@ -6,8 +6,10 @@ User.fixture {{
   :firstname => /\w+/.gen,
   :surname => /\w+/.gen,
   :active => true,
+  :password => (password = /\w+/.gen),
+  :password_confirmation => password,
   :created_at => Time.now,
-  :account => Account.make
+  :account => Account.make,
 }}
 
 Client.fixture {{
@@ -91,4 +93,8 @@ Email.fixture {{
   :maildir => 'foo',
   :created_at => Time.now,
   :domain => Domain.make
+}}
+Role.fixture {{
+  :name => /\w+/.gen,
+  :description => /\w+/.gen,
 }}
