@@ -1,12 +1,14 @@
 Controlr::Application.routes.draw do
 
+  resources :roles
+
   resources :domains do
     resources :emails
     resources :dns, :controller => 'domain_records'
   end
 
   resources :accounts
-#  resources :users
+  resources :users
   devise_for :users
 
   resources :clients

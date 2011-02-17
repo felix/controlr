@@ -18,14 +18,10 @@
   .field
     = f.label :active
     = f.check_box :active
-  .field
-    = f.label :created_at
-    = f.datetime_select :created_at
-  .field
-    = f.label :updated_at
-    = f.datetime_select :updated_at
-  .field
-    = f.label :deleted_at
-    = f.text_field :deleted_at
+
+  - for role in Role.all
+    = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+    = role.name
+  = hidden_field_tag "user[role_ids][]", ""
   .actions
     = f.submit 'Save'

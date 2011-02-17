@@ -43,6 +43,10 @@ group(:development, :test) do
 #  gem 'redgreen'
   gem 'test_notifier'
 
+  # for some generators
+  gem 'hpricot'
+  gem 'ruby_parser'
+
   #gem 'dm-sweatshop',         DM_VERSION
   gem 'dm-sweatshop', :git => 'git@github.com:felix/dm-sweatshop.git', :branch => 'noparsetree'
 

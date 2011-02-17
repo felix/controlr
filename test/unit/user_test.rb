@@ -8,6 +8,10 @@ class UserTest < Test::Unit::TestCase
       @user = User.gen
     end
 
+    should 'be valid' do
+      assert @user.valid?
+    end
+
     should 'require an email' do
       @user.email = nil
       assert !@user.valid?

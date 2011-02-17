@@ -16,5 +16,11 @@ class User
   property :deleted_at, ParanoidDateTime
 
   belongs_to :account
+  has n, :assignments
+  has n, :roles, :through => :assignments
+
+  def has_role?(role_sym)
+      roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
 
 end
