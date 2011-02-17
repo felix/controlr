@@ -1,22 +1,20 @@
 Controlr::Application.routes.draw do
-  resources :emails
 
-  resources :domain_records
+  resources :domains do
+    resources :emails
+    resources :dns, :controller => 'domain_records'
+  end
 
-  resources :domains
-
+  resources :accounts
   resources :users
 
   resources :clients
 
-  resources :accounts
-
-  resources :ip_addresses
-
-  resources :services
-  #resources :postfixes, :as => :services, :controller => :services
-
   resources :servers
+  resources :ip_addresses
+  resources :services
+
+  #resources :postfixes, :as => :services, :controller => :services
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,4 +1,4 @@
-class EmailAddress
+class Email
   include DataMapper::Resource
 
   attr_accessor :store, :destinations
@@ -7,11 +7,14 @@ class EmailAddress
   property :address, String, :required => true
   property :active, Boolean
   property :destination, Text
+  property :maildir, String
   property :created_at, DateTime
   property :modified_at, DateTime
   property :deleted_at, ParanoidDateTime
 
   belongs_to :domain
+
+  #validates_format_of :address, :as => :email_address, :unless => lambda {|ea| ea.address[0] == '@'}
 
   def destinations
     @destination.split(%r{,\n+}).uniq.compact

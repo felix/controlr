@@ -2,28 +2,16 @@
 
 %table
   %tr
-    %th Address
-    %th Destination
-    %th Active
-    %th Created at
-    %th Modified at
-    %th Deleted at
     %th
     %th
     %th
 
   - @emails.each do |email|
     %tr
-      %td= email.address
-      %td= email.destination
-      %td= email.active
-      %td= email.created_at
-      %td= email.modified_at
-      %td= email.deleted_at
       %td= link_to 'Show', email
       %td= link_to 'Edit', edit_email_path(email)
       %td= link_to 'Destroy', email, :confirm => 'Are you sure?', :method => :delete
 
 %br
 
-= link_to 'New Email', new_email_path
+= link_to 'New Email address', new_email_path

@@ -10,6 +10,5 @@ class Account
   belongs_to :client, :required => true
   has n, :users
   has n, :ip_addresses
-  has n, :mailboxes
 
 end

@@ -84,17 +84,10 @@ Domain.fixture {{
   :account => Account.make,
 }}
 
-EmailAddress.fixture {{
+Email.fixture {{
   :address => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
   :active => true,
   :destination => 'test@example.com',
-  :created_at => Time.now,
-  :domain => Domain.make
-}}
-
-Mailbox.fixture {{
-  :email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
-  :active => true,
   :maildir => 'foo',
   :created_at => Time.now,
   :domain => Domain.make

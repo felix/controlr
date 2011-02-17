@@ -1,19 +1,19 @@
-class EmailsController < ApplicationController
-  # GET /emails
-  # GET /emails.xml
+class EmailesController < ApplicationController
+  # GET /emailes
+  # GET /emailes.xml
   def index
-    @emails = Email.all
+    @emailes = Email.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @emails }
+      format.xml  { render :xml => @emailes }
     end
   end
 
-  # GET /emails/1
-  # GET /emails/1.xml
+  # GET /emailes/1
+  # GET /emailes/1.xml
   def show
-    @email = Email.get(params[:id])
+    @email = Email.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,8 +21,8 @@ class EmailsController < ApplicationController
     end
   end
 
-  # GET /emails/new
-  # GET /emails/new.xml
+  # GET /emailes/new
+  # GET /emailes/new.xml
   def new
     @email = Email.new
 
@@ -32,19 +32,19 @@ class EmailsController < ApplicationController
     end
   end
 
-  # GET /emails/1/edit
+  # GET /emailes/1/edit
   def edit
-    @email = Email.get(params[:id])
+    @email = Email.find(params[:id])
   end
 
-  # POST /emails
-  # POST /emails.xml
+  # POST /emailes
+  # POST /emailes.xml
   def create
     @email = Email.new(params[:email])
 
     respond_to do |format|
       if @email.save
-        format.html { redirect_to(@email, :notice => 'Email was successfully created.') }
+        format.html { redirect_to(@email, :notice => 'Email address was successfully created.') }
         format.xml  { render :xml => @email, :status => :created, :location => @email }
       else
         format.html { render :action => "new" }
@@ -53,14 +53,14 @@ class EmailsController < ApplicationController
     end
   end
 
-  # PUT /emails/1
-  # PUT /emails/1.xml
+  # PUT /emailes/1
+  # PUT /emailes/1.xml
   def update
-    @email = Email.get(params[:id])
+    @email = Email.find(params[:id])
 
     respond_to do |format|
-      if @email.update(params[:email])
-        format.html { redirect_to(@email, :notice => 'Email was successfully updated.') }
+      if @email.update_attributes(params[:email])
+        format.html { redirect_to(@email, :notice => 'Email address was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -69,14 +69,14 @@ class EmailsController < ApplicationController
     end
   end
 
-  # DELETE /emails/1
-  # DELETE /emails/1.xml
+  # DELETE /emailes/1
+  # DELETE /emailes/1.xml
   def destroy
-    @email = Email.get(params[:id])
+    @email = Email.find(params[:id])
     @email.destroy
 
     respond_to do |format|
-      format.html { redirect_to(emails_url) }
+      format.html { redirect_to(emailes_url) }
       format.xml  { head :ok }
     end
   end
