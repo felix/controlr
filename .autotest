@@ -4,8 +4,9 @@ require 'autotest/rcov' if ENV['RCOV']
 require 'test_notifier/runner/autotest'
 
 Autotest.add_hook :initialize do |at|
-  at.add_exception '.diff'
-  at.add_exception %r%^\./tmp%
+  %w{.git .svn .hg .diff .DS_Store ._* vendor tmp log doc}.each do |exception|
+    at.add_exception(exception)
+  end
   TestNotifier.default_notifier = :notify_send
   #at.testlib = "minitest/autorun"
 end
