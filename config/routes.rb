@@ -1,4 +1,15 @@
 Controlr::Application.routes.draw do
+=begin
+  devise_for :users, :path_names => {
+    :sign_in => 'login',
+    :sign_out => 'logout',
+    :password => 'secret',
+    :confirmation => 'verification',
+    :registration => 'register',
+    :sign_up => 'signup'
+  }
+=end
+  devise_for :users
 
   resources :roles
 
@@ -9,7 +20,6 @@ Controlr::Application.routes.draw do
 
   resources :accounts
   resources :users
-  devise_for :users
 
   resources :clients
 

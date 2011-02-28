@@ -98,3 +98,8 @@ Role.fixture {{
   :name => /\w+/.gen,
   :description => /\w+/.gen,
 }}
+Permission.fixture {{
+  :action => /\w+/.gen,
+  :subject_class => /\w+/.gen,
+}}
+
