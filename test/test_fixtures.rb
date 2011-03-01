@@ -2,7 +2,8 @@
 # every fixture should be valid!
 
 User.fixture {{
-  :email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  #:email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  :email => /\w+@\w+\.com/.gen,
   :firstname => /\w+/.gen,
   :surname => /\w+/.gen,
   :active => true,
@@ -98,8 +99,11 @@ Role.fixture {{
   :name => /\w+/.gen,
   :description => /\w+/.gen,
 }}
+=begin
 Permission.fixture {{
   :action => /\w+/.gen,
   :subject_class => /\w+/.gen,
+  :subject_id => 1 # TODO
 }}
+=end
 

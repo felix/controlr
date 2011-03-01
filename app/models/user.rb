@@ -8,14 +8,14 @@ class User
 
   property :id, Serial
   property :email, String, :required => true, :unique => true, :format => :email_address
-  property :firstname, String, :required => true
+  property :firstname, String
   property :surname, String
   property :active, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  belongs_to :account
+  belongs_to :account, :required => false
   has n, :assignments
   has n, :roles, :through => :assignments
 

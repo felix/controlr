@@ -11,15 +11,19 @@ Controlr::Application.routes.draw do
 =end
   devise_for :users
 
-  resources :roles
+  resource :dashboard, :only => [:index]
 
   resources :domains do
     resources :emails
     resources :dns, :controller => 'domain_records'
   end
 
-  resources :accounts
+  resources :accounts do
+    resources :domains
+  end
+
   resources :users
+  resources :roles
 
   resources :clients
 
@@ -29,6 +33,6 @@ Controlr::Application.routes.draw do
 
   #resources :postfixes, :as => :services, :controller => :services
 
-   root :to => "welcome#index"
+   root :to => 'dashboard#index', :as => 'home'
 
 end

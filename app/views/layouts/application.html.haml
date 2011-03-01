@@ -11,7 +11,12 @@
         = render :partial => 'users/login'
       .identity
       %nav
+        %ul
+          %li= link_to 'Dashboard', home_path
+
 
     %section
       = yield
+    %nav
+      = yield(:submenu)
     %footer
