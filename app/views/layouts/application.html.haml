@@ -12,14 +12,14 @@
       %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
   %body
     %header
-      #account-bar
-        = render :partial => 'users/login'
+      .account
+        = render :partial => 'users/account_small'
       %hgroup
-        %h1 ControlR
+        %h1 Controlr
 
       %nav
         %ul
-          %li= link_to 'Dashboard', home_path
+          %li= link_to 'Dashboard', root_path
           %li= link_to 'Users', users_path
 
     #page

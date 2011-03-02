@@ -2,6 +2,13 @@ body {
   font-family: sans-serif;
   background-color: #efefef;
 }
+a {
+  color: #ff4010;
+  text-decoration: none;
+}
+a:hover {
+  border-bottom: 1px solid;
+}
 body > header {
   background-color: #ff4010;
 }
@@ -12,9 +19,6 @@ header h1 {
   color: black;
   letter-spacing: -.06em;
   text-shadow: 1px 1px 1px #aaa;
-}
-#account-bar {
-  float: right;
 }
 header .identity {
 }
@@ -44,7 +48,21 @@ header nav li.active,
 header nav li:hover {
   opacity: 1.0;
 }
-header nav li a {
+header nav a {
+  color: black;
+  text-decoration: none;
+}
+header nav a:hover {
+  border: none;
+}
+header .account {
+  float: right;
+  margin: 10px 10px 0 0;
+  font-size: .875em;
+  color: white;
+}
+header .account a {
+  color: white;
   text-decoration: none;
 }
 

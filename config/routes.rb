@@ -1,5 +1,4 @@
 Controlr::Application.routes.draw do
-=begin
   devise_for :users, :path_names => {
     :sign_in => 'login',
     :sign_out => 'logout',
@@ -8,8 +7,9 @@ Controlr::Application.routes.draw do
     :registration => 'register',
     :sign_up => 'signup'
   }
-=end
+=begin
   devise_for :users
+=end
 
   resource :dashboard, :only => [:index]
 
@@ -31,8 +31,6 @@ Controlr::Application.routes.draw do
   resources :ip_addresses
   resources :services
 
-  #resources :postfixes, :as => :services, :controller => :services
-
-   root :to => 'dashboard#index', :as => 'home'
+  root :to => 'dashboard#index'
 
 end
