@@ -1,0 +1,65 @@
+body {
+  font-family: sans-serif;
+  background-color: #efefef;
+}
+body > header {
+  background-color: #ff4010;
+}
+header h1 {
+  padding: 15px 0 10px 25px;
+  font-size: 2.5em;
+  font-weight: bold;
+  color: black;
+  letter-spacing: -.06em;
+  text-shadow: 1px 1px 1px #aaa;
+}
+#account-bar {
+  float: right;
+}
+header .identity {
+}
+header nav {
+  clear: both;
+}
+header nav ul {
+  margin-left: 25px;
+  overflow: hidden;
+}
+header nav li {
+  float: left;
+  margin: 0px 8px 0px 0px;
+  padding: 8px 20px 8px 20px;
+  background: #efefef;
+  /* Top left corner */
+  border-top-left-radius: 10px;
+  -moz-border-radius-topleft: 10px;
+  -webkit-border-top-left-radius: 10px;
+  /* Top right corner*/
+  border-top-right-radius: 10px;
+  -moz-border-radius-topright: 10px;
+  -webkit-border-top-right-radius: 10px;
+  opacity: 0.7;
+}
+header nav li.active,
+header nav li:hover {
+  opacity: 1.0;
+}
+header nav li a {
+  text-decoration: none;
+}
+
+#page {
+  min-height: 500px;
+  margin: 25px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 3px 5px 10px #ccc;
+  -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 3px 5px 10px #ccc;
+}
+#sidebar {
+  float: right;
+}
+body > footer {
+  clear: both;
+}
