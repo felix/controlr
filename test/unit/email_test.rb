@@ -3,7 +3,6 @@ require 'test_helper'
 class EmailTest < Test::Unit::TestCase
 
   context 'an Email instance' do
-
     setup do
       @email = Email.gen
     end
@@ -12,25 +11,7 @@ class EmailTest < Test::Unit::TestCase
       assert @email.valid?
     end
 
-    should 'require an address' do
-      @email.address = nil
-      assert !@email.valid?
-      assert !@email.errors[:address].nil?
-    end
-
-=begin
-    should 'require a valid address' do
-      @email.address = 'test.example.com'
-      assert !@email.valid?
-      assert !@email.errors[:address].nil?
-    end
-
-    should 'accept a catchall as a valid address' do
-      @email.address = '@example.com'
-      assert @email.valid?
-      assert @email.errors[:address].nil?
-    end
-=end
+    should validate_presence_of(:address)
 
     should 'return an array for destinations' do
       assert @email.destinations.class == Array

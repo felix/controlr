@@ -39,7 +39,7 @@ class UsersControllerTest < ActionController::TestCase
 
         context 'with invalid data' do
           setup do
-            post :create, :user => User.gen(:account => nil).attributes
+            post :create, :user => User.gen(:email => nil).attributes
           end
 
           should respond_with(:success)

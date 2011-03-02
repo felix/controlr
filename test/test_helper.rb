@@ -7,6 +7,8 @@ require 'test_fixtures.rb'
 # this needs to go before minitest???!
 require 'rails/test_help'
 
+require 'shoulda/datamapper'
+
 class ActiveSupport::TestCase
   include Devise::TestHelpers
 end
