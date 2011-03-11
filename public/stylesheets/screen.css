@@ -2,17 +2,23 @@ body {
   font-family: sans-serif;
   background-color: #efefef;
 }
+section h1 {
+  margin-bottom: .75em;
+  padding-bottom: .25em;
+  font-size: 1.5em;
+  border-bottom: 1px solid black;
+}
 a {
   color: #ff4010;
   text-decoration: none;
 }
 a:hover {
-  border-bottom: 1px solid;
+  text-decoration: underline;
 }
 body > header {
   background-color: #ff4010;
 }
-header h1 {
+header.page h1 {
   padding: 15px 0 10px 25px;
   font-size: 2.5em;
   font-weight: bold;
@@ -22,6 +28,9 @@ header h1 {
 }
 header .identity {
 }
+
+/*** main nav ***/
+
 header nav {
   clear: both;
 }
@@ -44,6 +53,8 @@ header nav li {
   -webkit-border-top-right-radius: 10px;
   opacity: 0.7;
 }
+body.dashboard nav li.dashboard,
+body.users nav li.users,
 header nav li.active,
 header nav li:hover {
   opacity: 1.0;
@@ -53,7 +64,7 @@ header nav a {
   text-decoration: none;
 }
 header nav a:hover {
-  border: none;
+  text-decoration: none;
 }
 header .account {
   float: right;
@@ -65,7 +76,6 @@ header .account a {
   color: white;
   text-decoration: none;
 }
-
 #page {
   min-height: 500px;
   margin: 25px;
@@ -75,9 +85,128 @@ header .account a {
   -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 3px 5px 10px #ccc;
 }
+#page section {
+  float: left;
+  width: 79%;
+}
+footer.page {
+  clear: both;
+  margin: 0 25px 20px;
+}
+footer.page p {
+  color: #555;
+  font-size: .75em;
+  text-align: right;
+}
+
+
+/*** tables ***/
+
+table {
+  width: 100%;
+  margin: .5em 0;
+  font-size: .875em;
+  border-collapse: collapse;
+}
+td, th {
+  padding: .375em;
+  vertical-align: middle;
+  text-align: left;
+}
+td.right, th.right {
+  text-align: right;
+}
+th {
+  font-weight: bold;
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  background-color: #eee;
+}
+tr:hover {
+  background-color: #f8f8f8;
+}
+td {
+  border-bottom: 1px solid #ddd;
+}
+
+/*** sub menu ***/
+
 #sidebar {
   float: right;
+  width: 20%;
+  min-width: 100px;
 }
-body > footer {
+#sidebar nav {
+  margin-top: 30px;
+}
+#sidebar nav h3 {
+  margin: 0 0 10px 0;
+  padding: 12px 12px 12px 20px;
+  color: white;
+  font-weight: normal;
+  background-color: #111;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-top-left-radius: 5px 5px;
+  border-top-right-radius: 5px 5px;
+  border-bottom-right-radius: 5px 5px;
+  border-bottom-left-radius: 5px 5px;
+}
+#sidebar nav ul {
+  border-top: 1px solid #eee;
+}
+#sidebar nav li {
+  border-bottom: 1px solid #eee;
+}
+#sidebar nav a {
+  display: block;
+  margin: 0 0 0 5px;
+  padding-left: 20px;
+  color: #555;
+  line-height: 2;
+  text-transform: lowercase;
+  background: transparent left no-repeat;
+}
+#sidebar nav li:hover {
+  background-color: #eee;
+}
+#sidebar nav a:hover {
+  text-decoration: none;
+}
+#sidebar nav .add {
+  background-image: url(/images/add.png);
+}
+
+
+/*** forms ***/
+
+form {
+  width: 100%;
+}
+fieldset {
+  width: 100%;
+}
+fieldset li {
+  display: block;
   clear: both;
+  margin-bottom: .5em;
+  line-height: 1.5;
+  overflow: hidden;
+}
+fieldset label {
+  float: left;
+  width: 25%;
+  margin-right: .5em;
+  text-align: right;
+}
+fieldset input[type=text],
+fieldset .field {
+  float: left;
+}
+fieldset input[type=text],
+fieldset textarea {
+  margin-left: .5em;
+  padding: 2px;
+  border: 1px solid #eee;
 }

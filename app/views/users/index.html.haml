@@ -1,31 +1,25 @@
-%h1 Listing users
+%h1= User.human_name(:count => 2)
 
 %table
   %tr
-    %th Email
-    %th Firstname
-    %th Surname
-    %th Active
-    %th Created at
-    %th Updated at
-    %th Deleted at
-    %th
-    %th
+    %th= User.human_attribute_name('email')
+    %th= User.human_attribute_name('firstname')
+    %th= User.human_attribute_name('surname')
+    %th= User.human_attribute_name('active')
+    %th= User.human_attribute_name('created')
+    %th= User.human_attribute_name('updated')
     %th
 
   - @users.each do |user|
     %tr
-      %td= user.email
+      %td= link_to user.email, edit_user_path(user)
       %td= user.firstname
       %td= user.surname
-      %td= user.active
+      %td= user.active ? image_tag('tick.png') : ''
       %td= user.created_at
       %td= user.updated_at
-      %td= user.deleted_at
-      %td= link_to 'Show', user
-      %td= link_to 'Edit', edit_user_path(user)
-      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+      %td
+        =#link_to 'Show', user
+        =link_to image_tag('edit.png'), edit_user_path(user)
+        =link_to image_tag('delete.png'), user, :confirm => t('actions.confirm'), :method => :delete
 
-%br
-
-= link_to 'New User', new_user_path

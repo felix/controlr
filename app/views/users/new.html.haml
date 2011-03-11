@@ -1,5 +1,5 @@
-%h1 New user
+%h1= t('.title')
 
 = render 'form'
 
-= link_to 'Back', users_path
+= link_to t('actions.return'), users_path

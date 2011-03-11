@@ -6,22 +6,31 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :email
-    = f.text_field :email
-  .field
-    = f.label :firstname
-    = f.text_field :firstname
-  .field
-    = f.label :surname
-    = f.text_field :surname
-  .field
-    = f.label :active
-    = f.check_box :active
+  %fieldset
+    %ul
+      %li
+        = f.label :email
+        = f.text_field :email
+      %li
+        = f.label :firstname
+        = f.text_field :firstname
+      %li
+        = f.label :surname
+        = f.text_field :surname
+      %li
+        = f.label :active
+        = f.check_box :active
 
-  - for role in Role.all
-    = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
-    = role.name
-  = hidden_field_tag "user[role_ids][]", ""
-  .actions
+  %fieldset
+    %ul
+      %li
+        = f.label :roles
+        %ul.field
+          - for role in Role.all
+            %li
+              = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+              = role.description
+        = hidden_field_tag "user[role_ids][]", ""
+
+  %fieldset.actions
     = f.submit 'Save'

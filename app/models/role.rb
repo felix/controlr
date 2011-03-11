@@ -10,4 +10,7 @@ class Role
   has n, :assignments
   has n, :users, :through => :assignments
 
+  has n, :grants
+  has n, :permissions, :through => :grants
+
 end

@@ -10,8 +10,8 @@
     %meta{:content => '', :name => 'description'}/
     /[if lt IE 9]
       %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
-  %body
-    %header
+  %body{:class => controller.controller_path}
+    %header.page
       .account
         = render :partial => 'users/account_small'
       %hgroup
@@ -19,13 +19,17 @@
 
       %nav
         %ul
-          %li= link_to 'Dashboard', root_path
-          %li= link_to 'Users', users_path
+          %li.dashboard= link_to t('dashboard'), root_path
+          %li.users= link_to User.model_name.human(:count => 2), users_path
 
     #page
       %section
         = yield
       #sidebar
         %nav
-          = yield(:submenu)
-    %footer
+          = render :partial => 'submenu' rescue nil
+    %footer.page
+      %p 
+        &copy;
+        = Time.now.year
+        Felix Hanley

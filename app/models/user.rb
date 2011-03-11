@@ -1,5 +1,7 @@
 class User
   include DataMapper::Resource
+  extend ActiveModel::Translation
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable, :registerable,
@@ -19,8 +21,20 @@ class User
   has n, :assignments
   has n, :roles, :through => :assignments
 
+  # for assignment of roles
+  def role_ids=(ids)
+    self.roles.clear
+    ids.delete_if{|i| i.empty?}.each do |id|
+      self.roles << Role.get(id)
+    end
+  end
+
   def has_role?(role_sym)
     roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
+
+  def role?(role)
+    return !!self.roles.find_by_name(role.to_s.camelize)
   end
 
 end
