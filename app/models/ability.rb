@@ -2,42 +2,37 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
-    #
-    #   user ||= User.new # guest user (not logged in)
-    #   if user.admin?
-    #     can :manage, :all
-    #   else
-    #     can :read, :all
-    #   end
-    #
-    # The first argument to `can` is the action you are giving the user permission to do.
-    # If you pass :manage it will apply to every action. Other common actions here are
-    # :read, :create, :update and :destroy.
-    #
-    # The second argument is the resource the user can perform the action on. If you pass
-    # :all it will apply to every resource. Otherwise pass a Ruby class of the resource.
-    #
-    # The third argument is an optional hash of conditions to further filter the objects.
-    # For example, here the user can only update published articles.
-    #
-    #   can :update, Article, :published => true
-    #
-    # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
-    can do |action, subject_class, subject|
-      user.role.permissions.find_all_by_action(action).any? do |permission|
-        permission.subject_class == subject_class.to_s &&
-          (subject.nil? || permission.subject_id.nil? || permission.subject_id == subject.id)
-      end
-    end
+    # predefined
+    # :index, :show, :new, :edit
+    #alias_action :index, :show, :to => :read
+    #alias_action :new, :to => :create
+    #alias_action :edit, :to => :update
+    alias_action :update, :destroy, :to => :modify
 
-=begin
-    if user.has_role? :super
+    user ||= User.new
+
+    # super user can do everything
+    if user.role? :super
       can :manage, :all
     else
-      can :read, :all
-    end
+      # edit update self
+      can :modify, user, :active => true, :id => user.id
+
+      user.roles.permissions.each do |permission|
+        can permission.action.to_sym, permission.subject_class.constantize do |subject|
+          permission.subject_id.nil? || permission.subject_id == subject.id
+        end
+      end
+=begin
+      can do |action, subject_class, subject|
+        user.roles.permissions.all(:action => action).any? do |permission|
+          permission.subject_class == subject_class.to_s &&
+            (subject.nil? || permission.subject_id.nil? || permission.subject_id == subject.id)
+        end
+      end
 =end
+    end
+
   end
 end

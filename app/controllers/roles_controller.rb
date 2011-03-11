@@ -80,4 +80,9 @@ class RolesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def report
+    @roles = Role.all(:name.not => 'super')
+    @permissions = Permission.all
+  end
 end

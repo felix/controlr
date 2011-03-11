@@ -3,6 +3,11 @@ class ApplicationController < ActionController::Base
   use Rails::DataMapper::Middleware::IdentityMap
   protect_from_forgery
 
+  rescue_from CanCan::AccessDenied do |exception|
+   # redirect_to root_url, :alert => exception.message
+    render :file => "#{Rails.root}/public/403.html", :status => 403
+  end
+
   private
 
   def store_location

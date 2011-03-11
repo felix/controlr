@@ -3,6 +3,7 @@ class Permission
 
   property :id, Serial
   property :action, String, :required => true
+  property :description, String, :required => true
   property :subject_class, String, :required => true
   property :subject_id, Integer
 

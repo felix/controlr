@@ -8,7 +8,8 @@
     %th= User.human_attribute_name('active')
     %th= User.human_attribute_name('created')
     %th= User.human_attribute_name('updated')
-    %th
+    - if can? :modify, User
+      %th
 
   - @users.each do |user|
     %tr
@@ -18,8 +19,9 @@
       %td= user.active ? image_tag('tick.png') : ''
       %td= user.created_at
       %td= user.updated_at
-      %td
-        =#link_to 'Show', user
-        =link_to image_tag('edit.png'), edit_user_path(user), :title => t('actions.edit')
-        =link_to image_tag('delete.png'), user, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
+      - if can? :modify, User
+        %td
+          =#link_to 'Show', user
+          =link_to image_tag('edit.png'), edit_user_path(user), :title => t('actions.edit')
+          =link_to image_tag('delete.png'), user, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
 

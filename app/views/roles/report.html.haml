@@ -1,0 +1,14 @@
+%h1= t('.title')
+
+%table
+  %tr
+    %th= Permission.model_name.human
+    - @roles.sort.each do |role|
+      %th= role.name
+  - @permissions.each do |perm|
+    %tr
+      %td= perm.description
+      - @roles.sort.each do |role|
+        %td
+          = check_box_tag "roles[permission_ids][]", perm.id, role.permissions.include?(perm)
+

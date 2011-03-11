@@ -77,17 +77,19 @@ header .account a {
   text-decoration: none;
 }
 #page {
-  min-height: 500px;
   margin: 25px;
-  padding: 20px;
-  background-color: white;
+  background-color: #f5f5f5;
+  overflow: hidden;
   box-shadow: 3px 5px 10px #ccc;
   -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 3px 5px 10px #ccc;
 }
 #page section {
   float: left;
-  width: 79%;
+  width: 73%;
+  min-height: 400px;
+  padding: 20px;
+  background-color: white;
 }
 footer.page {
   clear: both;
@@ -134,6 +136,7 @@ td {
 #sidebar {
   float: right;
   width: 20%;
+  padding: 20px;
   min-width: 100px;
 }
 #sidebar nav {
