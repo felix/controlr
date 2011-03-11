@@ -1,4 +1,4 @@
-%h1= User.human_name(:count => 2)
+%h1= User.model_name.human(:count => 2)
 
 %table
   %tr
@@ -20,6 +20,6 @@
       %td= user.updated_at
       %td
         =#link_to 'Show', user
-        =link_to image_tag('edit.png'), edit_user_path(user)
-        =link_to image_tag('delete.png'), user, :confirm => t('actions.confirm'), :method => :delete
+        =link_to image_tag('edit.png'), edit_user_path(user), :title => t('actions.edit')
+        =link_to image_tag('delete.png'), user, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
 

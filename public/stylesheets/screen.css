@@ -141,7 +141,7 @@ td {
 }
 #sidebar nav h3 {
   margin: 0 0 10px 0;
-  padding: 12px 12px 12px 20px;
+  padding: .375em .75em;
   color: white;
   font-weight: normal;
   background-color: #111;
@@ -166,7 +166,6 @@ td {
   color: #555;
   line-height: 2;
   text-transform: lowercase;
-  background: transparent left no-repeat;
 }
 #sidebar nav li:hover {
   background-color: #eee;
@@ -174,8 +173,17 @@ td {
 #sidebar nav a:hover {
   text-decoration: none;
 }
-#sidebar nav .add {
+
+/*** buttons ***/
+
+.button {
+  background: transparent left no-repeat;
+}
+.button.add {
   background-image: url(/images/add.png);
+}
+.button.list {
+  background-image: url(/images/list.png);
 }
 
 

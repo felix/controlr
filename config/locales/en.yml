@@ -8,7 +8,8 @@ en:
   actions:
     confirm: 'Are you sure?'
     return: Return
-  dashboard: Dashboard
+    delete: Delete
+    edit: Edit
   activemodel:
     models:
       user:
@@ -19,10 +20,15 @@ en:
         email: Email-i18n
         firstname: Firstname
         surname: Surname
+  dashboard:
+    tab: Dashboard
+    submenu:
+      title: Shortcuts
   users:
     new:
       title: New User
+    tab: Users
     submenu:
       title: User Actions
+      list: List Users
       new: New User
-    

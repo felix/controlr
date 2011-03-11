@@ -1,4 +1,5 @@
 %h3= t('.title')
 %ul
-  %li= link_to t('.new',:model => 'User'), new_user_path, :class => 'add'
+  %li= link_to t('.list',:model => 'User'), users_path, :class => 'list button'
+  %li= link_to t('.new',:model => 'User'), new_user_path, :class => 'add button'
 
