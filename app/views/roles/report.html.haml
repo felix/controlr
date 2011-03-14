@@ -1,14 +1,18 @@
 %h1= t('.title')
 
-%table
-  %tr
-    %th= Permission.model_name.human
-    - @roles.sort.each do |role|
-      %th= role.name
-  - @permissions.each do |perm|
+= form_tag({:controller => 'roles', :action => 'report'}, :method => 'post') do
+  %table
     %tr
-      %td= perm.description
+      %th= Permission.model_name.human
       - @roles.sort.each do |role|
-        %td
-          = check_box_tag "roles[permission_ids][]", perm.id, role.permissions.include?(perm)
-
+        %th
+          = role.name
+          = hidden_field_tag "permissions[#{role.id}][]", ""
+    - @permissions.each do |perm|
+      %tr
+        %td= perm.description
+        - @roles.sort.each do |role|
+          %td
+            = check_box_tag "permissions[#{role.id}][]", perm.id, role.permissions.include?(perm)
+  %fieldset.actions
+    = submit_tag 'Save'

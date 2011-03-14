@@ -1,2 +1,6 @@
+permissions as YAML in roles rather than separate model (see redmine)
+
+
+
 http://blog.teksol.info/2008/10/16/how-to-use-datamapper-from-rails-including-migrations-and-tests
 http://guides.rubyonrails.org/testing.html

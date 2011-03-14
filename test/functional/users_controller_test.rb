@@ -3,16 +3,14 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   context 'Users Controller' do
     setup do
-      Client.auto_migrate!
-      Account.auto_migrate!
-      User.auto_migrate!
-      @client = Client.gen
-      @account = Account.gen(:client => @client)
-      @user = User.gen(:account => @account)
+      @user = valid_user
+      @user.save
     end
 
     context 'while authed' do
       setup do
+        @user.roles << Role.first(:name => 'admin')
+        @user.save
         sign_in @user
       end
 
@@ -22,7 +20,7 @@ class UsersControllerTest < ActionController::TestCase
         end
 
         should respond_with(:success)
-        should render_template(:index)
+        #should render_template(:index)
         should assign_to(:users)
       end
 
@@ -71,9 +69,15 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       context 'on DELETE to :destroy' do
+        setup do
+          @another_user = valid_user
+          @another_user.save
+        end
+
         should 'destroy user' do
+          assert @another_user.valid?
           assert_difference('User.count', -1) do
-            delete :destroy, :id => @user.id
+            delete :destroy, :id => @another_user.id
           end
           assert_redirected_to users_path
         end
@@ -93,7 +97,7 @@ class UsersControllerTest < ActionController::TestCase
       context 'on GET to :new' do
         should "should get new" do
           get :new
-          assert_response :success
+          assert_response(:success)
         end
       end
 

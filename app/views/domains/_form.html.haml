@@ -6,11 +6,13 @@
         - @domain.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :active
-    = f.text_field :active
-  .actions
+  %fieldset
+    %ul
+      %li
+        = f.label :name
+        = f.text_field :name
+      %li
+        = f.label :active
+        = f.check_box :active
+  %fieldset.actions
     = f.submit 'Save'

@@ -1,6 +1,17 @@
 
-# every fixture should be valid!
+def valid_user
+  User.new(
+    :email => /\w+@\w+\.com/.gen,
+    :firstname => /\w+/.gen,
+    :surname => /\w+/.gen,
+    :active => true,
+    :password => (password = /\w+/.gen),
+    :password_confirmation => password,
+    :created_at => Time.now
+  )
+end
 
+# every fixture should be valid!
 User.fixture {{
   #:email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
   :email => /\w+@\w+\.com/.gen,

@@ -7,7 +7,6 @@ class Permission
   property :subject_class, String, :required => true
   property :subject_id, Integer
 
-  has n, :grants
-  has n, :roles, :through => :grants
+  has n, :roles, :through => Resource, :constraint => :skip
 
 end

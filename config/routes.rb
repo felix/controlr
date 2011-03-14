@@ -1,4 +1,6 @@
 Controlr::Application.routes.draw do
+  resources :settings
+
   devise_for :users, :path_names => {
     :sign_in => 'login',
     :sign_out => 'logout',
@@ -18,9 +20,9 @@ Controlr::Application.routes.draw do
     resources :dns, :controller => 'domain_records'
   end
 
-  resources :accounts do
-    resources :domains
-  end
+#  resources :accounts do
+#    resources :domains
+#  end
 
   resources :users
 
@@ -32,11 +34,11 @@ Controlr::Application.routes.draw do
     resources :permissions
   end
 
-  resources :clients
+#  resources :clients
 
-  resources :servers
-  resources :ip_addresses
-  resources :services
+#  resources :servers
+#  resources :ip_addresses
+#  resources :services
 
   root :to => 'dashboard#index'
 

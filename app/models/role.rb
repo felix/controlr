@@ -7,10 +7,14 @@ class Role
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  has n, :assignments
-  has n, :users, :through => :assignments
+  has n, :users, :through => Resource, :constraint => :skip
+  has n, :permissions, :through => Resource, :constraint => :skip
 
-  has n, :grants
-  has n, :permissions, :through => :grants
-
+  # for assignment of permissions
+  def permission_ids=(ids)
+    self.permissions.clear
+    ids.delete_if{|i| i.empty?}.each do |id|
+      self.permissions << Permission.get(id)
+    end
+  end
 end

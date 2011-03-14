@@ -5,8 +5,9 @@
     %title Controlr
     = stylesheet_link_tag 'reset'
     = stylesheet_link_tag 'screen'
-    = csrf_meta_tag
     /%script{:src => 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'}
+    = javascript_include_tag :defaults
+    = csrf_meta_tag
     %meta{:content => '', :name => 'description'}/
     /[if lt IE 9]
       %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
@@ -22,6 +23,9 @@
           %li.dashboard= link_to t('dashboard.tab'), root_path
           - if can? :read, User
             %li.users= link_to t('users.tab'), users_path
+          %li.domains= link_to t('domains.tab'), domains_path
+          - if @domain
+            %li.emails= link_to t('emails.tab'), domain_emails_path(@domain)
 
     #page
       %section

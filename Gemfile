@@ -10,6 +10,8 @@ gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
 gem 'rails',              RAILS_VERSION
 gem 'i18n'
 
+gem 'jquery-rails', '>= 0.2.6'
+
 gem 'dm-rails',          '~> 1.0.4'
 gem 'dm-mysql-adapter',     DM_VERSION
 
@@ -49,6 +51,7 @@ group(:development, :test) do
   gem 'ruby_parser'
 
   #gem 'dm-sweatshop',         DM_VERSION
+  gem 'randexp'
   gem 'dm-sweatshop', :git => 'git@github.com:felix/dm-sweatshop.git', :branch => 'noparsetree'
 
   # To get a detailed overview about what queries get issued and how long they take

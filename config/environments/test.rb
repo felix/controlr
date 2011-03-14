@@ -32,4 +32,7 @@ Controlr::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # setup the logger
+  DataMapper::Logger.new($stderr, :debug)
 end

@@ -1,8 +1,10 @@
-class EmailesController < ApplicationController
+class EmailsController < ApplicationController
+  before_filter :get_domain
+
   # GET /emailes
   # GET /emailes.xml
   def index
-    @emailes = Email.all
+    @emails = @domain.emails.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,7 +26,7 @@ class EmailesController < ApplicationController
   # GET /emailes/new
   # GET /emailes/new.xml
   def new
-    @email = Email.new
+    @email = @domain.emails.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -79,5 +81,13 @@ class EmailesController < ApplicationController
       format.html { redirect_to(emailes_url) }
       format.xml  { head :ok }
     end
+  end
+
+  private
+
+  def get_domain
+    @domain = Domain.get!(params[:domain_id])
+  rescue DataMapper::ObjectNotFoundError
+    redirect_to :root
   end
 end

@@ -1,21 +1,18 @@
-%h1 Listing domains
+%h1= Domain.model_name.human(:count => 2)
 
 %table
   %tr
-    %th Name
-    %th Active
-    %th
-    %th
-    %th
+    %th= Domain.human_attribute_name('name')
+    %th= Domain.human_attribute_name('active')
+    - if can? :modify, Domain
+      %th
 
   - @domains.each do |domain|
     %tr
-      %td= domain.name
-      %td= domain.active
-      %td= link_to 'Show', domain
-      %td= link_to 'Edit', edit_domain_path(domain)
-      %td= link_to 'Destroy', domain, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Domain', new_domain_path
+      %td= link_to domain.name, domain_path(domain)
+      %td= domain.active ? image_tag('tick.png') : ''
+      - if can? :modify, Domain
+        %td
+          =#link_to 'Show', domain
+          =link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
+          =link_to image_tag('delete.png'), domain, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')

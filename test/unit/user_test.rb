@@ -4,7 +4,8 @@ class UserTest < Test::Unit::TestCase
 
   context 'an User instance' do
     setup do
-      @user = User.gen
+      #@user = User.gen
+      @user = valid_user
     end
 
     should 'be valid' do

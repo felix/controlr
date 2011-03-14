@@ -12,4 +12,10 @@ require 'shoulda/datamapper'
 class ActiveSupport::TestCase
   include Devise::TestHelpers
 end
+
+def logger
+  ::Rails.logger
+end
+
 DataMapper.auto_migrate!
+require "#{Rails.root}/db/seeds.rb"

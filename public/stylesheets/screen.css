@@ -55,6 +55,8 @@ header nav li {
 }
 body.dashboard nav li.dashboard,
 body.users nav li.users,
+body.domains nav li.domains,
+body.emails nav li.emails,
 header nav li.active,
 header nav li:hover {
   opacity: 1.0;

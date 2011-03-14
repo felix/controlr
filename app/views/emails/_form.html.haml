@@ -1,4 +1,4 @@
-= form_for @email do |f|
+= form_for([@domain,@email]) do |f|
   -if @email.errors.any?
     #error_explanation
       %h2= "#{pluralize(@email.errors.count, "error")} prohibited this email address from being saved:"

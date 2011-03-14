@@ -15,15 +15,23 @@ en:
       user:
         one: User
         other: Users
+      domain:
+        one: Domain
+        other: Domains
     attributes:
       user:
         email: Email-i18n
         firstname: Firstname
         surname: Surname
+      domain:
+        name: Name
   dashboard:
     tab: Dashboard
     submenu:
       title: Shortcuts
+  roles:
+    report:
+      title: Permission report
   users:
     new:
       title: New User
@@ -32,3 +40,17 @@ en:
       title: User Actions
       list: List Users
       new: New User
+  domains:
+    new:
+      title: New Domain
+    tab: Domains
+    submenu:
+      title: Domain Actions
+      list: List Domains
+      new: New Domain
+  emails:
+    new:
+      title: New Email
+    tab: Emails
+    submenu:
+      new: New Email
