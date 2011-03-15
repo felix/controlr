@@ -1,15 +1,17 @@
 require 'test_helper'
 
-class UserTest < Test::Unit::TestCase
+class MailboxTest < Test::Unit::TestCase
 
-  context 'an User instance' do
+  context 'an Mailbox instance' do
+    Domain.auto_migrate!
+    Mailbox.auto_migrate!
     setup do
       repository(:default) do
         transaction = DataMapper::Transaction.new(repository)
         transaction.begin
         repository.adapter.push_transaction(transaction)
       end
-      @user = User.gen
+      @mailbox = Mailbox.gen
     end
 
     def teardown
@@ -17,12 +19,13 @@ class UserTest < Test::Unit::TestCase
     end
 
     should 'be valid' do
-      assert @user.valid?
+      assert @mailbox.valid?
     end
 
     should validate_presence_of(:email)
-    should allow_value('felix@home.org').for(:email)
-    should_not allow_value('felix').for(:email)
-    should_not allow_value('@home').for(:email)
+    should validate_presence_of(:domain)
+    should_not allow_value('test').for(:email)
+    should_not allow_value('test@').for(:email)
+    should_not allow_value('@example.com').for(:email)
   end
 end

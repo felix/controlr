@@ -1,0 +1,7 @@
+%h1 Editing mailbox
+
+= render 'form'
+
+= link_to 'Show', [@mailbox.domain, @mailbox]
+\|
+= link_to 'Back', domain_mailboxes_path(@domain)

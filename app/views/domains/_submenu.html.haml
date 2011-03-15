@@ -1,6 +1,8 @@
 %h3= t('.title')
 %ul
-  %li= link_to t('emails.submenu.new',:model => 'Email'), new_domain_email_path(@domain), :class => 'add button' unless cannot? :create, Email
   %li= link_to t('.list',:model => 'Domain'), domains_path, :class => 'list button'
-  %li= link_to t('.new',:model => 'Domain'), new_domain_path, :class => 'add button' unless cannot? :create, Domain
+  - if @domain && !@domain.new? && can?(:create, Email)
+    %li= link_to t('mailboxes.submenu.new',:model => 'Mailbox'), new_domain_mailbox_path(@domain), :class => 'add button'
+  - if can? :create, Domain
+    %li= link_to t('.new',:model => 'Domain'), new_domain_path, :class => 'add button'
 

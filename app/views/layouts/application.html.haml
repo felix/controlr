@@ -24,15 +24,22 @@
           - if can? :read, User
             %li.users= link_to t('users.tab'), users_path
           %li.domains= link_to t('domains.tab'), domains_path
-          - if @domain
-            %li.emails= link_to t('emails.tab'), domain_emails_path(@domain)
+          - if @domain && !@domain.new?
+            %li.aliases= link_to t('aliases.tab'), domain_aliases_path(@domain)
+            %li.mailboxes= link_to t('mailboxes.tab'), domain_mailboxes_path(@domain)
 
     #page
       %section
+        - unless flash.empty?
+          .flash
+            %ul
+              - flash.each do |t,m|
+                %li{:class => t}= m
+
         = yield
       #sidebar
         %nav
-          = render :partial => 'submenu' rescue nil
+          = render :partial => 'submenu'
     %footer.page
       %p 
         &copy;

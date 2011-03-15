@@ -1,0 +1,21 @@
+%h1= Mailbox.model_name.human(:count => 2)
+
+%table
+  %tr
+    %th= Mailbox.human_attribute_name('email')
+    %th= Mailbox.human_attribute_name('active')
+    %th= Mailbox.human_attribute_name('created')
+    %th= Mailbox.human_attribute_name('updated')
+    - if can? :modify, Email
+      %th
+
+  - @mailboxes.each do |mailbox|
+    %tr
+      %td= link_to mailbox.email, edit_domain_mailbox_path(@domain,mailbox)
+      %td= mailbox.active ? image_tag('tick.png') : ''
+      %td= mailbox.created_at
+      %td= mailbox.updated_at
+      %td
+        = link_to image_tag('edit.png'), edit_domain_mailbox_path(@domain,mailbox)
+        = link_to image_tag('delete.png'), [@domain,mailbox], :confirm => 'Are you sure?', :method => :delete
+

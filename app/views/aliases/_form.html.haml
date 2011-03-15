@@ -1,0 +1,23 @@
+= form_for([@alias.domain,@alias]) do |f|
+  -if @alias.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@alias.errors.count, "error")} prohibited this alias address from being saved:"
+      %ul
+        - @alias.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    %ul
+      %li
+        = f.label :source
+        = f.text_field :source, :value => (@alias.source ?  @alias.source.slice(/[^@]+/) : '')
+        = "@#{@alias.domain.name}"
+      %li
+        = f.label :destination
+        = f.text_area :destination, :rows => 5, :value => (@alias.destination ? @alias.destination_array.join('\n') : '')
+      %li
+        = f.label :active
+        = f.check_box :active
+
+  %fieldset.actions
+    = f.submit 'Save'

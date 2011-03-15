@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   context 'Users Controller' do
     setup do
+      User.auto_migrate!
       repository(:default) do
         transaction = DataMapper::Transaction.new(repository)
         transaction.begin
@@ -16,7 +17,6 @@ class UsersControllerTest < ActionController::TestCase
 
     context 'while authed' do
       setup do
-        User.auto_migrate!
         @user = User.gen
         @user.roles << Role.first(:name => 'admin')
         @user.save
@@ -95,7 +95,6 @@ class UsersControllerTest < ActionController::TestCase
 
     context 'while unauthed' do
       setup do
-        User.auto_migrate!
         @user = User.gen
         raise "INVALID #{@user.errors.inspect}" unless @user.valid?
       end

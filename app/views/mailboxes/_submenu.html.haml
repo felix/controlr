@@ -1,0 +1,5 @@
+%h3= t('.title')
+%ul
+  %li= link_to t('.list',:model => 'Mailbox'), domain_mailboxes_path(@domain), :class => 'list button'
+  - if can? :create, Email
+    %li= link_to t('.new',:model => 'Mailbox'), new_domain_mailbox_path(@domain), :class => 'add button'

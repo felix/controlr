@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   before_filter :authenticate_user!, :except => [:new, :create]
   authorize_resource
   skip_authorize_resource :only => :new

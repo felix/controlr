@@ -1,0 +1,20 @@
+= form_for([@mailbox.domain,@mailbox]) do |f|
+  -if @mailbox.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@mailbox.errors.count, "error")} prohibited this mailbox address from being saved:"
+      %ul
+        - @mailbox.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    %ul
+      %li
+        = f.label :email
+        = f.text_field :email, :value => (@mailbox.email ? @mailbox.email.slice(/[^@]+/) : '')
+        = "@#{@mailbox.domain.name}"
+      %li
+        = f.label :active
+        = f.check_box :active
+
+  %fieldset.actions
+    = f.submit 'Save'

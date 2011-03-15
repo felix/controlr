@@ -1,0 +1,21 @@
+%h1= Alias.model_name.human(:count => 2)
+
+%table
+  %tr
+    %th= Alias.human_attribute_name('alias')
+    %th= Alias.human_attribute_name('active')
+    %th= Alias.human_attribute_name('created')
+    %th= Alias.human_attribute_name('updated')
+    - if can? :modify, Email
+      %th
+
+  - @aliases.each do |a|
+    %tr
+      %td= link_to a.source, edit_domain_alias_path(@domain,a)
+      %td= a.active ? image_tag('tick.png') : ''
+      %td= a.created_at
+      %td= a.updated_at
+      %td
+        = link_to image_tag('edit.png'), edit_domain_alias_path(@domain,a)
+        = link_to image_tag('delete.png'), [@domain,a], :confirm => 'Are you sure?', :method => :delete
+

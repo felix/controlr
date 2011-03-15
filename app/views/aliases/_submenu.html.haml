@@ -1,0 +1,5 @@
+%h3= t('.title')
+%ul
+  %li= link_to t('.list',:model => 'Alias'), domain_aliases_path(@domain), :class => 'list button'
+  - if can? :create, Email
+    %li= link_to t('.new',:model => 'Alias'), new_domain_alias_path(@domain), :class => 'add button'

@@ -34,6 +34,7 @@ gem 'haml'
 gem 'haml-rails'
 
 group(:development, :test) do
+  #gem 'ruby-debug19', :require => 'ruby-debug'
 
   # needed for test/unit/ui/console/testrunner
   gem 'test-unit'
@@ -51,7 +52,6 @@ group(:development, :test) do
   gem 'ruby_parser'
 
   #gem 'dm-sweatshop',         DM_VERSION
-  gem 'randexp'
   gem 'dm-sweatshop', :git => 'git@github.com:felix/dm-sweatshop.git', :branch => 'noparsetree'
 
   # To get a detailed overview about what queries get issued and how long they take

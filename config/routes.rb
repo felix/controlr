@@ -16,7 +16,8 @@ Controlr::Application.routes.draw do
   resource :dashboard, :only => [:index]
 
   resources :domains do
-    resources :emails
+    resources :aliases
+    resources :mailboxes
     resources :dns, :controller => 'domain_records'
   end
 

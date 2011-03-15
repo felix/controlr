@@ -1,19 +1,20 @@
-class Email
+class Alias
   include DataMapper::Resource
   extend ActiveModel::Translation
 
   property :id, Serial
-  property :address, String, :required => true
-  property :active, Boolean
+  property :source, String, :required => true
   property :destination, Text
-  property :maildir, String
+  property :active, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  belongs_to :domain
+  belongs_to :domain, :required => true
 
-  #validates_format_of :address, :as => :email_address, :unless => lambda {|ea| ea.address[0] == '@'}
+  validates_format_of :source, :as => :email_address
+
+  before :save, :set_source
 
   def destination
     destination_array.reject{|e| e == @address}.join(',')
@@ -32,26 +33,14 @@ class Email
     end
   end
 
-  def store=(store)
-    if store
-      self.destination = destination_array.unshift(@address)
-    else
-      self.destination = destination_array.reject{|e| e == @address}
-    end
-    raise self.destination.inspect
-  end
-
-  def store
-    self.store?
-  end
-
-  def store?
-    destination_array.include? @address
-  end
-
-
   def destination_array
     return [] if @destination.nil?
     @destination.split(%r{,\n+}).uniq.compact
+  end
+
+  private
+
+  def set_source(context = :default)
+    self.source = source.slice(/[^@]+/) << '@' << domain.name
   end
 end

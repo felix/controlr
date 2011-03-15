@@ -18,6 +18,12 @@ en:
       domain:
         one: Domain
         other: Domains
+      alias:
+        one: Alias
+        other: Aliases
+      mailbox:
+        one: Mailbox
+        other: Mailboxes
     attributes:
       user:
         email: Email-i18n
@@ -48,9 +54,19 @@ en:
       title: Domain Actions
       list: List Domains
       new: New Domain
-  emails:
+  aliases:
     new:
-      title: New Email
-    tab: Emails
+      title: New Alias
+    tab: Aliases
     submenu:
-      new: New Email
+      title: Alias Actions
+      list: List Aliases
+      new: New Alias
+  mailboxes:
+    new:
+      title: New Mailbox
+    tab: Mailboxes
+    submenu:
+      title: Mailbox Actions
+      list: List Mailboxes
+      new: New Mailbox

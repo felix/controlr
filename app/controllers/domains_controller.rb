@@ -1,4 +1,7 @@
 class DomainsController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_resource
+
   # GET /domains
   # GET /domains.xml
   def index
@@ -80,4 +83,5 @@ class DomainsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
 end

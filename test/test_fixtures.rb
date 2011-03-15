@@ -12,6 +12,33 @@ User.fixture {{
   :created_at => Time.now,
   #:account => Account.make,
 }}
+Domain.fixture {{
+  :name => DataMapper::Sweatshop.unique {/\w+\.\w\.com/.gen},
+  :active => true,
+  :created_at => Time.now,
+  #:account => Account.make,
+}}
+
+Alias.fixture {{
+  :source => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  :destination => 'test@example.com',
+  :active => true,
+  :created_at => Time.now,
+  :domain => Domain.make
+}}
+Mailbox.fixture {{
+  :email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  :maildir => 'blah',
+  :active => true,
+  :password => '',
+  :created_at => Time.now,
+  :domain => Domain.make
+}}
+Role.fixture {{
+  :name => /\w+/.gen,
+  :description => /\w+/.gen,
+}}
+=begin
 
 Client.fixture {{
   :name => DataMapper::Sweatshop.unique {/\w+/.gen},
@@ -80,26 +107,6 @@ Service.fixture(:postfix) {{
   :server => Server.make
 }}
 
-Domain.fixture {{
-  :name => DataMapper::Sweatshop.unique {/\w+\.\w\.com/.gen},
-  :active => true,
-  :created_at => Time.now,
-  #:account => Account.make,
-}}
-
-Email.fixture {{
-  :address => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
-  :active => true,
-  :destination => 'test@example.com',
-  :maildir => 'foo',
-  :created_at => Time.now,
-  :domain => Domain.make
-}}
-Role.fixture {{
-  :name => /\w+/.gen,
-  :description => /\w+/.gen,
-}}
-=begin
 Permission.fixture {{
   :action => /\w+/.gen,
   :subject_class => /\w+/.gen,
