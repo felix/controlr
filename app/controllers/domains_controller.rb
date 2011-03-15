@@ -46,7 +46,7 @@ class DomainsController < ApplicationController
     @domain = Domain.new(params[:domain])
 
     respond_to do |format|
-      if @domain.save
+      if @domain.save && create_default_aliases(@domain)
         format.html { redirect_to(@domain, :notice => 'Domain was successfully created.') }
         format.xml  { render :xml => @domain, :status => :created, :location => @domain }
       else
@@ -84,4 +84,20 @@ class DomainsController < ApplicationController
     end
   end
 
+  private
+
+  def create_default_aliases(domain)
+    # TODO get default from settings
+    hostmaster = domain.aliases.new(
+      :source => 'hostmaster',
+      :destination => 'hostmaster@seconddrawer.com.au',
+      :active => true
+    )
+    postmaster = domain.aliases.new(
+      :source => 'postmaster',
+      :destination => 'postmaster@seconddrawer.com.au',
+      :active => true
+    )
+    domain.save
+  end
 end

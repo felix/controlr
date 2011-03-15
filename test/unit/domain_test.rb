@@ -20,9 +20,7 @@ class DomainTest < Test::Unit::TestCase
       assert @domain.valid?
     end
     should validate_presence_of(:name)
+    should validate_uniqueness_of(:name)
 
-    should 'create default aliases' do
-      assert @domain.aliases != nil
-    end
   end
 end

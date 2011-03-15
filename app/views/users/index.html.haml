@@ -6,8 +6,7 @@
     %th= User.human_attribute_name('firstname')
     %th= User.human_attribute_name('surname')
     %th= User.human_attribute_name('active')
-    %th= User.human_attribute_name('created')
-    %th= User.human_attribute_name('updated')
+    %th= User.human_attribute_name('last_sign_in')
     - if can? :modify, User
       %th
 
@@ -17,8 +16,8 @@
       %td= user.firstname
       %td= user.surname
       %td= user.active ? image_tag('tick.png') : ''
-      %td= user.created_at
-      %td= user.updated_at
+      %td
+        %time{:datetime => user.last_sign_in_at, :class => 'relative'}= user.last_sign_in_at
       - if can? :modify, User
         %td
           =#link_to 'Show', user

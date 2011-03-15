@@ -13,7 +13,7 @@ User.fixture {{
   #:account => Account.make,
 }}
 Domain.fixture {{
-  :name => DataMapper::Sweatshop.unique {/\w+\.\w\.com/.gen},
+  :name => DataMapper::Sweatshop.unique {/\w{2,16}\.com/.gen},
   :active => true,
   :created_at => Time.now,
   #:account => Account.make,

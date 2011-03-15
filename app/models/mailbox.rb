@@ -13,7 +13,7 @@ class Mailbox
 
   belongs_to :domain, :required => true
 
-  validates_format_of :email, :as => :email_address
+  #validates_format_of :email, :as => :email_address
 
   before :save, :set_email
 

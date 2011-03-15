@@ -88,6 +88,7 @@ header .account a {
   -webkit-box-shadow: 3px 5px 10px #ccc;
 }
 #page section {
+  position: relative;
   float: left;
   width: 73%;
   min-height: 400px;
@@ -104,6 +105,22 @@ footer.page p {
   text-align: right;
 }
 
+/*** flash ***/
+
+.flash {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: .75em;
+  text-align: center;
+}
+.flash ul {
+  padding: 5px;
+  background-color: yellow;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+}
 
 /*** tables ***/
 

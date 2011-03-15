@@ -12,7 +12,7 @@ class Alias
 
   belongs_to :domain, :required => true
 
-  validates_format_of :source, :as => :email_address
+  #validates_format_of :source, :as => :email_address
 
   before :save, :set_source
 
@@ -21,7 +21,6 @@ class Alias
   end
 
   def destination=(emails)
-    debugger
     if emails.nil? || emails.empty?
       @destination = destination_array.delete_if{|e| e != @address}.uniq.compact.join(',')
     else
