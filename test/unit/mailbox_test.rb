@@ -27,5 +27,11 @@ class MailboxTest < Test::Unit::TestCase
     should_not allow_value('test').for(:email)
     should_not allow_value('test@').for(:email)
     should_not allow_value('@example.com').for(:email)
+
+    should 'create an alias also' do
+      mb = Mailbox.gen(:email => 'test123@bob.com')
+      a = Alias.first(:source => mb.email)
+      assert_not_nil a
+    end
   end
 end

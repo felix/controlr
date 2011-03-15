@@ -14,22 +14,18 @@ class Alias
 
   #validates_format_of :source, :as => :email_address
 
-  before :save, :set_source
-
-  def destination
-    destination_array.reject{|e| e == @address}.join(',')
+  before :save do |a|
+    self.source = source.slice(/[^@]+/) << '@' << domain.name
   end
 
   def destination=(emails)
-    if emails.nil? || emails.empty?
-      @destination = destination_array.delete_if{|e| e != @address}.uniq.compact.join(',')
+    emails ||= ''
+    if emails.class == Array
+      new_dest = emails.uniq.compact.join(',')
     else
-      if emails.class == Array
-        @destination = emails.uniq.compact.join(',')
-      else
-        @destination = emails.split(%r{,\n+}).uniq.compact.join(',')
-      end
+      new_dest = emails.split(%r{,\n+}).uniq.compact.join(',')
     end
+    super(new_dest)
   end
 
   def destination_array
@@ -37,9 +33,4 @@ class Alias
     @destination.split(%r{,\n+}).uniq.compact
   end
 
-  private
-
-  def set_source(context = :default)
-    self.source = source.slice(/[^@]+/) << '@' << domain.name
-  end
 end

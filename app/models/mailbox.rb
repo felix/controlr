@@ -15,13 +15,13 @@ class Mailbox
 
   #validates_format_of :email, :as => :email_address
 
-  before :save, :set_email
-
-  private
-
-  def set_email(context = :default)
+  before :save do |mb|
     self.email = @email.slice(/[^@]+/) << '@' << @domain.name
+    a = @domain.aliases.create(
+      :source => self.email,
+      :destination => self.email,
+      :active => self.active
+    )
   end
-
 
 end

@@ -241,3 +241,6 @@ fieldset textarea {
   padding: 2px;
   border: 1px solid #eee;
 }
+input.right {
+  text-align: right;
+}

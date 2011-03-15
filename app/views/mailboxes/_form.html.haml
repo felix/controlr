@@ -10,7 +10,7 @@
     %ul
       %li
         = f.label :email
-        = f.text_field :email, :value => (@mailbox.email ? @mailbox.email.slice(/[^@]+/) : '')
+        = f.text_field :email, :class => 'right', :value => (@mailbox.email ? @mailbox.email.slice(/[^@]+/) : '')
         = "@#{@mailbox.domain.name}"
       %li
         = f.label :active

@@ -21,6 +21,11 @@ class DomainTest < Test::Unit::TestCase
     end
     should validate_presence_of(:name)
     should validate_uniqueness_of(:name)
+    should allow_value('example.com').for(:name)
+    should allow_value('3example.com').for(:name)
+    should_not allow_value('@example.com').for(:name)
+    should_not allow_value('test@example.com').for(:name)
+    should_not allow_value('test').for(:name)
 
   end
 end

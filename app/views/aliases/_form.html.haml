@@ -10,7 +10,7 @@
     %ul
       %li
         = f.label :source
-        = f.text_field :source, :value => (@alias.source ?  @alias.source.slice(/[^@]+/) : '')
+        = f.text_field :source, :class => 'right', :value => (@alias.source ?  @alias.source.slice(/[^@]+/) : '')
         = "@#{@alias.domain.name}"
       %li
         = f.label :destination

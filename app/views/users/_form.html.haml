@@ -21,16 +21,17 @@
         = f.label :active
         = f.check_box :active
 
-  %fieldset
-    %ul
-      %li
-        = f.label :roles
-        %ul.field
-          - for role in Role.all
-            %li
-              = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
-              = role.description
-        = hidden_field_tag "user[role_ids][]", ""
+  - if can? :update, Role
+    %fieldset
+      %ul
+        %li
+          = f.label :roles
+          %ul.field
+            - Role.all.reject{|r| r.name == 'super'}.each do |role|
+              %li
+                = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+                = role.description
+          = hidden_field_tag "user[role_ids][]", ""
 
   %fieldset.actions
     = f.submit 'Save'
