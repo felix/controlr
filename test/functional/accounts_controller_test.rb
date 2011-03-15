@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class AccountsControllerTest < ActionController::TestCase
+=begin
   setup do
     Client.auto_migrate!
     Account.auto_migrate!
@@ -64,4 +65,5 @@ class AccountsControllerTest < ActionController::TestCase
 
     assert_redirected_to accounts_path
   end
+=end
 end

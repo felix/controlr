@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class IpAddressesControllerTest < ActionController::TestCase
+=begin
   setup do
     @ip_address = IpAddress.gen
   end
@@ -49,4 +50,5 @@ class IpAddressesControllerTest < ActionController::TestCase
 
     assert_redirected_to ip_addresses_path
   end
+=end
 end

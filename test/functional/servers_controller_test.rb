@@ -1,5 +1,6 @@
 require 'test_helper'
 class ServersControllerTest < ActionController::TestCase
+=begin
   describe ServersController do
     before do
       Server.auto_migrate!
@@ -48,4 +49,5 @@ class ServersControllerTest < ActionController::TestCase
       assert_redirected_to servers_path
     end
   end
+=end
 end

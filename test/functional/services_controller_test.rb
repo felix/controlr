@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class ServicesControllerTest < ActionController::TestCase
+=begin
   setup do
     Service.auto_migrate!
     @server = Server.gen
@@ -48,4 +49,5 @@ class ServicesControllerTest < ActionController::TestCase
 
     assert_redirected_to services_path
   end
+=end
 end

@@ -4,12 +4,8 @@ class DashboardControllerTest < ActionController::TestCase
 
   context 'Dashboard controller' do
     setup do
-      Client.auto_migrate!
-      Account.auto_migrate!
       User.auto_migrate!
-      @client = Client.gen
-      @account = Account.gen(:client => @client)
-      @user = User.gen(:account => @account)
+      @user = User.gen
     end
 
     context 'while authed' do
