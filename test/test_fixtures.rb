@@ -42,6 +42,7 @@ Mailbox.fixture {{
 Role.fixture {{
   :name => /\w+/.gen,
   :description => /\w+/.gen,
+  :permissions => 2.of {Ability.permissions.keys.pick}
 }}
 =begin
 

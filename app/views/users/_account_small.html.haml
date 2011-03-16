@@ -1,5 +1,7 @@
 - if user_signed_in?
-  = link_to "#{current_user.email}", edit_user_path(current_user)
+  = link_to current_user.email, edit_user_path(current_user)
+  |
+  = link_to current_user.account.name, account_path(current_user.account)
   |
   = link_to 'Log out', destroy_user_session_path
 - else

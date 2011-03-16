@@ -1,0 +1,19 @@
+manage_roles:
+  action: manage
+  description: Manage roles
+  subject_class: Role
+
+manage_users:
+  action: manage
+  description: Manage users
+  subject_class: User
+
+manage_emails:
+  action: manage
+  description: Manage emails
+  subject_class: Email
+
+manage_domains:
+  action: manage
+  description: Manage domains
+  subject_class: Domain

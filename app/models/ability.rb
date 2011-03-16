@@ -1,13 +1,11 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  @@permissions = nil
 
-    # predefined
-    # :index, :show, :new, :edit
-    #alias_action :index, :show, :to => :read
-    #alias_action :new, :to => :create
-    #alias_action :edit, :to => :update
+  def initialize(user)
+    self.clear_aliased_actions
+
     alias_action :update, :destroy, :to => :modify
 
     user ||= User.new
@@ -17,22 +15,27 @@ class Ability
       can :manage, :all
     else
       # edit update self
-      can :modify, user, :active => true, :id => user.id
+      can :modify, User do |resource|
+        resource == user
+      end
 
-      user.roles.permissions.each do |permission|
-        can permission.action.to_sym, permission.subject_class.constantize do |subject|
-          permission.subject_id.nil? || permission.subject_id == subject.id
+      user.roles.each do |role|
+        if role.permissions
+          role.permissions.each do |perm_name|
+            can(Ability.permissions[perm_name]['action'].to_sym, Ability.permissions[perm_name]['subject_class'].constantize) do |subject|
+              Ability.permissions[perm_name]['subject_id'].nil? || Ability.permissions[perm_name]['subject_id'] == subject.id
+            end
+          end
         end
       end
-=begin
-      can do |action, subject_class, subject|
-        user.roles.permissions.all(:action => action).any? do |permission|
-          permission.subject_class == subject_class.to_s &&
-            (subject.nil? || permission.subject_id.nil? || permission.subject_id == subject.id)
-        end
-      end
-=end
     end
+  end
 
+  def self.permissions
+    @@permissions ||= Ability.load_permissions
+  end
+
+  def self.load_permissions(file='permissions.yml')
+    YAML.load_file("#{::Rails.root.to_s}/config/#{file}")
   end
 end

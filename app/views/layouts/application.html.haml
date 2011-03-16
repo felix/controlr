@@ -22,9 +22,11 @@
       %nav
         %ul
           %li.dashboard= link_to t('dashboard.tab'), root_path
-          - if can? :read, User
+          - if can? :manage, Account
+            %li.accounts= link_to t('accounts.tab'), accounts_path
+          - if can? :manage, User
             %li.users= link_to t('users.tab'), users_path
-          - if can? :read, Domain
+          - if can? :manage, Domain
             %li.domains= link_to t('domains.tab'), domains_path
           - if @domain && !@domain.new?
             %li.aliases= link_to t('aliases.tab'), domain_aliases_path(@domain)

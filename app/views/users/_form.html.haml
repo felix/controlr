@@ -21,7 +21,7 @@
         = f.label :active
         = f.check_box :active
 
-  - if can? :update, Role
+  - if can? :manage, Role
     %fieldset
       %ul
         %li

@@ -3,16 +3,16 @@
 = form_tag({:controller => 'roles', :action => 'report'}, :method => 'post') do
   %table
     %tr
-      %th= Permission.model_name.human
+      %th= Role.human_attribute_name('permissions')
       - @roles.sort.each do |role|
         %th
           = role.name
           = hidden_field_tag "permissions[#{role.id}][]", ""
-    - @permissions.each do |perm|
+    - Ability.permissions.each do |pname, pdetails|
       %tr
-        %td= perm.description
+        %td= pdetails['description']
         - @roles.sort.each do |role|
           %td
-            = check_box_tag "permissions[#{role.id}][]", perm.id, role.permissions.include?(perm)
+            = check_box_tag "permissions[#{role.id}][]", pname, role.permissions.include?(pname) rescue role.inspect
   %fieldset.actions
     = submit_tag 'Save'

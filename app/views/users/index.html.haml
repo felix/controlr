@@ -7,7 +7,7 @@
     %th= User.human_attribute_name('surname')
     %th= User.human_attribute_name('active')
     %th= User.human_attribute_name('last_sign_in')
-    - if can? :modify, User
+    - if can? :manage, User
       %th
 
   - @users.each do |user|
@@ -18,7 +18,7 @@
       %td= user.active ? image_tag('tick.png') : ''
       %td
         %time{:datetime => user.last_sign_in_at, :class => 'relative'}= user.last_sign_in_at
-      - if can? :modify, User
+      - if can? :manage, User
         %td
           =#link_to 'Show', user
           =link_to image_tag('edit.png'), edit_user_path(user), :title => t('actions.edit')

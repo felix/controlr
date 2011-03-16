@@ -83,6 +83,5 @@ class RolesController < ApplicationController
 
   def report
     @roles = Role.all(:name.not => 'super')
-    @permissions = Permission.all
   end
 end

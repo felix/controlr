@@ -21,9 +21,9 @@ Controlr::Application.routes.draw do
     resources :dns, :controller => 'domain_records'
   end
 
-#  resources :accounts do
+  resources :accounts do
 #    resources :domains
-#  end
+  end
 
   resources :users
 

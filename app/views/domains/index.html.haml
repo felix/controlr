@@ -8,7 +8,7 @@
     %th= Mailbox.model_name.human(:count => 2)
     %th= Domain.human_attribute_name('created')
     %th= Domain.human_attribute_name('updated')
-    - if can? :modify, Domain
+    - if can? :manage, Domain
       %th
 
   - @domains.each do |domain|
@@ -21,7 +21,7 @@
         %time{:datetime => domain.created_at, :class => 'relative'}= domain.created_at
       %td
         %time{:datetime => domain.updated_at, :class => 'relative'}= domain.updated_at
-      - if can? :modify, Domain
+      - if can? :manage, Domain
         %td
           =#link_to 'Show', domain
           =link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
