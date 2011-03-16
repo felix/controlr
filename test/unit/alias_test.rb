@@ -24,6 +24,7 @@ class AliasTest < Test::Unit::TestCase
     end
 
     should validate_presence_of(:source)
+    should belong_to(:domain)
 
     should 'store destination as a string' do
       assert @alias.destination.class == String
