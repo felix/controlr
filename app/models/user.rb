@@ -17,7 +17,7 @@ class User
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  #belongs_to :account
+  belongs_to :account
   has n, :roles, :through => Resource, :constraint => :skip
 
   # for assignment of roles

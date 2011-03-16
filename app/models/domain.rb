@@ -11,7 +11,7 @@ class Domain
 
   has n, :mailboxes, :constraint => :destroy
   has n, :aliases, :constraint => :destroy
-  #belongs_to :account
+  belongs_to :account
   #has n, :domain_records
 
   def raise_on_save_failure

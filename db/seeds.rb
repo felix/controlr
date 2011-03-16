@@ -1,26 +1,33 @@
 
+default_account = Account.create(
+  :name => 'default',
+  :active => true
+)
 # create user
-super_user = User.create(:email => 'super@example.com',
-                         :firstname => 'Super',
-                         :surname => 'User',
-                         :password => 'password',
-                         :password_confirmation => 'password',
-                         :active => true,
-                         :created_at => Time.now)
-admin_user = User.create(:email => 'admin@example.com',
-                         :firstname => 'Admin',
-                         :surname => 'User',
-                         :password => 'password',
-                         :password_confirmation => 'password',
-                         :active => true,
-                         :created_at => Time.now)
-user = User.create(:email => 'user@example.com',
-                   :firstname => 'User',
-                   :surname => 'User',
-                   :password => 'password',
-                   :password_confirmation => 'password',
-                   :active => true,
-                   :created_at => Time.now)
+super_user = default_account.users.create(
+  :email => 'super@example.com',
+  :firstname => 'Super',
+  :surname => 'User',
+  :password => 'password',
+  :password_confirmation => 'password',
+  :active => true
+)
+admin_user = default_account.users.create(
+  :email => 'admin@example.com',
+  :firstname => 'Admin',
+  :surname => 'User',
+  :password => 'password',
+  :password_confirmation => 'password',
+  :active => true
+)
+user = default_account.users.create(
+  :email => 'user@example.com',
+  :firstname => 'User',
+  :surname => 'User',
+  :password => 'password',
+  :password_confirmation => 'password',
+  :active => true
+)
 
 # create roles
 super_role = Role.create(:name => 'super', :description => 'Super user')
@@ -29,7 +36,7 @@ user_role  = Role.create(:name => 'user', :description => 'Normal user')
 
 # create permissions
 role_perms = Hash.new
-%w{create update modify}.each do |action|
+%w{manage}.each do |action|
   role_perms[action] = Permission.create(
     :action => action,
     :subject_class => 'Role',
@@ -38,7 +45,7 @@ role_perms = Hash.new
 end
 
 user_perms = Hash.new
-%w{read create update modify}.each do |action|
+%w{manage}.each do |action|
   user_perms[action] = Permission.create(
     :action => action,
     :subject_class => 'User',
@@ -47,7 +54,7 @@ user_perms = Hash.new
 end
 
 email_perms = Hash.new
-%w{read create update modify}.each do |action|
+%w{manage}.each do |action|
   email_perms[action] = Permission.create(
     :action => action,
     :subject_class => 'Email',
@@ -55,7 +62,7 @@ email_perms = Hash.new
   )
 end
 domain_perms = Hash.new
-%w{read create update modify}.each do |action|
+%w{manage}.each do |action|
   domain_perms[action] = Permission.create(
     :action => action,
     :subject_class => 'Domain',
@@ -70,9 +77,6 @@ end
   end
 end
 admin_role.save
-
-user_role.permissions << user_perms['read']
-user_role.save
 
 # assign roles
 super_user.roles << super_role

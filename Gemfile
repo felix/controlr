@@ -54,6 +54,8 @@ group(:development, :test) do
   #gem 'dm-sweatshop',         DM_VERSION
   gem 'dm-sweatshop', :git => 'git@github.com:felix/dm-sweatshop.git', :branch => 'noparsetree'
 
+  #gem 'rails_metrics'
+
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run
   #

@@ -7,6 +7,6 @@ class Client
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
 
-  has n, :accounts
+  #has n, :accounts
 
 end

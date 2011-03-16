@@ -21,6 +21,7 @@ class UserTest < Test::Unit::TestCase
     end
 
     should validate_presence_of(:email)
+    should belong_to(:account)
     should allow_value('felix@home.org').for(:email)
     should_not allow_value('felix').for(:email)
     should_not allow_value('@home').for(:email)

@@ -3,6 +3,7 @@ require 'test_helper'
 class DomainTest < Test::Unit::TestCase
 
   context 'a Domain instance' do
+    Domain.auto_migrate!
     setup do
       repository(:default) do
         transaction = DataMapper::Transaction.new(repository)
@@ -21,6 +22,7 @@ class DomainTest < Test::Unit::TestCase
     end
     should validate_presence_of(:name)
     should validate_uniqueness_of(:name)
+    should belong_to(:account)
     should have_many(:mailboxes)
     should have_many(:aliases)
     should allow_value('example.com').for(:name)
