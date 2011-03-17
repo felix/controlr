@@ -14,10 +14,6 @@ class Domain
   belongs_to :account
   #has n, :domain_records
 
-  def raise_on_save_failure
-    true
-  end
-
   validates_format_of :name, :with => /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/
 
 end

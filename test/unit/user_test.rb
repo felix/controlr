@@ -4,16 +4,12 @@ class UserTest < Test::Unit::TestCase
 
   context 'an User instance' do
     setup do
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
+      start_transaction
       @user = User.gen
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     should 'be valid' do
@@ -28,15 +24,14 @@ class UserTest < Test::Unit::TestCase
 
     should 'be able to clear roles' do
       @user.role_ids = []
-      @user.save
-      assert @user.roles == []
+      assert @user.roles.size == 0
     end
 
     should 'be able to change roles' do
-      @user.roles.clear
-      @user.roles << Role.first
-      @user.save
-      assert @user.roles.count == 1
+      @user.role_ids = ['1']
+      assert @user.roles.size == 1
+      @user.role_ids = ['2']
+      assert @user.roles.size == 1
     end
   end
 end

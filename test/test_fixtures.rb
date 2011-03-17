@@ -2,13 +2,12 @@
 # every fixture should be valid!
 
 Account.fixture {{
-  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
+  :name => DataMapper::Sweatshop.unique(:account) {/\w+/.gen},
   :created_at => Time.now,
   #:client => Client.make
 }}
 User.fixture {{
-  #:email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
-  :email => /\w+@\w+\.com/.gen,
+  :email => DataMapper::Sweatshop.unique(:email) {/\w{2,10}@\w{2,16}\.com/.gen},
   :firstname => /\w+/.gen,
   :surname => /\w+/.gen,
   :active => true,
@@ -18,21 +17,21 @@ User.fixture {{
   :account => Account.make,
 }}
 Domain.fixture {{
-  :name => DataMapper::Sweatshop.unique {/\w{2,16}\.com/.gen},
+  :name => DataMapper::Sweatshop.unique(:domain) {/\w{2,16}\.com/.gen},
   :active => true,
   :created_at => Time.now,
   :account => Account.make,
 }}
 
 Alias.fixture {{
-  :source => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  :source => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},
   :destination => 'test@example.com',
   :active => true,
   :created_at => Time.now,
   :domain => Domain.make
 }}
 Mailbox.fixture {{
-  :email => DataMapper::Sweatshop.unique {/\w+@\w+\.com/.gen},
+  :email => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},
   :maildir => 'blah',
   :active => true,
   :password => '',
@@ -106,12 +105,6 @@ Service.fixture(:postfix) {{
   :stop_cmd => '/etc/init.d/postfix reload',
   :created_at => Time.now,
   :server => Server.make
-}}
-
-Permission.fixture {{
-  :action => /\w+/.gen,
-  :subject_class => /\w+/.gen,
-  :subject_id => 1 # TODO
 }}
 =end
 

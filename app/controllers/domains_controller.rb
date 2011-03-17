@@ -1,5 +1,4 @@
 class DomainsController < ApplicationController
-  before_filter :authenticate_user!
   authorize_resource
 
   # GET /domains

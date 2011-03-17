@@ -1,5 +1,4 @@
 class RolesController < ApplicationController
-  before_filter :authenticate_user!
   authorize_resource
 
   # GET /roles

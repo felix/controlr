@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:new, :create]
   authorize_resource
-  skip_authorize_resource :only => :new
 
   # GET /users
   # GET /users.xml
   def index
-    @users = current_user.account.users.all
+    @users = @account.users.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,7 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.get(params[:id])
+    @user = @account.users.get(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,7 +26,7 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.xml
   def new
-    @user = User.new
+    @user = @account.users.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,13 +36,13 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = User.get(params[:id])
+    @user = @account.users.get(params[:id])
   end
 
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
+    @user = @account.users.new(params[:user])
 
     respond_to do |format|
       if @user.save
@@ -60,12 +58,12 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.get(params[:id])
+    @user = @account.users.get(params[:id])
 
     respond_to do |format|
       if @user.update(params[:user])
-        @current_ability = nil
-        @current_user = nil
+        #@current_ability = nil
+        #@current_user = nil
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -78,8 +76,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.get(params[:id])
-    @user.destroy
+    @user = @account.users.get(params[:id])
+    @user.destroy if @user
 
     respond_to do |format|
       format.html { redirect_to(users_url) }

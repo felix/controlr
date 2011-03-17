@@ -9,8 +9,8 @@ class Role
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  has n, :assignments
-  has n, :users, :through => :assignments, :constraint => :skip
+  has n, :assignments, :constraint => :destroy
+  has n, :users, :through => :assignments
 
   def raise_on_save_failure
     true

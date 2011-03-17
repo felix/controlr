@@ -8,11 +8,14 @@ class ApplicationController < ActionController::Base
     #render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
-  # define some 'global' variables
-  before_filter do
-  end
+  before_filter :authenticate_user!
+  append_before_filter :setup_globals
 
-  private
+  protected
+
+  def setup_globals
+    @account = current_user.account if user_signed_in?
+  end
 
   def store_location
     session[:return_to] = request.request_uri

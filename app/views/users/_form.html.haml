@@ -20,6 +20,12 @@
       %li
         = f.label :active
         = f.check_box :active
+      %li
+        = f.label :password
+        = f.text_field :password
+      %li
+        = f.label :password_confirmation
+        = f.text_field :password_confirmation
 
   - if can? :manage, Role
     %fieldset

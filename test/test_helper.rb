@@ -29,5 +29,7 @@ def rollback_transaction
   repository(:default).adapter.pop_transaction.rollback
 end
 
+#DataMapper::Model.raise_on_save_failure = true
+
 DataMapper.auto_migrate!
 require "#{Rails.root}/db/seeds.rb"

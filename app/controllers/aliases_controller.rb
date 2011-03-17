@@ -1,5 +1,5 @@
 class AliasesController < ApplicationController
-  before_filter :get_domain, :authenticate_user!
+  before_filter :get_domain
   authorize_resource :class => 'Email'
 
   # GET /aliases
@@ -87,7 +87,7 @@ class AliasesController < ApplicationController
   private
 
   def get_domain
-    @domain = Domain.get!(params[:domain_id])
+    @domain = @account.domains.get!(params[:domain_id])
   rescue DataMapper::ObjectNotFoundError
     redirect_to :root
   end

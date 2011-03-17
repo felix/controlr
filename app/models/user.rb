@@ -4,9 +4,8 @@ class User
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
-  devise :database_authenticatable, :registerable,
-    :recoverable, :rememberable, :trackable, :validatable
-
+  devise :database_authenticatable,:recoverable,
+    :rememberable, :trackable, :validatable
 
   property :id, Serial
   property :email, String, :required => true, :unique => true, :format => :email_address
@@ -18,20 +17,17 @@ class User
   property :deleted_at, ParanoidDateTime
 
   belongs_to :account
-  has n, :assignments
-  has n, :roles, :through => :assignments, :constraint => :skip
-
-  def raise_on_save_failure
-    true
-  end
+  has n, :assignments, :constraint => :destroy
+  has n, :roles, :through => :assignments
 
   # for assignment of roles
   def role_ids=(role_ids)
-    self.assignments.destroy
-      role_ids.reject{|i| i.empty?}.each do |id|
-        role = Role.get(id)
-        self.roles << role
-      end
+    self.assignments.destroy unless self.new?
+    self.reload
+    role_ids.reject{|i| i.empty?}.each do |id|
+      role = Role.get(id)
+      self.roles << role
+    end
   end
 
   def has_role?(role_sym)
