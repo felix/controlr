@@ -25,5 +25,18 @@ class UserTest < Test::Unit::TestCase
     should allow_value('felix@home.org').for(:email)
     should_not allow_value('felix').for(:email)
     should_not allow_value('@home').for(:email)
+
+    should 'be able to clear roles' do
+      @user.role_ids = []
+      @user.save
+      assert @user.roles == []
+    end
+
+    should 'be able to change roles' do
+      @user.roles.clear
+      @user.roles << Role.first
+      @user.save
+      assert @user.roles.count == 1
+    end
   end
 end

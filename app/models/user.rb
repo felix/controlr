@@ -18,14 +18,20 @@ class User
   property :deleted_at, ParanoidDateTime
 
   belongs_to :account
-  has n, :roles, :through => Resource, :constraint => :skip
+  has n, :assignments
+  has n, :roles, :through => :assignments, :constraint => :skip
+
+  def raise_on_save_failure
+    true
+  end
 
   # for assignment of roles
-  def role_ids=(ids)
-    self.roles.clear
-    ids.delete_if{|i| i.empty?}.each do |id|
-      self.roles << Role.get(id)
-    end
+  def role_ids=(role_ids)
+    self.assignments.destroy
+      role_ids.reject{|i| i.empty?}.each do |id|
+        role = Role.get(id)
+        self.roles << role
+      end
   end
 
   def has_role?(role_sym)

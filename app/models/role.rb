@@ -9,7 +9,12 @@ class Role
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  has n, :users, :through => Resource, :constraint => :skip
+  has n, :assignments
+  has n, :users, :through => :assignments, :constraint => :skip
+
+  def raise_on_save_failure
+    true
+  end
 
   def permissions
     super || []

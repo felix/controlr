@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.xml
   def index
-    @users = User.all
+    @users = current_user.account.users.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -64,6 +64,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.update(params[:user])
+        @current_ability = nil
+        @current_user = nil
         format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else

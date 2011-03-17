@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     #render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
+  # define some 'global' variables
+  before_filter do
+  end
+
   private
 
   def store_location
