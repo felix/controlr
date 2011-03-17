@@ -3,18 +3,14 @@ require 'test_helper'
 class DomainTest < Test::Unit::TestCase
 
   context 'a Domain instance' do
-    Domain.auto_migrate!
     setup do
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
+      Domain.auto_migrate!
+      start_transaction
       @domain = Domain.gen
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     should "be valid" do

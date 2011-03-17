@@ -33,7 +33,7 @@ class User
   end
 
   def role?(role)
-    return !!self.roles.first(:name => role.to_s.camelize)
+    return !!self.roles.first(:name => role.to_s)
   end
 
 end

@@ -17,5 +17,17 @@ def logger
   ::Rails.logger
 end
 
+def start_transaction
+  repository(:default) do
+    transaction = DataMapper::Transaction.new(repository)
+    transaction.begin
+    repository.adapter.push_transaction(transaction)
+  end
+end
+
+def rollback_transaction
+  repository(:default).adapter.pop_transaction.rollback
+end
+
 DataMapper.auto_migrate!
 require "#{Rails.root}/db/seeds.rb"

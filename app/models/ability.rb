@@ -6,7 +6,10 @@ class Ability
   def initialize(user)
     self.clear_aliased_actions
 
-    alias_action :update, :destroy, :to => :modify
+    alias_action :index, :show, :to => :read
+    alias_action :new,          :to => :create
+    alias_action :edit,         :to => :update
+    alias_action :destroy,      :to => :delete
 
     user ||= User.new
 
@@ -15,15 +18,23 @@ class Ability
       can :manage, :all
     else
       # edit update self
-      can :modify, User do |resource|
+      can :read, User do |resource|
         resource == user
       end
+      can :update, User do |resource|
+        resource == user
+      end
+      # enables signup
+      can :create, User
 
       user.roles.each do |role|
         if role.permissions
           role.permissions.each do |perm_name|
-            can(Ability.permissions[perm_name]['action'].to_sym, Ability.permissions[perm_name]['subject_class'].constantize) do |subject|
-              Ability.permissions[perm_name]['subject_id'].nil? || Ability.permissions[perm_name]['subject_id'] == subject.id
+            unless Ability.permissions[perm_name].nil?
+              can(Ability.permissions[perm_name]['action'].to_sym, Ability.permissions[perm_name]['subject_class'].constantize) do |subject|
+                Ability.permissions[perm_name]['subject_id'].nil? ||
+                  Ability.permissions[perm_name]['subject_id'] == subject.id
+              end
             end
           end
         end

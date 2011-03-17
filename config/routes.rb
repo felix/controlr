@@ -31,6 +31,7 @@ Controlr::Application.routes.draw do
   resources :roles do
     collection do
       get 'report'
+      post 'report'
     end
     resources :permissions
   end

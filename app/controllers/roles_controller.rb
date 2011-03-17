@@ -1,4 +1,7 @@
 class RolesController < ApplicationController
+  before_filter :authenticate_user!
+  authorize_resource
+
   # GET /roles
   # GET /roles.xml
   def index
@@ -83,5 +86,10 @@ class RolesController < ApplicationController
 
   def report
     @roles = Role.all(:name.not => 'super')
+    if request.post?
+      @roles.each do |role|
+        role.update(:permissions => params[:permissions][role.name])
+      end
+    end
   end
 end

@@ -7,12 +7,12 @@
       - @roles.sort.each do |role|
         %th
           = role.name
-          = hidden_field_tag "permissions[#{role.id}][]", ""
+          = hidden_field_tag "permissions[#{role.name}][]", ""
     - Ability.permissions.each do |pname, pdetails|
       %tr
         %td= pdetails['description']
         - @roles.sort.each do |role|
           %td
-            = check_box_tag "permissions[#{role.id}][]", pname, role.permissions.include?(pname) rescue role.inspect
+            = check_box_tag "permissions[#{role.name}][]", pname, role.permissions.include?(pname)
   %fieldset.actions
     = submit_tag 'Save'

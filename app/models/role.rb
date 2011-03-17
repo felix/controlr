@@ -16,6 +16,7 @@ class Role
   end
 
   def permissions=(perms)
+    perms ||= []
     perms = [perms].flatten.uniq.compact
     super(perms)
   end
