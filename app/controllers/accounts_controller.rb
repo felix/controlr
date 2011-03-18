@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+
   # GET /accounts
   # GET /accounts.xml
   def index
@@ -14,6 +15,8 @@ class AccountsController < ApplicationController
   # GET /accounts/1.xml
   def show
     @account = Account.get(params[:id])
+    # this is the only action that selects the current account for super
+    session[:current_account_id] = @account.id || Account.get(1)
 
     respond_to do |format|
       format.html # show.html.erb

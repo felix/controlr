@@ -69,6 +69,7 @@ header .account {
   margin: 10px 10px 0 0;
   font-size: .875em;
   color: white;
+  text-transform: lowercase;
 }
 header .account a {
   color: white;

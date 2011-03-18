@@ -30,6 +30,8 @@
 
   - if can? :manage, Role
     = render :partial => 'roles', :locals => {:f => f}
+  - if can? :manage, Account
+    = render :partial => 'accounts', :locals => {:f => f}
 
   %fieldset.actions
     = f.submit 'Save'

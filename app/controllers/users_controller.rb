@@ -36,7 +36,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    @user = @account.users.get(params[:id])
+    if current_user.has_role? :super
+      @user = User.get(params[:id])
+    else
+      @user = @account.users.get(params[:id])
+    end
   end
 
   # POST /users
@@ -59,12 +63,16 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = @account.users.get(params[:id])
+    if params[:user][:password].empty? && params[:user][:password_confirmation].empty?
+      params[:user].delete('password')
+      params[:user].delete('password_confirmation')
+    end
 
     respond_to do |format|
       if @user.update(params[:user])
         #@current_ability = nil
         #@current_user = nil
-        format.html { redirect_to(@user, :notice => 'User was successfully updated.') }
+        format.html { redirect_to(users_url, :notice => 'User was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -15,8 +15,8 @@
     %tr
       %td= link_to domain.name, domain_path(domain)
       %td= domain.active ? image_tag('tick.png') : ''
-      %td= domain.aliases.count
-      %td= domain.mailboxes.count
+      %td= domain.aliases.size
+      %td= domain.mailboxes.size
       %td
         %time{:datetime => domain.created_at, :class => 'relative'}= domain.created_at
       %td

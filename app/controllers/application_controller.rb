@@ -14,9 +14,12 @@ class ApplicationController < ActionController::Base
   protected
 
   def setup_globals
-    @account = current_user.account if user_signed_in?
-    if @account && session[:current_domain_id]
-      @domain = @account.domains.get(session[:current_domain_id])
+    if user_signed_in?
+      session[:current_account_id] ||= current_user.account.id
+      @account = Account.get(session[:current_account_id])
+      if session[:current_domain_id]
+        @domain = @account.domains.get(session[:current_domain_id])
+      end
     end
   end
 
