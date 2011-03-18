@@ -12,7 +12,7 @@ GIT
       sugar-high (~> 0.2.10)
 
 GIT
-  remote: git@github.com:felix/dm-sweatshop.git
+  remote: git://github.com/felix/dm-sweatshop.git
   revision: 1b208aadc091c2f3fca9fad41d2688ad11274db5
   branch: noparsetree
   specs:
@@ -21,8 +21,9 @@ GIT
       dm-core (~> 1.1.0)
       randexp (~> 0.1.5)
 
-PATH
-  remote: /home/felix/Source/shoulda-datamapper
+GIT
+  remote: git://github.com/felix/shoulda-datamapper.git
+  revision: 48717ebb7dce211d81c45205fc3360dc74ee9ee1
   specs:
     shoulda-datamapper (0.1.0)
       data_mapper
