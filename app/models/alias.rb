@@ -29,8 +29,8 @@ class Alias
   end
 
   def destination_array
-    return [] if @destination.nil?
-    @destination.split(%r{,\n+}).uniq.compact
+    return [] if destination.nil?
+    destination.split(%r{,\n+}).uniq.compact
   end
 
 end
