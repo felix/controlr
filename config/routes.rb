@@ -27,13 +27,11 @@ Controlr::Application.routes.draw do
 
   resources :users
 
-  resources :permissions
   resources :roles do
     collection do
       get 'report'
       post 'report'
     end
-    resources :permissions
   end
 
 #  resources :clients

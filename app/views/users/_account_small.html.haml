@@ -1,7 +1,13 @@
 - if user_signed_in?
+  - if @account.domains.size > 0
+    = form_tag '#', :method => 'get' do |f|
+      %select.selectdomain
+        %option Select domain
+        - @account.domains.each do |domain|
+          - unless domain.new?
+            %option{:value => domain_path(domain), :selected => (session[:current_domain_id] == domain.id) && 'selected'}= domain.name
+    |
   = link_to current_user.email, edit_user_path(current_user)
-  |
-  = link_to current_user.account.name, account_path(current_user.account)
   |
   = link_to 'Log out', destroy_user_session_path
 - else

@@ -3,19 +3,16 @@ require 'test_helper'
 class MailboxTest < Test::Unit::TestCase
 
   context 'an Mailbox instance' do
-    Domain.auto_migrate!
-    Mailbox.auto_migrate!
     setup do
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
-      @mailbox = Mailbox.gen
+      start_transaction
+      Domain.auto_migrate!
+      Mailbox.auto_migrate!
+      @domain = Domain.gen
+      @mailbox = Mailbox.gen(:domain => @domain)
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     should 'be valid' do
@@ -29,8 +26,8 @@ class MailboxTest < Test::Unit::TestCase
     should_not allow_value('@example.com').for(:email)
 
     should 'create an alias also' do
-      mb = Mailbox.gen(:email => 'test123@bob.com')
-      a = Alias.first(:source => mb.email)
+      mb = Mailbox.gen(:domain => @domain, :email => 'test123@bob.com')
+      a = @domain.aliases.first(:source => mb.email)
       assert_not_nil a
     end
   end

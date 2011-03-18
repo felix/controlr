@@ -154,9 +154,6 @@ td {
   padding: 20px;
   min-width: 100px;
 }
-#sidebar nav {
-  margin-top: 30px;
-}
 #sidebar nav h3 {
   margin: 0 0 10px 0;
   padding: .375em .75em;
@@ -209,6 +206,10 @@ td {
 
 form {
   width: 100%;
+}
+header.page form {
+  display: inline;
+  width: inherit;
 }
 fieldset {
   width: 100%;

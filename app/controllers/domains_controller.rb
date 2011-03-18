@@ -4,7 +4,7 @@ class DomainsController < ApplicationController
   # GET /domains
   # GET /domains.xml
   def index
-    @domains = Domain.all
+    @domains = @account.domains.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,8 @@ class DomainsController < ApplicationController
   # GET /domains/1
   # GET /domains/1.xml
   def show
-    @domain = Domain.get(params[:id])
+    @domain = @account.domains.get(params[:id])
+    session[:current_domain_id] = @domain.id if @domain
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class DomainsController < ApplicationController
   # GET /domains/new
   # GET /domains/new.xml
   def new
-    @domain = Domain.new
+    @domain = @account.domains.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,13 +37,13 @@ class DomainsController < ApplicationController
 
   # GET /domains/1/edit
   def edit
-    @domain = Domain.get(params[:id])
+    @domain = @account.domains.get(params[:id])
   end
 
   # POST /domains
   # POST /domains.xml
   def create
-    @domain = Domain.new(params[:domain])
+    @domain = @account.domains.new(params[:domain])
 
     respond_to do |format|
       if @domain.save && create_default_aliases(@domain)
@@ -58,7 +59,7 @@ class DomainsController < ApplicationController
   # PUT /domains/1
   # PUT /domains/1.xml
   def update
-    @domain = Domain.get(params[:id])
+    @domain = @account.domains.get(params[:id])
 
     respond_to do |format|
       if @domain.update(params[:domain])
@@ -74,7 +75,7 @@ class DomainsController < ApplicationController
   # DELETE /domains/1
   # DELETE /domains/1.xml
   def destroy
-    @domain = Domain.get(params[:id])
+    @domain = @account.domains.get(params[:id])
     @domain.destroy
 
     respond_to do |format|

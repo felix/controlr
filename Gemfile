@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 RAILS_VERSION = '~> 3.0.5'
-DM_VERSION    = '~> 1.0.2'
+DM_VERSION    = '~> 1.1.0'
 
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
@@ -12,12 +12,12 @@ gem 'i18n'
 
 gem 'jquery-rails', '>= 0.2.6'
 
-gem 'dm-rails',          '~> 1.0.4'
+gem 'dm-rails',             DM_VERSION
 gem 'dm-mysql-adapter',     DM_VERSION
 
 gem 'dm-migrations',        DM_VERSION
-gem 'dm-types',             DM_VERSION
 gem 'dm-validations',       DM_VERSION
+gem 'dm-types',             DM_VERSION
 gem 'dm-constraints',       DM_VERSION
 gem 'dm-transactions',      DM_VERSION
 gem 'dm-aggregates',        DM_VERSION
@@ -25,7 +25,7 @@ gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 
 gem 'devise'
-gem 'dm-devise'
+gem 'dm-devise', :git => 'git://github.com/dkubb/dm-devise.git'
 gem 'cancan'
 
 gem 'rails3-generators'

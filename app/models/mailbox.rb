@@ -13,15 +13,14 @@ class Mailbox
 
   belongs_to :domain, :required => true
 
-  validates_format_of :email, :as => :email_address
+  #validates_format_of :email, :as => :email_address
 
   before :save do |mb|
-    self.email = @email.slice(/[^@]+/) << '@' << @domain.name
-    a = @domain.aliases.create(
-      :source => self.email,
-      :destination => self.email,
-      :active => self.active
-    )
+    self.email = email.slice(/[^@]+/) << '@' << @domain.name
+    a = @domain.aliases.first_or_create({:source => self.email},
+                                        {:active => self.active} )
+    a.destination = a.destination_array << self.email
+    a.save
   end
 
 end

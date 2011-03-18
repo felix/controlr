@@ -16,7 +16,7 @@ class MailboxesController < ApplicationController
   # GET /mailboxes/1
   # GET /mailboxes/1.xml
   def show
-    @mailbox = Mailbox.get(params[:id])
+    @mailbox = @domain.mailboxes.get(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -37,7 +37,7 @@ class MailboxesController < ApplicationController
 
   # GET /mailboxes/1/edit
   def edit
-    @mailbox = Mailbox.get(params[:id])
+    @mailbox = @domain.mailboxes.get(params[:id])
   end
 
   # POST /mailboxes

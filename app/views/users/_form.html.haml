@@ -17,9 +17,10 @@
       %li
         = f.label :surname
         = f.text_field :surname
-      %li
-        = f.label :active
-        = f.check_box :active
+      - if can? :manage, User
+        %li
+          = f.label :active
+          = f.check_box :active
       %li
         = f.label :password
         = f.text_field :password
@@ -28,16 +29,7 @@
         = f.text_field :password_confirmation
 
   - if can? :manage, Role
-    %fieldset
-      %ul
-        %li
-          = f.label :roles
-          %ul.field
-            - Role.all.reject{|r| r.name == 'super'}.each do |role|
-              %li
-                = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
-                = role.description
-          = hidden_field_tag "user[role_ids][]", ""
+    = render :partial => 'roles', :locals => {:f => f}
 
   %fieldset.actions
     = f.submit 'Save'

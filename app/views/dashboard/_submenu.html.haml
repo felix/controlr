@@ -1,3 +1,6 @@
 %h3= t('.title')
 %ul
-  %li= link_to t('users.submenu.new'), new_user_path, :class => 'add button'
+  - if can? :create, Domain
+    %li= link_to t('domains.submenu.new'), new_domain_path, :class => 'add button'
+  - if can? :create, User
+    %li= link_to t('users.submenu.new'), new_user_path, :class => 'add button'

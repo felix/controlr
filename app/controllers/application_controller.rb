@@ -15,6 +15,9 @@ class ApplicationController < ActionController::Base
 
   def setup_globals
     @account = current_user.account if user_signed_in?
+    if @account && session[:current_domain_id]
+      @domain = @account.domains.get(session[:current_domain_id])
+    end
   end
 
   def store_location
