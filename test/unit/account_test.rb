@@ -4,17 +4,12 @@ class AccountTest < Test::Unit::TestCase
 
   context 'an Account instance' do
     setup do
-      Account.auto_migrate!
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
+      start_transaction
       @account = Account.gen
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     should validate_presence_of(:name)

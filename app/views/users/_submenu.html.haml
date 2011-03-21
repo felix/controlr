@@ -1,5 +1,5 @@
 %h3= t('.title')
 %ul
-  %li= link_to t('.list',:model => 'User'), users_path, :class => 'list button'
-  %li= link_to t('.new',:model => 'User'), new_user_path, :class => 'add button' unless cannot? :create, User
+  %li= link_to "#{t('actions.list')} #{t('activemodel.models.user.other')}", users_path, :class => 'list button'
+  %li= link_to "#{t('actions.new')} #{t('activemodel.models.user.one')}", new_user_path, :class => 'add button' unless cannot? :create, User
 

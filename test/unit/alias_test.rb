@@ -3,20 +3,14 @@ require 'test_helper'
 class AliasTest < Test::Unit::TestCase
 
   context 'an Alias instance' do
-    Domain.auto_migrate!
-    Alias.auto_migrate!
     setup do
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
+      start_transaction
       @domain = Domain.gen
       @alias = Alias.gen(:domain => @domain)
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     should 'be valid' do

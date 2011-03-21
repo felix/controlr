@@ -1,14 +1,15 @@
 - if user_signed_in?
   - if @account.domains.size > 0
-    = form_tag '#', :method => 'get' do |f|
-      %select.selectdomain
-        %option Select domain
+    = form_tag request.fullpath, :method => 'get' do |f|
+      %select.selectdomain{:name => 'change_domain'}
+        %option{:value => ''} Select domain
         - @account.domains.each do |domain|
           - unless domain.new?
-            %option{:value => domain_path(domain), :selected => (session[:current_domain_id] == domain.id) && 'selected'}= domain.name
+            %option{:value => domain.id, :selected => (session[:current_domain_id] == domain.id.to_s) && 'selected'}= domain.name
     |
-  = @account.name
-  |
+  - if current_user.has_role? :super
+    = @account.name
+    |
   = link_to current_user.email, edit_user_path(current_user)
   |
   = link_to 'Log out', destroy_user_session_path

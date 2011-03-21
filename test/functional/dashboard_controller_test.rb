@@ -4,16 +4,11 @@ class DashboardControllerTest < ActionController::TestCase
 
   context 'Dashboard controller' do
     setup do
-      User.auto_migrate!
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
+      start_transaction
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     context 'while authed' do

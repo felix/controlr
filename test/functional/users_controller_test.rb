@@ -3,11 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   context 'Users Controller' do
     setup do
-      Account.auto_migrate!
-      User.auto_migrate!
-
       start_transaction
-
       @account = Account.gen
       @admin = @account.users.gen
       @admin.roles << Role.first(:name => 'admin')
@@ -74,7 +70,7 @@ class UsersControllerTest < ActionController::TestCase
       context 'on PUT to :update' do
         should 'update user' do
           put :update, :id => @admin.to_param, :user => @admin.attributes
-          assert_redirected_to user_path(assigns(:user))
+          assert_redirected_to users_path
         end
       end
 

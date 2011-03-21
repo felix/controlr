@@ -10,6 +10,8 @@ en:
     return: Return
     delete: Delete
     edit: Edit
+    new: New
+    list: List
   activemodel:
     models:
       user:
@@ -26,7 +28,7 @@ en:
         other: Mailboxes
     attributes:
       user:
-        email: Email-i18n
+        email: Email
         firstname: Firstname
         surname: Surname
       domain:
@@ -38,35 +40,23 @@ en:
   roles:
     report:
       title: Permission report
-  users:
-    new:
-      title: New User
-    tab: Users
-    submenu:
-      title: User Actions
-      list: List Users
-      new: New User
   domains:
     new:
       title: New Domain
     tab: Domains
     submenu:
       title: Domain Actions
-      list: List Domains
-      new: New Domain
   aliases:
     new:
       title: New Alias
     tab: Aliases
     submenu:
       title: Alias Actions
-      list: List Aliases
-      new: New Alias
   mailboxes:
     new:
       title: New Mailbox
     tab: Mailboxes
     submenu:
       title: Mailbox Actions
-      list: List Mailboxes
-      new: New Mailbox
+  accounts:
+    tab: Accounts

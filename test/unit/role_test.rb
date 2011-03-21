@@ -3,16 +3,12 @@ require 'test_helper'
 class RoleTest < Test::Unit::TestCase
   context 'a Role instance' do
     setup do
-      repository(:default) do
-        transaction = DataMapper::Transaction.new(repository)
-        transaction.begin
-        repository.adapter.push_transaction(transaction)
-      end
+      start_transaction
       @role = Role.gen
     end
 
     def teardown
-      repository(:default).adapter.pop_transaction.rollback
+      rollback_transaction
     end
 
     should "be valid" do

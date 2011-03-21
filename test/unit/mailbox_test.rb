@@ -5,8 +5,6 @@ class MailboxTest < Test::Unit::TestCase
   context 'an Mailbox instance' do
     setup do
       start_transaction
-      Domain.auto_migrate!
-      Mailbox.auto_migrate!
       @domain = Domain.gen
       @mailbox = Mailbox.gen(:domain => @domain)
     end

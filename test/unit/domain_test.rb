@@ -4,7 +4,6 @@ class DomainTest < Test::Unit::TestCase
 
   context 'a Domain instance' do
     setup do
-      Domain.auto_migrate!
       start_transaction
       @domain = Domain.gen
     end
