@@ -1,4 +1,4 @@
-%h1= Account.model_name.human(:count => 2)
+%h1= t('.title')
 
 %table
   %tr
@@ -22,4 +22,4 @@
         %time{:datetime => account.updated_at, :class => 'relative'}= account.updated_at
       %td
         = link_to image_tag('edit.png'), edit_account_path(account)
-        = link_to image_tag('delete.png'), account, :confirm => 'Are you sure?', :method => :delete
+        = link_to image_tag('delete.png'), account, :confirm => t('actions.confirm'), :method => :delete

@@ -40,29 +40,26 @@ header nav ul {
 }
 header nav li {
   float: left;
+}
+header nav a {
+  display: block;
   margin: 0px 8px 0px 0px;
   padding: 8px 20px 8px 20px;
+  color: black;
+  text-decoration: none;
   background: #efefef;
-  /* Top left corner */
   border-top-left-radius: 10px;
   -moz-border-radius-topleft: 10px;
   -webkit-border-top-left-radius: 10px;
-  /* Top right corner*/
   border-top-right-radius: 10px;
   -moz-border-radius-topright: 10px;
   -webkit-border-top-right-radius: 10px;
   opacity: 0.7;
 }
-header nav li.active,
-header nav li:hover {
-  opacity: 1.0;
-}
-header nav a {
-  color: black;
-  text-decoration: none;
-}
+header nav a.active,
 header nav a:hover {
   text-decoration: none;
+  opacity: 1.0;
 }
 header .account {
   float: right;
@@ -206,7 +203,8 @@ td {
 /*** forms ***/
 
 form {
-  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 header.page form {
   display: inline;
@@ -233,10 +231,15 @@ fieldset .field {
   float: left;
 }
 fieldset input[type=text],
+fieldset input[type=password],
 fieldset textarea {
   margin-left: .5em;
   padding: 2px;
   border: 1px solid #eee;
+}
+fieldset.actions {
+  text-align: right;
+  text-transform: lowercase;
 }
 input.right {
   text-align: right;

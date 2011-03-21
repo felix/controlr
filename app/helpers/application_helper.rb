@@ -6,6 +6,6 @@ module ApplicationHelper
     else
       klass = request.fullpath.include?(path) ? 'active' : ''
     end
-    "<li class=#{klass}>#{link_to(text,path)}</li>".html_safe
+    "<li>#{link_to(text,path,:class => klass)}</li>".html_safe
   end
 end

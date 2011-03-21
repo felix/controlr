@@ -3,7 +3,8 @@
     %li
       = f.label :roles
       %ul.field
-        - Role.all.reject{|r| r.name == 'super'}.each do |role|
+        - Role.all.each do |role|
+          - if role.name == 'super' && !current_user.has_role?(:super) then next
           %li
             = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
             = role.description

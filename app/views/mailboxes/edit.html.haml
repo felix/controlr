@@ -1,7 +1,3 @@
-%h1 Editing mailbox
+%h1= t('.title', :name => @mailbox.email)
 
 = render 'form'
-
-= link_to 'Show', @mailbox
-\|
-= link_to 'Back', mailboxes_path

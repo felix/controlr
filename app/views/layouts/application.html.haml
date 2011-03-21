@@ -21,7 +21,8 @@
 
       %nav
         %ul
-          = create_tab t('dashboard.tab'), root_path
+          - if user_signed_in?
+            = create_tab t('dashboard.tab'), root_path
           - if can? :manage, Account
             = create_tab t('accounts.tab'), accounts_path
           - if can? :manage, User

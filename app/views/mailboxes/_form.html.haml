@@ -17,4 +17,6 @@
         = f.check_box :active
 
   %fieldset.actions
-    = f.submit 'Save'
+    = f.submit t('actions.save')
+    \|
+    = link_to t('actions.back'), mailboxes_path

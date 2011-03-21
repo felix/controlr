@@ -15,4 +15,6 @@
     = render :partial => 'activation', :locals => {:f => f}
     = render :partial => 'accounts', :locals => {:f => f}
   %fieldset.actions
-    = f.submit 'Save'
+    = f.submit t('actions.save')
+    \|
+    = link_to t('actions.back'), domains_path

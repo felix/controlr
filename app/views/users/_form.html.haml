@@ -34,4 +34,6 @@
     = render :partial => 'accounts', :locals => {:f => f}
 
   %fieldset.actions
-    = f.submit 'Save'
+    = f.submit t('actions.save')
+    \|
+    = link_to t('actions.back'), users_path

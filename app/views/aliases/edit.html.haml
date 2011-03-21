@@ -1,7 +1,3 @@
-%h1 Editing alias
+%h1= t('.title', :name => @alias.source)
 
 = render 'form'
-
-= link_to 'Show', @alias
-\|
-= link_to 'Back', aliases_path
