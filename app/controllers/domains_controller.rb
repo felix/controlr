@@ -47,7 +47,7 @@ class DomainsController < ApplicationController
 
     respond_to do |format|
       if @domain.save && create_default_aliases(@domain)
-        format.html { redirect_to(@domain, :notice => 'Domain was successfully created.') }
+        format.html { redirect_to(domains_path, :notice => 'Domain was successfully created.') }
         format.xml  { render :xml => @domain, :status => :created, :location => @domain }
       else
         format.html { render :action => "new" }
@@ -76,7 +76,7 @@ class DomainsController < ApplicationController
   # DELETE /domains/1.xml
   def destroy
     @domain = @account.domains.get(params[:id])
-    @domain.destroy
+    @domain.destroy if @domain
 
     respond_to do |format|
       format.html { redirect_to(domains_url) }
@@ -89,14 +89,22 @@ class DomainsController < ApplicationController
   def create_default_aliases(domain)
     # TODO get default from settings
     hostmaster = domain.aliases.new(
-      :source => 'hostmaster',
+      :source => "hostmaster@#{domain.name}",
       :destination => 'hostmaster@seconddrawer.com.au',
-      :active => true
+      :active => true,
+      :system => true
     )
     postmaster = domain.aliases.new(
-      :source => 'postmaster',
+      :source => "postmaster@#{domain.name}",
       :destination => 'postmaster@seconddrawer.com.au',
-      :active => true
+      :active => true,
+      :system => true
+    )
+    catchall = domain.aliases.new(
+      :source => "@#{domain.name}",
+      :destination => '',
+      :active => false,
+      :system => true
     )
     domain.save
   end

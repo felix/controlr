@@ -1,4 +1,4 @@
-= form_for([@mailbox.domain,@mailbox]) do |f|
+= form_for @mailbox do |f|
   -if @mailbox.errors.any?
     #error_explanation
       %h2= "#{pluralize(@mailbox.errors.count, "error")} prohibited this mailbox address from being saved:"

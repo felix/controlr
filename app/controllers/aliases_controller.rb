@@ -1,6 +1,8 @@
 class AliasesController < ApplicationController
-  before_filter :get_domain
   authorize_resource :class => 'Email'
+  before_filter do
+    redirect_to domains_url unless @domain
+  end
 
   # GET /aliases
   # GET /aliases.xml
@@ -47,7 +49,7 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.save
-        format.html { redirect_to([@domain,@alias], :notice => 'Alias address was successfully created.') }
+        format.html { redirect_to(@alias, :notice => 'Alias address was successfully created.') }
         format.xml  { render :xml => @alias, :status => :created, :location => @alias }
       else
         format.html { render :action => "new" }
@@ -63,7 +65,7 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.update(params[:alias])
-        format.html { redirect_to([@alias.domain,@alias], :notice => 'Alias address was successfully updated.') }
+        format.html { redirect_to(@alias, :notice => 'Alias address was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,19 +78,11 @@ class AliasesController < ApplicationController
   # DELETE /aliases/1.xml
   def destroy
     @alias = @domain.aliases.get(params[:id])
-    @alias.destroy
+    @alias.destroy if @alias
 
     respond_to do |format|
       format.html { redirect_to(aliases_url) }
       format.xml  { head :ok }
     end
-  end
-
-  private
-
-  def get_domain
-    @domain = @account.domains.get!(params[:domain_id])
-  rescue DataMapper::ObjectNotFoundError
-    redirect_to :root
   end
 end

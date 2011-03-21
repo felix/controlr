@@ -25,12 +25,12 @@
           - if can? :manage, Account
             = create_tab t('accounts.tab'), accounts_path
           - if can? :manage, User
-            = create_tab t('users.tab'), users_path
+            = create_tab t('activemodel.models.user.other'), users_path
           - if can? :manage, Domain
             = create_tab t('domains.tab'), domains_path
           - if session[:current_domain_id]
-            =create_tab t('aliases.tab'), domain_aliases_path(session[:current_domain_id])
-            =create_tab t('mailboxes.tab'), domain_mailboxes_path(session[:current_domain_id])
+            =create_tab t('aliases.tab'), aliases_path
+            =create_tab t('mailboxes.tab'), mailboxes_path
 
     #page
       %section

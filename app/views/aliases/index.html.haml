@@ -12,7 +12,7 @@
 
   - @aliases.each do |a|
     %tr
-      %td= link_to a.source, edit_domain_alias_path(@domain,a)
+      %td= link_to a.source, edit_alias_path(a)
       %td= a.active ? image_tag('tick.png') : ''
       %td= a.destination_array.join('<br>')
       %td
@@ -20,6 +20,6 @@
       %td
         %time{:datetime => a.updated_at, :class => 'relative'}= a.updated_at
       %td
-        = link_to image_tag('edit.png'), edit_domain_alias_path(@domain,a)
-        = link_to image_tag('delete.png'), [@domain,a], :confirm => 'Are you sure?', :method => :delete
+        = link_to image_tag('edit.png'), edit_alias_path(a)
+        = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete
 

@@ -6,6 +6,7 @@ class Alias
   property :source, String, :required => true
   property :destination, Text
   property :active, Boolean
+  property :system, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime
@@ -15,7 +16,8 @@ class Alias
   #validates_format_of :source, :as => :email_address
 
   before :save do |a|
-    self.source = source.slice(/[^@]+/) << '@' << domain.name
+    localpart = source.slice(/^[^@]+/) || ''
+    self.source = localpart << '@' << domain.name
   end
 
   def destination=(emails)

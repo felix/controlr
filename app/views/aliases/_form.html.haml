@@ -1,4 +1,4 @@
-= form_for([@alias.domain,@alias]) do |f|
+= form_for(@alias) do |f|
   -if @alias.errors.any?
     #error_explanation
       %h2= "#{pluralize(@alias.errors.count, "error")} prohibited this alias address from being saved:"
