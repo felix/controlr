@@ -1,6 +1,8 @@
 class MailboxesController < ApplicationController
-  before_filter :get_domain
   authorize_resource :class => 'Email'
+  before_filter do
+    redirect_to domains_url unless @domain
+  end
 
   # GET /mailboxes
   # GET /mailboxes.xml
@@ -47,7 +49,7 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.save
-        format.html { redirect_to([@domain,@mailbox], :notice => 'Mailbox address was successfully created.') }
+        format.html { redirect_to(mailboxes_path, :notice => 'Mailbox address was successfully created.') }
         format.xml  { render :xml => @mailbox, :status => :created, :location => @mailbox }
       else
         format.html { render :action => "new" }
@@ -63,7 +65,7 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.update(params[:mailbox])
-        format.html { redirect_to([@mailbox.domain,@mailbox], :notice => 'Mailbox address was successfully updated.') }
+        format.html { redirect_to(@mailbox, :notice => 'Mailbox address was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -76,7 +78,7 @@ class MailboxesController < ApplicationController
   # DELETE /mailboxes/1.xml
   def destroy
     @mailbox = @domain.mailboxes.get(params[:id])
-    @mailbox.destroy
+    @mailbox.destroy if @mailbox
 
     respond_to do |format|
       format.html { redirect_to(mailboxes_url) }
@@ -84,11 +86,4 @@ class MailboxesController < ApplicationController
     end
   end
 
-  private
-
-  def get_domain
-    @domain = @account.domains.get!(params[:domain_id])
-  rescue DataMapper::ObjectNotFoundError
-    redirect_to :root
-  end
 end

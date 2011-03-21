@@ -8,17 +8,20 @@ class ApplicationController < ActionController::Base
     #render :file => "#{Rails.root}/public/403.html", :status => 403
   end
 
-  before_filter :authenticate_user!
-  append_before_filter :setup_globals
+  prepend_before_filter :setup_globals
 
   protected
 
   def setup_globals
+
+    authenticate_user!
+
     if user_signed_in?
-      session[:current_account_id] ||= current_user.account.id
-      @account = Account.get(session[:current_account_id])
+      @account = Account.get(session[:current_account_id] ||= current_user.account.id)
+      session[:current_domain_id] = params.delete(:change_domain) if params[:change_domain]
       if session[:current_domain_id]
         @domain = @account.domains.get(session[:current_domain_id])
+        session[:current_domain_id] = nil unless @domain
       end
     end
   end
