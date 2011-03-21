@@ -5,6 +5,7 @@ class Domain
   property :id, Serial
   property :name, String, :unique => true, :required => true
   property :active, Boolean
+  property :email_active, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime

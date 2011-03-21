@@ -11,10 +11,8 @@
       %li
         = f.label :name
         = f.text_field :name
-      %li
-        = f.label :active
-        = f.check_box :active
   - if can? :manage, Account
+    = render :partial => 'activation', :locals => {:f => f}
     = render :partial => 'accounts', :locals => {:f => f}
   %fieldset.actions
     = f.submit 'Save'
