@@ -12,6 +12,6 @@
     |
   = link_to current_user.email, edit_user_path(current_user)
   |
-  = link_to 'Log out', destroy_user_session_path
+  = link_to t('logout'), destroy_user_session_path
 - else
-  = link_to 'Log in', new_user_session_path
+  = link_to t('login'), new_user_session_path

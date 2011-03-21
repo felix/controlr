@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  authorize_resource
+  authorize_resource :class => 'Domain'
 
   # GET /domains
   # GET /domains.xml
@@ -38,6 +38,7 @@ class DomainsController < ApplicationController
   # GET /domains/1/edit
   def edit
     @domain = @account.domains.get(params[:id])
+    redirect_to domains_path unless @domain
   end
 
   # POST /domains
@@ -60,6 +61,7 @@ class DomainsController < ApplicationController
   # PUT /domains/1.xml
   def update
     @domain = @account.domains.get(params[:id])
+    redirect_to domains_path unless @domain
 
     respond_to do |format|
       if @domain.update(params[:domain])

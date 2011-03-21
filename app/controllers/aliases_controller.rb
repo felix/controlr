@@ -65,7 +65,7 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.update(params[:alias])
-        format.html { redirect_to(@alias, :notice => 'Alias address was successfully updated.') }
+        format.html { redirect_to(aliases_path, :notice => 'Alias address was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

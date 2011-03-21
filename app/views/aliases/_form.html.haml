@@ -10,8 +10,11 @@
     %ul
       %li
         = f.label :source
-        = f.text_field :source, :class => 'right', :value => (@alias.source ?  @alias.source.slice(/[^@]+/) : '')
-        = "@#{@alias.domain.name}"
+        - if @alias.source.starts_with? '@'
+          = t('aliases.catchall')
+        - else
+          = f.text_field :source, :class => 'right', :value => (@alias.source ?  @alias.source.slice(/^[^@]+/) : '')
+          = "@#{@alias.domain.name}"
       %li
         = f.label :destination
         = f.text_area :destination, :rows => 5, :value => (@alias.destination ? @alias.destination_array.join('\n') : '')

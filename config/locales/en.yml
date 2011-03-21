@@ -2,30 +2,32 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  logout: Log Out
+  login: Log In
   active: Active
   created: Created
   updated: Updated
   actions:
     confirm: 'Are you sure?'
     return: Return
+    cancel: Cancel
     delete: Delete
     edit: Edit
-    new: New
-    list: List
+    save: Save
   activemodel:
     models:
       user:
-        one: User
-        other: Users
+        one: 1 User
+        other: '%{count} Users'
       domain:
-        one: Domain
-        other: Domains
+        one: 1 Domain
+        other: '%{count} Domains'
       alias:
-        one: Alias
-        other: Aliases
+        one: 1 Alias
+        other: '%{count} Aliases'
       mailbox:
-        one: Mailbox
-        other: Mailboxes
+        one: 1 Mailbox
+        other: '%{count} Mailboxes'
     attributes:
       user:
         email: Email
@@ -40,23 +42,39 @@ en:
   roles:
     report:
       title: Permission report
+  users:
+    tab: Users
+    submenu:
+      title: User Actions
+      new: New User
+      list: List Users
   domains:
     new:
       title: New Domain
     tab: Domains
     submenu:
       title: Domain Actions
+      list: List Domains
+      new: New Domain
   aliases:
     new:
       title: New Alias
     tab: Aliases
     submenu:
       title: Alias Actions
+      new: New Alias
+      list: List Aliases
+    catchall: Catchall
   mailboxes:
     new:
       title: New Mailbox
     tab: Mailboxes
     submenu:
       title: Mailbox Actions
+      new: New Mailbox
+      list: List Mailboxes
   accounts:
     tab: Accounts
+    submenu:
+      title: Account Actions
+      new: New Account
