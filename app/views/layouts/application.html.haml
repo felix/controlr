@@ -33,7 +33,8 @@
           - if session[:current_domain_id]
             =create_tab t('aliases.tab'), aliases_path
             =create_tab t('mailboxes.tab'), mailboxes_path
-        = render :partial => 'domains/switcher'
+        - if user_signed_in?
+          = render :partial => 'domains/switcher'
 
     #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
       %section
