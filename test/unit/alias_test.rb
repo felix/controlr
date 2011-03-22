@@ -24,6 +24,11 @@ class AliasTest < Test::Unit::TestCase
       assert @alias.destination.class == String
     end
 
+    should 'store destinations as comma separated string' do
+      @alias.destination = ['test1@example.com','test2@example.com']
+      assert @alias.destination == 'test1@example.com,test2@example.com'
+    end
+
     should 'remove duplicates from destination' do
       @alias.destination = ['test1@example.com','test1@example.com']
       assert @alias.destination == 'test1@example.com'

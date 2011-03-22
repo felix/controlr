@@ -25,14 +25,14 @@ class Alias
     if emails.class == Array
       new_dest = emails.uniq.compact.join(',')
     else
-      new_dest = emails.split(%r{,\n+}).uniq.compact.join(',')
+      new_dest = emails.split(%r{[,\n]+}).uniq.compact.join(',')
     end
     super(new_dest)
   end
 
   def destination_array
     return [] if destination.nil?
-    destination.split(%r{,\n+}).uniq.compact
+    destination.split(',').uniq.compact
   end
 
 end
