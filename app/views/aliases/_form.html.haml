@@ -17,7 +17,7 @@
           = "@#{@alias.domain.name}"
       %li
         = f.label :destination
-        = f.text_area :destination, :rows => 5, :value => (@alias.destination ? @alias.destination_array.join('\n') : '')
+        = f.text_area :destination, :rows => 5, :value => (@alias.destination ? @alias.destination_array.join("\n") : '')
       %li
         = f.label :active
         = f.check_box :active

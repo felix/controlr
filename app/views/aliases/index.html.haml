@@ -17,7 +17,7 @@
       - else
         %td= link_to a.source, edit_alias_path(a)
       %td= a.active ? image_tag('tick.png') : ''
-      %td= a.destination_array.join('<br>')
+      %td= a.destination_array.join('<br>').html_safe
       %td
         %time{:datetime => a.created_at, :class => 'relative'}= a.created_at
       %td
