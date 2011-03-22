@@ -34,6 +34,11 @@ class AliasTest < Test::Unit::TestCase
       assert @alias.destination == 'test1@example.com'
     end
 
+    should 'not contain any whitespace in destination' do
+      @alias.destination = "one\ntwo three   four"
+      assert @alias.destination == 'one,two,three,four'
+    end
+
     should 'allow nil to be passed to destination' do
       @alias.destination = nil
       assert @alias.destination == ''

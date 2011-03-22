@@ -25,7 +25,7 @@ class Alias
     if emails.class == Array
       new_dest = emails.collect{|a| a.strip}.uniq.compact.join(',')
     else
-      new_dest = emails.split(%r{[,\n]+}).collect{|a| a.strip}.uniq.compact.join(',')
+      new_dest = emails.split(%r{[\s,\n]+}).collect{|a| a.strip}.uniq.compact.join(',')
     end
     super(new_dest)
   end

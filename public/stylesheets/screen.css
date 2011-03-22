@@ -149,7 +149,7 @@ table {
   border-collapse: collapse;
 }
 td, th {
-  padding: .375em;
+  padding: 3px 5px;
   vertical-align: middle;
   text-align: left;
 }
@@ -166,6 +166,7 @@ tr:hover {
   background-color: #f8f8f8;
 }
 td {
+  line-height: 1.2em;
   border-bottom: 1px solid #ddd;
 }
 
