@@ -1,0 +1,8 @@
+- content_for :sidebar do
+  %nav
+    %h3= t('.title')
+    %ul
+      %li= link_to t('.list'), aliases_path, :class => 'list button'
+      - if can? :create, Email
+        %li= link_to t('.new'), new_alias_path, :class => 'add button'
+= render :file => 'layouts/application'

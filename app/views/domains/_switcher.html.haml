@@ -1,0 +1,7 @@
+- if @account.domains.size > 0
+  = form_tag switch_domains_path, :class => 'switcher' do |f|
+    %select{:name => 'id'}
+      %option{:value => ''}= t('.switchdomain')
+      - @account.domains.each do |domain|
+        - unless domain.new?
+          %option{:value => domain.id, :selected => (@domain == domain) && 'selected'}= domain.name

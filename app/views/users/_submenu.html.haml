@@ -1,5 +1,0 @@
-%h3= t('.title')
-%ul
-  %li= link_to t('.list'), users_path, :class => 'list button'
-  %li= link_to t('.new'), new_user_path, :class => 'add button' unless cannot? :create, User
-

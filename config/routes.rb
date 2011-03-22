@@ -12,7 +12,11 @@ Controlr::Application.routes.draw do
   resource :dashboard, :only => [:index]
 
   resources :accounts
-  resources :domains
+  resources :domains do
+    collection do
+      post 'switch'
+    end
+  end
   resources :aliases
   resources :mailboxes
 #  resources :dns, :controller => 'domain_records'

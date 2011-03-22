@@ -86,6 +86,11 @@ class DomainsController < ApplicationController
     end
   end
 
+  def switch
+    session[:current_domain_id] = params[:id] if params[:id]
+    redirect_to(request.referrer)
+  end
+
   private
 
   def create_default_aliases(domain)

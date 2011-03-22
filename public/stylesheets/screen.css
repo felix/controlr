@@ -33,8 +33,10 @@ header .identity {
 
 header nav {
   clear: both;
+  overflow: hidden;
 }
 header nav ul {
+  float: left;
   margin-left: 25px;
   overflow: hidden;
 }
@@ -61,12 +63,21 @@ header nav a:hover {
   text-decoration: none;
   opacity: 1.0;
 }
-header .account {
+form.switcher {
   float: right;
-  margin: 10px 10px 0 0;
+  margin-right: 25px;
+}
+form.switcher select {
+  font-size: 1em;
+}
+header .account {
+  padding-right: 10px;
   font-size: .875em;
   color: white;
+  line-height: 22px;
+  text-align: right;
   text-transform: lowercase;
+  background-color: #f04010;
 }
 header .account a {
   color: white;
@@ -82,11 +93,25 @@ header .account a {
 }
 #page section {
   position: relative;
-  float: left;
-  width: 73%;
   min-height: 400px;
   padding: 20px;
   background-color: white;
+}
+#page.sidebar section {
+  float: left;
+  width: 73%;
+}
+
+/** login page **/
+
+body.sessions #page{
+  width: 600px;
+  height: 300px;
+  margin: 25px auto;
+  background-color: white;
+}
+body.sessions #page section {
+  width: 560px;
 }
 footer.page {
   clear: both;

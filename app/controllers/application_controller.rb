@@ -17,7 +17,6 @@ class ApplicationController < ActionController::Base
 
     if user_signed_in?
       @account = Account.get(session[:current_account_id] ||= current_user.account.id)
-      session[:current_domain_id] = params.delete(:change_domain) if params[:change_domain]
       if session[:current_domain_id]
         @domain = @account.domains.get(session[:current_domain_id])
         session[:current_domain_id] = nil unless @domain
@@ -26,7 +25,8 @@ class ApplicationController < ActionController::Base
   end
 
   def store_location
-    session[:return_to] = request.request_uri
+    #session[:return_to] = request.fullpath if request.get?
+    session[:return_to] = request.referrer if request.get?
   end
 
   def redirect_back_or_default(default)

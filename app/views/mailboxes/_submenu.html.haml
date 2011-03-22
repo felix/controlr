@@ -1,5 +1,0 @@
-%h3= t('.title')
-%ul
-  %li= link_to t('.list'), mailboxes_path, :class => 'list button'
-  - if can? :create, Email
-    %li= link_to t('.new'), new_mailbox_path, :class => 'add button'

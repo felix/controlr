@@ -12,7 +12,8 @@
     %meta{:content => '', :name => 'description'}/
     /[if lt IE 9]
       %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
-  %body{:class => controller.controller_path}
+    = yield :head
+  %body{:class => controller.controller_name}
     %header.page
       .account
         = render :partial => 'users/account_small'
@@ -32,8 +33,9 @@
           - if session[:current_domain_id]
             =create_tab t('aliases.tab'), aliases_path
             =create_tab t('mailboxes.tab'), mailboxes_path
+        = render :partial => 'domains/switcher'
 
-    #page
+    #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
       %section
         - unless flash.empty?
           .flash
@@ -42,11 +44,11 @@
                 %li{:class => t}= m
 
         = yield
-      #sidebar
-        %nav
-          = render :partial => 'submenu'
+      - if content_for?(:sidebar)
+        #sidebar
+          = yield(:sidebar)
     %footer.page
-      %p 
+      %p
         &copy;
         = Time.now.year
         Felix Hanley
