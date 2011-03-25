@@ -24,8 +24,4 @@ class Mailbox
     a.save
   end
 
-  def password=(plaintext)
-    @password = Digest::MD5.hexdigest(plaintext)
-  end
-
 end
