@@ -32,9 +32,8 @@ Alias.fixture {{
 }}
 Mailbox.fixture {{
   :email => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},
-  :maildir => 'blah',
   :active => true,
-  :password => 'secret',
+  :passhash => /[0-9a-z]{32}/.gen,
   :created_at => Time.now,
   :domain => Domain.make
 }}

@@ -7,8 +7,7 @@ class Mailbox
   property :id, Serial
   property :email, String, :required => true
   property :active, Boolean
-  property :maildir, String
-  property :password, String, :length => 32, :required => true
+  property :passhash, String, :length => 32, :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
 
@@ -22,6 +21,10 @@ class Mailbox
                                         {:active => self.active} )
     a.destination = a.destination_array << self.email
     a.save
+  end
+
+  def passhash=(plain)
+    super(Digest::MD5.hexdigest(plain)) unless plain.nil?
   end
 
 end

@@ -68,14 +68,14 @@ class MailboxesControllerTest < ActionController::TestCase
 
       context 'on PUT to :update' do
         should 'update mailbox' do
-          put :update, {:id => @mailbox.to_param, :mailbox => @mailbox.attributes}
+          put :update, :id => @mailbox.to_param, :mailbox => @mailbox.attributes
           assert_redirected_to mailboxes_path
         end
       end
 
       context 'on DELETE to :destroy' do
         setup do
-          @another_mailbox = Mailbox.gen(:domain => @domain)
+          @another_mailbox = @domain.mailboxes.gen
           raise @another_mailbox.inspect unless @another_mailbox.valid?
         end
 
@@ -88,7 +88,7 @@ class MailboxesControllerTest < ActionController::TestCase
         end
 
         should 'not destroy mailbox from another domain' do
-          @another_mailbox.domain = Domain.gen
+          @another_mailbox.domain = @account.domains.gen
           @another_mailbox.save
           assert_no_difference('Mailbox.count') do
             delete :destroy, :id => @another_mailbox.to_param

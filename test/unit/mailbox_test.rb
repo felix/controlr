@@ -6,7 +6,7 @@ class MailboxTest < Test::Unit::TestCase
     setup do
       start_transaction
       @domain = Domain.gen
-      @mailbox = Mailbox.gen(:domain => @domain)
+      @mailbox = @domain.mailboxes.gen
     end
 
     def teardown
@@ -18,7 +18,7 @@ class MailboxTest < Test::Unit::TestCase
     end
 
     should validate_presence_of(:email)
-    should validate_presence_of(:password)
+    should validate_presence_of(:passhash)
     should belong_to(:domain)
     #should_not allow_value('test').for(:email)
     #should_not allow_value('test@').for(:email)
@@ -30,10 +30,10 @@ class MailboxTest < Test::Unit::TestCase
       assert_not_nil a
     end
 
-    #should 'convert password to MD5 hash' do
-    #  @mailbox.password = 'test'
-    #  assert @mailbox.password = '098f6bcd4621d373cade4e832627b4f6'
-    #end
+    should 'convert password to MD5 hash' do
+      @mailbox.passhash = 'test'
+      assert @mailbox.passhash = '098f6bcd4621d373cade4e832627b4f6'
+    end
 
   end
 end

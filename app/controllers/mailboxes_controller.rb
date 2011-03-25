@@ -1,6 +1,6 @@
 class MailboxesController < ApplicationController
   authorize_resource :class => 'Email'
-  before_filter do
+  append_before_filter do
     redirect_to domains_url unless @domain
   end
 
