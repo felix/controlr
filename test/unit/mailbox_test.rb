@@ -18,6 +18,7 @@ class MailboxTest < Test::Unit::TestCase
     end
 
     should validate_presence_of(:email)
+    should validate_presence_of(:password)
     should belong_to(:domain)
     #should_not allow_value('test').for(:email)
     #should_not allow_value('test@').for(:email)
@@ -28,5 +29,11 @@ class MailboxTest < Test::Unit::TestCase
       a = @domain.aliases.first(:source => mb.email)
       assert_not_nil a
     end
+
+    #should 'convert password to MD5 hash' do
+    #  @mailbox.password = 'test'
+    #  assert @mailbox.password = '098f6bcd4621d373cade4e832627b4f6'
+    #end
+
   end
 end

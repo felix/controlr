@@ -68,6 +68,7 @@ form.switcher {
   margin-right: 25px;
 }
 form.switcher select {
+  padding: 2px 3px;
   font-size: 1em;
 }
 header .account {
@@ -78,6 +79,7 @@ header .account {
   text-align: right;
   text-transform: lowercase;
   background-color: #f04010;
+  border-bottom: 1px solid #ea3a08;
 }
 header .account a {
   color: white;

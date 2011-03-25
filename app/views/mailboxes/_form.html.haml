@@ -15,6 +15,9 @@
       %li
         = f.label :active
         = f.check_box :active
+      %li
+        = f.label :password
+        = f.password_field :password
 
   %fieldset.actions
     = f.submit t('actions.save')

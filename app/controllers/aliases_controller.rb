@@ -77,7 +77,7 @@ class AliasesController < ApplicationController
   # DELETE /aliases/1
   # DELETE /aliases/1.xml
   def destroy
-    @alias = @domain.aliases.get(params[:id])
+    @alias = @domain.aliases.first(:id => params[:id], :system.not => true)
     @alias.destroy if @alias
 
     respond_to do |format|

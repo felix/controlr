@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 class Mailbox
   include DataMapper::Resource
   extend ActiveModel::Translation
@@ -6,7 +8,7 @@ class Mailbox
   property :email, String, :required => true
   property :active, Boolean
   property :maildir, String
-  property :password, String, :length => 32
+  property :password, String, :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
   property :deleted_at, ParanoidDateTime

@@ -65,7 +65,7 @@ class DomainsController < ApplicationController
 
     respond_to do |format|
       if @domain.update(params[:domain])
-        format.html { redirect_to(:root, :notice => 'Domain was successfully updated.') }
+        format.html { redirect_to(domains_path, :notice => 'Domain was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

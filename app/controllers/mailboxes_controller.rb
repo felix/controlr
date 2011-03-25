@@ -40,6 +40,7 @@ class MailboxesController < ApplicationController
   # GET /mailboxes/1/edit
   def edit
     @mailbox = @domain.mailboxes.get(params[:id])
+    redirect_to(mailboxes_path) unless @mailbox
   end
 
   # POST /mailboxes
@@ -65,7 +66,7 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.update(params[:mailbox])
-        format.html { redirect_to(@mailbox, :notice => 'Mailbox address was successfully updated.') }
+        format.html { redirect_to(mailboxes_path, :notice => 'Mailbox address was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
