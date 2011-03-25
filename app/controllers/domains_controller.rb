@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  authorize_resource :class => 'Domain'
+  authorize_resource :class => 'Domain', :except => :switch
 
   # GET /domains
   # GET /domains.xml
