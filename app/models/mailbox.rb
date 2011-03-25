@@ -11,7 +11,6 @@ class Mailbox
   property :password, String, :required => true
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :deleted_at, ParanoidDateTime
 
   belongs_to :domain, :required => true
 

@@ -63,7 +63,7 @@ class UsersController < ApplicationController
   # PUT /users/1.xml
   def update
     @user = @account.users.get(params[:id])
-    if !params[:user][:password]
+    if params[:user][:password].nil? || params[:user][:password].empty?
       params[:user].delete('password')
       params[:user].delete('password_confirmation')
     end
