@@ -38,4 +38,7 @@ class User
     return !!self.roles.first(:name => role.to_s)
   end
 
+  def fullname
+    "#{firstname} #{surname}"
+  end
 end

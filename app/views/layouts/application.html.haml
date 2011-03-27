@@ -37,6 +37,9 @@
           = render :partial => 'domains/switcher'
 
     #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
+      - if content_for?(:sidebar)
+        #sidebar
+          = yield(:sidebar)
       %section
         - unless flash.empty?
           .flash
@@ -45,9 +48,6 @@
                 %li{:class => t}= m
 
         = yield
-      - if content_for?(:sidebar)
-        #sidebar
-          = yield(:sidebar)
     %footer.page
       %p
         &copy;

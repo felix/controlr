@@ -26,7 +26,6 @@ class Mailbox
     a.save
   end
 
-
   def passhash=(plain)
     super(Digest::MD5.hexdigest(plain)) unless plain.nil?
   end

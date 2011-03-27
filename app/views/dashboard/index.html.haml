@@ -1,3 +1,24 @@
-%h1= t('.title')
+%h1= t('.title', :name => current_user.fullname)
 
-%p This is your dashboard
+%p
+  You logged in
+  %time{:datetime => current_user.current_sign_in_at, :class => 'relative'}= current_user.current_sign_in_at
+  = "from #{current_user.current_sign_in_ip}."
+  Your last login was
+  %time{:datetime => current_user.last_sign_in_at, :class => 'relative'}= current_user.last_sign_in_at
+  = "from #{current_user.last_sign_in_ip}."
+
+-# if can? :manage, Domain
+  .summary
+    %h2= t('.account')
+    %ul
+      %li= t('.domains', :count => @account.domains.count)
+      %li= t('.mailboxes', :count => @account.domains.mailboxes.count)
+      %li= t('.size', :size => @account.domains.mailboxes.sum(:bytes))
+-# if can? :manage, Email
+  .summary
+    %h2= t('.mail')
+    %ul
+      %li= t('.aliases', :count => @account.domains.aliases.count)
+      %li= t('.mailboxes', :count => @account.domains.mailboxes.count)
+      %li= t('.size', :size => @account.domains.mailboxes.sum(:bytes))

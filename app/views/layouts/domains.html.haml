@@ -1,6 +1,6 @@
 - content_for :sidebar do
+  %h3= t('.title')
   %nav
-    %h3= t('.title')
     %ul
       %li= link_to t('.list'), domains_path, :class => 'list button'
       - if @domain && !@domain.new? && can?(:create, Email)

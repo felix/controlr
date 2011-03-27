@@ -15,6 +15,9 @@ a {
 a:hover {
   text-decoration: underline;
 }
+p {
+  line-height: 1.5;
+}
 body > header {
   background-color: #ff4010;
 }
@@ -101,7 +104,7 @@ header .account a {
 }
 #page.sidebar section {
   float: left;
-  width: 73%;
+  width: 75%;
 }
 
 /** login page **/
@@ -177,11 +180,10 @@ td {
 #sidebar {
   float: right;
   width: 20%;
-  padding: 20px;
   min-width: 100px;
 }
-#sidebar nav h3 {
-  margin: 0 0 10px 0;
+#sidebar h3 {
+  margin: 20px 20px 10px 0;
   padding: .375em .75em;
   color: white;
   font-weight: normal;
@@ -193,6 +195,9 @@ td {
   border-top-right-radius: 5px 5px;
   border-bottom-right-radius: 5px 5px;
   border-bottom-left-radius: 5px 5px;
+}
+#sidebar nav {
+  margin-right: 20px;
 }
 #sidebar nav ul {
   border-top: 1px solid #eee;
@@ -227,6 +232,14 @@ td {
   background-image: url(/images/list.png);
 }
 
+/*** summaries ***/
+
+div.summary {
+  float: left;
+  width: 200px;
+  height: 200px;
+  margin: 0 20px 20px 0;
+}
 
 /*** forms ***/
 

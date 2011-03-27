@@ -18,6 +18,9 @@
       %li
         = f.label :passhash
         = f.password_field :passhash
+      %li
+        = f.label :quota
+        = f.text_field :quota
 
   %fieldset.actions
     = f.submit t('actions.save')

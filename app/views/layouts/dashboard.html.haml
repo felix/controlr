@@ -1,0 +1,16 @@
+- content_for :sidebar do
+  %h3= t('.title')
+  %nav
+    %ul
+      - if current_user.role? :super
+        %li= link_to t('layouts.accounts.new'), new_account_path, :class => 'add button'
+      - if can? :create, User
+        %li= link_to t('layouts.users.new'), new_user_path, :class => 'add button'
+      - if can? :create, Domain
+        %li= link_to t('layouts.domains.new'), new_domain_path, :class => 'add button'
+      - if can? :create, Email
+        %li= link_to t('layouts.aliases.new'), new_alias_path, :class => 'add button'
+      - if can? :create, Email
+        %li= link_to t('layouts.mailboxes.new'), new_mailbox_path, :class => 'add button'
+= render :file => 'layouts/application'
+

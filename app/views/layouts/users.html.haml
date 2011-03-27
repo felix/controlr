@@ -1,7 +1,8 @@
 - content_for :sidebar do
+  %h3= t('.title')
   %nav
-    %h3= t('.title')
     %ul
       %li= link_to t('.list'), users_path, :class => 'list button'
-      %li= link_to t('.new'), new_user_path, :class => 'add button' unless cannot? :create, User
+      - if can? :create, User
+        %li= link_to t('.new'), new_user_path, :class => 'add button'
 = render :file => 'layouts/application'
