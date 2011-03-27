@@ -4,6 +4,8 @@
   %tr
     %th= Mailbox.human_attribute_name('email')
     %th= Mailbox.human_attribute_name('active')
+    %th= Mailbox.human_attribute_name('quota')
+    %th= Mailbox.human_attribute_name('messages')
     %th= Mailbox.human_attribute_name('created')
     %th= Mailbox.human_attribute_name('updated')
     - if can? :modify, Email
@@ -13,6 +15,8 @@
     %tr
       %td= link_to mailbox.email, edit_mailbox_path(mailbox)
       %td= mailbox.active ? image_tag('tick.png') : ''
+      %td= number_to_human_size(mailbox.quota)
+      %td= mailbox.messages
       %td
         %time{:datetime => mailbox.created_at, :class => 'relative'}= mailbox.created_at
       %td
