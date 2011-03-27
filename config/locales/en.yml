@@ -35,6 +35,8 @@ en:
         surname: Surname
       domain:
         name: Name
+      mailbox:
+        passhash: Password
   layouts:
     dashboard:
       title: Shortcuts
@@ -95,6 +97,8 @@ en:
       title: Mailboxes
     new:
       title: New Mailbox
+    edit:
+      title: 'Editing %{name}'
   accounts:
     tab: Accounts
     index:

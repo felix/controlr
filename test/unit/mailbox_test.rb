@@ -18,6 +18,7 @@ class MailboxTest < Test::Unit::TestCase
     end
 
     should validate_presence_of(:email)
+    should validate_uniqueness_of(:email)
     should validate_presence_of(:passhash)
     should belong_to(:domain)
     #should_not allow_value('test').for(:email)

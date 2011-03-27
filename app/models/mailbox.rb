@@ -5,7 +5,7 @@ class Mailbox
   extend ActiveModel::Translation
 
   property :id, Serial
-  property :email, String, :required => true
+  property :email, String, :unique => true, :required => true
   property :active, Boolean
   property :passhash, String, :length => 32, :required => true
   property :quota, Integer    # used by dovecot
@@ -21,10 +21,11 @@ class Mailbox
   before :save do |mb|
     self.email = email.slice(/[^@]+/) << '@' << @domain.name
     a = @domain.aliases.first_or_create({:source => self.email},
-                                        {:active => self.active} )
+                                        {:active => self.active})
     a.destination = a.destination_array << self.email
     a.save
   end
+
 
   def passhash=(plain)
     super(Digest::MD5.hexdigest(plain)) unless plain.nil?
