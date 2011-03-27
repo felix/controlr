@@ -1,0 +1,9 @@
+- content_for :sidebar do
+  %h3= t('.title')
+  %nav
+    %ul
+      %li= link_to t('.list'), roles_path, :class => 'list button'
+      %li= link_to t('.new'), new_role_path, :class => 'add button'
+      %li= link_to t('.report'), report_roles_path, :class => 'list button'
+= render :file => 'layouts/application'
+

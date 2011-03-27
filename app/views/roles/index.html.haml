@@ -1,23 +1,19 @@
-%h1 Listing roles
+%h1= t('.title')
 
 %table
   %tr
-    %th Name
-    %th Created at
-    %th Updated at
-    %th
-    %th
+    %th= Role.human_attribute_name('name')
+    %th= Role.human_attribute_name('created')
+    %th= Role.human_attribute_name('updated')
     %th
 
   - @roles.each do |role|
     %tr
-      %td= role.name
-      %td= role.created_at
-      %td= role.updated_at
-      %td= link_to 'Show', role
-      %td= link_to 'Edit', edit_role_path(role)
-      %td= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Role', new_role_path
+      %td= link_to role.name, edit_role_path(role)
+      %td
+        %time{:datetime => role.created_at, :class => 'relative'}= role.created_at
+      %td
+        %time{:datetime => role.updated_at, :class => 'relative'}= role.updated_at
+      %td
+        = link_to image_tag('edit.png'), edit_role_path(role)
+        = link_to image_tag('delete.png'), role, :confirm => t('actions.confirm'), :method => :delete

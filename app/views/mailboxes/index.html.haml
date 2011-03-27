@@ -25,5 +25,5 @@
         %time{:datetime => mailbox.updated_at, :class => 'relative'}= mailbox.updated_at
       %td
         = link_to image_tag('edit.png'), edit_mailbox_path(mailbox)
-        = link_to image_tag('delete.png'), mailbox, :confirm => 'Are you sure?', :method => :delete
+        = link_to image_tag('delete.png'), mailbox, :confirm => t('actions.confirm'), :method => :delete
 

@@ -89,6 +89,7 @@ class RolesController < ApplicationController
       @roles.each do |role|
         role.update(:permissions => params[:permissions][role.name])
       end
+      flash[:notice] = 'Roles successfully updated'
     end
   end
 end

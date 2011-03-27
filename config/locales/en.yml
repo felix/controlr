@@ -60,6 +60,11 @@ en:
       title: Mailbox Actions
       new: New Mailbox
       list: List Mailboxes
+    roles:
+      title: Role Actions
+      list: List Roles
+      new: New Role
+      report: Report
   dashboard:
     tab: Dashboard
     index:
@@ -113,3 +118,12 @@ en:
       title: New Account
     edit:
       title: 'Editing %{name}'
+  roles:
+    index:
+      title: Roles
+    new:
+      title: New Role
+    edit:
+      title: 'Editing %{name}'
+    report:
+      title: Role Report
