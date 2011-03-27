@@ -13,7 +13,7 @@
 
   - @domains.each do |domain|
     %tr
-      %td= link_to domain.name, domain_path(domain)
+      %td= link_to domain.name, edit_domain_path(domain)
       %td= domain.active ? image_tag('tick.png') : ''
       %td= domain.aliases.size
       %td= domain.mailboxes.size
