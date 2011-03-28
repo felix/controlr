@@ -1,5 +1,6 @@
 %ul
-  = create_tab t('domains.home'), domain_path(@domain)
-  - if session[:current_domain_id]
-    =create_tab t('aliases.tab'), aliases_path
-    =create_tab t('mailboxes.tab'), mailboxes_path
+  - if !@domain.new?
+    = create_tab t('domains.home'), domain_path(@domain)
+    - if session[:current_domain_id]
+      =create_tab t('aliases.tab'), aliases_path
+      =create_tab t('mailboxes.tab'), mailboxes_path
