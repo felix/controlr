@@ -302,9 +302,6 @@ fieldset.actions {
   text-transform: lowercase;
   background-color: inherit;
 }
-input.right {
-  text-align: right;
-}
 .hint {
   display: none;
   position: absolute;
@@ -330,17 +327,20 @@ input.right {
   margin-left: 1em;
 }
 
-/** login page **/
+/** login pages et al **/
 
-body.sessions #page{
+body.sessions #page,
+body.passwords #page {
   width: 600px;
   height: 300px;
   margin: 25px auto;
   background-color: white;
 }
-body.sessions #page section {
+body.sessions #page section,
+body.passwords #page section {
   width: 560px;
 }
-body.sessions fieldset {
+body.sessions fieldset,
+body.passwords fieldset {
   background-color: inherit;
 }

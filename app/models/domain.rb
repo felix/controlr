@@ -12,7 +12,6 @@ class Domain
   property :passhash, String, :length => 32
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :deleted_at, ParanoidDateTime
 
   has n, :mailboxes, :constraint => :destroy
   has n, :aliases, :constraint => :destroy

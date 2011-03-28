@@ -74,15 +74,9 @@ class MailboxesControllerTest < ActionController::TestCase
       end
 
       context 'on DELETE to :destroy' do
-        setup do
-          @another_mailbox = @domain.mailboxes.gen
-          raise @another_mailbox.inspect unless @another_mailbox.valid?
-        end
-
         should 'destroy mailbox' do
-          assert @another_mailbox.valid?
           assert_difference('Mailbox.count', -1) do
-            delete :destroy, :id => @another_mailbox.to_param
+            delete :destroy, :id => @mailbox.to_param
           end
           assert_redirected_to mailboxes_path
         end

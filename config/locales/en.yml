@@ -98,6 +98,8 @@ en:
       title: Users
     edit:
       title: 'Editing %{name}'
+    password:
+      forgot: Forgot your password?
     form:
       hints:
         email: Used to login to this control panel
