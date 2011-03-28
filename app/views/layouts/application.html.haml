@@ -19,14 +19,13 @@
         .admin
           - if user_signed_in?
             = link_to t('settings'), root_path
-            |
             = render :partial => 'domains/switcher'
         .account
           = render :partial => 'users/account_small'
       %hgroup
         - if user_signed_in?
           %h1= link_to @account.name, root_path
-          - if @domain
+          - if @domain && !@domain.new?
             &raquo;
             %h2= link_to @domain.name, domain_path(@domain)
         - else

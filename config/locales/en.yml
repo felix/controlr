@@ -30,10 +30,6 @@ en:
         bytes: Size
         messages: Messages
         passhash: Password
-    hints:
-      alias:
-        source: This is the email address that others will send to
-        destination: This is where the above email will be redirect to. Remember to include a mailbox address if you want it stored.
   activemodel:
     models:
       user:
@@ -111,19 +107,31 @@ en:
     tab: Aliases
     index:
       title: Aliases
+      summary: Aliases redirect email from one address to one or more addresses or mailboxes
     new:
       title: New Alias
     edit:
       title: 'Editing %{name}'
     catchall: '** catchall **'
+    form:
+      hints:
+        source: This is the email address that others will send to
+        destination: This is where the above email will be redirect to. Remember to include a mailbox address if you want it stored.
   mailboxes:
     tab: Mailboxes
     index:
       title: Mailboxes
+      summary: Mailboxes are where emails are collected for later access
     new:
       title: New Mailbox
+      summary: A new alias will also be created that will direct email to this mailbox
     edit:
       title: 'Editing %{name}'
+    form:
+      hints:
+        email: This is also the username used to login to IMAP, POP and SMTP services
+        passhash: The password used to access IMAP, POP and SMTP services
+        quota: Set the maximum size (in bytes) for this mailbox. Only applicable if this domain is quota restricted
   accounts:
     tab: Accounts
     index:

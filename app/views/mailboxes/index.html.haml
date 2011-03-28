@@ -1,29 +1,31 @@
 %h1= t('.title')
+%p= t('.summary')
 
-%table
-  %tr
-    %th= t('helpers.label.mailbox.email')
-    %th= t('attributes.active')
-    %th= t('helpers.label.mailbox.quota')
-    %th= t('helpers.label.mailbox.bytes')
-    %th= t('helpers.label.mailbox.messages')
-    %th= t('attributes.created_at')
-    %th= t('attributes.updated_at')
-    - if can? :modify, Email
-      %th
-
-  - @mailboxes.each do |mailbox|
+= t('activemodel.models.mailbox', :count => @mailboxes.size)
+- if @mailboxes.size > 0
+  %table
     %tr
-      %td= link_to mailbox.email, edit_mailbox_path(mailbox)
-      %td= mailbox.active ? image_tag('tick.png') : ''
-      %td= number_to_human_size(mailbox.quota)
-      %td= number_to_human_size(mailbox.bytes)
-      %td= mailbox.messages
-      %td
-        %time{:datetime => mailbox.created_at, :class => 'relative'}= mailbox.created_at
-      %td
-        %time{:datetime => mailbox.updated_at, :class => 'relative'}= mailbox.updated_at
-      %td
-        = link_to image_tag('edit.png'), edit_mailbox_path(mailbox)
-        = link_to image_tag('delete.png'), mailbox, :confirm => t('actions.confirm'), :method => :delete
+      %th= t('helpers.label.mailbox.email')
+      %th= t('attributes.active')
+      %th= t('helpers.label.mailbox.quota')
+      %th= t('helpers.label.mailbox.bytes')
+      %th= t('helpers.label.mailbox.messages')
+      %th= t('attributes.created_at')
+      %th= t('attributes.updated_at')
+      - if can? :modify, Email
+        %th
 
+    - @mailboxes.each do |mailbox|
+      %tr
+        %td= link_to mailbox.email, edit_mailbox_path(mailbox)
+        %td= mailbox.active ? image_tag('tick.png') : ''
+        %td= number_to_human_size(mailbox.quota)
+        %td= number_to_human_size(mailbox.bytes)
+        %td= mailbox.messages
+        %td
+          %time{:datetime => mailbox.created_at, :class => 'relative'}= mailbox.created_at
+        %td
+          %time{:datetime => mailbox.updated_at, :class => 'relative'}= mailbox.updated_at
+        %td
+          = link_to image_tag('edit.png'), edit_mailbox_path(mailbox)
+          = link_to image_tag('delete.png'), mailbox, :confirm => t('actions.confirm'), :method => :delete

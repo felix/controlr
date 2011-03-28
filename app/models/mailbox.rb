@@ -8,7 +8,7 @@ class Mailbox
   property :email, String, :unique => true, :required => true
   property :active, Boolean
   property :passhash, String, :length => 32, :required => true
-  property :quota, Integer    # used by dovecot
+  property :quota, Integer, :required => false    # used by dovecot
   property :bytes, Integer    # used by dovecot
   property :messages, Integer # used by dovecot
   property :created_at, DateTime

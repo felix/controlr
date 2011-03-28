@@ -4,4 +4,12 @@ jQuery(document).ready(function() {
   jQuery('form.switcher select').change(function(){
     $(this).closest('form').submit();
   });
+  jQuery('form .hint').each(function(){
+    var hint = $(this);
+    hint.siblings('input,textarea').each(function(){
+      $(this).focus(function(){ hint.show(); });
+      $(this).blur(function(){ hint.hide(); });
+    });
+  });
+
 });

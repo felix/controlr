@@ -1,4 +1,5 @@
 - if @account.domains.size > 0
+  |
   = form_tag switch_domains_path, :class => 'switcher' do |f|
     %select{:name => 'id'}
       %option{:value => ''}= t('.switchdomain')

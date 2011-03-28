@@ -2,12 +2,6 @@ body {
   font-family: sans-serif;
   background-color: #efefef;
 }
-section h1 {
-  margin-bottom: .75em;
-  padding-bottom: .25em;
-  font-size: 1.5em;
-  border-bottom: 1px solid black;
-}
 a {
   color: #ff4010;
   text-decoration: none;
@@ -40,15 +34,9 @@ header.page {
   margin-left: 10px;
 }
 form.switcher select {
-  padding: 0 3px;
-  color: white;
+  padding-left: 3px;
   font-size: 1em;
-  border: 1px solid #f04010;
-  background-color: #f04010;
-}
-form.switcher option {
-  color: black;
-  background-color: white;
+  border: 0;
 }
 #top-bar .account {
   float: right;
@@ -113,6 +101,9 @@ header nav a:hover {
   text-decoration: none;
   opacity: 1.0;
 }
+
+/** main content area **/
+
 #page {
   margin: 25px;
   background-color: #f5f5f5;
@@ -131,17 +122,10 @@ header nav a:hover {
   float: left;
   width: 75%;
 }
-
-/** login page **/
-
-body.sessions #page{
-  width: 600px;
-  height: 300px;
-  margin: 25px auto;
-  background-color: white;
-}
-body.sessions #page section {
-  width: 560px;
+section h1 {
+  padding-bottom: .25em;
+  font-size: 1.5em;
+  border-bottom: 1px solid black;
 }
 footer.page {
   clear: both;
@@ -174,7 +158,7 @@ footer.page p {
 
 table {
   width: 100%;
-  margin: .5em 0;
+  margin: .75em 0 .5em;
   font-size: .875em;
   border-collapse: collapse;
 }
@@ -269,7 +253,6 @@ div.summary {
 /*** forms ***/
 
 form {
-  margin: 0 auto;
   max-width: 500px;
 }
 header.page form {
@@ -278,13 +261,16 @@ header.page form {
 }
 fieldset {
   width: 100%;
+  margin-top: .75em;
+  padding: 10px;
+  background-color: #fafafa;
 }
 fieldset li {
+  position: relative;
   display: block;
   clear: both;
   margin-bottom: .5em;
   line-height: 1.5;
-  overflow: hidden;
 }
 fieldset label {
   float: left;
@@ -294,7 +280,6 @@ fieldset label {
 }
 fieldset input[type=text],
 fieldset .field {
-  float: left;
 }
 fieldset input[type=text],
 fieldset input[type=password],
@@ -306,15 +291,21 @@ fieldset textarea {
 fieldset.actions {
   text-align: right;
   text-transform: lowercase;
+  background-color: inherit;
 }
 input.right {
   text-align: right;
 }
 .hint {
-  float: left;
-  margin-left: 135px;
+  display: none;
+  position: absolute;
+  right: -225px;
+  width: 200px;
+  padding: 5px;
   color: #555;
   font-size: .75em;
+  background-color: #ffc;
+  border: 1px solid #ffa;
 }
 #error_explanation {
   margin: 10px;
@@ -328,4 +319,19 @@ input.right {
 #error_explanation ul {
   list-style: disc inside;
   margin-left: 1em;
+}
+
+/** login page **/
+
+body.sessions #page{
+  width: 600px;
+  height: 300px;
+  margin: 25px auto;
+  background-color: white;
+}
+body.sessions #page section {
+  width: 560px;
+}
+body.sessions fieldset {
+  background-color: inherit;
 }

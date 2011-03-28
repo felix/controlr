@@ -12,15 +12,18 @@
         = f.label :email
         = f.text_field :email, :class => 'right', :value => (@mailbox.email ? @mailbox.email.slice(/[^@]+/) : '')
         = "@#{@mailbox.domain.name}"
+        %span.hint= t('.hints.email')
       %li
         = f.label :active
         = f.check_box :active
       %li
         = f.label :passhash
         = f.password_field :passhash
+        %span.hint= t('.hints.passhash')
       %li
         = f.label :quota
         = f.text_field :quota
+        %span.hint= t('.hints.quota')
 
   %fieldset.actions
     = f.submit t('actions.save')
