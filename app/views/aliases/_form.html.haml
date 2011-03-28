@@ -18,7 +18,10 @@
         %span.hint= t('helpers.hints.alias.source')
       %li
         = f.label :destination
-        = f.text_area :destination, :rows => 5, :value => (@alias.destination ? @alias.destination_array.join("\n") : '')
+        = f.text_area :destination,
+          :rows => 5,
+          :value => (@alias.destination ? @alias.destination_array.join("\n") : '')
+
         %span.hint= t('helpers.hints.alias.destination')
       %li
         = f.label :active

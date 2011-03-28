@@ -24,15 +24,19 @@
         .account
           = render :partial => 'users/account_small'
       %hgroup
-        %h1= link_to @account.name, root_path
-        - if @domain
-          &raquo;
-          %h2= link_to @domain.name, domain_path(@domain)
-      %nav
-        - if session[:current_domain_id]
-          = render :partial => 'layouts/domain_menu'
+        - if user_signed_in?
+          %h1= link_to @account.name, root_path
+          - if @domain
+            &raquo;
+            %h2= link_to @domain.name, domain_path(@domain)
         - else
-          = render :partial => 'layouts/account_menu'
+          %h1 Control Panel
+      %nav
+        - if user_signed_in?
+          - if session[:current_domain_id]
+            = render :partial => 'layouts/domain_menu'
+          - else
+            = render :partial => 'layouts/account_menu'
 
     #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
       - if content_for?(:sidebar)
