@@ -1,7 +1,7 @@
 %h1= t('.title')
 %p= t('.summary')
 
-= t('activemodel.models.mailbox', :count => @mailboxes.size)
+%p.count= t('activemodel.models.mailbox', :count => @mailboxes.size)
 - if @mailboxes.size > 0
   %table
     %tr

@@ -253,7 +253,7 @@ div.summary {
 /*** forms ***/
 
 form {
-  max-width: 500px;
+  max-width: 35em;
 }
 header.page form {
   display: inline;
@@ -274,20 +274,29 @@ fieldset li {
 }
 fieldset label {
   float: left;
-  width: 125px;
+  width: 8em;
   margin-right: 5px;
   text-align: right;
 }
 fieldset input[type=text],
-fieldset .field {
-}
-fieldset input[type=text],
 fieldset input[type=password],
-fieldset textarea {
+fieldset textarea,
+fieldset .field {
+  width: 25em;
   margin-left: 5px;
   padding: 2px;
   border: 1px solid #eee;
 }
+fieldset .field {
+  border: 0;
+}
+fieldset ul.field {
+  margin-left: 9em;
+}
+fieldset .field li {
+  clear: none;
+}
+
 fieldset.actions {
   text-align: right;
   text-transform: lowercase;

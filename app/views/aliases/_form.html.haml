@@ -13,8 +13,7 @@
         - if !@alias.new? && @alias.source.starts_with?('@')
           = t('aliases.catchall')
         - else
-          = f.text_field :source, :class => 'right', :value => (@alias.source ?  @alias.source.slice(/^[^@]+/) : '')
-          = "@#{@alias.domain.name}"
+          = f.text_field :source, :class => 'right', :value => @alias.source
         %span.hint= t('.hints.source')
       %li
         = f.label :destination

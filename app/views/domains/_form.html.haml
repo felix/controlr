@@ -11,6 +11,14 @@
       %li
         = f.label :name
         = f.text_field :name
+        %span.hint= t('.hints.name')
+  - if @domain.ftp_active
+    %fieldset
+      %ul
+        %li
+          = f.label :passhash
+          = f.password_field :passhash
+          %span.hint= t('.hints.passhash')
   - if can? :manage, Account
     = render :partial => 'activation', :locals => {:f => f}
     = render :partial => 'accounts', :locals => {:f => f}
