@@ -117,7 +117,7 @@ en:
       title: 'Editing %{name}'
     catchall: '** catchall **'
   mailboxes:
-    tab: Email
+    tab: Mailboxes
     index:
       title: Mailboxes
     new:

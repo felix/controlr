@@ -29,6 +29,7 @@ header.page {
   text-transform: lowercase;
   background-color: #f04010;
   border-bottom: 1px solid #ea3a08;
+  overflow: hidden;
 }
 #top-bar a {
   color: white;
@@ -40,7 +41,14 @@ header.page {
 }
 form.switcher select {
   padding: 0 3px;
+  color: white;
   font-size: 1em;
+  border: 1px solid #f04010;
+  background-color: #f04010;
+}
+form.switcher option {
+  color: black;
+  background-color: white;
 }
 #top-bar .account {
   float: right;
