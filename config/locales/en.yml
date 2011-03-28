@@ -5,8 +5,7 @@ en:
   logout: Log Out
   login: Log In
   active: Active
-  created: Created
-  updated: Updated
+  settings: Settings
   actions:
     confirm: 'Are you sure?'
     back: Return
@@ -14,6 +13,23 @@ en:
     delete: Delete
     edit: Edit
     save: Save
+  # default attributes across models
+  attributes:
+    active: Active
+    created_at: Created
+    updated_at: Updated
+  helpers:
+    label:
+      alias:
+        source: Alias
+        destination: Destinations
+      mailbox:
+        bytes: Size
+        passhash: Password
+    hints:
+      alias:
+        source: This is the email address that others will send to
+        destination: This is where the above email will be redirect to. Remember to include a mailbox address if you want it stored.
   activemodel:
     models:
       user:
@@ -28,15 +44,6 @@ en:
       mailbox:
         one: 1 Mailbox
         other: '%{count} Mailboxes'
-    attributes:
-      user:
-        email: Email
-        firstname: Firstname
-        surname: Surname
-      domain:
-        name: Name
-      mailbox:
-        passhash: Password
   layouts:
     dashboard:
       title: Shortcuts
@@ -84,6 +91,7 @@ en:
       title: 'Editing %{name}'
   domains:
     tab: Domains
+    home: Dashboard
     index:
       title: Domains
     new:
@@ -103,7 +111,7 @@ en:
       title: 'Editing %{name}'
     catchall: '** catchall **'
   mailboxes:
-    tab: Mailboxes
+    tab: Email
     index:
       title: Mailboxes
     new:

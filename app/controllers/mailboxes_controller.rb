@@ -1,7 +1,7 @@
 class MailboxesController < ApplicationController
   authorize_resource :class => 'Email'
   append_before_filter do
-    redirect_to domains_url unless @domain
+    redirect_to(domains_url, :notice => 'Please select a domain first') unless @domain
   end
 
   # GET /mailboxes

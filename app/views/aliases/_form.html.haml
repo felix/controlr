@@ -15,9 +15,11 @@
         - else
           = f.text_field :source, :class => 'right', :value => (@alias.source ?  @alias.source.slice(/^[^@]+/) : '')
           = "@#{@alias.domain.name}"
+        %span.hint= t('helpers.hints.alias.source')
       %li
         = f.label :destination
         = f.text_area :destination, :rows => 5, :value => (@alias.destination ? @alias.destination_array.join("\n") : '')
+        %span.hint= t('helpers.hints.alias.destination')
       %li
         = f.label :active
         = f.check_box :active

@@ -1,4 +1,3 @@
-permissions as YAML in roles rather than separate model (see redmine)
+assign users to domains
 add autocomplete to alias destination selection
-
-http://blog.teksol.info/2008/10/16/how-to-use-datamapper-from-rails-including-migrations-and-tests
+context help http://www.askthecssguy.com/2007/03/form_field_hints_with_css_and.html

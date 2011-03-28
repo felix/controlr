@@ -2,13 +2,13 @@
 
 %table
   %tr
-    %th= Mailbox.human_attribute_name('email')
-    %th= Mailbox.human_attribute_name('active')
-    %th= Mailbox.human_attribute_name('quota')
-    %th= Mailbox.human_attribute_name('bytes')
-    %th= Mailbox.human_attribute_name('messages')
-    %th= Mailbox.human_attribute_name('created')
-    %th= Mailbox.human_attribute_name('updated')
+    %th= t('helpers.label.mailbox.email')
+    %th= t('attributes.active')
+    %th= t('helpers.label.mailbox.quota')
+    %th= t('helpers.label.mailbox.bytes')
+    %th= t('helpers.label.mailbox.messages')
+    %th= t('attributes.created_at')
+    %th= t('attributes.updated_at')
     - if can? :modify, Email
       %th
 

@@ -2,11 +2,11 @@
 
 %table
   %tr
-    %th= Alias.human_attribute_name('alias')
-    %th= Alias.human_attribute_name('active')
-    %th= Alias.human_attribute_name('destination')
-    %th= Alias.human_attribute_name('created')
-    %th= Alias.human_attribute_name('updated')
+    %th= t('helpers.label.alias.source')
+    %th= t('attributes.active')
+    %th= t('helpers.label.alias.destination')
+    %th= t('attributes.created_at')
+    %th= t('attributes.updated_at')
     - if can? :modify, Email
       %th
 

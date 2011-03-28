@@ -18,14 +18,53 @@ a:hover {
 p {
   line-height: 1.5;
 }
-body > header {
+header.page {
   background-color: #ff4010;
 }
+#top-bar {
+  line-height: 22px;
+  font-size: .875em;
+  color: white;
+  height: 22px;
+  text-transform: lowercase;
+  background-color: #f04010;
+  border-bottom: 1px solid #ea3a08;
+}
+#top-bar a {
+  color: white;
+  text-decoration: none;
+}
+#top-bar .admin {
+  float: left;
+  margin-left: 10px;
+}
+form.switcher select {
+  padding: 0 3px;
+  font-size: 1em;
+}
+#top-bar .account {
+  float: right;
+  margin-right: 10px;
+  text-align: right;
+}
+header.page hgroup {
+  line-height: 60px;
+}
+header.page h1,
+header.page h2 {
+  display: inline;
+}
+header.page hgroup a {
+  color: black;
+}
+header.page hgroup a {
+  text-decoration: none;
+}
 header.page h1 {
+  margin-right: .25em;
   padding: 15px 0 10px 25px;
   font-size: 2.5em;
   font-weight: bold;
-  color: black;
   letter-spacing: -.06em;
   text-shadow: 1px 1px 1px #aaa;
 }
@@ -65,28 +104,6 @@ header nav a.active,
 header nav a:hover {
   text-decoration: none;
   opacity: 1.0;
-}
-form.switcher {
-  float: right;
-  margin-right: 25px;
-}
-form.switcher select {
-  padding: 2px 3px;
-  font-size: 1em;
-}
-header .account {
-  padding-right: 10px;
-  font-size: .875em;
-  color: white;
-  line-height: 22px;
-  text-align: right;
-  text-transform: lowercase;
-  background-color: #f04010;
-  border-bottom: 1px solid #ea3a08;
-}
-header .account a {
-  color: white;
-  text-decoration: none;
 }
 #page {
   margin: 25px;
@@ -244,8 +261,8 @@ div.summary {
 /*** forms ***/
 
 form {
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 500px;
 }
 header.page form {
   display: inline;
@@ -263,8 +280,8 @@ fieldset li {
 }
 fieldset label {
   float: left;
-  width: 25%;
-  margin-right: .5em;
+  width: 125px;
+  margin-right: 5px;
   text-align: right;
 }
 fieldset input[type=text],
@@ -274,7 +291,7 @@ fieldset .field {
 fieldset input[type=text],
 fieldset input[type=password],
 fieldset textarea {
-  margin-left: .5em;
+  margin-left: 5px;
   padding: 2px;
   border: 1px solid #eee;
 }
@@ -284,6 +301,12 @@ fieldset.actions {
 }
 input.right {
   text-align: right;
+}
+.hint {
+  float: left;
+  margin-left: 135px;
+  color: #555;
+  font-size: .75em;
 }
 #error_explanation {
   margin: 10px;

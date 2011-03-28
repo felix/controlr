@@ -15,26 +15,24 @@
     = yield :head
   %body{:class => controller.controller_name}
     %header.page
-      .account
-        = render :partial => 'users/account_small'
-      %hgroup
-        %h1 Controlr
-
-      %nav
-        %ul
+      #top-bar
+        .admin
           - if user_signed_in?
-            = create_tab t('dashboard.tab'), root_path
-          - if can? :manage, Account
-            = create_tab t('accounts.tab'), accounts_path
-          - if can? :manage, User
-            = create_tab t('users.tab'), users_path
-          - if can? :manage, Domain
-            = create_tab t('domains.tab'), domains_path
-          - if session[:current_domain_id]
-            =create_tab t('aliases.tab'), aliases_path
-            =create_tab t('mailboxes.tab'), mailboxes_path
-        - if user_signed_in?
-          = render :partial => 'domains/switcher'
+            = link_to t('settings'), root_path
+            |
+            = render :partial => 'domains/switcher'
+        .account
+          = render :partial => 'users/account_small'
+      %hgroup
+        %h1= link_to @account.name, root_path
+        - if @domain
+          &raquo;
+          %h2= link_to @domain.name, domain_path(@domain)
+      %nav
+        - if session[:current_domain_id]
+          = render :partial => 'layouts/domain_menu'
+        - else
+          = render :partial => 'layouts/account_menu'
 
     #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
       - if content_for?(:sidebar)

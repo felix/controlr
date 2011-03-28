@@ -89,7 +89,7 @@ class DomainsController < ApplicationController
   def switch
     session[:current_domain_id] = params[:id] if params[:id]
     flash[:notice] = t('domains.switcher.switched')
-    redirect_to(request.referrer)
+    redirect_to(domain_path(session[:current_domain_id]))
   end
 
   private
