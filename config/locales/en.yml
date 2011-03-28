@@ -18,13 +18,17 @@ en:
     active: Active
     created_at: Created
     updated_at: Updated
+  # labels for forms and tables
   helpers:
     label:
       alias:
         source: Alias
         destination: Destinations
       mailbox:
+        email: Email
+        quota: Quota
         bytes: Size
+        messages: Messages
         passhash: Password
     hints:
       alias:
@@ -44,6 +48,7 @@ en:
       mailbox:
         one: 1 Mailbox
         other: '%{count} Mailboxes'
+  # mainly for sidebar contents
   layouts:
     dashboard:
       title: Shortcuts
@@ -72,6 +77,7 @@ en:
       list: List Roles
       new: New Role
       report: Report
+  # views
   dashboard:
     tab: Dashboard
     index:
