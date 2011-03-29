@@ -27,7 +27,7 @@ gem 'dm-devise', :git => 'git://github.com/dkubb/dm-devise.git'
 gem 'cancan'
 
 gem 'rails3-generators'
-gem 'exception_notification'
+gem 'exception_notification', :require => 'exception_notifier'
 gem 'haml'
 gem 'haml-rails'
 
