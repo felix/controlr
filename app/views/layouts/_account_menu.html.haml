@@ -4,5 +4,5 @@
     = create_tab t('accounts.tab'), accounts_path
   - if can? :manage, User
     = create_tab t('users.tab'), users_path
-  - if can? :manage, Domain
+  - if can? :read, Domain
     = create_tab t('domains.tab'), domains_path

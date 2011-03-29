@@ -5,9 +5,7 @@ class MailboxesControllerTest < ActionController::TestCase
     setup do
       start_transaction
 
-      @admin = User.gen
-      @admin.roles << Role.first(:name => 'admin')
-      @admin.save
+      @admin = User.gen(:role => 'administrator')
       @domain = @admin.account.domains.gen
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
       @mailbox = @domain.mailboxes.gen

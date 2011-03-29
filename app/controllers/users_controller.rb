@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if current_user.has_role? :super
+    if current_user.role? :super
       @user = User.get(params[:id])
     else
       @user = @account.users.get(params[:id])

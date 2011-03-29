@@ -1,5 +1,5 @@
 - if user_signed_in?
-  - if current_user.has_role? :super
+  - if current_user.role? :super
     = @account.name
     |
   = link_to current_user.email, edit_user_path(current_user)

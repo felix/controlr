@@ -21,9 +21,5 @@ class AbilityTest < Test::Unit::TestCase
       assert @ability.can?(:edit, User, @user)
     end
 
-    should 'be able to edit self even with no role' do
-      @user.roles = []
-      assert @ability.can?(:read, User, @user)
-    end
   end
 end

@@ -4,7 +4,11 @@ class DomainsController < ApplicationController
   # GET /domains
   # GET /domains.xml
   def index
-    @domains = @account.domains.all
+    if can? :manage, Domain
+      @domains = @account.domains.all
+    else
+      @domains = current_user.domains
+    end
 
     respond_to do |format|
       format.html # index.html.erb

@@ -1,7 +1,7 @@
 # actions are:
 # read, create, update, delete and manage (for all actions)
 #
-# by default, users can edit their selves
+# by default, users can edit themselves
 
 manage_roles:
   action: manage

@@ -107,6 +107,7 @@ en:
       account: Account
       hints:
         email: Used to login to this control panel
+        role: Administrators can manage all domains. Users can manage selected domains.
   domains:
     tab: Domains
     home: Dashboard

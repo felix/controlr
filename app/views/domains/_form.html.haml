@@ -31,7 +31,7 @@
         %li
           = f.label :ftp_active
           = f.check_box :ftp_active
-  - if can? :manage, Account
+  - if can?(:manage, Account) && @domain.email_active
     %fieldset
       %legend= t('.email')
       %ul

@@ -2,7 +2,7 @@
   %h3= t('.title')
   %nav
     %ul
-      - if current_user.role? :super
+      - if can? :create, Account
         %li= link_to t('layouts.accounts.new'), new_account_path, :class => 'add button'
       - if can? :create, User
         %li= link_to t('layouts.users.new'), new_user_path, :class => 'add button'

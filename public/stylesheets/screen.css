@@ -299,13 +299,8 @@ fieldset .field {
   border: 1px solid #eee;
 }
 fieldset .field {
-  border: 0;
-}
-fieldset ul.field {
   margin-left: 9em;
-}
-fieldset .field li {
-  clear: none;
+  border: 0;
 }
 
 fieldset.actions {

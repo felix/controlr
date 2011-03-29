@@ -2,6 +2,8 @@ class User
   include DataMapper::Resource
   extend ActiveModel::Translation
 
+  ROLES = %w{super administrator user}
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :lockable and :timeoutable
   devise :database_authenticatable,:recoverable,
@@ -12,32 +14,27 @@ class User
   property :firstname, String
   property :surname, String
   property :active, Boolean
+  property :role, String, :required => true, :default => 'user'
   property :created_at, DateTime
   property :updated_at, DateTime
 
   belongs_to :account
-  has n, :assignments, :constraint => :destroy
-  has n, :roles, :through => :assignments
-
-  # for assignment of roles
-  def role_ids=(role_ids)
-    self.assignments.destroy unless self.new?
-    self.reload
-    role_ids.reject{|i| i.empty?}.each do |id|
-      role = Role.get(id)
-      self.roles << role
-    end
-  end
-
-  def has_role?(role_sym)
-    roles.any? { |r| r.name.underscore.to_sym == role_sym }
-  end
-
-  def role?(role)
-    return !!self.roles.first(:name => role.to_s)
-  end
+  has n, :assignments
+  has n, :domains, :through => :assignments
 
   def fullname
     "#{firstname} #{surname}"
   end
+
+  def role?(r)
+    role == r.to_s
+  end
+
+  def domain_ids=(ids)
+    self.domains.clear
+    ids.reject{|i| i.empty?}.each do |id|
+      self.domains << Domain.get(id)
+    end
+  end
+
 end

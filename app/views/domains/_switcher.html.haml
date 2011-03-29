@@ -4,5 +4,5 @@
     %select{:name => 'id'}
       %option{:value => ''}= t('.switchdomain')
       - @account.domains.each do |domain|
-        - unless domain.new?
+        - unless domain.new? or !can?(:read, domain)
           %option{:value => domain.id, :selected => (@domain == domain) && 'selected'}= domain.name

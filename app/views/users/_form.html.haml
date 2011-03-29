@@ -30,19 +30,27 @@
         = f.label :password_confirmation
         = f.text_field :password_confirmation
 
-  - if can? :manage, Role
+  - if can? :manage, User
+    - content_for :head do
+      %script
+        jQuery(document).ready(function() {
+        jQuery('#user_role').change(function(){ $('#role-domains').toggle($(this).val() != 'administrator') });
+        });
     %fieldset
-      %legend= t('.roles')
+      %legend= t('.role')
       %ul
         %li
-          = f.label :roles
-          %ul.field
-            - Role.all.each do |role|
-              - if role.name == 'super' && !current_user.has_role?(:super) then next
-              %li
-                = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
-                = role.description
-          = hidden_field_tag "user[role_ids][]", ""
+          = f.label :role
+          = f.collection_select :role, User::ROLES.reject{|r| r == 'super'}, :to_s, :humanize
+          %span.hint= t('.hints.role')
+        %li#role-domains
+          = f.label :domains
+          .field
+            - @account.domains.each do |domain|
+              = check_box_tag 'user[domain_ids][]', domain.id, @user.domains.include?(domain)
+              = domain.name
+              = hidden_field_tag 'user[domain_ids][]', ''
+              %br
   - if can? :manage, Account
     %fieldset
       %legend= t('.account')

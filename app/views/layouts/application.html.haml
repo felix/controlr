@@ -24,7 +24,7 @@
           = render :partial => 'users/account_small'
       %hgroup
         - if user_signed_in?
-          %h1= link_to @account.name, root_path
+          %h1= link_to @account.name||'Controlr', root_path
           - if @domain && !@domain.new?
             &raquo;
             %h2= link_to @domain.name, domain_path(@domain)

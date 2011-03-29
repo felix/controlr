@@ -6,5 +6,3 @@ Controlr::Application.config.session_store :cookie_store, :key => '_controlr_ses
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rails generate session_migration")
 # Controlr::Application.config.session_store :active_record_store
-#require 'dm-rails/session_store'
-#Controlr::Application.config.session_store Rails::DataMapper::SessionStore

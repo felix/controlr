@@ -16,7 +16,8 @@ class Domain
   has n, :mailboxes, :constraint => :destroy
   has n, :aliases, :constraint => :destroy
   belongs_to :account
-  #has n, :domain_records
+  has n, :assignments
+  has n, :users, :through => :assignments
 
   validates_format_of :name, :with => %r{^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$}
 

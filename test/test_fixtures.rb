@@ -14,7 +14,7 @@ User.fixture {{
   :password => (password = /\w{6,20}/.gen),
   :password_confirmation => password,
   :created_at => Time.now,
-  :account => Account.make,
+  :account => Account.make
 }}
 Domain.fixture {{
   :name => DataMapper::Sweatshop.unique(:domain) {/\w{2,16}\.com/.gen},
@@ -36,11 +36,6 @@ Mailbox.fixture {{
   :passhash => /[0-9a-z]{32}/.gen,
   :created_at => Time.now,
   :domain => Domain.make
-}}
-Role.fixture {{
-  :name => /\w+/.gen,
-  :description => /\w+/.gen,
-  :permissions => 2.of {Ability.permissions.keys.pick}
 }}
 =begin
 

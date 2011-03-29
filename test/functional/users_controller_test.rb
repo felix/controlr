@@ -5,9 +5,7 @@ class UsersControllerTest < ActionController::TestCase
     setup do
       start_transaction
       @account = Account.gen
-      @admin = @account.users.gen
-      @admin.roles << Role.first(:name => 'admin')
-      @admin.save
+      @admin = @account.users.gen(:role => 'administrator')
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
     end
 
