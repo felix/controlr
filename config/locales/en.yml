@@ -15,6 +15,7 @@ en:
     save: Save
   # default attributes across models
   attributes:
+    name: Name
     active: Active
     created_at: Created
     updated_at: Updated
@@ -101,6 +102,9 @@ en:
     password:
       forgot: Forgot your password?
     form:
+      details: Details
+      roles: Roles
+      account: Account
       hints:
         email: Used to login to this control panel
   domains:
@@ -116,9 +120,16 @@ en:
       switchdomain: Select domain
       switched: Changed domain
     form:
+      details: Details
+      activation: Activation
+      email: Email
+      ftp: FTP
       hints:
         name: The fully qualified domain name. Also used as the username for other services like FTP.
+        active: All services and logins are disabled when set to 'inactive'
         passhash: Used to login to other services like FTP
+        email_quota: Maximum storage (in bytes) used for emails
+        ftp_quota: Maximum storage (in bytes) used for FTP and website
   aliases:
     tab: Aliases
     index:
@@ -130,6 +141,7 @@ en:
       title: 'Editing %{name}'
     catchall: '** catchall **'
     form:
+      details: Details
       hints:
         source: This is the email address that others will send to
         destination: This is where the above email will be redirect to. Remember to include a mailbox address if you want it stored.
@@ -144,6 +156,7 @@ en:
     edit:
       title: 'Editing %{name}'
     form:
+      details: Details
       hints:
         email: This is also the username used to login to IMAP, POP and SMTP services
         passhash: The password used to access IMAP, POP and SMTP services

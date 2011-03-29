@@ -6,7 +6,6 @@ DM_VERSION    = '~> 1.1.0'
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
-#gem 'railties',           RAILS_VERSION, :require => 'rails'
 gem 'rails',              RAILS_VERSION
 gem 'i18n'
 
@@ -14,7 +13,6 @@ gem 'jquery-rails', '>= 0.2.6'
 
 gem 'dm-rails',             DM_VERSION
 gem 'dm-mysql-adapter',     DM_VERSION
-
 gem 'dm-migrations',        DM_VERSION
 gem 'dm-validations',       DM_VERSION
 gem 'dm-types',             DM_VERSION
@@ -29,13 +27,11 @@ gem 'dm-devise', :git => 'git://github.com/dkubb/dm-devise.git'
 gem 'cancan'
 
 gem 'rails3-generators'
-
+gem 'exception_notification'
 gem 'haml'
 gem 'haml-rails'
 
 group(:development, :test) do
-  #gem 'ruby-debug19', :require => 'ruby-debug'
-
   # needed for test/unit/ui/console/testrunner
   gem 'test-unit'
   gem 'shoulda' #, :git => '/home/felix/Source/shoulda', :branch => 'datamapper'
@@ -44,7 +40,6 @@ group(:development, :test) do
   gem 'dm-sqlite-adapter',    DM_VERSION
   gem 'autotest'
   gem 'autotest-rails-pure'
-#  gem 'redgreen'
   gem 'test_notifier'
 
   # for some generators
@@ -53,8 +48,6 @@ group(:development, :test) do
 
   #gem 'dm-sweatshop',         DM_VERSION
   gem 'dm-sweatshop', :git => 'git://github.com/felix/dm-sweatshop.git', :branch => 'noparsetree'
-
-  #gem 'rails_metrics'
 
   # To get a detailed overview about what queries get issued and how long they take
   # have a look at rails_metrics. Once you bundled it, you can run

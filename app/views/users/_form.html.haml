@@ -7,6 +7,7 @@
           %li= msg
 
   %fieldset
+    %legend= t('.details')
     %ul
       %li
         = f.label :email
@@ -30,9 +31,25 @@
         = f.text_field :password_confirmation
 
   - if can? :manage, Role
-    = render :partial => 'roles', :locals => {:f => f}
+    %fieldset
+      %legend= t('.roles')
+      %ul
+        %li
+          = f.label :roles
+          %ul.field
+            - Role.all.each do |role|
+              - if role.name == 'super' && !current_user.has_role?(:super) then next
+              %li
+                = check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role)
+                = role.description
+          = hidden_field_tag "user[role_ids][]", ""
   - if can? :manage, Account
-    = render :partial => 'accounts', :locals => {:f => f}
+    %fieldset
+      %legend= t('.account')
+      %ul
+        %li
+          = f.label :account
+          = collection_select(:user, :account_id, Account.all, :id, :name)
 
   %fieldset.actions
     = f.submit t('actions.save')

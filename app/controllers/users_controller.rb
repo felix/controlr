@@ -15,12 +15,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = @account.users.get(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @user }
-    end
+    redirect_to edit_user_path(params[:id])
   end
 
   # GET /users/new

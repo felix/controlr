@@ -260,10 +260,21 @@ header.page form {
   width: inherit;
 }
 fieldset {
+  position: relative;
   width: 100%;
   margin-top: .75em;
-  padding: 10px;
+  padding: 2.5em 10px 10px;
   background-color: #fafafa;
+}
+fieldset legend {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  right: 10px;
+  padding: 5px 0;
+  color: #888;
+  font-weight: bold;
+  border-bottom: 1px dotted #eee;
 }
 fieldset li {
   position: relative;

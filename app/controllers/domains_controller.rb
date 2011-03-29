@@ -39,6 +39,7 @@ class DomainsController < ApplicationController
   def edit
     @domain = @account.domains.get(params[:id])
     redirect_to domains_path unless @domain
+    session[:current_domain_id] = @domain.id if @domain
   end
 
   # POST /domains
@@ -87,9 +88,13 @@ class DomainsController < ApplicationController
   end
 
   def switch
-    session[:current_domain_id] = params[:id] if params[:id]
-    flash[:notice] = t('domains.switcher.switched')
-    redirect_to(domain_path(session[:current_domain_id]))
+    if params[:id].empty?
+      redirect_to root_path
+    else
+      session[:current_domain_id] = params[:id]
+      flash[:notice] = t('domains.switcher.switched')
+      redirect_to(domain_path(session[:current_domain_id]))
+    end
   end
 
   private

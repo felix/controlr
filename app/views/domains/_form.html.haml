@@ -7,21 +7,50 @@
           %li= msg
 
   %fieldset
+    %legend= t('.details')
     %ul
       %li
         = f.label :name
         = f.text_field :name
         %span.hint= t('.hints.name')
+      %li
+        = f.label :active
+        = f.check_box :active
+        %span.hint= t('.hints.active')
+      - if can? :manage, Account
+        %li
+          = f.label :account
+          = collection_select(:domain, :account_id, Account.all, :id, :name)
+  - if can? :manage, Domain
+    %fieldset
+      %legend= t('.activation')
+      %ul
+        %li
+          = f.label :email_active
+          = f.check_box :email_active
+        %li
+          = f.label :ftp_active
+          = f.check_box :ftp_active
+  - if can? :manage, Account
+    %fieldset
+      %legend= t('.email')
+      %ul
+        %li
+          = f.label :email_quota
+          = f.text_field :email_quota
+          %span.hint= t('.hints.email_quota')
   - if @domain.ftp_active
     %fieldset
+      %legend= t('.ftp')
       %ul
         %li
           = f.label :passhash
           = f.password_field :passhash
           %span.hint= t('.hints.passhash')
-  - if can? :manage, Account
-    = render :partial => 'activation', :locals => {:f => f}
-    = render :partial => 'accounts', :locals => {:f => f}
+        %li
+          = f.label :ftp_quota
+          = f.text_field :ftp_quota
+          %span.hint= t('.hints.ftp_quota')
   %fieldset.actions
     = f.submit t('actions.save')
     \|

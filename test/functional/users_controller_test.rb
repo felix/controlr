@@ -55,7 +55,7 @@ class UsersControllerTest < ActionController::TestCase
       context 'on GET to :show' do
         should 'show user' do
           get :show, :id => @admin.to_param
-          assert_response :success
+          assert_redirected_to edit_user_path(@admin)
         end
       end
 
