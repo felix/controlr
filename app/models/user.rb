@@ -22,6 +22,12 @@ class User
   has n, :assignments
   has n, :domains, :through => :assignments
 
+  # check for active account also
+  # called by devise
+  def active_for_authentication?
+    self.account.active && self.active
+  end
+
   def fullname
     "#{firstname} #{surname}"
   end

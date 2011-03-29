@@ -103,7 +103,7 @@ en:
       forgot: Forgot your password?
     form:
       details: Details
-      roles: Roles
+      role: Role
       account: Account
       hints:
         email: Used to login to this control panel

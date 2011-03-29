@@ -21,6 +21,7 @@ class Ability
         resource.account == user.account
       end
 
+      # can manage all email in account
       can :manage, [Email] do |resource|
         resource.domain.account == user.account
       end

@@ -19,8 +19,6 @@ class MailboxesControllerTest < ActionController::TestCase
     context 'while authed as admin' do
       setup do
         sign_in @admin
-        @request.session[:current_account_id] = @domain.account.id
-        @request.session[:current_domain_id] = @domain.id
       end
 
       context 'on GET to :index' do
@@ -80,10 +78,10 @@ class MailboxesControllerTest < ActionController::TestCase
         end
 
         should 'not destroy mailbox from another domain' do
-          @another_mailbox.domain = @account.domains.gen
-          @another_mailbox.save
+          another_domain = @admin.account.domains.gen
+          another_mailbox = another_domain.mailboxes.gen
           assert_no_difference('Mailbox.count') do
-            delete :destroy, :id => @another_mailbox.to_param
+            delete :destroy, :id => another_mailbox.to_param
           end
           assert_redirected_to mailboxes_path
         end

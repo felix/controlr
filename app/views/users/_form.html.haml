@@ -34,7 +34,9 @@
     - content_for :head do
       %script
         jQuery(document).ready(function() {
-        jQuery('#user_role').change(function(){ $('#role-domains').toggle($(this).val() != 'administrator') });
+        jQuery('#user_role').change(function(){
+        $('#role-domains').toggle($(this).val() != 'administrator');
+        }).trigger('click');
         });
     %fieldset
       %legend= t('.role')
