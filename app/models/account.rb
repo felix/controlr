@@ -7,7 +7,6 @@ class Account
   property :active, Boolean
   property :created_at, DateTime
   property :updated_at, DateTime
-  property :deleted_at, ParanoidDateTime
 
   has n, :domains
   has n, :users
