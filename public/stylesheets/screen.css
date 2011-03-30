@@ -170,6 +170,9 @@ td, th {
 td.right, th.right {
   text-align: right;
 }
+td.centered, th.centered {
+  text-align: center;
+}
 th {
   font-weight: bold;
   border-top: 1px solid #aaa;

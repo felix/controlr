@@ -113,6 +113,7 @@ en:
     home: Dashboard
     index:
       title: Domains
+      email_status: Email Status
     new:
       title: New Domain
     edit:
@@ -130,6 +131,7 @@ en:
         active: All services and logins are disabled when set to 'inactive'
         passhash: Used to login to other services like FTP
         email_quota: Maximum storage (in bytes) used for emails
+        email_alias: "This setting will redirect all email sent to '%{domain}' to addresses in the selected domain"
         ftp_quota: Maximum storage (in bytes) used for FTP and website
   aliases:
     tab: Aliases

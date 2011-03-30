@@ -3,6 +3,7 @@
 
 Account.fixture {{
   :name => DataMapper::Sweatshop.unique(:account) {/\w+/.gen},
+  :active => true,
   :created_at => Time.now,
   #:client => Client.make
 }}

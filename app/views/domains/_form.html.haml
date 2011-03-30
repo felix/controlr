@@ -21,6 +21,7 @@
         %li
           = f.label :account
           = collection_select(:domain, :account_id, Account.all, :id, :name)
+
   - if can? :manage, Domain
     %fieldset
       %legend= t('.activation')
@@ -31,7 +32,7 @@
         %li
           = f.label :ftp_active
           = f.check_box :ftp_active
-  - if can?(:manage, Account) && @domain.email_active
+
     %fieldset
       %legend= t('.email')
       %ul
@@ -39,6 +40,15 @@
           = f.label :email_quota
           = f.text_field :email_quota
           %span.hint= t('.hints.email_quota')
+        %li
+          = f.label :email_alias
+          %select{:name => 'domain[email_alias]'}
+            %option{:value => ''}
+            - @account.domains.each do |domain|
+              - unless domain.new? or !can?(:read, domain) or domain == @domain
+                %option{:value => domain.name, :selected => (@domain.email_alias == domain.name) && 'selected'}= domain.name
+          %span.hint= t('.hints.email_alias', :domain => @domain.name)
+
   - if @domain.ftp_active
     %fieldset
       %legend= t('.ftp')

@@ -4,19 +4,28 @@
   %tr
     %th= Domain.human_attribute_name('name')
     %th= Domain.human_attribute_name('active')
-    %th= Alias.model_name.human(:count => 2)
-    %th= Mailbox.model_name.human(:count => 2)
-    %th= Domain.human_attribute_name('created')
-    %th= Domain.human_attribute_name('updated')
+    %th.centered= t('.email_status')
+    %th.centered= image_tag('alias.png')
+    %th.centered= image_tag('mailbox.png')
+    %th.centered= t('helpers.label.mailbox.bytes')
+    %th= t('attributes.created_at')
+    %th= t('attributes.updated_at')
     - if can? :manage, Domain
       %th
 
   - @domains.each do |domain|
     %tr
       %td= link_to domain.name, domain_path(domain)
-      %td= domain.active ? image_tag('tick.png') : ''
-      %td= domain.aliases.size
-      %td= domain.mailboxes.size
+      %td.centered= domain.active ? image_tag('tick.png') : ''
+      %td.centered
+        - if domain.email_active
+          - if domain.email_alias.empty?
+            = image_tag('mailbox.png')
+          - else
+            = image_tag('redirect.png')
+      %td.centered= domain.aliases.size
+      %td.centered= domain.mailboxes.size
+      %td.centered= domain.mailboxes.reduce{|sum,mb| sum + mb.bytes}
       %td
         %time{:datetime => domain.created_at, :class => 'relative'}= domain.created_at
       %td

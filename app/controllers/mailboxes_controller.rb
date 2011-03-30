@@ -79,7 +79,6 @@ class MailboxesController < ApplicationController
   # DELETE /mailboxes/1.xml
   def destroy
     @mailbox = @domain.mailboxes.get(params[:id])
-    raise @mailbox.inspect
     @mailbox.destroy if @mailbox
 
     respond_to do |format|

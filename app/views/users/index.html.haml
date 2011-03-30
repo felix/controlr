@@ -5,7 +5,7 @@
     %th= User.human_attribute_name('email')
     %th= User.human_attribute_name('firstname')
     %th= User.human_attribute_name('surname')
-    %th= User.human_attribute_name('active')
+    %th= t('attributes.active')
     %th= User.human_attribute_name('last_sign_in')
     - if can? :manage, User
       %th
