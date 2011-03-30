@@ -20,7 +20,6 @@ class Domain
   belongs_to :account
   has n, :assignments
   has n, :users, :through => :assignments
-  has n, :name_records
 
   validates_format_of :name, :with => %r{^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$}
 
