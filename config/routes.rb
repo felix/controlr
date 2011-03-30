@@ -1,5 +1,7 @@
 Controlr::Application.routes.draw do
 
+  resources :name_records
+
   devise_for :users, :path_names => {
     :sign_in => 'login',
     :sign_out => 'logout',

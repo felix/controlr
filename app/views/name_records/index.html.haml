@@ -1,0 +1,27 @@
+%h1 Listing name_records
+
+%table
+  %tr
+    %th Host
+    %th Description
+    %th Active
+    %th Type
+    %th Value
+    %th
+    %th
+    %th
+
+  - @name_records.each do |name_record|
+    %tr
+      %td= name_record.host
+      %td= name_record.description
+      %td= name_record.active
+      %td= name_record.type
+      %td= name_record.value
+      %td= link_to 'Show', name_record
+      %td= link_to 'Edit', edit_name_record_path(name_record)
+      %td= link_to 'Destroy', name_record, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Name record', new_name_record_path
