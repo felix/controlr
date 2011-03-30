@@ -1,15 +1,15 @@
 require 'test_helper'
 
-class MailboxesControllerTest < ActionController::TestCase
-  context 'Mailboxes Controller' do
+class AliasesControllerTest < ActionController::TestCase
+  context 'Aliases Controller' do
     setup do
       start_transaction
 
       @admin = User.gen(:role => 'administrator')
       @domain = @admin.account.domains.gen
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
-      @mailbox = @domain.mailboxes.gen
-      raise "INVALID #{@mailbox.errors.inspect}" unless @mailbox.valid?
+      @alias = @domain.aliases.gen
+      raise "INVALID #{@alias.errors.inspect}" unless @alias.valid?
     end
 
     def teardown
@@ -28,67 +28,67 @@ class MailboxesControllerTest < ActionController::TestCase
 
         should respond_with(:success)
         should render_template(:index)
-        should assign_to(:mailboxes)
+        should assign_to(:aliases)
       end
 
       context 'on POST to :new' do
-        should 'create new mailboxes' do
-          post :create, :mailbox => @domain.mailboxes.make.attributes
-          assert_redirected_to mailboxes_path
-          assert_not_nil assigns(:mailbox)
+        should 'create new aliases' do
+          post :create, :alias => @domain.aliases.make.attributes
+          assert_redirected_to aliases_path
+          assert_not_nil assigns(:alias)
         end
 
         context 'with invalid data' do
           should 'return to form' do
-            post :create, :mailbox => @domain.mailboxes.make(:email=> nil).attributes
+            post :create, :alias => @domain.aliases.make(:email=> nil).attributes
             assert_response :success
-            assert_not_nil assigns(:mailbox)
+            assert_not_nil assigns(:alias)
           end
         end
       end
 
       context 'on GET to :show' do
-        should 'show mailbox' do
-          get :show, :id => @mailbox.id
-          assert_redirected_to edit_mailbox_path(@mailbox)
+        should 'show alias' do
+          get :show, :id => @alias.id
+          assert_redirected_to edit_alias_path(@alias)
         end
 
         should 'redirect to list if not found' do
           get :show, :id => 45484
-          assert_redirected_to mailboxes_path
+          assert_redirected_to aliases_path
         end
       end
 
       context 'on GET to :edit' do
         should 'get edit' do
-          get :edit, :id => @mailbox.id
+          get :edit, :id => @alias.id
           assert_response :success
-          assert_not_nil assigns(:mailbox)
+          assert_not_nil assigns(:alias)
         end
       end
 
       context 'on PUT to :update' do
-        should 'update mailbox' do
-          put :update, :id => @mailbox.to_param, :mailbox => @mailbox.attributes
-          assert_redirected_to mailboxes_path
+        should 'update alias' do
+          put :update, :id => @alias.to_param, :alias => @alias.attributes
+          assert_redirected_to aliases_path
         end
       end
 
       context 'on DELETE to :destroy' do
-        should 'destroy mailbox' do
-          assert_difference('Mailbox.count', -1) do
-            delete :destroy, :id => @mailbox.to_param
+        should 'destroy alias' do
+          assert_difference('alias.count', -1) do
+            delete :destroy, :id => @alias.to_param
           end
-          assert_redirected_to mailboxes_path
+          assert_redirected_to aliases_path
         end
 
-        should 'not destroy mailbox from another domain' do
+        should 'not destroy alias from another domain' do
           another_domain = @admin.account.domains.gen
-          another_mailbox = another_domain.mailboxes.gen
-          assert_no_difference('Mailbox.count') do
-            delete :destroy, :id => another_mailbox.to_param
+          another_alias = another_domain.aliases.gen
+          assert_no_difference('alias.count') do
+            delete :destroy, :id => another_alias.to_param
           end
-          assert_redirected_to mailboxes_path
+          assert_redirected_to aliases_path
         end
       end
 
@@ -126,7 +126,7 @@ class MailboxesControllerTest < ActionController::TestCase
 
       context 'on PUT to :update' do
         should 'require a login' do
-          put :update, :id => @admin.to_param, :mailbox => @admin.attributes
+          put :update, :id => @admin.to_param, :alias => @admin.attributes
           assert_redirected_to new_user_session_path
         end
       end

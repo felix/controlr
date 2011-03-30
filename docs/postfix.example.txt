@@ -1,0 +1,36 @@
+
+# in main.cf
+virtual_mailbox_domains = mysql:$config_directory/mysql_virtual_domain_maps.cf
+virtual_mailbox_base = /var/vmail
+virtual_mailbox_maps = mysql:$config_directory/mysql_virtual_mailbox_maps.cf
+virtual_alias_maps =
+    proxy:mysql:$config_directory/mysql_virtual_alias_maps.cf
+    proxy:mysql:$config_directory/mysql_virtual_alias_domain_maps.cf
+
+# in mysql_virtual_alias_maps.cf
+user = postfix
+password = secret
+hosts = database.server
+dbname = controlr
+query = SELECT destination FROM aliases WHERE source='%s' and active='1'
+
+# in mysql_virtual_domain_maps.cf
+user = postfix
+password = secret
+hosts = database.server
+dbname = controlr
+query = SELECT name FROM domains WHERE name='%s' and active='1' and email_active='1'
+
+# in mysql_virtual_mailbox_maps.cf
+user = postfix
+hosts = database.server
+password = secret
+dbname = controlr
+query = SELECT CONCAT('%d','/','%u') FROM mailboxes WHERE email='%s' and active='1'
+
+# in mysql_virtual_alias_domain_maps.cf
+user = postfix
+hosts = database.server
+password = secret
+dbname = controlr
+query = SELECT destination FROM aliases,domains WHERE domains.name = '%d' AND aliases.source = CONCAT('%u', '@', domains.email_alias) AND aliases.active = 1 AND domains.active='1'
