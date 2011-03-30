@@ -1,0 +1,25 @@
+= form_for @name_record do |f|
+  -if @name_record.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@name_record.errors.count, "error")} prohibited this name_record from being saved:"
+      %ul
+        - @name_record.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :host
+    = f.text_field :host
+  .field
+    = f.label :description
+    = f.text_field :description
+  .field
+    = f.label :active
+    = f.text_field :active
+  .field
+    = f.label :type
+    = f.text_field :type
+  .field
+    = f.label :value
+    = f.text_field :value
+  .actions
+    = f.submit 'Save'
