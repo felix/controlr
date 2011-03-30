@@ -8,7 +8,7 @@ class DomainsControllerTest < ActionController::TestCase
       @admin = User.gen(:role => 'administrator')
       @account = @admin.account
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
-      @domain = @account.domains.gen
+      @domain = Domain.gen(:account => @account)
       raise "INVALID #{@domain.errors.inspect}" unless @domain.valid?
     end
 
@@ -72,7 +72,7 @@ class DomainsControllerTest < ActionController::TestCase
 
       context 'on DELETE to :destroy' do
         setup do
-          @another_domain = @admin.account.domains.gen
+          @another_domain = Domain.gen(:account => @admin.account)
           raise @another_domain.inspect unless @another_domain.valid?
         end
 

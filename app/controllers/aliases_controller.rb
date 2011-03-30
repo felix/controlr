@@ -1,6 +1,6 @@
 class AliasesController < ApplicationController
   authorize_resource :class => Email
-  before_filter do
+  append_before_filter do
     redirect_to domains_url unless @domain
   end
 
@@ -18,12 +18,7 @@ class AliasesController < ApplicationController
   # GET /aliases/1
   # GET /aliases/1.xml
   def show
-    @alias = Alias.get(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @alias }
-    end
+    redirect_to edit_alias_path(params[:id])
   end
 
   # GET /aliases/new
@@ -39,7 +34,8 @@ class AliasesController < ApplicationController
 
   # GET /aliases/1/edit
   def edit
-    @alias = Alias.get(params[:id])
+    @alias = @domain.aliases.get(params[:id])
+    redirect_to aliases_path unless @alias
   end
 
   # POST /aliases
@@ -49,7 +45,7 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.save
-        format.html { redirect_to(@alias, :notice => 'Alias address was successfully created.') }
+        format.html { redirect_to(aliases_path, :notice => 'Alias address was successfully created.') }
         format.xml  { render :xml => @alias, :status => :created, :location => @alias }
       else
         format.html { render :action => "new" }

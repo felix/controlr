@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MailboxTest < Test::Unit::TestCase
 
-  context 'an Mailbox instance' do
+  context 'a Mailbox instance' do
     setup do
       start_transaction
       @domain = Domain.gen
