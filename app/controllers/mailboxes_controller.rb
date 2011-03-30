@@ -18,12 +18,7 @@ class MailboxesController < ApplicationController
   # GET /mailboxes/1
   # GET /mailboxes/1.xml
   def show
-    @mailbox = @domain.mailboxes.get(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @mailbox }
-    end
+    redirect_to edit_mailbox_path(params[:id])
   end
 
   # GET /mailboxes/new

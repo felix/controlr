@@ -20,6 +20,10 @@ class AliasTest < Test::Unit::TestCase
     should validate_presence_of(:source)
     should belong_to(:domain)
 
+    should 'default to non-system' do
+      assert @alias.system == false
+    end
+
     should 'store destination as a string' do
       assert @alias.destination.class == String
     end

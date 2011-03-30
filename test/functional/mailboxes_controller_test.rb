@@ -6,9 +6,9 @@ class MailboxesControllerTest < ActionController::TestCase
       start_transaction
 
       @admin = User.gen(:role => 'administrator')
-      @domain = @admin.account.domains.gen
+      @domain = Domain.gen(:account => @admin.account)
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
-      @mailbox = @domain.mailboxes.gen
+      @mailbox = Mailbox.gen(:domain => @domain)
       raise "INVALID #{@mailbox.errors.inspect}" unless @mailbox.valid?
     end
 
@@ -18,6 +18,9 @@ class MailboxesControllerTest < ActionController::TestCase
 
     context 'while authed as admin' do
       setup do
+        @request.session = {
+          :current_domain_id => @domain.id
+        }
         sign_in @admin
       end
 
@@ -52,11 +55,6 @@ class MailboxesControllerTest < ActionController::TestCase
           get :show, :id => @mailbox.id
           assert_redirected_to edit_mailbox_path(@mailbox)
         end
-
-        should 'redirect to list if not found' do
-          get :show, :id => 45484
-          assert_redirected_to mailboxes_path
-        end
       end
 
       context 'on GET to :edit' do
@@ -64,6 +62,11 @@ class MailboxesControllerTest < ActionController::TestCase
           get :edit, :id => @mailbox.id
           assert_response :success
           assert_not_nil assigns(:mailbox)
+        end
+
+        should 'redirect to list if not found' do
+          get :edit, :id => 45484
+          assert_redirected_to mailboxes_path
         end
       end
 
@@ -83,8 +86,8 @@ class MailboxesControllerTest < ActionController::TestCase
         end
 
         should 'not destroy mailbox from another domain' do
-          another_domain = @admin.account.domains.gen
-          another_mailbox = another_domain.mailboxes.gen
+          another_domain = Domain.gen(:account => @admin.account)
+          another_mailbox = Mailbox.gen(:domain => another_domain)
           assert_no_difference('Mailbox.count') do
             delete :destroy, :id => another_mailbox.to_param
           end

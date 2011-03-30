@@ -4,8 +4,6 @@
 Account.fixture {{
   :name => DataMapper::Sweatshop.unique(:account) {/\w+/.gen},
   :active => true,
-  :created_at => Time.now,
-  #:client => Client.make
 }}
 User.fixture {{
   :email => DataMapper::Sweatshop.unique(:email) {/\w{2,10}@\w{2,16}\.com/.gen},
@@ -14,92 +12,30 @@ User.fixture {{
   :active => true,
   :password => (password = /\w{6,20}/.gen),
   :password_confirmation => password,
-  :created_at => Time.now,
-  :account => Account.make
+  :account => Account.gen
 }}
 Domain.fixture {{
   :name => DataMapper::Sweatshop.unique(:domain) {/\w{2,16}\.com/.gen},
   :active => true,
-  :created_at => Time.now,
-  :account => Account.make,
+  :account => Account.gen,
 }}
 
 Alias.fixture {{
   :source => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},
   :destination => 'test@example.com',
   :active => true,
-  :created_at => Time.now,
-  :domain => Domain.make
+  :domain => Domain.gen
 }}
 Mailbox.fixture {{
   :email => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},
   :active => true,
   :passhash => /[0-9a-z]{32}/.gen,
-  :created_at => Time.now,
-  :domain => Domain.make
+  :domain => Domain.gen
 }}
-=begin
-
-Client.fixture {{
-  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
-  :created_at => Time.now
-}}
-Client.fixture(:accounts) {{
-  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
-  :created_at => Time.now,
-  :accounts => 2.of {Account.make}
-}}
-
-Account.fixture(:users) {{
-  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
-  :created_at => Time.now,
-  :client => Client.make,
-  :users => 2.of {User.make}
-}}
-
-Server.fixture {{
-  :name => DataMapper::Sweatshop.unique {/\w+/.gen},
-  :active     => true,
-  :created_at => Time.now
-}}
-
-IpAddress.fixture {{
-  :address => DataMapper::Sweatshop.unique(:ip) {/100\.\d\.\d\.\d/.gen}.to_s,
+NameRecord.fixture {{
+  :host => /\w+\.\w{3,6}\.\w{2}/.gen,
+  :description => /\w+/.gen,
   :active => true,
-  :created_at => Time.now,
-  :account => Account.make
+  :value => /\d{2}\.\d{2}\.\d{2}\.\d{2}/.gen,
+  :domain => Domain.gen
 }}
-IpAddress.fixture(:private) {{
-  :address => DataMapper::Sweatshop.unique(:ip) {/192\.168\.\d\.\d/.gen}.to_s,
-  :active => true,
-  :created_at => Time.now,
-  :account => Account.make
-}}
-IpAddress.fixture(:server) {{
-  :address => DataMapper::Sweatshop.unique(:ip) {/100\.\d\.\d\.\d/.gen}.to_s,
-  :active => true,
-  :created_at => Time.now,
-  :account => Account.make,
-  :server => Server.make
-}}
-
-Service.fixture {{
-  :name => 'Foo',
-  :type => nil,
-  :active => false,
-  :start_cmd => '/etc/init.d/foo start',
-  :stop_cmd => '/etc/init.d/foo reload',
-  :created_at => Time.now,
-  :server => Server.make
-}}
-Service.fixture(:postfix) {{
-  :name => 'Postfix',
-  :type => 'Postfix',
-  :active => false,
-  :start_cmd => '/etc/init.d/postfix start',
-  :stop_cmd => '/etc/init.d/postfix reload',
-  :created_at => Time.now,
-  :server => Server.make
-}}
-=end
-

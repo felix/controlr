@@ -6,9 +6,10 @@ class AliasesControllerTest < ActionController::TestCase
       start_transaction
 
       @admin = User.gen(:role => 'administrator')
-      @domain = @admin.account.domains.gen
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
-      @alias = @domain.aliases.gen
+      @domain = Domain.gen(:account => @admin.account)
+      raise "INVALID #{@domain.errors.inspect}" unless @domain.valid?
+      @alias = Alias.gen(:domain => @domain)
       raise "INVALID #{@alias.errors.inspect}" unless @alias.valid?
     end
 
@@ -18,6 +19,9 @@ class AliasesControllerTest < ActionController::TestCase
 
     context 'while authed as admin' do
       setup do
+        @request.session = {
+          :current_domain_id => @domain.id
+        }
         sign_in @admin
       end
 
@@ -40,7 +44,7 @@ class AliasesControllerTest < ActionController::TestCase
 
         context 'with invalid data' do
           should 'return to form' do
-            post :create, :alias => @domain.aliases.make(:email=> nil).attributes
+            post :create, :alias => @domain.aliases.make(:source => nil).attributes
             assert_response :success
             assert_not_nil assigns(:alias)
           end
@@ -52,11 +56,6 @@ class AliasesControllerTest < ActionController::TestCase
           get :show, :id => @alias.id
           assert_redirected_to edit_alias_path(@alias)
         end
-
-        should 'redirect to list if not found' do
-          get :show, :id => 45484
-          assert_redirected_to aliases_path
-        end
       end
 
       context 'on GET to :edit' do
@@ -64,6 +63,11 @@ class AliasesControllerTest < ActionController::TestCase
           get :edit, :id => @alias.id
           assert_response :success
           assert_not_nil assigns(:alias)
+        end
+
+        should 'redirect to list if not found' do
+          get :edit, :id => 45484
+          assert_redirected_to aliases_path
         end
       end
 
@@ -76,16 +80,16 @@ class AliasesControllerTest < ActionController::TestCase
 
       context 'on DELETE to :destroy' do
         should 'destroy alias' do
-          assert_difference('alias.count', -1) do
+          assert_difference('Alias.count', -1) do
             delete :destroy, :id => @alias.to_param
           end
           assert_redirected_to aliases_path
         end
 
         should 'not destroy alias from another domain' do
-          another_domain = @admin.account.domains.gen
-          another_alias = another_domain.aliases.gen
-          assert_no_difference('alias.count') do
+          another_domain = Domain.gen(:account => @admin.account)
+          another_alias = Alias.gen(:domain => another_domain)
+          assert_no_difference('Alias.count') do
             delete :destroy, :id => another_alias.to_param
           end
           assert_redirected_to aliases_path

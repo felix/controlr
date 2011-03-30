@@ -4,8 +4,7 @@ class UsersControllerTest < ActionController::TestCase
   context 'Users Controller' do
     setup do
       start_transaction
-      @account = Account.gen
-      @admin = @account.users.gen(:role => 'administrator')
+      @admin = User.gen(:role => 'administrator')
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
     end
 
@@ -30,7 +29,7 @@ class UsersControllerTest < ActionController::TestCase
 
       context 'on POST to :new' do
         should 'create new users' do
-          post :create, :user => @account.users.make.attributes.merge(
+          post :create, :user => @admin.account.users.make.attributes.merge(
             :password => 'blahblah',
             :password_confirmation => 'blahblah'
           )
@@ -40,7 +39,7 @@ class UsersControllerTest < ActionController::TestCase
 
         context 'with invalid data' do
           should 'return to form' do
-            post :create, :user => @account.users.make(:email => nil).attributes.merge(
+            post :create, :user => @admin.account.users.make(:email => nil).attributes.merge(
               :password => 'blahblah',
               :password_confirmation => 'blahblah'
             )

@@ -6,7 +6,7 @@ class Alias
   property :source, String, :required => true
   property :destination, Text
   property :active, Boolean
-  property :system, Boolean
+  property :system, Boolean, :default => false
   property :created_at, DateTime
   property :updated_at, DateTime
 
