@@ -47,8 +47,8 @@ Controlr::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.middleware.use ExceptionNotifier,
-    :email_prefix => "[Controlr] ",
-    :sender_address => %{"controlr" <controlr@seconddrawer.com.au>},
-    :exception_recipients => %w{root@seconddrawer.com.au}
+#  config.middleware.use ExceptionNotifier,
+#    :email_prefix => "[Controlr] ",
+#    :sender_address => %{"controlr" <controlr@seconddrawer.com.au>},
+#    :exception_recipients => %w{root@seconddrawer.com.au}
 end
