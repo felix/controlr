@@ -35,7 +35,7 @@ Controlr::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Disable delivery errors, bad email addresses will be ignored
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = false
 
   # Enable threaded mode
   # config.threadsafe!
@@ -47,8 +47,11 @@ Controlr::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-#  config.middleware.use ExceptionNotifier,
-#    :email_prefix => "[Controlr] ",
-#    :sender_address => %{"controlr" <controlr@seconddrawer.com.au>},
-#    :exception_recipients => %w{root@seconddrawer.com.au}
+  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.perform_deliveries = true
+
+  config.middleware.use ExceptionNotifier,
+    :email_prefix => "[Controlr] ",
+    :sender_address => %{"controlr" <controlr@seconddrawer.com.au>},
+    :exception_recipients => %w{deploy@seconddrawer.com.au}
 end

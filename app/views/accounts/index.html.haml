@@ -2,12 +2,12 @@
 
 %table
   %tr
-    %th= Account.human_attribute_name('name')
-    %th= Account.human_attribute_name('active')
-    %th= User.model_name.human(:count => 2)
-    %th= Domain.model_name.human(:count => 2)
-    %th= Account.human_attribute_name('created')
-    %th= Account.human_attribute_name('updated')
+    %th= t('attributes.name')
+    %th= t('attributes.active')
+    %th= Account.human_attribute_name('users')
+    %th= Account.human_attribute_name('domains')
+    %th= t('attributes.created_at')
+    %th= t('attributes.updated_at')
     %th
 
   - @accounts.each do |account|

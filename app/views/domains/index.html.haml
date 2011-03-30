@@ -2,8 +2,8 @@
 
 %table
   %tr
-    %th= Domain.human_attribute_name('name')
-    %th= Domain.human_attribute_name('active')
+    %th= t('attributes.name')
+    %th= t('attributes.active')
     %th.centered= t('.email_status')
     %th.centered= image_tag('alias.png')
     %th.centered= image_tag('mailbox.png')
@@ -25,7 +25,7 @@
             = image_tag('mailbox.png')
       %td.centered= domain.aliases.size
       %td.centered= domain.mailboxes.size
-      %td.centered= domain.mailboxes.reduce{|sum,mb| sum + mb.bytes}
+      %td.centered
       %td
         %time{:datetime => domain.created_at, :class => 'relative'}= domain.created_at
       %td
