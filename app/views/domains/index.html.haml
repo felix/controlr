@@ -19,10 +19,10 @@
       %td.centered= domain.active ? image_tag('tick.png') : ''
       %td.centered
         - if domain.email_active
-          - if domain.email_alias.empty?
-            = image_tag('mailbox.png')
-          - else
+          - if domain.email_alias
             = image_tag('redirect.png')
+          - else
+            = image_tag('mailbox.png')
       %td.centered= domain.aliases.size
       %td.centered= domain.mailboxes.size
       %td.centered= domain.mailboxes.reduce{|sum,mb| sum + mb.bytes}
