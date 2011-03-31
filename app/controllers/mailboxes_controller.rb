@@ -58,6 +58,7 @@ class MailboxesController < ApplicationController
   # PUT /mailboxes/1.xml
   def update
     @mailbox = @domain.mailboxes.get(params[:id])
+    params[:mailbox].delete(:passhash) if params[:mailbox][:passhash].empty?
 
     respond_to do |format|
       if @mailbox.update(params[:mailbox])

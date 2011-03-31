@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
   });
   jQuery('form .hint').each(function(){
     var hint = $(this);
-    hint.siblings('input,textarea,select').each(function(){
+    hint.parent().find('input,textarea,select').each(function(){
       $(this).focus(function(){ hint.show(); });
       $(this).blur(function(){ hint.hide(); });
     });

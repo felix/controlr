@@ -8,7 +8,7 @@ class Mailbox
   property :email, String, :unique => true, :required => true
   property :active, Boolean
   property :passhash, String, :length => 32, :required => true
-  property :quota, Integer, :default => 0 # used by dovecot
+  property :quota, String     # used by dovecot
   property :bytes, Integer    # used by dovecot
   property :messages, Integer # used by dovecot
   property :created_at, DateTime
@@ -17,6 +17,7 @@ class Mailbox
   belongs_to :domain, :required => true
 
   #validates_format_of :email, :as => :email_address
+  validates_format_of :quota, :with => %r{^([0-9]+[bkMG]?)?$}
 
   before :save do |mb|
     self.email = email.slice(/[^@]+/) << '@' << @domain.name
@@ -24,6 +25,9 @@ class Mailbox
                                         {:active => self.active})
     a.destination = a.destination_array << self.email
     a.save
+
+    # set default quota if nec
+    self.quota = @domain.email_default_quota if (self.quota.nil? || self.quota.empty?)
   end
 
   def passhash=(plain)
