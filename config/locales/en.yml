@@ -164,7 +164,7 @@ en:
       hints:
         email: This is also the username used to login to IMAP, POP and SMTP services
         passhash: The password used to access IMAP, POP and SMTP services. Will only be changed if supplied
-        quota: "Set the maximum size (in kilobytes) for this mailbox. Empty for maximum. (204800 = 200Mb)"
+        quota: "Set the maximum size (in kilobytes) for this mailbox. 0 for maximum. (204800 = 200Mb)"
   accounts:
     tab: Accounts
     index:
