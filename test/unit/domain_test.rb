@@ -31,16 +31,13 @@ class DomainTest < Test::Unit::TestCase
       assert @domain.passhash = '098f6bcd4621d373cade4e832627b4f6'
     end
 
-    should 'have default value for email_default_quota' do
-      assert !@domain.email_default_quota.nil?
+    should 'have default value for email_max_quota' do
+      assert !@domain.email_max_quota.nil?
     end
 
-    should allow_value('1').for(:email_default_quota)
-    should allow_value('1b').for(:email_default_quota)
-    should allow_value('1k').for(:email_default_quota)
-    should_not allow_value('100Kb').for(:email_default_quota)
-    should_not allow_value('100T').for(:email_default_quota)
-    should_not allow_value('100%').for(:email_default_quota)
+    should allow_value('1').for(:email_max_quota)
+    should_not allow_value('100Kb').for(:email_max_quota)
+    should_not allow_value('100%').for(:email_max_quota)
 
   end
 end

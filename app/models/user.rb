@@ -19,8 +19,8 @@ class User
   property :updated_at, DateTime
 
   belongs_to :account
-  has n, :assignments
-  has n, :domains, :through => :assignments
+  #has n, :assignments
+  has n, :domains, :through => Resource
 
   # check for active account also
   # called by devise

@@ -3,7 +3,7 @@
   %nav
     %ul
       %li= link_to t('.list'), domains_path, :class => 'list button'
-      - if @domain && !@domain.new? && can?(:create, Email)
+      - if @domain && !@domain.new? && can?(:create, Mailbox)
         %li= link_to t('layouts.mailboxes.new'), new_mailbox_path, :class => 'add button'
       - if can? :create, Domain
         %li= link_to t('.new'), new_domain_path, :class => 'add button'

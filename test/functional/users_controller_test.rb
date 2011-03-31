@@ -69,6 +69,13 @@ class UsersControllerTest < ActionController::TestCase
           put :update, :id => @admin.to_param, :user => @admin.attributes
           assert_redirected_to users_path
         end
+
+        should 'not change password if not entered' do
+          old_pass = @admin.encrypted_password
+          put :update, :id => @admin.to_param, :user => @admin.attributes.merge(:password => nil)
+          assert assigns(:user).encrypted_password == old_pass
+        end
+
       end
 
       context 'on DELETE to :destroy' do

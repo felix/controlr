@@ -1,5 +1,5 @@
 class MailboxesController < ApplicationController
-  authorize_resource :class => Email
+  authorize_resource
   append_before_filter do
     redirect_to(domains_url, :notice => 'Please select a domain first') unless @domain
   end
@@ -58,7 +58,7 @@ class MailboxesController < ApplicationController
   # PUT /mailboxes/1.xml
   def update
     @mailbox = @domain.mailboxes.get(params[:id])
-    params[:mailbox].delete(:passhash) if params[:mailbox][:passhash].empty?
+    params[:mailbox].delete(:passhash) unless params[:mailbox][:passhash].blank?
 
     respond_to do |format|
       if @mailbox.update(params[:mailbox])

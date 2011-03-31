@@ -30,7 +30,7 @@ class Alias
   end
 
   def destination_array
-    return [] if destination.nil?
+    return [] if destination.blank?
     destination.split(',')
   end
 

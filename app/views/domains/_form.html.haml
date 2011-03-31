@@ -37,9 +37,9 @@
       %legend= t('.email')
       %ul
         %li
-          = f.label :email_default_quota
-          = f.text_field :email_default_quota
-          %span.hint= t('.hints.email_default_quota')
+          = f.label :email_max_quota
+          = f.text_field :email_max_quota
+          %span.hint= t('.hints.email_max_quota')
         %li
           = f.label :email_alias
           %select{:name => 'domain[email_alias]'}

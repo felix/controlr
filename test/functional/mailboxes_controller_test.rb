@@ -41,6 +41,12 @@ class MailboxesControllerTest < ActionController::TestCase
           assert_not_nil assigns(:mailbox)
         end
 
+        should 'provide default quota if empty' do
+          mb = Mailbox.make(:quota => nil)
+          post :create, :mailbox => mb.attributes
+          assert assigns(:mailbox).quota == @domain.email_max_quota
+        end
+
         context 'with invalid data' do
           should 'return to form' do
             post :create, :mailbox => @domain.mailboxes.make(:email=> nil).attributes
@@ -74,6 +80,13 @@ class MailboxesControllerTest < ActionController::TestCase
         should 'update mailbox' do
           put :update, :id => @mailbox.to_param, :mailbox => @mailbox.attributes
           assert_redirected_to mailboxes_path
+        end
+
+        should 'not change passhash if not entered' do
+          old_hash = @mailbox.passhash
+          put :update, :id => @mailbox.to_param, :mailbox => @mailbox.attributes.merge(:passhash => nil)
+          mb = Mailbox.get(@mailbox.id)
+          assert mb.passhash == old_hash
         end
       end
 

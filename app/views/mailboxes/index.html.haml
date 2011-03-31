@@ -10,7 +10,7 @@
     %th= t('helpers.label.mailbox.messages')
     %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
-    - if can? :modify, Email
+    - if can? :modify, Mailbox
       %th
 
   - @mailboxes.each do |mailbox|

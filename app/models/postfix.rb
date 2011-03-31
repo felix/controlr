@@ -1,3 +1,0 @@
-class Postfix < Service
-
-end
