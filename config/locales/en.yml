@@ -162,7 +162,7 @@ en:
       details: Details
       hints:
         email: This is also the username used to login to IMAP, POP and SMTP services
-        passhash: The password used to access IMAP, POP and SMTP services
+        passhash: The password used to access IMAP, POP and SMTP services. Will only be changed if supplied
         quota: Set the maximum size (in bytes) for this mailbox. Only applicable if this domain is quota restricted
   accounts:
     tab: Accounts
