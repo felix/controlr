@@ -131,7 +131,7 @@ en:
         name: The fully qualified domain name. Also used as the username for other services like FTP.
         active: All services and logins are disabled when set to 'inactive'
         passhash: Used to login to other services like FTP
-        email_max_quota: "Maximum quota for users' email storage (in kilobytes)"
+        email_max_quota: "Maximum quota for users' email storage in kilobytes (204800 = 200Mb)"
         email_alias: "This setting will redirect all email sent to '%{domain}' to addresses in the selected domain"
         ftp_quota: Maximum storage (in bytes) used for FTP and website
   aliases:
@@ -164,7 +164,7 @@ en:
       hints:
         email: This is also the username used to login to IMAP, POP and SMTP services
         passhash: The password used to access IMAP, POP and SMTP services. Will only be changed if supplied
-        quota: "Set the maximum size (in kilobytes) for this mailbox. Empty for maximum"
+        quota: "Set the maximum size (in kilobytes) for this mailbox. Empty for maximum. (204800 = 200Mb)"
   accounts:
     tab: Accounts
     index:
