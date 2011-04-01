@@ -1,4 +1,30 @@
+# Controlr
 
-User
+A Ruby on Rails based hosting control panel.
 
+Currently a work in progress as I have the time. It will replace the current
+control panel for seconddrawer.com.au.
 
+Currently it supports the following:
+
+- reseller user accounts
+- domain user accounts
+- email aliases
+- email mailboxes
+
+and requires the following:
+
+- postfix
+- dovecot
+- dovecot IMAP quota (optional)
+
+and _will_ provide the following:
+
+- nice easy 'wizards' to set up common configurations
+- tinydns zone generation
+- bind zone generation
+- nginx config generation
+- apache config generation
+- client account billing
+
+Copyright 2011 Felix Hanley; see LICENSE.txt

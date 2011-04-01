@@ -1,4 +1,2 @@
-assign users to domains
-add autocomplete to alias destination selection
-context help http://www.askthecssguy.com/2007/03/form_field_hints_with_css_and.html
-subdomains http://publications.jbfavre.org/web/nginx-vhosts-automatiques-avec-SSL-et-authentification.en
+- add autocomplete to alias destination selection
+- subdomains in nginx http://publications.jbfavre.org/web/nginx-vhosts-automatiques-avec-SSL-et-authentification.en
