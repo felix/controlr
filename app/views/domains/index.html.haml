@@ -7,7 +7,6 @@
     %th.centered= t('.email_status')
     %th.centered= image_tag('alias.png')
     %th.centered= image_tag('mailbox.png')
-    %th.centered= t('helpers.label.mailbox.bytes')
     %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
     - if can? :manage, Domain
@@ -25,7 +24,6 @@
             = image_tag('mailbox.png')
       %td.centered= domain.aliases.size
       %td.centered= domain.mailboxes.size
-      %td.centered
       %td
         %time{:datetime => domain.created_at, :class => 'relative'}= domain.created_at
       %td

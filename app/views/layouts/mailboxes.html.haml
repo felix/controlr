@@ -3,6 +3,6 @@
   %nav
     %ul
       %li= link_to t('.list'), mailboxes_path, :class => 'list button'
-      - if can? :create, Email
+      - if can? :create, Mailbox
         %li= link_to t('.new'), new_mailbox_path, :class => 'add button'
 = render :file => 'layouts/application'

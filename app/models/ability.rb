@@ -22,7 +22,7 @@ class Ability
       end
 
       # can manage all email in account
-      can :manage, [Email] do |resource|
+      can :manage, [Mailbox, Alias] do |resource|
         resource.domain.account == user.account
       end
 
@@ -39,7 +39,7 @@ class Ability
         user.domains.include?(resource)
       end
 
-      can :manage, [Email] do |resource|
+      can :manage, [Mailbox, Alias] do |resource|
         user.domains.collect{|d| d.id}.include? resource.domain.id
       end
 

@@ -1,5 +1,5 @@
 class AliasesController < ApplicationController
-  authorize_resource :class => Email
+  authorize_resource
   append_before_filter do
     redirect_to domains_url unless @domain
   end

@@ -8,7 +8,7 @@
     %th= t('helpers.label.alias.destination')
     %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
-    - if can? :modify, Email
+    - if can? :modify, Alias
       %th
 
   - @aliases.each do |a|

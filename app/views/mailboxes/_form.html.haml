@@ -18,7 +18,7 @@
         = f.check_box :active
       %li
         = f.label :passhash
-        = f.password_field :passhash
+        = f.password_field :passhash, :value => nil
         %span.hint= t('.hints.passhash')
       %li
         = f.label :quota

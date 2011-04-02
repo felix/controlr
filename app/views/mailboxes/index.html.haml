@@ -10,14 +10,14 @@
     %th= t('helpers.label.mailbox.messages')
     %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
-    - if can? :modify, Email
+    - if can? :modify, Mailbox
       %th
 
   - @mailboxes.each do |mailbox|
     %tr
       %td= link_to mailbox.email, edit_mailbox_path(mailbox)
       %td= mailbox.active ? image_tag('tick.png') : ''
-      %td= number_to_human_size(mailbox.quota)
+      %td= number_to_human_size(mailbox.quota*1024)
       %td= number_to_human_size(mailbox.bytes)
       %td= mailbox.messages
       %td
