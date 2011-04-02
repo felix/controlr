@@ -68,6 +68,13 @@ class DomainsControllerTest < ActionController::TestCase
           put :update, {:id => @domain.to_param, :domain => @domain.attributes}
           assert_redirected_to domains_path
         end
+
+        should 'not change passhash if not entered' do
+          old_hash = @domain.passhash
+          put :update, :id => @domain.to_param, :domain => @domain.attributes.merge(:passhash => nil)
+          mb = Domain.get(@domain.id)
+          assert mb.passhash == old_hash
+        end
       end
 
       context 'on DELETE to :destroy' do
