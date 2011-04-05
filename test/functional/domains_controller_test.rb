@@ -6,6 +6,8 @@ class DomainsControllerTest < ActionController::TestCase
       start_transaction
 
       @admin = User.gen(:role => 'administrator')
+      @super = User.gen(:role => 'super')
+      @user = User.gen(:role => 'user', :account => @admin.account)
       @account = @admin.account
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
       @domain = Domain.gen(:account => @account)
@@ -56,10 +58,17 @@ class DomainsControllerTest < ActionController::TestCase
       end
 
       context 'on GET to :edit' do
-        should 'get edit' do
+        setup do
           get :edit, :id => @domain.id
+        end
+
+        should 'get edit' do
           assert_response :success
           assert_not_nil assigns(:domain)
+        end
+
+        should 'not show account selector' do
+          assert_select 'select#domain_account_id', false
         end
       end
 
@@ -100,7 +109,67 @@ class DomainsControllerTest < ActionController::TestCase
           assert_redirected_to domains_path
         end
       end
+    end
 
+    context 'while authed as super' do
+      setup do
+        sign_in @super
+        @request.session[:current_account_id] = @domain.account.id
+      end
+
+      context 'on GET to :index' do
+        setup do
+          get :index
+        end
+
+        should respond_with(:success)
+        should render_template(:index)
+        should assign_to(:domains)
+
+        should 'show ALL domains for account' do
+          assert_select 'form.switcher option', {:count => @domain.account.domains.size+1}
+        end
+      end
+
+      context 'on GET to :edit' do
+        setup do
+          get :edit, :id => @domain.id
+        end
+
+        should 'get edit' do
+          assert_response :success
+          assert_not_nil assigns(:domain)
+        end
+
+        should 'show account selector' do
+          assert_select 'select#domain_account_id', true
+        end
+      end
+    end
+
+    context 'while authed as user' do
+      setup do
+        @user.domains << @domain
+        @user.save
+        sign_in @user
+        @request.session[:current_account_id] = @domain.account.id
+        @request.session[:current_domain_id] = @domain.id
+      end
+
+      context 'on GET to :index' do
+        setup do
+          d1 = 3.of {Domain.gen(:account => @user.account)}
+          get :index
+        end
+
+        should respond_with(:success)
+        should render_template(:index)
+        should assign_to(:domains)
+
+        should 'show only domains for user' do
+          assert_select 'form.switcher option', {:count => @user.domains.size+1}
+        end
+      end
     end
 
     context 'while unauthed' do

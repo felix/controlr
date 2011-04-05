@@ -1,6 +1,6 @@
 - if user_signed_in?
   - if current_user.role? :super
-    = @account.name
+    %span= @account.name
     |
   = link_to current_user.email, edit_user_path(current_user)
   |

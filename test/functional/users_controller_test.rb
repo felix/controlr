@@ -5,6 +5,7 @@ class UsersControllerTest < ActionController::TestCase
     setup do
       start_transaction
       @admin = User.gen(:role => 'administrator')
+      @super = User.gen(:role => 'super')
       raise "INVALID #{@admin.errors.inspect}" unless @admin.valid?
     end
 
@@ -101,7 +102,26 @@ class UsersControllerTest < ActionController::TestCase
           assert_redirected_to users_path
         end
       end
+    end
 
+    context 'while authed as super' do
+      setup do
+        sign_in @super
+      end
+
+      context 'on GET to :index' do
+        setup do
+          get :index
+        end
+
+        should respond_with(:success)
+        should render_template(:index)
+        should assign_to(:users)
+
+        should 'show current account in header' do
+          assert_select 'div.account span', {:text => @super.account.name}
+        end
+      end
     end
 
     context 'while unauthed' do

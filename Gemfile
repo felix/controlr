@@ -23,7 +23,7 @@ gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 
 gem 'devise'
-gem 'dm-devise', :git => 'git://github.com/dkubb/dm-devise.git'
+gem 'dm-devise' #, :git => 'git://github.com/dkubb/dm-devise.git'
 gem 'cancan'
 
 gem 'rails3-generators'

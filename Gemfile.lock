@@ -1,17 +1,4 @@
 GIT
-  remote: git://github.com/dkubb/dm-devise.git
-  revision: 98609480445651dee2e22ecb18ae43ecb3068456
-  specs:
-    dm-devise (1.2.0.beta)
-      devise (~> 1.2.rc)
-      dm-core (~> 1.1.0)
-      dm-migrations (~> 1.1.0)
-      dm-rails (~> 1.1.0)
-      dm-serializer (~> 1.1.0)
-      dm-timestamps (~> 1.1.0)
-      sugar-high (~> 0.2.10)
-
-GIT
   remote: git://github.com/felix/dm-sweatshop.git
   revision: 1b208aadc091c2f3fca9fad41d2688ad11274db5
   branch: noparsetree
@@ -99,6 +86,14 @@ GEM
       dm-core (~> 1.1.0)
     dm-core (1.1.0)
       addressable (~> 2.2.4)
+    dm-devise (1.2.0)
+      devise (~> 1.2.0)
+      dm-core (< 1.2, >= 1.0.2)
+      dm-migrations (< 1.2, >= 1.0.2)
+      dm-rails (< 1.2, >= 1.0.3)
+      dm-serializer (< 1.2, >= 1.0.2)
+      dm-timestamps (< 1.2, >= 1.0.2)
+      sugar-high (~> 0.2.10)
     dm-do-adapter (1.1.0)
       data_objects (~> 0.10.2)
       dm-core (~> 1.1.0)
@@ -220,7 +215,7 @@ DEPENDENCIES
   devise
   dm-aggregates (~> 1.1.0)
   dm-constraints (~> 1.1.0)
-  dm-devise!
+  dm-devise
   dm-migrations (~> 1.1.0)
   dm-mysql-adapter (~> 1.1.0)
   dm-observer (~> 1.1.0)
