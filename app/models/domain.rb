@@ -12,6 +12,7 @@ class Domain
   property :email_max_quota, Integer, :default => '200000'
   property :ftp_active, Boolean
   property :ftp_quota, Integer, :default => 0
+  property :dns_active, Boolean, :default => 0
   property :passhash, String, :length => 32
   property :created_at, DateTime
   property :updated_at, DateTime
