@@ -249,11 +249,24 @@ td {
 
 /*** summaries ***/
 
-div.summary {
+.summary {
   float: left;
   width: 200px;
-  height: 200px;
-  margin: 0 20px 20px 0;
+  min-height: 150px;
+  margin: 20px 20px 0 0;
+  padding: 10px;
+  line-height: 1.5;
+  background-color: #fafafa;
+}
+.summary h2 {
+  margin-bottom: .5em;
+  padding: 5px 0;
+  color: #888;
+  font-weight: bold;
+  border-bottom: 1px dotted #eee;
+}
+.summary .warning {
+  color: red;
 }
 
 /*** forms ***/

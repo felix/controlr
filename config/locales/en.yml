@@ -56,8 +56,11 @@ en:
         one: 1 Alias
         other: '%{count} Aliases'
       mailbox:
-        one: 1 Mailbox
+        one: '1 Mailbox'
         other: '%{count} Mailboxes'
+      name_record:
+        one: 1 Record
+        other: '%{count} Records'
   # mainly for sidebar contents
   layouts:
     dashboard:
@@ -124,6 +127,18 @@ en:
     home: Dashboard
     show:
       title: '%{name}'
+      status:
+        title: Status
+        active: Active
+        inactive: Inactive
+        created: Created
+        updated: Updated
+      email:
+        title: Email
+      ftp:
+        title: FTP
+      dns:
+        title: DNS
     index:
       title: Domains
       email_status: Email Status
