@@ -8,7 +8,6 @@
     %th= t('helpers.label.mailbox.quota')
     %th= t('helpers.label.mailbox.bytes')
     %th= t('helpers.label.mailbox.messages')
-    %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
     - if can? :modify, Mailbox
       %th
@@ -20,8 +19,6 @@
       %td= number_to_human_size(mailbox.quota*1024)
       %td= number_to_human_size(mailbox.bytes)
       %td= mailbox.messages
-      %td
-        %time{:datetime => mailbox.created_at, :class => 'relative'}= mailbox.created_at
       %td
         %time{:datetime => mailbox.updated_at, :class => 'relative'}= mailbox.updated_at
       %td
