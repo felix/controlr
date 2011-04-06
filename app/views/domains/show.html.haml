@@ -1,8 +1,32 @@
-%p
-  %b Name:
-  = @domain.name
-%p
-  %b Active:
-  = @domain.active
+%h1= t('.title', :name => @domain.name)
 
-= link_to t('actions.edit'), edit_domain_path(@domain)
+.summary
+  %h2= t('.status.title')
+  %ul
+    %li{:class => @domain.active || 'warning'}
+      = @domain.active ? t('.status.active') : t('.status.inactive')
+    %li= t('activemodel.models.user', :count => @domain.users.count)
+    %li
+      = t('.status.created')
+      %time{:datetime => @domain.created_at, :class => 'relative'}= @domain.created_at
+    %li
+      = t('.status.updated')
+      %time{:datetime => @domain.updated_at, :class => 'relative'}= @domain.updated_at
+.summary
+  %h2= t('.email.title')
+  %ul
+    %li{:class => @domain.email_active || 'warning'}
+      = @domain.email_active ? t('.status.active') : t('.status.inactive')
+    %li= t('activemodel.models.alias', :count => @domain.aliases.count)
+    %li= t('activemodel.models.mailbox', :count => @domain.mailboxes.count)
+.summary
+  %h2= t('.dns.title')
+  %ul
+    %li{:class => @domain.dns_active || 'warning'}
+      = @domain.dns_active ? t('.status.active') : t('.status.inactive')
+    %li= t('activemodel.models.name_record', :count => @domain.name_records.count)
+.summary
+  %h2= t('.ftp.title')
+  %ul
+    %li{:class => @domain.ftp_active || 'warning'}
+      = @domain.ftp_active ? t('.status.active') : t('.status.inactive')
