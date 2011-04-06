@@ -1,8 +1,13 @@
 class NameRecordsController < ApplicationController
+  authorize_resource
+  append_before_filter do
+    redirect_to domains_url unless @domain
+  end
+
   # GET /name_records
   # GET /name_records.xml
   def index
-    @name_records = NameRecord.all
+    @name_records = @domain.name_records.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,7 +18,7 @@ class NameRecordsController < ApplicationController
   # GET /name_records/1
   # GET /name_records/1.xml
   def show
-    @name_record = NameRecord.get(params[:id])
+    @name_record = @domain.name_records.get(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,7 +29,7 @@ class NameRecordsController < ApplicationController
   # GET /name_records/new
   # GET /name_records/new.xml
   def new
-    @name_record = NameRecord.new
+    @name_record = @domain.name_records.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -34,13 +39,13 @@ class NameRecordsController < ApplicationController
 
   # GET /name_records/1/edit
   def edit
-    @name_record = NameRecord.get(params[:id])
+    @name_record = @domain.name_records.get(params[:id])
   end
 
   # POST /name_records
   # POST /name_records.xml
   def create
-    @name_record = NameRecord.new(params[:name_record])
+    @name_record = @domain.name_records.new(params[:name_record])
 
     respond_to do |format|
       if @name_record.save
@@ -56,11 +61,11 @@ class NameRecordsController < ApplicationController
   # PUT /name_records/1
   # PUT /name_records/1.xml
   def update
-    @name_record = NameRecord.get(params[:id])
+    @name_record = @domain.name_records.get(params[:id])
 
     respond_to do |format|
       if @name_record.update(params[:name_record])
-        format.html { redirect_to(@name_record, :notice => 'Name record was successfully updated.') }
+        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -72,7 +77,7 @@ class NameRecordsController < ApplicationController
   # DELETE /name_records/1
   # DELETE /name_records/1.xml
   def destroy
-    @name_record = NameRecord.get(params[:id])
+    @name_record = @domain.name_records.get(params[:id])
     @name_record.destroy
 
     respond_to do |format|

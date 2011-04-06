@@ -22,45 +22,47 @@
           = f.label :account
           = collection_select(:domain, :account_id, Account.all, :id, :name)
 
-  - if can? :manage, Domain
-    %fieldset
-      %legend= t('.activation')
-      %ul
-        %li
-          = f.label :email_active
-          = f.check_box :email_active
-        %li
-          = f.label :ftp_active
-          = f.check_box :ftp_active
+  %fieldset
+    %legend= t('.email')
+    %ul
+      %li
+        = f.label :email_active
+        = f.check_box :email_active
+      %li
+        = f.label :email_max_quota
+        = f.text_field :email_max_quota
+        %span.hint= t('.hints.email_max_quota')
+      %li
+        = f.label :email_alias
+        %select{:name => 'domain[email_alias]'}
+          %option{:value => ''}
+          - @account.domains.each do |domain|
+            - unless domain.new? or !can?(:read, domain) or domain == @domain or domain.email_alias
+              %option{:value => domain.name, :selected => (@domain.email_alias == domain.name) && 'selected'}= domain.name
+        %span.hint= t('.hints.email_alias', :domain => @domain.name)
 
-    %fieldset
-      %legend= t('.email')
-      %ul
-        %li
-          = f.label :email_max_quota
-          = f.text_field :email_max_quota
-          %span.hint= t('.hints.email_max_quota')
-        %li
-          = f.label :email_alias
-          %select{:name => 'domain[email_alias]'}
-            %option{:value => ''}
-            - @account.domains.each do |domain|
-              - unless domain.new? or !can?(:read, domain) or domain == @domain or domain.email_alias
-                %option{:value => domain.name, :selected => (@domain.email_alias == domain.name) && 'selected'}= domain.name
-          %span.hint= t('.hints.email_alias', :domain => @domain.name)
+  %fieldset
+    %legend= t('.dns')
+    %ul
+      %li
+        = f.label :dns_active
+        = f.check_box :dns_active
 
-  - if @domain.ftp_active
-    %fieldset
-      %legend= t('.ftp')
-      %ul
-        %li
-          = f.label :passhash
-          = f.password_field :passhash
-          %span.hint= t('.hints.passhash')
-        %li
-          = f.label :ftp_quota
-          = f.text_field :ftp_quota
-          %span.hint= t('.hints.ftp_quota')
+  %fieldset
+    %legend= t('.ftp')
+    %ul
+      %li
+        = f.label :ftp_active
+        = f.check_box :ftp_active
+      %li
+        = f.label :passhash
+        = f.password_field :passhash, :value => nil
+        %span.hint= t('.hints.passhash')
+      %li
+        = f.label :ftp_quota
+        = f.text_field :ftp_quota
+        %span.hint= t('.hints.ftp_quota')
+
   %fieldset.actions
     = f.submit t('actions.save')
     \|

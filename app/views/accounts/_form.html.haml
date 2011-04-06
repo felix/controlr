@@ -10,10 +10,11 @@
     %ul
       %li
         = f.label :name
-        = f.text_field :name
+        = f.text_field :name, :disabled => !can?(:manage, Account)
       %li
         = f.label :active
-        = f.check_box :active
+        = f.check_box :active, :disabled => !can?(:manage, Account)
+
   %fieldset.actions
     = f.submit 'Save'
     \|

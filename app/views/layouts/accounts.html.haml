@@ -1,7 +1,10 @@
-- content_for :sidebar do
-  %h3= t('.title')
-  %nav
-    %ul
-      %li= link_to t('.list'), accounts_path, :class => 'list button'
-      %li= link_to t('.new'), new_account_path, :class => 'add button'
-= render :file => 'layouts/application'
+- if can? :manage, Account
+  - content_for :sidebar do
+    %h3= t('.title')
+    %nav
+      %ul
+        %li= link_to t('.list'), accounts_path, :class => 'list button'
+        %li= link_to t('.new'), new_account_path, :class => 'add button'
+  = render :file => 'layouts/application'
+- else
+  = render :file => 'layouts/dashboard'

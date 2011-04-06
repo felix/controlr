@@ -32,7 +32,7 @@
           %h1 Control Panel
       %nav
         - if user_signed_in?
-          - if @domain
+          - if @domain && !@domain.new?
             = render :partial => 'layouts/domain_menu'
           - else
             = render :partial => 'layouts/account_menu'

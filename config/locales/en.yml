@@ -30,6 +30,9 @@ en:
         name: Domain Name
         passhash: Password
         email_max_quota: Max Quota
+        dns_active: Active
+        ftp_active: Active
+        email_active: Active
       alias:
         source: Alias
         destination: Destinations
@@ -39,6 +42,8 @@ en:
         bytes: Size
         messages: Messages
         passhash: Password
+      name_record:
+        ttl: TTL
   activemodel:
     models:
       user:
@@ -68,6 +73,7 @@ en:
     domains:
       title: Domain Actions
       list: List Domains
+      edit: Edit Domain
       new: New Domain
     aliases:
       title: Alias Actions
@@ -77,6 +83,10 @@ en:
       title: Mailbox Actions
       new: New Mailbox
       list: List Mailboxes
+    name_records:
+      title: DNS Actions
+      new: New Record
+      list: List Entries
     roles:
       title: Role Actions
       list: List Roles
@@ -112,6 +122,8 @@ en:
   domains:
     tab: Domains
     home: Dashboard
+    show:
+      title: '%{name}'
     index:
       title: Domains
       email_status: Email Status
@@ -127,6 +139,7 @@ en:
       activation: Activation
       email: Email
       ftp: FTP
+      dns: DNS
       hints:
         name: The fully qualified domain name. Also used as the username for other services like FTP.
         active: All services and logins are disabled when set to 'inactive'
@@ -166,13 +179,29 @@ en:
         passhash: The password used to access IMAP, POP and SMTP services. Will only be changed if supplied
         quota: "Set the maximum size (in kilobytes) for this mailbox. 0 for maximum. (204800 = 200Mb)"
   accounts:
-    tab: Accounts
+    tab: Account
     index:
       title: Accounts
     new:
       title: New Account
     edit:
       title: 'Editing %{name}'
+  name_records:
+    tab: DNS
+    index:
+      title: DNS Records
+    new:
+      title: New DNS Record
+    edit:
+      title: 'Editing %{type} record for %{name}'
+    form:
+      hints:
+        type: The DNS record type
+        host: The domain name will be appended to this host if not supplied
+        value: This can be a FQDN or an IP address depending on the type. If a FQDN is supplied, ensure it resolves
+        ttl: The Time-To-Live for this record
+        description: This is for your information only
+        distance: A lower number has higher priority
   roles:
     index:
       title: Roles

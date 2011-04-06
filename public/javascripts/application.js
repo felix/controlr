@@ -12,4 +12,16 @@ jQuery(document).ready(function() {
     });
   });
 
+  // specific toggles
+
+  // user domains
+  jQuery('#user_role').change(function(){
+    $('#role-domains').toggle($(this).val() != 'administrator');
+  }).trigger('change');
+
+  jQuery('#name_record_type').change(function(){
+    $('#mx-distance').toggle($(this).val() == 'MX');
+  }).trigger('change');
+
+
 });

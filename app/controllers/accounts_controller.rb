@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  authorize_resource
 
   # GET /accounts
   # GET /accounts.xml

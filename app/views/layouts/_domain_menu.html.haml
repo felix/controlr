@@ -1,6 +1,7 @@
 %ul
-  - if !@domain.new?
-    = create_tab t('domains.home'), domain_path(@domain)
-    - if @domain && @domain.email_active
-      =create_tab t('aliases.tab'), aliases_path
-      =create_tab t('mailboxes.tab'), mailboxes_path
+  = create_tab t('domains.home'), domain_path(@domain)
+  - if @domain && @domain.email_active
+    =create_tab t('aliases.tab'), aliases_path
+    =create_tab t('mailboxes.tab'), mailboxes_path
+  - if @domain && @domain.dns_active
+    =create_tab t('name_records.tab'), name_records_path

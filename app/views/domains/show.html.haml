@@ -1,8 +1,5 @@
-%p
-  %b Name:
-  = @domain.name
+%h1= t('.title', :name => @domain.name)
 %p
   %b Active:
   = @domain.active
 
-= link_to t('actions.edit'), edit_domain_path(@domain)
