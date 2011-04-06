@@ -19,7 +19,7 @@
       = @domain.email_active ? t('.status.active') : t('.status.inactive')
     %li= t('activemodel.models.alias', :count => @domain.aliases.count)
     %li= t('activemodel.models.mailbox', :count => @domain.mailboxes.count)
-.summary
+-#.summary
   %h2= t('.dns.title')
   %ul
     %li{:class => @domain.dns_active || 'warning'}

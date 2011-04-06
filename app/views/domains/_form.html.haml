@@ -41,7 +41,7 @@
               %option{:value => domain.name, :selected => (@domain.email_alias == domain.name) && 'selected'}= domain.name
         %span.hint= t('.hints.email_alias', :domain => @domain.name)
 
-  %fieldset
+  -#%fieldset
     %legend= t('.dns')
     %ul
       %li

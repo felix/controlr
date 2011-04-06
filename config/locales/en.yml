@@ -115,8 +115,6 @@ en:
   domains:
     tab: Domains
     home: Dashboard
-<<<<<<< HEAD
-=======
     show:
       title: '%{name}'
       status:
@@ -131,7 +129,6 @@ en:
         title: FTP
       dns:
         title: DNS
->>>>>>> b0586ee... domain dashboard
     index:
       title: Domains
       email_status: Email Status
