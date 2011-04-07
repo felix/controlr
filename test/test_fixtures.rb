@@ -39,3 +39,7 @@ NameRecord.fixture {{
   :value => /\d{2}\.\d{2}\.\d{2}\.\d{2}/.gen,
   :domain => Domain.gen
 }}
+ConfigFile.fixture {{
+  :active => true,
+  :domain => Domain.gen
+}}

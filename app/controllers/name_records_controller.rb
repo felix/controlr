@@ -49,7 +49,7 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       if @name_record.save
-        format.html { redirect_to(@name_record, :notice => 'Name record was successfully created.') }
+        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully created.') }
         format.xml  { render :xml => @name_record, :status => :created, :location => @name_record }
       else
         format.html { render :action => "new" }

@@ -17,6 +17,17 @@ def logger
   ::Rails.logger
 end
 
+module DataMapper
+  class Transaction
+    module SqliteAdapter
+      include DataObjectsAdapter
+      def supports_savepoints?
+        true
+      end
+    end
+  end
+end
+
 def start_transaction
   repository(:default) do
     transaction = DataMapper::Transaction.new(repository)

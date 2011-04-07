@@ -52,12 +52,15 @@ class DomainsController < ApplicationController
     @domain = @account.domains.new(params[:domain])
 
     respond_to do |format|
-      if default_setup(@domain) && @domain.save
-        format.html { redirect_to(domains_path, :notice => 'Domain was successfully created.') }
-        format.xml  { render :xml => @domain, :status => :created, :location => @domain }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @domain.errors, :status => :unprocessable_entity }
+      @domain.transaction do |t|
+        if default_setup(@domain) && @domain.save
+          format.html { redirect_to(domains_path, :notice => 'Domain was successfully created.') }
+          format.xml  { render :xml => @domain, :status => :created, :location => @domain }
+        else
+          t.rollback
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @domain.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end

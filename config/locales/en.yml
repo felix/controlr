@@ -44,6 +44,9 @@ en:
         passhash: Password
       name_record:
         ttl: TTL
+      config_file:
+        type: Type
+        current: Current
   activemodel:
     models:
       user:
@@ -217,6 +220,12 @@ en:
         ttl: The Time-To-Live for this record
         description: This is for your information only
         distance: A lower number has higher priority
+  config_files:
+    tab: Configs
+    index:
+      title: Config File Status
+      summary: The current status of all generated config files
+      generate: Generate
   roles:
     index:
       title: Roles

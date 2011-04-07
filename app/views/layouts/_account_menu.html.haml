@@ -2,9 +2,11 @@
   = create_tab t('dashboard.tab'), root_path
   - if can? :manage, Account
     = create_tab t('accounts.tab'), accounts_path
-  - if can? :update, Account
+  - elsif can? :update, Account
     = create_tab t('accounts.tab'), edit_account_path(@account)
   - if can? :manage, User
     = create_tab t('users.tab'), users_path
   - if can? :read, Domain
     = create_tab t('domains.tab'), domains_path
+  - if can? :manage, ConfigFile
+    = create_tab t('config_files.tab'), config_files_path

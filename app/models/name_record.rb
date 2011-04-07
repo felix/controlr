@@ -1,7 +1,7 @@
 class NameRecord
   include DataMapper::Resource
 
-  TYPES = %w{A MX CNAME NS PTR TXT SOA AXFR}
+  TYPES = %w{A MX CNAME NS PTR TXT}
 
   property :id, Serial
   property :host, String, :required => true
