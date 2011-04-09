@@ -41,7 +41,7 @@
               %option{:value => domain.name, :selected => (@domain.email_alias == domain.name) && 'selected'}= domain.name
         %span.hint= t('.hints.email_alias', :domain => @domain.name)
 
-  -#%fieldset
+  %fieldset
     %legend= t('.dns')
     %ul
       %li
@@ -54,18 +54,6 @@
       %li
         = f.label :ftp_active
         = f.check_box :ftp_active
-      %li
-        = f.label :passhash
-        = f.password_field :passhash, :value => nil
-        %span.hint= t('.hints.passhash')
-      %li
-        = f.label :ftp_quota
-        = f.text_field :ftp_quota
-        %span.hint= t('.hints.ftp_quota')
-
-  %fieldset
-    %legend= t('.ftp')
-    %ul
       %li
         = f.label :passhash
         = f.password_field :passhash, :value => nil

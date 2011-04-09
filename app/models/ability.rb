@@ -16,13 +16,18 @@ class Ability
       can :manage, :all
 
     elsif user.role? :administrator
+      # can edit account
+      can :update, Account do |resource|
+        resource == user.account
+      end
+
       # can manage all domains in account
       can :manage, [Domain, User] do |resource|
         resource.account == user.account
       end
 
       # can manage all email in account
-      can :manage, [Mailbox, Alias] do |resource|
+      can :manage, [Mailbox, Alias, NameRecord] do |resource|
         resource.domain.account == user.account
       end
 
@@ -39,7 +44,7 @@ class Ability
         user.domains.include?(resource)
       end
 
-      can :manage, [Mailbox, Alias] do |resource|
+      can :manage, [Mailbox, Alias, NameRecord] do |resource|
         user.domains.collect{|d| d.id}.include? resource.domain.id
       end
 

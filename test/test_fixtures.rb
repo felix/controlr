@@ -32,3 +32,10 @@ Mailbox.fixture {{
   :passhash => /[0-9a-z]{32}/.gen,
   :domain => Domain.gen
 }}
+NameRecord.fixture {{
+  :host => /\w+\.\w{3,6}\.\w{2}/.gen,
+  :description => /\w+/.gen,
+  :active => true,
+  :value => /\d{2}\.\d{2}\.\d{2}\.\d{2}/.gen,
+  :domain => Domain.gen
+}}

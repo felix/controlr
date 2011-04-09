@@ -1,7 +1,5 @@
 Controlr::Application.routes.draw do
 
-  resources :name_records
-
   devise_for :users, :path_names => {
     :sign_in => 'login',
     :sign_out => 'logout',
@@ -18,13 +16,14 @@ Controlr::Application.routes.draw do
     collection do
       post 'switch'
     end
+    member do
+      get 'sync'
+    end
   end
+  resources :users
   resources :aliases
   resources :mailboxes
-#  resources :dns, :controller => 'domain_records'
-
-  resources :users
-  #resources :settings
+  resources :name_records
 
   resources :roles do
     collection do
@@ -32,12 +31,6 @@ Controlr::Application.routes.draw do
       post 'report'
     end
   end
-
-#  resources :clients
-
-#  resources :servers
-#  resources :ip_addresses
-#  resources :services
 
   root :to => 'dashboard#index'
 

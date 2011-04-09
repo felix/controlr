@@ -1,5 +1,5 @@
 class DomainsController < ApplicationController
-  authorize_resource :class => 'Domain', :except => :switch
+  authorize_resource :except => :switch
 
   # GET /domains
   # GET /domains.xml
@@ -52,12 +52,15 @@ class DomainsController < ApplicationController
     @domain = @account.domains.new(params[:domain])
 
     respond_to do |format|
-      if @domain.save && create_default_aliases(@domain)
-        format.html { redirect_to(domains_path, :notice => 'Domain was successfully created.') }
-        format.xml  { render :xml => @domain, :status => :created, :location => @domain }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @domain.errors, :status => :unprocessable_entity }
+      @domain.transaction do |t|
+        if default_setup(@domain) && @domain.save
+          format.html { redirect_to(domains_path, :notice => 'Domain was successfully created.') }
+          format.xml  { render :xml => @domain, :status => :created, :location => @domain }
+        else
+          t.rollback
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @domain.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
@@ -101,19 +104,35 @@ class DomainsController < ApplicationController
     end
   end
 
+  def sync
+    @domain = @account.domains.get(params[:id])
+    redirect_to domains_path unless @domain
+
+    @domain.sync_config_files
+
+    respond_to do |format|
+      format.html { redirect_to(domain_path(@domain), :notice => 'Domain was synchronised.') }
+      format.xml  { head :ok }
+    end
+  end
+
   private
 
+  def default_setup(domain)
+    create_default_aliases(domain)
+    create_default_ns_records(domain)
+  end
+
   def create_default_aliases(domain)
-    # TODO get default from settings
     hostmaster = domain.aliases.new(
       :source => "hostmaster@#{domain.name}",
-      :destination => 'hostmaster@seconddrawer.com.au',
+      :destination => CONFIG['hostmaster'],
       :active => true,
       :system => true
     )
     postmaster = domain.aliases.new(
       :source => "postmaster@#{domain.name}",
-      :destination => 'postmaster@seconddrawer.com.au',
+      :destination => CONFIG['postmaster'],
       :active => true,
       :system => true
     )
@@ -123,6 +142,38 @@ class DomainsController < ApplicationController
       :active => false,
       :system => true
     )
-    domain.save
+  end
+
+  def create_default_ns_records(domain)
+    ns1 = domain.name_records.new(
+      :type => 'NS',
+      :host => domain.name,
+      :value => CONFIG['nameserver1'],
+      :active => true,
+      :description => 'Automatically generated entry'
+    )
+    ns2 = domain.name_records.new(
+      :type => 'NS',
+      :host => domain.name,
+      :value => CONFIG['nameserver2'],
+      :active => true,
+      :description => 'Automatically generated entry'
+    )
+    mx1 = domain.name_records.new(
+      :type => 'MX',
+      :host => domain.name,
+      :value => CONFIG['mx1'],
+      :active => false,
+      :distance => 10,
+      :description => 'Automatically generated entry'
+    )
+    mx2 = domain.name_records.new(
+      :type => 'MX',
+      :host => domain.name,
+      :value => CONFIG['mx2'],
+      :active => false,
+      :distance => 20,
+      :description => 'Automatically generated entry'
+    )
   end
 end

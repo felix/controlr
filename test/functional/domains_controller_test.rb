@@ -18,6 +18,8 @@ class DomainsControllerTest < ActionController::TestCase
       rollback_transaction
     end
 
+    # all general tests to be performed as admin
+    #
     context 'while authed as admin' do
       setup do
         sign_in @admin
@@ -35,18 +37,30 @@ class DomainsControllerTest < ActionController::TestCase
       end
 
       context 'on POST to :new' do
-        should 'create new domains' do
+        setup do
           post :create, :domain => @account.domains.make.attributes
+        end
+
+        should 'create new domains' do
           assert_redirected_to domains_path
           assert_not_nil assigns(:domain)
         end
 
-        context 'with invalid data' do
-          should 'return to form' do
-            post :create, :domain => @account.domains.make(:name => nil).attributes
-            assert_response :success
-            assert_not_nil assigns(:domain)
-          end
+        should 'create default aliases' do
+          assert_not_nil assigns(:domain).aliases
+        end
+
+        should 'create NS records' do
+          assert assigns(:domain).name_records.all(:type => 'NS').count >= 2
+        end
+
+      end
+
+      context 'on POST to :new with invalid data' do
+        should 'return to form' do
+          post :create, :domain => @account.domains.make(:name => nil).attributes
+          assert_response :success
+          assert_not_nil assigns(:domain)
         end
       end
 

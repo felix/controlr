@@ -6,20 +6,36 @@
         - @name_record.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    = f.label :host
-    = f.text_field :host
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :active
-    = f.text_field :active
-  .field
-    = f.label :type
-    = f.text_field :type
-  .field
-    = f.label :value
-    = f.text_field :value
-  .actions
-    = f.submit 'Save'
+  %fieldset
+    %ul
+      %li
+        = f.label :type
+        = f.select :type, NameRecord::TYPES
+        %span.hint= t('.hints.type')
+      %li
+        = f.label :host
+        = f.text_field :host
+        %span.hint= t('.hints.host')
+      %li
+        = f.label :active
+        = f.check_box :active
+      %li
+        = f.label :value
+        = f.text_field :value
+        %span.hint= t('.hints.value')
+      %li#mx-distance
+        = f.label :distance
+        = f.text_field :distance
+        %span.hint= t('.hints.distance')
+      %li
+        = f.label :ttl
+        = f.text_field :ttl
+        %span.hint= t('.hints.ttl')
+      %li
+        = f.label :description
+        = f.text_field :description
+        %span.hint= t('.hints.description')
+  %fieldset.actions
+    = f.submit t('actions.save')
+    \|
+    = link_to t('actions.back'), name_records_path

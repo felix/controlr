@@ -39,7 +39,7 @@ class MailboxTest < Test::Unit::TestCase
     should_not allow_value('').for(:quota)
     should_not allow_value('100Mb').for(:quota)
 
-    should 'have default quota created as nil' do
+    should 'have default quota created if nil' do
       mb = Mailbox.gen(:quota => nil)
       assert mb.quota == mb.domain.email_max_quota
     end

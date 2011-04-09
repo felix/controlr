@@ -1,2 +1,3 @@
 - add autocomplete to alias destination selection
 - subdomains in nginx http://publications.jbfavre.org/web/nginx-vhosts-automatiques-avec-SSL-et-authentification.en
+- get some validation from https://github.com/shupp/VegaDNS/blob/master/src/functions.php

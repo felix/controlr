@@ -1,0 +1,16 @@
+<% @domain.name_records(:active => true).each do |record|
+  case record.type
+  when 'MX' %>
+<%= "@#{record.host}::#{record.value}:#{record.distance}:#{record.ttl}" %>
+<% when 'A' %>
+<%= "+#{record.host}:#{record.value}:#{record.ttl}" %>
+<% when 'NS' %>
+<%= "&#{record.host}::#{record.value}:#{record.ttl}" %>
+<% when 'PTR' %>
+<%= "^#{record.host}:#{record.value}:#{record.ttl}" %>
+<% when 'TXT' %>
+<%== "'#{record.host}:#{record.value.gsub(/:/,'\\\072')}:#{record.ttl}" %>
+<% when 'CNAME' %>
+<%= "C#{record.host}:#{record.value}:#{record.ttl}" %>
+<% end %>
+<% end %>

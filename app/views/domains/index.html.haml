@@ -7,7 +7,6 @@
     %th.centered= t('.email_status')
     %th.centered= image_tag('alias.png')
     %th.centered= image_tag('mailbox.png')
-    %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
     - if can? :manage, Domain
       %th
@@ -25,11 +24,9 @@
       %td.centered= domain.aliases.size
       %td.centered= domain.mailboxes.size
       %td
-        %time{:datetime => domain.created_at, :class => 'relative'}= domain.created_at
-      %td
         %time{:datetime => domain.updated_at, :class => 'relative'}= domain.updated_at
       - if can? :manage, Domain
         %td
-          =#link_to 'Show', domain
-          =link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
-          =link_to image_tag('delete.png'), domain, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
+          = link_to image_tag('sync.png'), sync_domain_path(domain)
+          = link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
+          = link_to image_tag('delete.png'), domain, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
