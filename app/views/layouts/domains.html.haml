@@ -4,6 +4,7 @@
     %ul
       - if @domain && !@domain.new?
         - if can? :update, Domain
+          %li= link_to t('.sync'), sync_domain_path(@domain), :class => 'sync button'
           %li= link_to t('.edit'), edit_domain_path(@domain), :class => 'edit button'
         - if can?(:create, Mailbox)
           %li= link_to t('layouts.mailboxes.new'), new_mailbox_path, :class => 'add button'

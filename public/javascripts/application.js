@@ -4,6 +4,9 @@ jQuery(document).ready(function() {
   jQuery('form.switcher select').change(function(){
     $(this).closest('form').submit();
   });
+
+  // tooltips
+
   jQuery('form .hint').each(function(){
     var hint = $(this);
     hint.parent().find('input,textarea,select').each(function(){

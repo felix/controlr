@@ -16,16 +16,14 @@ Controlr::Application.routes.draw do
     collection do
       post 'switch'
     end
+    member do
+      get 'sync'
+    end
   end
   resources :users
   resources :aliases
   resources :mailboxes
   resources :name_records
-  resources :config_files do
-    member do
-      get 'generate'
-    end
-  end
 
   resources :roles do
     collection do

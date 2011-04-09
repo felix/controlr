@@ -104,6 +104,18 @@ class DomainsController < ApplicationController
     end
   end
 
+  def sync
+    @domain = @account.domains.get(params[:id])
+    redirect_to domains_path unless @domain
+
+    @domain.sync_config_files
+
+    respond_to do |format|
+      format.html { redirect_to(domain_path(@domain), :notice => 'Domain was synchronised.') }
+      format.xml  { head :ok }
+    end
+  end
+
   private
 
   def default_setup(domain)

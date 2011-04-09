@@ -30,7 +30,7 @@ class Domain
     super(Digest::MD5.hexdigest(plain)) unless plain.blank?
   end
 
-  def update_config_files
+  def sync_config_files
     if self.dns_active
       dns_max = self.name_records.max(:updated_at)
       generate_config(CONFIG['dns_service_type'], dns_max)
@@ -42,8 +42,7 @@ class Domain
   private
 
   def generate_config(type, updated=Time.now)
-    path = File.join(CONFIG['config_file_base'], type, self.name)
-
+    path = config_path(type)
     if !File.exists?(path) || updated >= File.stat(path).mtime
       FileUtils.mkdir_p(File.dirname(path)) if !File.exists?(path)
 
@@ -63,7 +62,10 @@ class Domain
 
   def remove_config(type)
     return nil unless type
-    path = File.join(CONFIG['config_file_base'], type, self.name)
-    File.unlink(path) if File.exists?(path)
+    File.unlink(config_path(type)) if File.exists?(config_path(type))
+  end
+
+  def config_path(type)
+    File.join(CONFIG['config_file_base'], type, self.name)
   end
 end

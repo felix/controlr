@@ -27,6 +27,6 @@
         %time{:datetime => domain.updated_at, :class => 'relative'}= domain.updated_at
       - if can? :manage, Domain
         %td
-          =#link_to 'Show', domain
-          =link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
-          =link_to image_tag('delete.png'), domain, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
+          = link_to image_tag('sync.png'), sync_domain_path(domain)
+          = link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
+          = link_to image_tag('delete.png'), domain, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')

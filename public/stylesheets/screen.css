@@ -246,6 +246,9 @@ td {
 .button.edit {
   background-image: url(/images/edit.png);
 }
+.button.sync {
+  background-image: url(/images/sync.png);
+}
 
 /*** summaries ***/
 

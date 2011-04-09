@@ -78,6 +78,7 @@ en:
       new: New Account
     domains:
       title: Domain Actions
+      sync: Synchronise
       list: List Domains
       edit: Edit Domain
       new: New Domain
