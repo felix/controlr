@@ -7,6 +7,7 @@ defaults: &defaults
   nameserver2: ns2.example.com
   mx1: mail.example.com
   mx2: mx2.example.com
+  dns_service_type: tinydns
 
 production:
   <<: *defaults

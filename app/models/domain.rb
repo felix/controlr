@@ -23,7 +23,6 @@ class Domain
   belongs_to :account
   has n, :users, :through => Resource
   has n, :name_records
-  has n, :config_files
 
   validates_format_of :name, :with => %r{^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$}
 
@@ -31,4 +30,40 @@ class Domain
     super(Digest::MD5.hexdigest(plain)) unless plain.blank?
   end
 
+  def update_config_files
+    if self.dns_active
+      dns_max = self.name_records.max(:updated_at)
+      generate_config(CONFIG['dns_service_type'], dns_max)
+    else
+      remove_config(CONFIG['dns_service_type'])
+    end
+  end
+
+  private
+
+  def generate_config(type, updated=Time.now)
+    path = File.join(CONFIG['config_file_base'], type, self.name)
+
+    if !File.exists?(path) || updated >= File.stat(path).mtime
+      FileUtils.mkdir_p(File.dirname(path)) if !File.exists?(path)
+
+      template = File.open(File.join(CONFIG['template_base'],"#{type}.erb")).read
+
+      erb = Erubis::Eruby.new(template)
+      context = Erubis::Context.new()
+      # use @domain in template to access domain
+      context['domain'] = self
+      data = erb.evaluate(context)
+
+      File.open(path, 'w') do |file|
+        file.write(data)
+      end
+    end
+  end
+
+  def remove_config(type)
+    return nil unless type
+    path = File.join(CONFIG['config_file_base'], type, self.name)
+    File.unlink(path) if File.exists?(path)
+  end
 end

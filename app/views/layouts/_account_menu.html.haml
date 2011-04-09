@@ -8,5 +8,3 @@
     = create_tab t('users.tab'), users_path
   - if can? :read, Domain
     = create_tab t('domains.tab'), domains_path
-  - if can? :manage, ConfigFile
-    = create_tab t('config_files.tab'), config_files_path
