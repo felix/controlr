@@ -27,8 +27,7 @@ else
   %w(
    about db:automigrate db:autoupgrade db:create db:create:all db:drop
    db:drop:all db:migrate db:migrate:down[version] db:migrate:up[version]
-   db:seed db:sessions:clear db:sessions:create db:setup deploy:bundler
-   deploy:migrate deploy:refresh deploy:restart deploy:update doc:app
+   db:seed db:sessions:clear db:sessions:create db:setup doc:app
    log:clear middleware notes notes:custom rails:template rails:update
    routes secret stats test test:recent test:uncommitted time:zones:all
    tmp:clear tmp:create

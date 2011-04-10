@@ -81,4 +81,16 @@ class AliasesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def defaults
+    if @domain.create_default_aliases
+      msg = 'Aliases were successfully generated'
+    else
+      msg = 'Could not generate aliases'
+    end
+    respond_to do |format|
+      format.html { redirect_to(aliases_url, :notice => msg) }
+      format.xml  { render :xml => @aliases }
+    end
+  end
 end

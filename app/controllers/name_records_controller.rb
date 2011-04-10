@@ -85,4 +85,16 @@ class NameRecordsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def defaults
+    if @domain.create_default_name_records
+      msg = 'Records were successfully generated'
+    else
+      msg = 'Could not generate records'
+    end
+    respond_to do |format|
+      format.html { redirect_to(name_records_url, :notice => msg) }
+      format.xml  { render :xml => @name_records }
+    end
+  end
 end

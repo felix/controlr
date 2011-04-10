@@ -86,6 +86,7 @@ en:
       title: Alias Actions
       new: New Alias
       list: List Aliases
+      defaults: Generate Defaults
     mailboxes:
       title: Mailbox Actions
       new: New Mailbox
@@ -94,6 +95,7 @@ en:
       title: DNS Actions
       new: New Record
       list: List Entries
+      defaults: Generate Defaults
     roles:
       title: Role Actions
       list: List Roles

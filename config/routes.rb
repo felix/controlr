@@ -21,9 +21,17 @@ Controlr::Application.routes.draw do
     end
   end
   resources :users
-  resources :aliases
+  resources :aliases do
+    collection do
+      get 'defaults'
+    end
+  end
   resources :mailboxes
-  resources :name_records
+  resources :name_records do
+    collection do
+      get 'defaults'
+    end
+  end
 
   resources :roles do
     collection do

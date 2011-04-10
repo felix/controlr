@@ -39,6 +39,61 @@ class Domain
     end
   end
 
+  def create_default_aliases
+    hostmaster = self.aliases.first_or_create(
+      {:source => "hostmaster@#{self.name}"},
+      {:destination => CONFIG['hostmaster'],
+      :active => true,
+      :system => true}
+    )
+    postmaster = self.aliases.first_or_create(
+      {:source => "postmaster@#{self.name}"},
+      {:destination => CONFIG['postmaster'],
+      :active => true,
+      :system => true}
+    )
+    catchall = self.aliases.first_or_create(
+      {:source => "@#{self.name}"},
+      {:destination => '',
+      :active => false,
+      :system => true}
+    )
+    return hostmaster && postmaster && catchall
+  end
+
+  def create_default_name_records
+    ns1 = self.name_records.first_or_create(
+      {:type => 'NS',
+      :host => self.name,
+      :value => CONFIG['nameserver1']},
+      {:active => true,
+      :description => 'Automatically generated entry'}
+    )
+    ns2 = self.name_records.first_or_create(
+      {:type => 'NS',
+      :host => self.name,
+      :value => CONFIG['nameserver2']},
+      {:active => true,
+      :description => 'Automatically generated entry'}
+    )
+    mx1 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => CONFIG['mx1']},
+      {:active => false,
+      :distance => 10,
+      :description => 'Automatically generated entry'}
+    )
+    mx2 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => CONFIG['mx2']},
+      {:active => false,
+      :distance => 20,
+      :description => 'Automatically generated entry'}
+    )
+  end
+
   private
 
   def generate_config(type, updated=Time.now)
