@@ -1,0 +1,20 @@
+# example Makefile for updating tinydns
+
+CONTROLR = ./controlr/*
+
+all: push
+
+push: controlr.sync data.cdb
+	rsync -az -e ssh data.cdb <secondary_tinydns_server>:/etc/tinydns/root/data.cdb
+
+data.cdb: data
+	/usr/bin/tinydns-data
+
+data: primary.data controlr.data tinydnsdyn.data
+	cat primary.data controlr.data tinydnsdyn.data | sort | uniq -u > data
+
+controlr.sync:
+	rsync -rt --delete -e ssh <controlr.host>:<controlr_base>/generated_configs/tinydns/ controlr/
+
+controlr.data: $(CONTROLR)
+	cat controlr/* > controlr.data
