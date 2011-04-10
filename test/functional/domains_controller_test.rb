@@ -106,7 +106,7 @@ class DomainsControllerTest < ActionController::TestCase
           raise @another_domain.inspect unless @another_domain.valid?
         end
 
-        should 'destroy domain if no children' do
+        should 'destroy domain' do
           assert @another_domain.valid?
           assert_difference('Domain.count', -1) do
             delete :destroy, :id => @another_domain.to_param

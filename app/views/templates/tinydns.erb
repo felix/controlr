@@ -5,7 +5,7 @@
 <% when 'A' %>
 <%= "+#{record.host}:#{record.value}:#{record.ttl}" %>
 <% when 'NS' %>
-<%= "&#{record.host}::#{record.value}:#{record.ttl}" %>
+<%= ".#{record.host}::#{record.value}:#{record.ttl}" %>
 <% when 'PTR' %>
 <%= "^#{record.host}:#{record.value}:#{record.ttl}" %>
 <% when 'TXT' %>

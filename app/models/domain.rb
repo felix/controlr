@@ -22,7 +22,7 @@ class Domain
   has n, :aliases, :constraint => :destroy
   belongs_to :account
   has n, :users, :through => Resource
-  has n, :name_records
+  has n, :name_records, :constraint => :destroy
 
   validates_format_of :name, :with => %r{^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$}
 
@@ -31,7 +31,7 @@ class Domain
   end
 
   def sync_config_files
-    if self.dns_active
+    if self.active && self.dns_active
       dns_max = self.name_records.max(:updated_at)
       generate_config(CONFIG['dns_service_type'], dns_max)
     else

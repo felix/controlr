@@ -42,14 +42,12 @@ class DomainTest < Test::Unit::TestCase
     should 'generate tinydns config file' do
       @domain.dns_active = true
       NameRecord.gen(:domain => @domain)
-      assert_not_nil @domain.sync_config_files
       assert File.exists?(File.join(CONFIG['config_file_base'],'tinydns',@domain.name))
     end
 
     should 'clear tinydns config file if dns is inactive' do
       @domain.dns_active = false
       NameRecord.gen(:domain => @domain)
-      assert_nil @domain.sync_config_files
       assert !File.exists?(File.join(CONFIG['config_file_base'],'tinydns',@domain.name))
     end
   end

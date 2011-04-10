@@ -17,16 +17,17 @@
       %td.centered= domain.active ? image_tag('tick.png') : ''
       %td.centered
         - if domain.email_active
-          - if domain.email_alias
-            = image_tag('redirect.png')
-          - else
+          - if domain.email_alias.blank?
             = image_tag('mailbox.png')
+          - else
+            = image_tag('redirect.png')
       %td.centered= domain.aliases.size
       %td.centered= domain.mailboxes.size
       %td
         %time{:datetime => domain.updated_at, :class => 'relative'}= domain.updated_at
       - if can? :manage, Domain
         %td
-          = link_to image_tag('sync.png'), sync_domain_path(domain)
+          - if can? :manage, Account
+            = link_to image_tag('sync.png'), sync_domain_path(domain)
           = link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')
           = link_to image_tag('delete.png'), domain, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete')
