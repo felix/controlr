@@ -1,6 +1,10 @@
 class DomainsController < ApplicationController
   authorize_resource :except => :switch
 
+  rescue_from DataMapper::ObjectNotFoundError do |exception|
+    redirect_to domains_path, :alert => t('missing')
+  end
+
   # GET /domains
   # GET /domains.xml
   def index
@@ -19,7 +23,7 @@ class DomainsController < ApplicationController
   # GET /domains/1
   # GET /domains/1.xml
   def show
-    @domain = @account.domains.get(params[:id])
+    @domain = @account.domains.get!(params[:id])
     session[:current_domain_id] = @domain.id if @domain
 
     respond_to do |format|
@@ -41,8 +45,7 @@ class DomainsController < ApplicationController
 
   # GET /domains/1/edit
   def edit
-    @domain = @account.domains.get(params[:id])
-    redirect_to domains_path unless @domain
+    @domain = @account.domains.get!(params[:id])
     session[:current_domain_id] = @domain.id if @domain
   end
 
@@ -65,8 +68,7 @@ class DomainsController < ApplicationController
   # PUT /domains/1
   # PUT /domains/1.xml
   def update
-    @domain = @account.domains.get(params[:id])
-    redirect_to domains_path unless @domain
+    @domain = @account.domains.get!(params[:id])
 
     respond_to do |format|
       if @domain.update(params[:domain])
@@ -82,8 +84,8 @@ class DomainsController < ApplicationController
   # DELETE /domains/1
   # DELETE /domains/1.xml
   def destroy
-    @domain = @account.domains.get(params[:id])
-    @domain.destroy if @domain
+    @domain = @account.domains.get!(params[:id])
+    @domain.destroy
 
     respond_to do |format|
       format.html { redirect_to(domains_url) }
@@ -102,8 +104,7 @@ class DomainsController < ApplicationController
   end
 
   def sync
-    @domain = @account.domains.get(params[:id])
-    redirect_to domains_path unless @domain
+    @domain = @account.domains.get!(params[:id])
 
     @domain.sync_config_files
 

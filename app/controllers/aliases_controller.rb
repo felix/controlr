@@ -4,6 +4,10 @@ class AliasesController < ApplicationController
     redirect_to domains_url unless @domain
   end
 
+  rescue_from DataMapper::ObjectNotFoundError do |exception|
+    redirect_to aliases_path, :alert => t('missing')
+  end
+
   # GET /aliases
   # GET /aliases.xml
   def index
@@ -34,8 +38,7 @@ class AliasesController < ApplicationController
 
   # GET /aliases/1/edit
   def edit
-    @alias = @domain.aliases.get(params[:id])
-    redirect_to aliases_path unless @alias
+    @alias = @domain.aliases.get!(params[:id])
   end
 
   # POST /aliases
@@ -57,7 +60,7 @@ class AliasesController < ApplicationController
   # PUT /aliases/1
   # PUT /aliases/1.xml
   def update
-    @alias = @domain.aliases.get(params[:id])
+    @alias = @domain.aliases.get!(params[:id])
 
     respond_to do |format|
       if @alias.update(params[:alias])
@@ -73,24 +76,15 @@ class AliasesController < ApplicationController
   # DELETE /aliases/1
   # DELETE /aliases/1.xml
   def destroy
-    @alias = @domain.aliases.first(:id => params[:id], :system.not => true)
-    @alias.destroy if @alias
+    @alias = @domain.aliases.get!(params[:id])
+    if @alias.system
+      return redirect_to(aliases_url, :alert => 'Cannot delete this alias')
+    end
+    @alias.destroy
 
     respond_to do |format|
       format.html { redirect_to(aliases_url) }
       format.xml  { head :ok }
-    end
-  end
-
-  def defaults
-    if @domain.create_default_aliases
-      msg = 'Aliases were successfully generated'
-    else
-      msg = 'Could not generate aliases'
-    end
-    respond_to do |format|
-      format.html { redirect_to(aliases_url, :notice => msg) }
-      format.xml  { render :xml => @aliases }
     end
   end
 end

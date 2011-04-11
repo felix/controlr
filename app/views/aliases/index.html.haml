@@ -22,5 +22,6 @@
         %time{:datetime => a.updated_at, :class => 'relative'}= a.updated_at
       %td
         = link_to image_tag('edit.png'), edit_alias_path(a)
-        = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete
+        - unless a.system
+          = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete
 

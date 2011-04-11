@@ -146,12 +146,17 @@ footer.page p {
   font-size: .75em;
   text-align: center;
 }
-.flash ul {
-  padding: 5px;
-  background-color: yellow;
+.flash li {
+  padding: 5px 1em;
   border-radius: 5px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
+}
+.flash .notice {
+  background-color: #b8ff5e;
+}
+.flash .alert {
+  background-color: #ffec5e;
 }
 
 /*** tables ***/
@@ -219,10 +224,12 @@ td {
 }
 #sidebar nav a {
   display: block;
+}
+#sidebar nav a,
+#sidebar nav form {
   margin: 0 0 0 5px;
-  padding-left: 20px;
-  color: #555;
   line-height: 2;
+  color: #555;
   text-transform: lowercase;
 }
 #sidebar nav li:hover {
@@ -235,6 +242,7 @@ td {
 /*** buttons ***/
 
 .button {
+  padding-left: 20px;
   background: transparent left no-repeat;
 }
 .button.add {
@@ -277,7 +285,8 @@ td {
 form {
   max-width: 35em;
 }
-header.page form {
+header.page form,
+#sidebar form {
   display: inline;
   width: inherit;
 }

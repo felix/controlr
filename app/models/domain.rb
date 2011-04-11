@@ -94,6 +94,49 @@ class Domain
     )
   end
 
+  def create_gmail_name_records
+    mx1 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => 'aspmx.l.google.com'},
+      {:active => false,
+      :distance => 1,
+      :description => 'Gmail MX record'}
+    )
+    mx2 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => 'alt1.aspmx.l.google.com'},
+      {:active => false,
+      :distance => 5,
+      :description => 'Gmail MX record'}
+    )
+    mx3 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => 'alt2.aspmx.l.google.com'},
+      {:active => false,
+      :distance => 5,
+      :description => 'Gmail MX record'}
+    )
+    mx4 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => 'aspmx2.googlemail.com'},
+      {:active => false,
+      :distance => 10,
+      :description => 'Gmail MX record'}
+    )
+    mx5 = self.name_records.first_or_create(
+      {:type => 'MX',
+      :host => self.name,
+      :value => 'aspmx3.googlemail.com'},
+      {:active => false,
+      :distance => 10,
+      :description => 'Gmail MX record'}
+    )
+  end
+
   private
 
   def generate_config(type, updated=Time.now)

@@ -5,5 +5,11 @@
       %li= link_to t('.list'), name_records_path, :class => 'list button'
       - if can? :create, NameRecord
         %li= link_to t('.new'), new_name_record_path, :class => 'add button'
-        %li= link_to t('.defaults'), defaults_name_records_path, :class => 'add button'
+        %li
+          = form_tag defaults_name_records_path, :class => 'auto-submit add button' do
+            = t('actions.generate')
+            %select{:name => 'type'}
+              %option{:value => ''}= t('.generate.select')
+              %option{:value => 'defaults'}= t('.generate.defaults')
+              %option{:value => 'gmail'}= t('.generate.gmail')
 = render :file => 'layouts/application'

@@ -1,6 +1,6 @@
 - if @account.domains.size > 0
   |
-  = form_tag switch_domains_path, :class => 'switcher' do |f|
+  = form_tag switch_domains_path, :class => 'auto-submit' do
     %select{:name => 'id'}
       %option{:value => ''}= t('.switchdomain')
       - @account.domains.each do |domain|

@@ -23,13 +23,13 @@ Controlr::Application.routes.draw do
   resources :users
   resources :aliases do
     collection do
-      get 'defaults'
+      post 'defaults'
     end
   end
   resources :mailboxes
   resources :name_records do
     collection do
-      get 'defaults'
+      post 'defaults'
     end
   end
 

@@ -4,6 +4,10 @@ class NameRecordsController < ApplicationController
     redirect_to domains_url unless @domain
   end
 
+  rescue_from DataMapper::ObjectNotFoundError do |exception|
+    redirect_to name_records_path, :alert => t('missing')
+  end
+
   # GET /name_records
   # GET /name_records.xml
   def index
@@ -18,7 +22,7 @@ class NameRecordsController < ApplicationController
   # GET /name_records/1
   # GET /name_records/1.xml
   def show
-    @name_record = @domain.name_records.get(params[:id])
+    @name_record = @domain.name_records.get!(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -39,7 +43,7 @@ class NameRecordsController < ApplicationController
 
   # GET /name_records/1/edit
   def edit
-    @name_record = @domain.name_records.get(params[:id])
+    @name_record = @domain.name_records.get!(params[:id])
   end
 
   # POST /name_records
@@ -61,7 +65,7 @@ class NameRecordsController < ApplicationController
   # PUT /name_records/1
   # PUT /name_records/1.xml
   def update
-    @name_record = @domain.name_records.get(params[:id])
+    @name_record = @domain.name_records.get!(params[:id])
 
     respond_to do |format|
       if @name_record.update(params[:name_record])
@@ -77,7 +81,7 @@ class NameRecordsController < ApplicationController
   # DELETE /name_records/1
   # DELETE /name_records/1.xml
   def destroy
-    @name_record = @domain.name_records.get(params[:id])
+    @name_record = @domain.name_records.get!(params[:id])
     @name_record.destroy
 
     respond_to do |format|
@@ -87,11 +91,17 @@ class NameRecordsController < ApplicationController
   end
 
   def defaults
-    if @domain.create_default_name_records
-      msg = 'Records were successfully generated'
-    else
-      msg = 'Could not generate records'
+    msg = 'Records already exist'
+    if params[:type] == 'default'
+      if @domain.create_default_name_records
+        msg = 'Records were successfully generated'
+      end
+    elsif params[:type] == 'gmail'
+      if @domain.create_gmail_name_records
+        msg = 'Records were successfully generated'
+      end
     end
+
     respond_to do |format|
       format.html { redirect_to(name_records_url, :notice => msg) }
       format.xml  { render :xml => @name_records }

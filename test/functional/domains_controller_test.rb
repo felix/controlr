@@ -41,10 +41,8 @@ class DomainsControllerTest < ActionController::TestCase
           post :create, :domain => @account.domains.make.attributes
         end
 
-        should 'create new domains' do
-          assert_redirected_to domains_path
-          assert_not_nil assigns(:domain)
-        end
+        should('redirect to domains'){ redirect_to domains_path }
+        should assign_to(:domain)
 
         should 'create default aliases' do
           assert_not_nil assigns(:domain).aliases
@@ -65,14 +63,25 @@ class DomainsControllerTest < ActionController::TestCase
       end
 
       context 'on GET to :show' do
-        should 'show domain' do
+        setup do
           get :show, :id => @domain.id
-          assert_response :success
         end
+
+        should respond_with(:success)
+        should assign_to(:domain)
+      end
+
+      context 'on GET to :show with invalid data' do
+        setup do
+          get :show, :id => 8884848
+        end
+
+        should('redirect to domain path'){ redirect_to domains_path }
       end
 
       context 'on GET to :edit' do
         setup do
+          @request.session[:current_domain_id] = @domain.id
           get :edit, :id => @domain.id
         end
 
@@ -89,7 +98,7 @@ class DomainsControllerTest < ActionController::TestCase
       context 'on PUT to :update' do
         should 'update domain' do
           put :update, {:id => @domain.to_param, :domain => @domain.attributes}
-          assert_redirected_to domains_path
+          assert_redirected_to domain_path(@domain)
         end
 
         should 'not change passhash if not entered' do
@@ -141,7 +150,7 @@ class DomainsControllerTest < ActionController::TestCase
         should assign_to(:domains)
 
         should 'show ALL domains for account' do
-          assert_select 'form.switcher option', {:count => @domain.account.domains.size+1}
+          assert_select 'form.auto-submit option', {:count => @domain.account.domains.size+1}
         end
       end
 
@@ -181,7 +190,7 @@ class DomainsControllerTest < ActionController::TestCase
         should assign_to(:domains)
 
         should 'show only domains for user' do
-          assert_select 'form.switcher option', {:count => @user.domains.size+1}
+          assert_select 'form.auto-submit option', {:count => @user.domains.size+1}
         end
       end
     end
@@ -189,45 +198,45 @@ class DomainsControllerTest < ActionController::TestCase
     context 'while unauthed' do
 
       context 'on GET to :index' do
-        should 'require login' do
+        setup do
           get :index
-          assert_redirected_to new_user_session_path
         end
+        should('redirect to login'){ redirect_to new_user_session_path }
       end
 
       context 'on GET to :new' do
-        should "should get new" do
+        setup do
           get :new
-          assert_redirected_to new_user_session_path
         end
+        should('redirect to login'){ redirect_to new_user_session_path }
       end
 
       context 'on GET to :show' do
-        should 'require login' do
+        setup do
           get :show, :id => @admin.to_param
-          assert_redirected_to new_user_session_path
         end
+        should('redirect to login'){ redirect_to new_user_session_path }
       end
 
       context 'on GET to :edit' do
-        should 'require a login' do
+        setup do
           get :edit, :id => @admin.to_param
-          assert_redirected_to new_user_session_path
         end
+        should('redirect to login'){ redirect_to new_user_session_path }
       end
 
       context 'on PUT to :update' do
-        should 'require a login' do
+        setup do
           put :update, :id => @admin.to_param, :domain => @admin.attributes
-          assert_redirected_to new_user_session_path
         end
+        should('redirect to login'){ redirect_to new_user_session_path }
       end
 
       context 'on DELETE to :destroy' do
-        should 'require a login' do
+        setup do
           delete :destroy, :id => @admin.to_param
-          assert_redirected_to new_user_session_path
         end
+        should('redirect to login'){ redirect_to new_user_session_path }
       end
     end
   end

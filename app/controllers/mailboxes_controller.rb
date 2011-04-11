@@ -4,6 +4,10 @@ class MailboxesController < ApplicationController
     redirect_to(domains_url, :notice => 'Please select a domain first') unless @domain
   end
 
+  rescue_from DataMapper::ObjectNotFoundError do |exception|
+    redirect_to mailboxes_path, :alert => t('missing')
+  end
+
   # GET /mailboxes
   # GET /mailboxes.xml
   def index
@@ -34,8 +38,7 @@ class MailboxesController < ApplicationController
 
   # GET /mailboxes/1/edit
   def edit
-    @mailbox = @domain.mailboxes.get(params[:id])
-    redirect_to(mailboxes_path) unless @mailbox
+    @mailbox = @domain.mailboxes.get!(params[:id])
   end
 
   # POST /mailboxes
@@ -57,7 +60,7 @@ class MailboxesController < ApplicationController
   # PUT /mailboxes/1
   # PUT /mailboxes/1.xml
   def update
-    @mailbox = @domain.mailboxes.get(params[:id])
+    @mailbox = @domain.mailboxes.get!(params[:id])
     params[:mailbox].delete(:passhash) unless params[:mailbox][:passhash].blank?
 
     respond_to do |format|
@@ -74,8 +77,8 @@ class MailboxesController < ApplicationController
   # DELETE /mailboxes/1
   # DELETE /mailboxes/1.xml
   def destroy
-    @mailbox = @domain.mailboxes.get(params[:id])
-    @mailbox.destroy if @mailbox
+    @mailbox = @domain.mailboxes.get!(params[:id])
+    @mailbox.destroy
 
     respond_to do |format|
       format.html { redirect_to(mailboxes_url) }
