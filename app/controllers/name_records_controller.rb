@@ -92,7 +92,7 @@ class NameRecordsController < ApplicationController
 
   def defaults
     msg = 'Records already exist'
-    if params[:type] == 'default'
+    if params[:type] == 'defaults'
       if @domain.create_default_name_records
         msg = 'Records were successfully generated'
       end

@@ -92,6 +92,7 @@ class Domain
       :distance => 20,
       :description => 'Automatically generated entry'}
     )
+    return ns1 && ns2 && mx1 && mx2
   end
 
   def create_gmail_name_records
@@ -135,6 +136,7 @@ class Domain
       :distance => 10,
       :description => 'Gmail MX record'}
     )
+    return mx1 && mx2 && mx3 && mx4 && mx5
   end
 
   def create_gapps_name_records
@@ -159,6 +161,7 @@ class Domain
       {:active => false,
       :description => 'Google Apps record'}
     )
+    return docs && calendar && webmail
   end
 
   private
