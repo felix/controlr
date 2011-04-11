@@ -5,13 +5,13 @@
     %title Controlr
     = stylesheet_link_tag 'reset'
     = stylesheet_link_tag 'screen'
-    %script{:src => 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'}
+    %script{:src => 'https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'}
     = javascript_include_tag :defaults
     = javascript_include_tag 'jquery.timeago'
     = csrf_meta_tag
     %meta{:content => '', :name => 'description'}/
     /[if lt IE 9]
-      %script{:src => 'http://html5shiv.googlecode.com/svn/trunk/html5.js'}
+      %script{:src => 'https://html5shiv.googlecode.com/svn/trunk/html5.js'}
     = yield :head
   %body{:class => controller.controller_name}
     %header.page

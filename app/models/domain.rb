@@ -136,7 +136,14 @@ class Domain
       :distance => 10,
       :description => 'Gmail MX record'}
     )
-    return mx1 && mx2 && mx3 && mx4 && mx5
+    spf = self.name_records.first_or_create(
+      {:type => 'TXT',
+      :host => self.name,
+      :value => 'v=spf1 include:aspmx.googlemail.com ~all'},
+      {:active => false,
+      :description => 'Gmail SPF record'}
+    )
+    return mx1 && mx2 && mx3 && mx4 && mx5 && spf
   end
 
   def create_gapps_name_records
