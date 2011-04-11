@@ -137,6 +137,30 @@ class Domain
     )
   end
 
+  def create_gapps_name_records
+    docs = self.name_records.first_or_create(
+      {:type => 'CNAME',
+      :host => "docs.#{self.name}",
+      :value => 'ghs.google.com'},
+      {:active => false,
+      :description => 'Google Apps record'}
+    )
+    calendar = self.name_records.first_or_create(
+      {:type => 'CNAME',
+      :host => "calendar.#{self.name}",
+      :value => 'ghs.google.com'},
+      {:active => false,
+      :description => 'Google Apps record'}
+    )
+    webmail = self.name_records.first_or_create(
+      {:type => 'CNAME',
+      :host => "webmail.#{self.name}",
+      :value => 'ghs.google.com'},
+      {:active => false,
+      :description => 'Google Apps record'}
+    )
+  end
+
   private
 
   def generate_config(type, updated=Time.now)

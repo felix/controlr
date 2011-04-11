@@ -103,6 +103,7 @@ en:
         select: Select template
         defaults: Defaults
         gmail: Gmail
+        gapps: Google Apps
     roles:
       title: Role Actions
       list: List Roles

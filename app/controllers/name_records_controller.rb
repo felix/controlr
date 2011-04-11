@@ -100,6 +100,10 @@ class NameRecordsController < ApplicationController
       if @domain.create_gmail_name_records
         msg = 'Records were successfully generated'
       end
+    elsif params[:type] == 'gapps'
+      if @domain.create_gapps_name_records
+        msg = 'Records were successfully generated'
+      end
     end
 
     respond_to do |format|
