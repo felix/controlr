@@ -3,7 +3,7 @@
 %table
   %tr
     %th= t('attributes.name')
-    %th= t('attributes.active')
+    %th.centered= t('attributes.active')
     %th.centered= t('.email_status')
     %th.centered= image_tag('alias.png')
     %th.centered= image_tag('mailbox.png')
@@ -14,7 +14,7 @@
   - @domains.each do |domain|
     %tr
       %td= link_to domain.name, domain_path(domain)
-      %td.centered= domain.active ? image_tag('tick.png') : ''
+      %td.centered= domain.active ? image_tag('active.png') : image_tag('inactive.png')
       %td.centered
         - if domain.email_active
           - if domain.email_alias.blank?

@@ -3,9 +3,9 @@
 %table
   %tr
     %th= t('attributes.name')
-    %th= t('attributes.active')
-    %th= Account.human_attribute_name('users')
-    %th= Account.human_attribute_name('domains')
+    %th.centered= t('attributes.active')
+    %th.centered= Account.human_attribute_name('users')
+    %th.centered= Account.human_attribute_name('domains')
     %th= t('attributes.created_at')
     %th= t('attributes.updated_at')
     %th
@@ -13,9 +13,9 @@
   - @accounts.each do |account|
     %tr
       %td= link_to account.name, account_path(account)
-      %td= account.active ? image_tag('tick.png') : ''
-      %td= account.users.size
-      %td= account.domains.size
+      %td.centered= account.active ? image_tag('active.png') : image_tag('inactive.png')
+      %td.centered= account.users.size
+      %td.centered= account.domains.size
       %td
         %time{:datetime => account.created_at, :class => 'relative'}= account.created_at
       %td
