@@ -10,7 +10,7 @@ class NameRecord
   property :type, String, :required => true, :length => 5, :default => 'A'
   property :value, String, :required => true
   property :distance, Integer, :default => 0
-  property :ttl, Integer
+  property :ttl, Integer, :required => false
   property :created_at, DateTime
   property :updated_at, DateTime
 
@@ -23,7 +23,9 @@ class NameRecord
     if !self.host.end_with? @domain.name
       self.host = "#{self.host.chomp('.')}.#{@domain.name}"
     end
+  end
 
+  before :valid? do
     if self.ttl.blank? || (self.ttl == 0) || (self.ttl < @domain.dns_min_ttl)
       self.ttl = @domain.dns_min_ttl
     end

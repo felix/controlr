@@ -24,7 +24,9 @@ class Mailbox
                                         {:active => self.active})
     a.destination = a.destination_array << self.email
     a.save
+  end
 
+  before :valid? do
     # set default quota if nec
     if self.quota.blank? || (self.quota == 0) || (self.quota > @domain.email_max_quota)
       self.quota = @domain.email_max_quota
