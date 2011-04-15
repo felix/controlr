@@ -41,7 +41,7 @@ class DomainsControllerTest < ActionController::TestCase
           post :create, :domain => @account.domains.make.attributes
         end
 
-        should('redirect to domains'){ redirect_to domains_path }
+        should('redirect to domain dashboard'){ redirect_to domain_path(assigns(:domain)) }
         should assign_to(:domain)
 
         should 'create default aliases' do
