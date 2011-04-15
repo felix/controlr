@@ -24,6 +24,6 @@
       %td
         %time{:datetime => name_record.updated_at, :class => 'relative'}= name_record.updated_at
       - if can? :manage, NameRecord
-        %td
+        %td.right
           =link_to image_tag('edit.png'), edit_name_record_path(name_record), :title => t('actions.edit')
           =link_to image_tag('delete.png'), name_record, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete'), :remote => true

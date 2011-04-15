@@ -155,7 +155,9 @@ en:
         title: DNS
     index:
       title: Domains
-      email_status: Email Status
+      email_status: Email
+      dns_status: DNS
+      ftp_status: FTP
     new:
       title: New Domain
     edit:

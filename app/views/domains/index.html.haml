@@ -5,8 +5,8 @@
     %th= t('attributes.name')
     %th.centered= t('attributes.active')
     %th.centered= t('.email_status')
-    %th.centered= image_tag('alias.png')
-    %th.centered= image_tag('mailbox.png')
+    %th.centered= t('.dns_status')
+    %th.centered= t('.ftp_status')
     %th= t('attributes.updated_at')
     - if can? :manage, Domain
       %th
@@ -18,15 +18,20 @@
       %td.centered
         - if domain.email_active
           - if domain.email_alias.blank?
+            = domain.aliases.size
+            = image_tag('alias.png')
+            = domain.mailboxes.size
             = image_tag('mailbox.png')
           - else
             = image_tag('redirect.png')
-      %td.centered= domain.aliases.size
-      %td.centered= domain.mailboxes.size
+        - else
+          = image_tag('inactive.png')
+      %td.centered= domain.dns_active ? image_tag('active.png') : image_tag('inactive.png')
+      %td.centered= domain.ftp_active ? image_tag('active.png') : image_tag('inactive.png')
       %td
         %time{:datetime => domain.updated_at, :class => 'relative'}= domain.updated_at
       - if can? :manage, Domain
-        %td
+        %td.right
           - if can? :manage, Account
             = link_to image_tag('sync.png'), sync_domain_path(domain)
           = link_to image_tag('edit.png'), edit_domain_path(domain), :title => t('actions.edit')

@@ -21,8 +21,9 @@
       %td= a.destination_array.join('<br>').html_safe
       %td
         %time{:datetime => a.updated_at, :class => 'relative'}= a.updated_at
-      %td
-        = link_to image_tag('edit.png'), edit_alias_path(a)
-        - unless a.system
-          = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete, :remote => true
+      - if can? :manage, Alias
+        %td.right
+          = link_to image_tag('edit.png'), edit_alias_path(a)
+          - unless a.system
+            = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete, :remote => true
 
