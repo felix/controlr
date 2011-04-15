@@ -10,7 +10,7 @@ class NameRecord
   property :type, String, :required => true, :length => 5, :default => 'A'
   property :value, String, :required => true
   property :distance, Integer, :default => 0
-  property :ttl, Integer, :required => false
+  property :ttl, Integer
   property :created_at, DateTime
   property :updated_at, DateTime
 
