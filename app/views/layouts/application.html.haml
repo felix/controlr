@@ -36,18 +36,17 @@
             = render :partial => 'layouts/domain_menu'
           - else
             = render :partial => 'layouts/account_menu'
+      #flash
+        %ul
+          - flash.each do |t,m|
+            %li{:class => t}= m
+
 
     #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
       - if content_for?(:sidebar)
         #sidebar
           = yield(:sidebar)
       %section
-        - unless flash.empty?
-          .flash
-            %ul
-              - flash.each do |t,m|
-                %li{:class => t}= m
-
         = yield
     %footer.page
       %p

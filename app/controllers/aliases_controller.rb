@@ -84,7 +84,38 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(aliases_url) }
+      format.js
       format.xml  { head :ok }
+    end
+  end
+
+  def set_active
+    @alias = @domain.aliases.get!(params[:id])
+
+    respond_to do |format|
+      if @alias.update(:active => true)
+        format.html { redirect_to(aliases_path) }
+        format.js { render 'active_toggle' }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @alias.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def set_inactive
+    @alias = @domain.aliases.get!(params[:id])
+
+    respond_to do |format|
+      if @alias.update(:active => false)
+        format.html { redirect_to(aliases_path) }
+        format.js { render 'active_toggle' }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @alias.errors, :status => :unprocessable_entity }
+      end
     end
   end
 end

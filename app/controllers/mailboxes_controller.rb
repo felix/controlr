@@ -82,7 +82,38 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(mailboxes_url) }
+      format.js
       format.xml  { head :ok }
+    end
+  end
+
+  def set_active
+    @mailbox = @domain.mailboxes.get!(params[:id])
+
+    respond_to do |format|
+      if @mailbox.update(:active => true)
+        format.html { redirect_to(mailboxes_path) }
+        format.js { render 'active_toggle' }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @mailbox.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
+  def set_inactive
+    @mailbox = @domain.mailboxes.get!(params[:id])
+
+    respond_to do |format|
+      if @mailbox.update(:active => false)
+        format.html { redirect_to(mailboxes_path) }
+        format.js { render 'active_toggle' }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @mailbox.errors, :status => :unprocessable_entity }
+      end
     end
   end
 

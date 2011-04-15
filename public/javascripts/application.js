@@ -1,6 +1,6 @@
 jQuery(document).ready(function() {
   jQuery('time.relative').timeago();
-  jQuery('.flash .notice').delay(6000).fadeOut('slow');
+  jQuery('#flash li').delay(6000).fadeOut('slow');
 
   // auto submit forms
   jQuery('form.auto-submit select').change(function(){

@@ -12,6 +12,7 @@ Controlr::Application.routes.draw do
   resource :dashboard, :only => [:index]
 
   resources :accounts
+
   resources :domains do
     collection do
       post 'switch'
@@ -21,13 +22,29 @@ Controlr::Application.routes.draw do
     end
   end
   resources :users
+
   resources :aliases do
+    member do
+      post 'set_active'
+      post 'set_inactive'
+    end
     collection do
       post 'defaults'
     end
   end
-  resources :mailboxes
+
+  resources :mailboxes do
+    member do
+      post 'set_active'
+      post 'set_inactive'
+    end
+  end
+
   resources :name_records do
+    member do
+      post 'set_active'
+      post 'set_inactive'
+    end
     collection do
       post 'defaults'
     end

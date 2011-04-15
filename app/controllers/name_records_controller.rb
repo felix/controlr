@@ -78,6 +78,36 @@ class NameRecordsController < ApplicationController
     end
   end
 
+  def set_active
+    @name_record = @domain.name_records.get!(params[:id])
+
+    respond_to do |format|
+      if @name_record.update(:active => true)
+        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully updated.') }
+        format.js { render 'active_toggle' }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
+  def set_inactive
+    @name_record = @domain.name_records.get!(params[:id])
+
+    respond_to do |format|
+      if @name_record.update(:active => false)
+        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully updated.') }
+        format.js { render 'active_toggle' }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   # DELETE /name_records/1
   # DELETE /name_records/1.xml
   def destroy
@@ -86,6 +116,7 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(name_records_url) }
+      format.js
       format.xml  { head :ok }
     end
   end

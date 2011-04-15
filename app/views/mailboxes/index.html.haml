@@ -4,7 +4,7 @@
 %table
   %tr
     %th= t('helpers.label.mailbox.email')
-    %th= t('attributes.active')
+    %th.centered= t('attributes.active')
     %th= t('helpers.label.mailbox.quota')
     %th= t('helpers.label.mailbox.bytes')
     %th= t('helpers.label.mailbox.messages')
@@ -13,9 +13,10 @@
       %th
 
   - @mailboxes.each do |mailbox|
-    %tr
+    %tr{:id => "mailbox-#{mailbox.id}"}
       %td= link_to mailbox.email, edit_mailbox_path(mailbox)
-      %td= mailbox.active ? image_tag('tick.png') : ''
+      %td.centered.status
+        = render :partial => 'active_toggle', :locals => {:mailbox => mailbox}
       %td= number_to_human_size(mailbox.quota*1024)
       %td= number_to_human_size(mailbox.bytes)
       %td= mailbox.messages
@@ -23,4 +24,4 @@
         %time{:datetime => mailbox.updated_at, :class => 'relative'}= mailbox.updated_at
       %td
         = link_to image_tag('edit.png'), edit_mailbox_path(mailbox)
-        = link_to image_tag('delete.png'), mailbox, :confirm => t('actions.confirm'), :method => :delete
+        = link_to image_tag('delete.png'), mailbox, :confirm => t('actions.confirm'), :method => :delete, :remote => true

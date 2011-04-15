@@ -13,6 +13,7 @@ p {
   line-height: 1.5;
 }
 header.page {
+  position: relative;
   background-color: #ff4010;
 }
 #top-bar {
@@ -113,7 +114,6 @@ header nav a:hover {
   -webkit-box-shadow: 3px 5px 10px #ccc;
 }
 #page section {
-  position: relative;
   min-height: 400px;
   padding: 20px;
   background-color: white;
@@ -139,23 +139,24 @@ footer.page p {
 
 /*** flash ***/
 
-.flash {
+#flash {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 22px;
+  left: 50%;
   font-size: .75em;
   text-align: center;
+  border-bottom-left-radius: 5px;
+  -moz-border-bottom radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
 }
-.flash li {
+#flash li {
   padding: 5px 1em;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  border-top: 1px solid #ea3a08;
 }
-.flash .notice {
+#flash .notice {
   background-color: #b8ff5e;
 }
-.flash .alert {
+#flash .alert {
   background-color: #ffec5e;
 }
 

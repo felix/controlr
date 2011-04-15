@@ -1,0 +1,1 @@
+$('#mailbox-<%= @mailbox.id %> .status').html("<%= escape_javascript( render(:partial => 'active_toggle', :locals => {:mailbox => @mailbox}) ) %>");
