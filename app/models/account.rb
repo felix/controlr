@@ -8,7 +8,7 @@ class Account
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  has n, :domains
+  has n, :domains, :order => [:name.asc]
   has n, :users
   #belongs_to :client, :required => true
 #  has n, :ip_addresses
