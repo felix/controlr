@@ -18,11 +18,11 @@ class Domain
   property :created_at, DateTime
   property :updated_at, DateTime
 
-  has n, :mailboxes, :constraint => :destroy
-  has n, :aliases, :constraint => :destroy
+  has n, :mailboxes, :constraint => :destroy, :order => [:email.asc]
+  has n, :aliases, :constraint => :destroy, :order => [:source.asc]
   belongs_to :account
   has n, :users, :through => Resource
-  has n, :name_records, :constraint => :destroy
+  has n, :name_records, :constraint => :destroy, :order => [:type.asc, :host.asc, :distance.asc]
 
   validates_format_of :name, :with => %r{^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$}
 
