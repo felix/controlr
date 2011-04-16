@@ -53,9 +53,11 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       if @name_record.save
-        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully created.') }
+        flash[:notice] = t('name_records.create.notice')
+        format.html { redirect_to(name_records_path) }
         format.xml  { render :xml => @name_record, :status => :created, :location => @name_record }
       else
+        flash[:alert] = t('name_records.create.alert')
         format.html { render :action => "new" }
         format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
       end
@@ -69,9 +71,11 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       if @name_record.update(params[:name_record])
-        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully updated.') }
+        flash[:notice] = t('.notice')
+        format.html { redirect_to(name_records_path) }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
       end
@@ -83,10 +87,12 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       if @name_record.update(:active => true)
-        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully updated.') }
-        format.js { render 'active_toggle' }
+        flash[:notice] = t('name_records.set_active.notice')
+        format.html { redirect_to(name_records_path) }
+        format.js { render 'active_toggle', :layout => 'application' }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('name_records.set_active.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
       end
@@ -98,10 +104,12 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       if @name_record.update(:active => false)
-        format.html { redirect_to(name_records_path, :notice => 'Name record was successfully updated.') }
+        flash[:notice] = t('name_records.set_inactive.notice')
+        format.html { redirect_to(name_records_path) }
         format.js { render 'active_toggle' }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('name_records.set_inactive.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
       end
@@ -115,6 +123,7 @@ class NameRecordsController < ApplicationController
     @name_record.destroy
 
     respond_to do |format|
+      flash[:notice] = t('name_records.destroy.notice')
       format.html { redirect_to(name_records_url) }
       format.js
       format.xml  { head :ok }

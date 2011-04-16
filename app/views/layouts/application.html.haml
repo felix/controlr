@@ -41,7 +41,6 @@
           - flash.each do |t,m|
             %li{:class => t}= m
 
-
     #page{:class => content_for?(:sidebar) ? 'sidebar' : ''}
       - if content_for?(:sidebar)
         #sidebar

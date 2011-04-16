@@ -1,29 +1,47 @@
+jQuery.fn.delayFade = function() {
+  return jQuery(this).delay(6000).slideUp();
+}
+
+// process AJAX flash
+jQuery(document).ajaxComplete(function(e, request, opts) { 
+  var flash = '';
+  if (flash_alert = request.getResponseHeader('X-Message-Alert')) {
+    flash += '<li class="alert">'+flash_alert+'</li>';
+  }
+  if (flash_notice = request.getResponseHeader('X-Message-Notice')) {
+    flash += '<li class="notice">'+flash_notice+'</li>';
+  }
+  jQuery('#flash ul').append(jQuery(flash).delayFade());
+});
+
 jQuery(document).ready(function() {
   jQuery('time.relative').timeago();
-  jQuery('#flash li').delay(6000).fadeOut('slow');
+
+  // HTML placed flash
+  jQuery('#flash li').delayFade();
 
   // auto submit forms
   jQuery('form.auto-submit select').change(function(){
-    $(this).closest('form').submit();
+    jQuery(this).closest('form').submit();
   });
 
   // tooltips
   jQuery('form .hint').each(function(){
-    var hint = $(this);
+    var hint = jQuery(this);
     hint.parent().find('input,textarea,select').each(function(){
-      $(this).focus(function(){ hint.show(); });
-      $(this).blur(function(){ hint.hide(); });
+      jQuery(this).focus(function(){ hint.show(); });
+      jQuery(this).blur(function(){ hint.hide(); });
     });
   });
 
   // toggle user domains
   jQuery('#user_role').change(function(){
-    $('#role-domains').toggle($(this).val() != 'administrator');
+    jQuery('#role-domains').toggle(jQuery(this).val() != 'administrator');
   }).trigger('change');
 
   // toggle name record types
   jQuery('#name_record_type').change(function(){
-    $('#mx-distance').toggle($(this).val() == 'MX');
+    jQuery('#mx-distance').toggle(jQuery(this).val() == 'MX');
   }).trigger('change');
 
 

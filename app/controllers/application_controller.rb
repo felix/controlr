@@ -8,6 +8,16 @@ class ApplicationController < ActionController::Base
   end
 
   prepend_before_filter :setup_globals
+  after_filter :flash_to_headers
+
+  # for XHR, stash flash in response headers to be
+  # accessed by JS later
+  def flash_to_headers
+    return unless request.xhr?
+    response.headers['X-Message-Notice'] = flash[:notice] unless flash[:notice].blank?
+    response.headers['X-Message-Alert'] = flash[:alert] unless flash[:alert].blank?
+    flash.discard
+  end
 
   protected
 

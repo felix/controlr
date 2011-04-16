@@ -142,12 +142,9 @@ footer.page p {
 #flash {
   position: absolute;
   top: 22px;
-  left: 50%;
+  left: 40%;
   font-size: .75em;
   text-align: center;
-  border-bottom-left-radius: 5px;
-  -moz-border-bottom radius: 5px;
-  -webkit-border-bottom-left-radius: 5px;
 }
 #flash li {
   padding: 5px 1em;
