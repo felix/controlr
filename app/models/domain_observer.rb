@@ -4,7 +4,7 @@ class DomainObserver
   observe Domain
 
   after :create do
-    self.create_default_aliases
-    self.create_default_name_records
+    self.copy_default_aliases
+    self.copy_default_name_records
   end
 end

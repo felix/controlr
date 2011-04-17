@@ -1,5 +1,14 @@
+- content_for :head do
+  %script
+    jQuery(document).ready(function(){
+    // toggle name record types
+    jQuery('#name_record_type').change(function(){
+    jQuery('#mx-distance').toggle(jQuery(this).val() == 'MX');
+    }).trigger('change');
+    });
+
 = form_for @name_record do |f|
-  -if @name_record.errors.any?
+  - if @name_record.errors.any?
     #error_explanation
       %h2= "#{pluralize(@name_record.errors.count, "error")} prohibited this name_record from being saved:"
       %ul

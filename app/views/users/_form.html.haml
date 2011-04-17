@@ -1,3 +1,12 @@
+- content_for :head do
+  %script
+    jQuery(document).ready(function(){
+    // toggle user domains
+    jQuery('#user_role').change(function(){
+    jQuery('#role-domains').toggle(jQuery(this).val() != 'administrator');
+    }).trigger('change');
+    });
+
 = form_for @user do |f|
   -if @user.errors.any?
     #error_explanation

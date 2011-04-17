@@ -34,15 +34,4 @@ jQuery(document).ready(function() {
     });
   });
 
-  // toggle user domains
-  jQuery('#user_role').change(function(){
-    jQuery('#role-domains').toggle(jQuery(this).val() != 'administrator');
-  }).trigger('change');
-
-  // toggle name record types
-  jQuery('#name_record_type').change(function(){
-    jQuery('#mx-distance').toggle(jQuery(this).val() == 'MX');
-  }).trigger('change');
-
-
 });

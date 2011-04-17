@@ -1,6 +1,10 @@
 class AccountsController < ApplicationController
   authorize_resource
 
+  rescue_from DataMapper::ObjectNotFoundError do |exception|
+    redirect_to root_path, :alert => t('accounts.missing')
+  end
+
   # GET /accounts
   # GET /accounts.xml
   def index
@@ -15,9 +19,9 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.xml
   def show
-    @account = Account.get(params[:id])
+    @account = Account.get!(params[:id])
     # this is the only action that selects the current account for super
-    session[:current_account_id] = @account.id || Account.get(1)
+    session[:current_account_id] = @account.id || current_user.account.id
 
     respond_to do |format|
       format.html # show.html.erb
@@ -38,7 +42,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
-    @account = Account.get(params[:id])
+    @account = Account.get!(params[:id])
   end
 
   # POST /accounts
@@ -62,7 +66,7 @@ class AccountsController < ApplicationController
   # PUT /accounts/1
   # PUT /accounts/1.xml
   def update
-    @account = Account.get(params[:id])
+    @account = Account.get!(params[:id])
 
     respond_to do |format|
       if @account.update(params[:account])
@@ -80,7 +84,7 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.xml
   def destroy
-    @account = Account.get(params[:id])
+    @account = Account.get!(params[:id])
     @account.destroy
 
     respond_to do |format|

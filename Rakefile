@@ -43,7 +43,7 @@ else
   # Create an empty task that will show up in rake -T, instructing how to
   # get a list of all the actual tasks. This isn't necessary but is a courtesy
   # to your future self.
-  desc "!!! Default rails tasks are hidden, run with LOAD_RAILS=1 to reveal."
+  desc "!!! Run with LOAD_RAILS=1 to reveal Rails tasks also."
   task :rails
 end
 
