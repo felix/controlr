@@ -1,11 +1,11 @@
 class MailboxesController < ApplicationController
   authorize_resource
   append_before_filter do
-    redirect_to(domains_url, :notice => 'Please select a domain first') unless @domain
+    redirect_to(domains_url, :alert => t('mailboxes.domain_missing')) unless @domain
   end
 
   rescue_from DataMapper::ObjectNotFoundError do |exception|
-    redirect_to mailboxes_path, :alert => t('missing')
+    redirect_to mailboxes_path, :alert => t('mailboxes.missing')
   end
 
   # GET /mailboxes
@@ -48,9 +48,11 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.save
-        format.html { redirect_to(mailboxes_path, :notice => 'Mailbox address was successfully created.') }
+        flash[:notice] = t('mailboxes.create.notice')
+        format.html { redirect_to(mailboxes_path) }
         format.xml  { render :xml => @mailbox, :status => :created, :location => @mailbox }
       else
+        flash[:alert] = t('mailboxes.create.alert')
         format.html { render :action => "new" }
         format.xml  { render :xml => @mailbox.errors, :status => :unprocessable_entity }
       end
@@ -65,9 +67,11 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.update(params[:mailbox])
-        format.html { redirect_to(mailboxes_path, :notice => 'Mailbox address was successfully updated.') }
+        flash[:notice] = t('mailboxes.update.notice')
+        format.html { redirect_to(mailboxes_path) }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('mailboxes.update.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @mailbox.errors, :status => :unprocessable_entity }
       end
@@ -81,6 +85,7 @@ class MailboxesController < ApplicationController
     @mailbox.destroy
 
     respond_to do |format|
+      flash[:notice] = t('mailboxes.destroy.notice')
       format.html { redirect_to(mailboxes_url) }
       format.js
       format.xml  { head :ok }
@@ -92,10 +97,12 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.update(:active => true)
+        flash[:notice] = t('mailboxes.set_active.notice')
         format.html { redirect_to(mailboxes_path) }
         format.js { render 'active_toggle' }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('mailboxes.set_active.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @mailbox.errors, :status => :unprocessable_entity }
       end
@@ -107,10 +114,12 @@ class MailboxesController < ApplicationController
 
     respond_to do |format|
       if @mailbox.update(:active => false)
+        flash[:notice] = t('mailboxes.set_inactive.notice')
         format.html { redirect_to(mailboxes_path) }
         format.js { render 'active_toggle' }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('mailboxes.set_inactive.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @mailbox.errors, :status => :unprocessable_entity }
       end

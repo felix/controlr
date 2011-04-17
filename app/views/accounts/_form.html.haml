@@ -16,6 +16,6 @@
         = f.check_box :active, :disabled => !can?(:manage, Account)
 
   %fieldset.actions
-    = f.submit 'Save'
+    = f.submit t('.save')
     \|
-    = link_to 'Back', accounts_path
+    = link_to t('.back'), accounts_path

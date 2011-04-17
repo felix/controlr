@@ -71,11 +71,11 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       if @name_record.update(params[:name_record])
-        flash[:notice] = t('.notice')
+        flash[:notice] = t('name_records.update.notice')
         format.html { redirect_to(name_records_path) }
         format.xml  { head :ok }
       else
-        flash[:alert] = t('.alert')
+        flash[:alert] = t('name_records.update.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @name_record.errors, :status => :unprocessable_entity }
       end

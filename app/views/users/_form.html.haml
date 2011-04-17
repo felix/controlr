@@ -55,6 +55,6 @@
           = collection_select(:user, :account_id, Account.all, :id, :name)
 
   %fieldset.actions
-    = f.submit t('actions.save')
+    = f.submit t('.save')
     \|
-    = link_to t('actions.back'), users_path
+    = link_to t('.back'), users_path

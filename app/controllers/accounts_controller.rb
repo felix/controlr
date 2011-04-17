@@ -48,9 +48,11 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.save
-        format.html { redirect_to(@account, :notice => 'Account was successfully created.') }
+        flash[:notice] = t('accounts.create.notice')
+        format.html { redirect_to(@account) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
+        flash[:alert] = t('accounts.create.alert')
         format.html { render :action => "new" }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
@@ -64,9 +66,11 @@ class AccountsController < ApplicationController
 
     respond_to do |format|
       if @account.update(params[:account])
-        format.html { redirect_to(@account, :notice => 'Account was successfully updated.') }
+        flash[:notice] = t('accounts.update.notice')
+        format.html { redirect_to(@account) }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('accounts.update.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @account.errors, :status => :unprocessable_entity }
       end
@@ -80,6 +84,7 @@ class AccountsController < ApplicationController
     @account.destroy
 
     respond_to do |format|
+      flash[:notice] = t('accounts.destroy.notice')
       format.html { redirect_to(accounts_url) }
       format.xml  { head :ok }
     end

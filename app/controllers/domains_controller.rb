@@ -2,7 +2,7 @@ class DomainsController < ApplicationController
   authorize_resource :except => :switch
 
   rescue_from DataMapper::ObjectNotFoundError do |exception|
-    redirect_to domains_path, :alert => t('missing')
+    redirect_to(domains_path, :alert => t('domains.missing'))
   end
 
   # GET /domains
@@ -25,6 +25,7 @@ class DomainsController < ApplicationController
   def show
     @domain = @account.domains.get!(params[:id])
     session[:current_domain_id] = @domain.id if @domain
+    flash[:notice] = t('domains.switch.notice')
 
     respond_to do |format|
       format.html # show.html.erb
@@ -56,9 +57,11 @@ class DomainsController < ApplicationController
 
     respond_to do |format|
       if @domain.save
-        format.html { redirect_to(domain_path(@domain), :notice => 'Domain was successfully created.') }
+        flash[:notice] = t('domains.create.notice')
+        format.html { redirect_to(domain_path(@domain)) }
         format.xml  { render :xml => @domain, :status => :created, :location => @domain }
       else
+        flash[:alert] = t('domains.create.alert')
         format.html { render :action => "new" }
         format.xml  { render :xml => @domain.errors, :status => :unprocessable_entity }
       end
@@ -72,9 +75,11 @@ class DomainsController < ApplicationController
 
     respond_to do |format|
       if @domain.update(params[:domain])
-        format.html { redirect_to(domain_path(@domain), :notice => 'Domain was successfully updated.') }
+        flash[:notice] = t('domains.update.notice')
+        format.html { redirect_to(domain_path(@domain)) }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('domains.update.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @domain.errors, :status => :unprocessable_entity }
       end
@@ -88,6 +93,7 @@ class DomainsController < ApplicationController
     @domain.destroy
 
     respond_to do |format|
+      flash[:notice] = t('domains.destroy.notice')
       format.html { redirect_to(domains_url) }
       format.xml  { head :ok }
     end
@@ -95,10 +101,11 @@ class DomainsController < ApplicationController
 
   def switch
     if params[:id].empty?
+      flash[:alert] = t('domains.switch.alert')
       redirect_to root_path
     else
       session[:current_domain_id] = params[:id]
-      flash[:notice] = t('domains.switcher.switched')
+      flash[:notice] = t('domains.switch.notice')
       redirect_to(domain_path(session[:current_domain_id]))
     end
   end
@@ -109,7 +116,8 @@ class DomainsController < ApplicationController
     @domain.sync_config_files
 
     respond_to do |format|
-      format.html { redirect_to(domain_path(@domain), :notice => 'Domain was synchronised.') }
+      flash[:notice] = t('domains.sync.notice')
+      format.html { redirect_to(domain_path(@domain)) }
       format.xml  { head :ok }
     end
   end

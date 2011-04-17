@@ -142,7 +142,9 @@ footer.page p {
 #flash {
   position: absolute;
   top: 22px;
-  left: 40%;
+  left: 50%;
+  width: 200px;
+  margin-left: -100px;
   font-size: .75em;
   text-align: center;
 }

@@ -6,27 +6,31 @@ en:
   login: Log In
   active: Active
   settings: Settings
-  actions:
-    confirm: 'Are you sure?'
-    back: Return
-    cancel: Cancel
-    delete: Delete
-    edit: Edit
-    save: Save
-    generate: Generate
+# fallback flash messages
+  notice: Operation successful
+  alert: Operation failed
+# fallback action links and prompts
+  confirm: 'Are you sure?'
+  back: Return
+  cancel: Cancel
+  delete: Delete
+  edit: Edit
+  save: Save
+  generate: Generate
+
   missing: The requested resource does not exist
   unauthorized:
     manage:
       all: 'Not authorized to %{action} %{subject}.'
-  # default attributes across models
-  attributes:
-    name: Name
-    active: Active
-    created_at: Created
-    updated_at: Updated
-  # labels for forms and tables
+
+# labels for forms and tables
   helpers:
     label:
+# fallback attributes across models
+      active: Active
+      name: Name
+      created_at: Created
+      updated_at: Updated
       user:
         firstname: First Name
         surname: Surname
@@ -143,10 +147,7 @@ en:
       title: '%{name}'
       status:
         title: Status
-        active: Active
         inactive: Inactive
-        created: Created
-        updated: Updated
       email:
         title: Email
       ftp:
@@ -162,9 +163,10 @@ en:
       title: New Domain
     edit:
       title: 'Editing %{name}'
-    switcher:
+    switch:
       switchdomain: Select domain
-      switched: Changed domain
+      notice: Changed active domain
+      alert: No domain selected
     form:
       details: Details
       activation: Activation
@@ -194,6 +196,7 @@ en:
         source: This is the email address that others will send to
         destination: This is where the above email will be redirect to. Remember to include a mailbox address if you want it stored.
   mailboxes:
+    missing: That mailbox does not exist
     tab: Mailboxes
     index:
       title: Mailboxes
@@ -233,6 +236,15 @@ en:
         ttl: The Time-To-Live for this record
         description: This is for your information only
         distance: A lower number has higher priority
+    update:
+      notice: Record was successfully updated
+    destroy:
+      notice: Record was deleted
+      alert: Could not delete record
+    set_active:
+      notice: Record activated
+    set_inactive:
+      notice: Record de-activated
   config_files:
     tab: Configs
     index:
@@ -248,3 +260,4 @@ en:
       title: 'Editing %{name}'
     report:
       title: Role Report
+#  vim: set ts=2 sw=2 tw=80 ft=yaml fdm=indent et fen :

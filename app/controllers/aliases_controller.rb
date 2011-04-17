@@ -1,11 +1,11 @@
 class AliasesController < ApplicationController
   authorize_resource
   append_before_filter do
-    redirect_to domains_url unless @domain
+    redirect_to(domains_url, :alert => t('aliases.domain_missing')) unless @domain
   end
 
   rescue_from DataMapper::ObjectNotFoundError do |exception|
-    redirect_to aliases_path, :alert => t('missing')
+    redirect_to aliases_path, :alert => t('aliases.missing')
   end
 
   # GET /aliases
@@ -48,9 +48,11 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.save
-        format.html { redirect_to(aliases_path, :notice => 'Alias address was successfully created.') }
+        flash[:notice] = t('aliases.create.notice')
+        format.html { redirect_to(aliases_path) }
         format.xml  { render :xml => @alias, :status => :created, :location => @alias }
       else
+        flash[:alert] = t('aliases.create.alert')
         format.html { render :action => "new" }
         format.xml  { render :xml => @alias.errors, :status => :unprocessable_entity }
       end
@@ -64,9 +66,11 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.update(params[:alias])
-        format.html { redirect_to(aliases_path, :notice => 'Alias address was successfully updated.') }
+        flash[:notice] = t('aliases.update.notice')
+        format.html { redirect_to(aliases_path) }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('aliases.update.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @alias.errors, :status => :unprocessable_entity }
       end
@@ -78,11 +82,13 @@ class AliasesController < ApplicationController
   def destroy
     @alias = @domain.aliases.get!(params[:id])
     if @alias.system
-      return redirect_to(aliases_url, :alert => 'Cannot delete this alias')
+      flash[:alert] = t('aliases.destroy.alert')
+      return redirect_to(aliases_url)
     end
     @alias.destroy
 
     respond_to do |format|
+      flash[:notice] = t('aliases.destroy.notice')
       format.html { redirect_to(aliases_url) }
       format.js
       format.xml  { head :ok }
@@ -94,25 +100,29 @@ class AliasesController < ApplicationController
 
     respond_to do |format|
       if @alias.update(:active => true)
+        flash[:notice] = t('aliases.set_active.notice')
         format.html { redirect_to(aliases_path) }
         format.js { render 'active_toggle' }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('aliases.set_active.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @alias.errors, :status => :unprocessable_entity }
       end
     end
   end
-  
+
   def set_inactive
     @alias = @domain.aliases.get!(params[:id])
 
     respond_to do |format|
       if @alias.update(:active => false)
+        flash[:notice] = t('aliases.set_inactive.notice')
         format.html { redirect_to(aliases_path) }
         format.js { render 'active_toggle' }
         format.xml  { head :ok }
       else
+        flash[:alert] = t('aliases.set_inactive.alert')
         format.html { render :action => "edit" }
         format.xml  { render :xml => @alias.errors, :status => :unprocessable_entity }
       end

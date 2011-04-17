@@ -2,28 +2,29 @@
 %p= t('.summary')
 
 %table
-  %tr
-    %th= t('helpers.label.alias.source')
-    %th.centered= t('attributes.active')
-    %th= t('helpers.label.alias.destination')
-    %th= t('attributes.updated_at')
-    - if can? :modify, Alias
-      %th
+  %thead
+    %tr
+      %th= t('helpers.label.alias.source')
+      %th.centered= t('helpers.label.alias.active')
+      %th= t('helpers.label.alias.destination')
+      %th= t('helpers.label.alias.updated_at')
+      - if can? :modify, Alias
+        %th.right= t('.actions')
 
-  - @aliases.each do |a|
-    %tr{:id => "alias-#{a.id}"}
-      - if a.source.starts_with? '@'
-        %td= link_to t('aliases.catchall'), edit_alias_path(a)
-      - else
-        %td= link_to a.source, edit_alias_path(a)
-      %td.centered.status
-        = render :partial => 'active_toggle', :locals => {:a => a}
-      %td= a.destination_array.join('<br>').html_safe
-      %td
-        %time{:datetime => a.updated_at, :class => 'relative'}= a.updated_at
-      - if can? :manage, Alias
-        %td.right
-          = link_to image_tag('edit.png'), edit_alias_path(a)
-          - unless a.system
-            = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete, :remote => true
-
+  %tbody
+    - @aliases.each do |a|
+      %tr{:id => "alias-#{a.id}"}
+        - if a.source.starts_with? '@'
+          %td= link_to t('aliases.catchall'), edit_alias_path(a)
+        - else
+          %td= link_to a.source, edit_alias_path(a)
+        %td.centered.status
+          = render :partial => 'active_toggle', :locals => {:a => a}
+        %td= a.destination_array.join('<br>').html_safe
+        %td
+          %time{:datetime => a.updated_at, :class => 'relative'}= a.updated_at
+        - if can? :manage, Alias
+          %td.right
+            = link_to image_tag('edit.png'), edit_alias_path(a)
+            - unless a.system
+              = link_to image_tag('delete.png'), a, :confirm => 'Are you sure?', :method => :delete, :remote => true
