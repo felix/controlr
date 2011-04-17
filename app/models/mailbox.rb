@@ -19,17 +19,15 @@ class Mailbox
   #validates_format_of :email, :as => :email_address
 
   before :save do |mb|
-    self.email = email.slice(/[^@]+/) << '@' << @domain.name
-    a = @domain.aliases.first_or_create({:source => self.email},
+    self.email = self.email.slice(/[^@]+/) << '@' << self.domain.name
+    a = self.domain.aliases.first_or_create({:source => self.email},
                                         {:active => self.active})
     a.destination = a.destination_array << self.email
     a.save
-  end
 
-  before :valid? do
     # set default quota if nec
-    if self.quota.blank? || (self.quota == 0) || (self.quota > @domain.email_max_quota)
-      self.quota = @domain.email_max_quota
+    if self.quota.blank? || (self.quota == 0) || (self.quota > self.domain.email_max_quota)
+      self.quota = self.domain.email_max_quota
     end
   end
 

@@ -20,14 +20,12 @@ class NameRecord
   #validates_with_method :value, :check_value
 
   before :save do
-    if !self.host.end_with? @domain.name
-      self.host = "#{self.host.chomp('.')}.#{@domain.name}"
+    if !self.host.end_with? self.domain.name
+      self.host = "#{self.host.chomp('.')}.#{self.domain.name}"
     end
-  end
 
-  before :valid? do
-    if self.ttl.blank? || (self.ttl == 0) || (self.ttl < @domain.dns_min_ttl)
-      self.ttl = @domain.dns_min_ttl
+    if self.ttl.blank? || (self.ttl == 0) || (self.ttl < self.domain.dns_min_ttl)
+      self.ttl = self.domain.dns_min_ttl
     end
   end
 

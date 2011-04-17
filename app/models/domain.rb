@@ -4,13 +4,13 @@ class Domain
 
   property :id, Serial
   property :name, String, :unique => true, :required => true
-  property :active, Boolean
-  property :email_active, Boolean
+  property :active, Boolean, :default => false
+  property :email_active, Boolean, :default => false
   property :email_alias, String
 #  property :backup_mx, Boolean, :default => 0
 #  property :mailboxes_max, Integer, :default => 0, :required => false
   property :email_max_quota, Integer, :default => '200000'
-  property :ftp_active, Boolean
+  property :ftp_active, Boolean, :default => false
   property :ftp_quota, Integer, :default => 0
   property :dns_active, Boolean, :default => 0
   property :dns_min_ttl, Integer, :default => '43200'
