@@ -4,8 +4,6 @@
 en:
   logout: Log Out
   login: Log In
-  active: Active
-  settings: Settings
 # fallback flash messages
   notice: Operation successful
   alert: Operation failed
@@ -17,6 +15,7 @@ en:
   edit: Edit
   save: Save
   generate: Generate
+  empty: '[empty]'
 
   missing: The requested resource does not exist
   unauthorized:
@@ -75,6 +74,8 @@ en:
         other: '%{count} Records'
   # mainly for sidebar contents
   layouts:
+    application:
+      admin: Admin
     dashboard:
       title: Shortcuts
     users:
@@ -251,6 +252,26 @@ en:
       title: Config File Status
       summary: The current status of all generated config files
       generate: Generate
+  default_name_records:
+    tab: DNS Defaults
+    index:
+      title: Default DNS Records
+      summary: These entries will be created for each new domain in your account
+      empty: '[domain name]'
+    new:
+      title: New Default DNS Record
+    edit:
+      title: 'Editing %{type} default'
+    form:
+      hints:
+        type: The DNS record type
+        host: The domain name will be appended to this host. Can be left blank
+        value: This can be a FQDN or an IP address depending on the type. If a FQDN is supplied, ensure it resolves
+        ttl: The Time-To-Live for this record
+        description: This is for your information only
+        distance: A lower number has higher priority
+  default_aliases:
+    tab: Email Defaults
   roles:
     index:
       title: Roles

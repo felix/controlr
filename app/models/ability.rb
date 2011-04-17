@@ -27,7 +27,7 @@ class Ability
       end
 
       # can manage all email in account
-      can :manage, [Mailbox, Alias, NameRecord] do |resource|
+      can :manage, [Mailbox, Alias, NameRecord, DefaultNameRecord, DefaultAlias] do |resource|
         resource.domain.account == user.account
       end
 

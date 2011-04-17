@@ -50,5 +50,15 @@ class DomainTest < Test::Unit::TestCase
       NameRecord.gen(:domain => @domain)
       assert !File.exists?(File.join(CONFIG['config_file_base'],'tinydns',@domain.name))
     end
+
+    should 'have default aliases created from account' do
+      assert @domain.aliases.count > 0
+      assert @domain.aliases.count == @domain.account.default_aliases.count
+    end
+
+    should 'have default name records created from account' do
+      assert @domain.name_records.count > 0
+      assert @domain.name_records.count == @domain.account.default_name_records.count
+    end
   end
 end

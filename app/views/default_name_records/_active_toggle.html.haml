@@ -1,0 +1,4 @@
+- if default_name_record.active
+  = link_to(image_tag('active.png'), set_inactive_default_name_record_path(default_name_record), :method => :post, :remote => true)
+- else 
+  = link_to(image_tag('inactive.png'), set_active_default_name_record_path(default_name_record), :method => :post, :remote => true)

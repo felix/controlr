@@ -50,6 +50,20 @@ Controlr::Application.routes.draw do
     end
   end
 
+  resources :default_name_records do
+    member do
+      post 'set_active'
+      post 'set_inactive'
+    end
+  end
+
+  resources :default_aliases do
+    member do
+      post 'set_active'
+      post 'set_inactive'
+    end
+  end
+
   resources :roles do
     collection do
       get 'report'

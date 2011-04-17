@@ -1,0 +1,32 @@
+%h1= t('.title')
+%p= t('.summary')
+
+%table.sorter
+  %thead
+    %tr
+      %th= t('helpers.label.name_record.host')
+      %th= t('helpers.label.name_record.type')
+      %th.centered= t('helpers.label.name_record.active')
+      %th= t('helpers.label.name_record.value')
+      %th= t('helpers.label.name_record.description')
+      %th= t('helpers.label.name_record.updated_at')
+      - if can? :manage, NameRecord
+        %th= t('.actions')
+
+  %tbody
+    - @default_name_records.each do |default_name_record|
+      %tr{:id => "default_name_record-#{default_name_record.id}"}
+        %td= link_to (default_name_record.host||t('.empty')), edit_default_name_record_path(default_name_record)
+        %td
+          = default_name_record.type
+          = "(#{default_name_record.distance})" if default_name_record.type == 'MX'
+        %td.centered.status
+          = render :partial => 'active_toggle', :locals => {:default_name_record => default_name_record}
+        %td= default_name_record.value
+        %td= default_name_record.description
+        %td
+          %time{:datetime => default_name_record.updated_at, :class => 'relative'}= default_name_record.updated_at
+        - if can? :manage, NameRecord
+          %td.right
+            =link_to image_tag('edit.png'), edit_default_name_record_path(default_name_record), :title => t('.edit')
+            =link_to image_tag('delete.png'), default_name_record, :confirm => t('.confirm'), :method => :delete, :title => t('.delete'), :remote => true

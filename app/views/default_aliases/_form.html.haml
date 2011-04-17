@@ -1,0 +1,32 @@
+= form_for(@default_alias) do |f|
+  -if @default_alias.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@default_alias.errors.count, "error")} prohibited this alias address from being saved:"
+      %ul
+        - @default_alias.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    %legend= t('.details')
+    %ul
+      %li
+        = f.label :source
+        - if !@default_alias.new? && @default_alias.source.blank?
+          = t('aliases.catchall')
+        - else
+          = f.text_field :source, :value => @default_alias.source
+        %span.hint= t('.hints.source')
+      %li
+        = f.label :destination
+        = f.text_area :destination,
+          :rows => 5,
+          :value => (@default_alias.destination ? @default_alias.destination_array.join("\n") : '')
+        %span.hint= t('.hints.destination')
+      %li
+        = f.label :active
+        = f.check_box :active
+
+  %fieldset.actions
+    = f.submit t('.save')
+    \|
+    = link_to t('.back'), default_aliases_path

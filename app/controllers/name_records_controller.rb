@@ -5,7 +5,7 @@ class NameRecordsController < ApplicationController
   end
 
   rescue_from DataMapper::ObjectNotFoundError do |exception|
-    redirect_to name_records_path, :alert => t('missing')
+    redirect_to name_records_path, :alert => t('name_records.missing')
   end
 
   # GET /name_records

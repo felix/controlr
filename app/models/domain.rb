@@ -13,7 +13,6 @@ class Domain
   property :ftp_active, Boolean, :default => false
   property :ftp_quota, Integer, :default => 0
   property :dns_active, Boolean, :default => 0
-  property :dns_min_ttl, Integer, :default => '43200'
   property :passhash, String, :length => 32
   property :created_at, DateTime
   property :updated_at, DateTime
@@ -39,60 +38,28 @@ class Domain
     end
   end
 
-  def create_default_aliases
-    hostmaster = self.aliases.first_or_create(
-      {:source => "hostmaster@#{self.name}"},
-      {:destination => CONFIG['hostmaster'],
-      :active => true,
-      :system => true}
-    )
-    postmaster = self.aliases.first_or_create(
-      {:source => "postmaster@#{self.name}"},
-      {:destination => CONFIG['postmaster'],
-      :active => true,
-      :system => true}
-    )
-    catchall = self.aliases.first_or_create(
-      {:source => "@#{self.name}"},
-      {:destination => '',
-      :active => false,
-      :system => true}
-    )
-    return hostmaster && postmaster && catchall
+  def copy_default_name_records
+    self.account.default_name_records.each do |dnr|
+      self.name_records.first_or_create(
+        {:type => dnr.type,
+          :value => dnr.value,
+          :host => "#{dnr.host}.#{self.name}"},
+          {:active => dnr.active,
+            :distance => dnr.distance,
+            :description => dnr.description}
+      )
+    end
   end
 
-  def create_default_name_records
-    ns1 = self.name_records.first_or_create(
-      {:type => 'NS',
-      :host => self.name,
-      :value => CONFIG['nameserver1']},
-      {:active => true,
-      :description => 'Automatically generated entry'}
-    )
-    ns2 = self.name_records.first_or_create(
-      {:type => 'NS',
-      :host => self.name,
-      :value => CONFIG['nameserver2']},
-      {:active => true,
-      :description => 'Automatically generated entry'}
-    )
-    mx1 = self.name_records.first_or_create(
-      {:type => 'MX',
-      :host => self.name,
-      :value => CONFIG['mx1']},
-      {:active => false,
-      :distance => 10,
-      :description => 'Automatically generated entry'}
-    )
-    mx2 = self.name_records.first_or_create(
-      {:type => 'MX',
-      :host => self.name,
-      :value => CONFIG['mx2']},
-      {:active => false,
-      :distance => 20,
-      :description => 'Automatically generated entry'}
-    )
-    return ns1 && ns2 && mx1 && mx2
+  def copy_default_aliases
+    self.account.default_aliases.each do |da|
+      self.aliases.first_or_create(
+        {:source => "#{da.source}@#{self.name}"},
+        {:destination => da.destination,
+          :active => da.active,
+          :system => da.system}
+      )
+    end
   end
 
   def create_gmail_name_records

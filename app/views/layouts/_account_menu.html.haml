@@ -8,3 +8,6 @@
     = create_tab t('users.tab'), users_path
   - if can? :read, Domain
     = create_tab t('domains.tab'), domains_path
+  - if can? :edit, Account
+    = create_tab t('default_name_records.tab'), default_name_records_path
+    = create_tab t('default_aliases.tab'), default_aliases_path

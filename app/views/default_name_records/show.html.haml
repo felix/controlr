@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Host:
+  = @name_record.host
+%p
+  %b Description:
+  = @name_record.description
+%p
+  %b Active:
+  = @name_record.active
+%p
+  %b Type:
+  = @name_record.type
+%p
+  %b Value:
+  = @name_record.value
+
+= link_to 'Edit', edit_name_record_path(@name_record)
+\|
+= link_to 'Back', name_records_path

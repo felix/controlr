@@ -19,12 +19,24 @@ Domain.fixture {{
   :active => true,
   :account => Account.gen,
 }}
-
 Alias.fixture {{
   :source => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},
   :destination => 'test@example.com',
   :active => true,
   :domain => Domain.gen
+}}
+DefaultAlias.fixture {{
+  :source => DataMapper::Sweatshop.unique(:email) {/\w+/.gen},
+  :destination => 'test@example.com',
+  :active => true,
+  :account => Account.gen
+}}
+DefaultNameRecord.fixture {{
+  :host => /\w+/.gen,
+  :description => /\w+/.gen,
+  :active => true,
+  :value => /\d{2}\.\d{2}\.\d{2}\.\d{2}/.gen,
+  :account => Account.gen
 }}
 Mailbox.fixture {{
   :email => DataMapper::Sweatshop.unique(:email) {/\w+@\w+\.com/.gen},

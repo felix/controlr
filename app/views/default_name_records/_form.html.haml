@@ -1,0 +1,50 @@
+- content_for :head do
+  %script
+    jQuery(document).ready(function(){
+    // toggle name record types
+    jQuery('#default_name_record_type').change(function(){
+    jQuery('#mx-distance').toggle(jQuery(this).val() == 'MX');
+    }).trigger('change');
+    });
+
+= form_for @default_name_record do |f|
+  -if @default_name_record.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@default_name_record.errors.count, "error")} prohibited this default_name_record from being saved:"
+      %ul
+        - @default_name_record.errors.full_messages.each do |msg|
+          %li= msg
+
+  %fieldset
+    %ul
+      %li
+        = f.label :type
+        = f.select :type, NameRecord::TYPES
+        %span.hint= t('.hints.type')
+      %li
+        = f.label :host
+        = f.text_field :host
+        %span.hint= t('.hints.host')
+      %li
+        = f.label :active
+        = f.check_box :active
+      %li
+        = f.label :value
+        = f.text_field :value
+        %span.hint= t('.hints.value')
+      %li#mx-distance
+        = f.label :distance
+        = f.text_field :distance
+        %span.hint= t('.hints.distance')
+      %li
+        = f.label :ttl
+        = f.text_field :ttl
+        %span.hint= t('.hints.ttl')
+      %li
+        = f.label :description
+        = f.text_field :description
+        %span.hint= t('.hints.description')
+  %fieldset.actions
+    = f.submit t('.save')
+    \|
+    = link_to t('.back'), default_name_records_path

@@ -1,0 +1,7 @@
+- content_for :sidebar do
+  %h3= t('.title')
+  %nav
+    %ul
+      %li= link_to t('.list'), default_name_records_path, :class => 'list button'
+      %li= link_to t('.new'), new_default_name_record_path, :class => 'add button'
+= render :file => 'layouts/application'

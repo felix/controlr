@@ -47,11 +47,6 @@ class DomainsControllerTest < ActionController::TestCase
         should 'create default aliases' do
           assert_not_nil assigns(:domain).aliases
         end
-
-        should 'create NS records' do
-          assert assigns(:domain).name_records.all(:type => 'NS').count >= 2
-        end
-
       end
 
       context 'on POST to :new with invalid data' do
