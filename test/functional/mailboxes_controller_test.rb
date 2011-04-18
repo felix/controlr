@@ -41,12 +41,6 @@ class MailboxesControllerTest < ActionController::TestCase
           assert_not_nil assigns(:mailbox)
         end
 
-        should 'provide default quota if empty' do
-          mb = Mailbox.make(:quota => nil)
-          post :create, :mailbox => mb.attributes
-          assert assigns(:mailbox).quota == @domain.email_max_quota
-        end
-
         context 'with invalid data' do
           should 'return to form' do
             post :create, :mailbox => @domain.mailboxes.make(:email=> nil).attributes

@@ -44,7 +44,8 @@ class MailboxesController < ApplicationController
   # POST /mailboxes
   # POST /mailboxes.xml
   def create
-    @mailbox = @domain.mailboxes.new(params[:mailbox])
+    @mailbox = @domain.mailboxes.new
+    @mailbox.attributes = params[:mailbox]
 
     respond_to do |format|
       if @mailbox.save

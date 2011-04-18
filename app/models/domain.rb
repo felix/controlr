@@ -43,7 +43,7 @@ class Domain
       self.name_records.first_or_create(
         {:type => dnr.type,
           :value => dnr.value,
-          :host => "#{dnr.host}.#{self.name}"},
+          :host => dnr.host.blank? ? self.name : "#{dnr.host}.#{self.name}"},
           {:active => dnr.active,
             :distance => dnr.distance,
             :description => dnr.description}

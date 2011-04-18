@@ -13,7 +13,7 @@
 
   %tbody
     - @default_aliases.each do |a|
-      %tr{:id => "alias-#{a.id}"}
+      %tr{:id => "default_alias-#{a.id}"}
         - if a.source.blank?
           %td= link_to t('aliases.catchall'), edit_default_alias_path(a)
         - else

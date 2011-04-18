@@ -35,29 +35,9 @@ class MailboxTest < Test::Unit::TestCase
       assert @mailbox.passhash = '098f6bcd4621d373cade4e832627b4f6'
     end
 
-    should allow_value('1').for(:quota)
-    should_not allow_value('').for(:quota)
-    should_not allow_value('100Mb').for(:quota)
-
-    should 'have default quota created if nil' do
-      mb = Mailbox.gen(:quota => nil)
-      assert mb.quota == mb.domain.email_max_quota
-    end
-
-    should 'have default quota if update as nil' do
-      @mailbox.update(:quota => nil)
-      assert @mailbox.quota == @mailbox.domain.email_max_quota
-    end
-
-    should 'have default quota created as 0' do
-      mb = Mailbox.gen(:quota => 0)
-      assert mb.quota == mb.domain.email_max_quota
-    end
-
-    should 'have default quota if update as 0' do
-      @mailbox.update(:quota => 0)
-      assert @mailbox.quota == @mailbox.domain.email_max_quota
-    end
+    #should allow_value('1').for(:quota)
+    should allow_value('').for(:quota)
+    #should_not allow_value('100Mb').for(:quota)
 
     should "not set quota above domain's default quota" do
       @mailbox.update(:quota => @mailbox.domain.email_max_quota+10)

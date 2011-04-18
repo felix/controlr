@@ -92,7 +92,7 @@ en:
       list: List Domains
       edit: Edit Domain
       new: New Domain
-    aliases:
+    aliases: &aliases_layout
       title: Alias Actions
       new: New Alias
       list: List Aliases
@@ -100,7 +100,7 @@ en:
       title: Mailbox Actions
       new: New Mailbox
       list: List Mailboxes
-    name_records:
+    name_records: &name_records_layout
       title: DNS Actions
       new: New Record
       list: List Entries
@@ -109,6 +109,12 @@ en:
         defaults: Defaults
         gmail: Gmail
         gapps: Google Apps
+    default_aliases:
+      <<: *aliases_layout
+      title: Default Alias Actions
+    default_name_records:
+      <<: *name_records_layout
+      title: Default DNS Actions
     roles:
       title: Role Actions
       list: List Roles
@@ -181,7 +187,7 @@ en:
         email_max_quota: "Maximum quota for users' email storage in kilobytes (204800 = 200Mb)"
         email_alias: "This setting will redirect all email sent to '%{domain}' to addresses in the selected domain"
         ftp_quota: Maximum storage (in bytes) used for FTP and website
-  aliases:
+  aliases: &aliases
     tab: Aliases
     index:
       title: Aliases
@@ -196,6 +202,17 @@ en:
       hints:
         source: This is the email address that others will send to
         destination: This is where the above email will be redirect to. Remember to include a mailbox address if you want it stored.
+    create:
+      notice: Alias was created
+    update:
+      notice: Alias was successfully updated
+    destroy:
+      notice: Alias was deleted
+      alert: Could not delete alias
+    set_active:
+      notice: Alias activated
+    set_inactive:
+      notice: Alias de-activated
   mailboxes:
     missing: That mailbox does not exist
     tab: Mailboxes
@@ -213,6 +230,17 @@ en:
         email: This is also the username used to login to IMAP, POP and SMTP services
         passhash: The password used to access IMAP, POP and SMTP services. Will only be changed if supplied
         quota: "Set the maximum size (in kilobytes) for this mailbox. 0 for maximum. (204800 = 200Mb)"
+    create:
+      notice: Mailbox was created
+    update:
+      notice: Mailbox was successfully updated
+    destroy:
+      notice: Mailbox was deleted
+      alert: Could not delete mailbox
+    set_active:
+      notice: Mailbox activated
+    set_inactive:
+      notice: Mailbox de-activated
   accounts:
     tab: Account
     index:
@@ -221,7 +249,7 @@ en:
       title: New Account
     edit:
       title: 'Editing %{name}'
-  name_records:
+  name_records: &name_records
     tab: DNS
     index:
       title: DNS Records
@@ -253,6 +281,7 @@ en:
       summary: The current status of all generated config files
       generate: Generate
   default_name_records:
+    <<: *name_records
     tab: DNS Defaults
     index:
       title: Default DNS Records
@@ -264,14 +293,21 @@ en:
       title: 'Editing %{type} default'
     form:
       hints:
-        type: The DNS record type
         host: The domain name will be appended to this host. Can be left blank
-        value: This can be a FQDN or an IP address depending on the type. If a FQDN is supplied, ensure it resolves
-        ttl: The Time-To-Live for this record
-        description: This is for your information only
-        distance: A lower number has higher priority
   default_aliases:
+    <<: *aliases
     tab: Email Defaults
+    index:
+      title: Default Aliases
+      summary: These aliases will be created for each new domain in your account
+    new:
+      title: New Default Alias
+    edit:
+      title: 'Editing %{type} default'
+    form:
+      hints:
+        source: This is the email address that others will send to
+        destination: This is where the above email will be redirect to
   roles:
     index:
       title: Roles

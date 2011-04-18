@@ -40,16 +40,31 @@ class DefaultNameRecordTest < Test::Unit::TestCase
       setup do
         @record.type = 'A'
       end
-      should allow_value('192.168.1.1').for(:value)
-      should_not allow_value('example.com').for(:value)
+
+      should 'allow IP address' do
+        @record.value = '192.168.1.1'
+        assert @record.valid?
+      end
+
+      should 'not allow FQDN' do
+        @record.value = 'example.com'
+        assert !@record.valid?
+      end
     end
 
-    context 'when MX record' do
+    context 'when CNAME record' do
       setup do
-        @record.type = 'MX'
+        @record.type = 'CNAME'
       end
-      should_not allow_value('192.168.1.1').for(:value)
-      should allow_value('example.com').for(:value)
+      should 'not allow IP address' do
+        @record.value = '192.168.1.1'
+        assert !@record.valid?
+      end
+
+      should 'allow FQDN' do
+        @record.value = 'example.com'
+        assert @record.valid?
+      end
     end
 
   end

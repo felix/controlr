@@ -1,29 +1,31 @@
 %h1= t('.title')
 
-%table
-  %tr
-    %th Host
-    %th Type
-    %th.centered= t('attributes.active')
-    %th Value
-    %th Description
-    %th= t('attributes.updated_at')
-    - if can? :manage, NameRecord
-      %th
-
-  - @name_records.each do |name_record|
-    %tr{:id => "name_record-#{name_record.id}"}
-      %td= link_to name_record.host, edit_name_record_path(name_record)
-      %td
-        = name_record.type
-        = "(#{name_record.distance})" if name_record.type == 'MX'
-      %td.centered.status
-        = render :partial => 'active_toggle', :locals => {:name_record => name_record}
-      %td= name_record.value
-      %td= name_record.description
-      %td
-        %time{:datetime => name_record.updated_at, :class => 'relative'}= name_record.updated_at
+%table.sorter
+  %thead
+    %tr
+      %th= t('helpers.label.name_record.host')
+      %th= t('helpers.label.name_record.type')
+      %th.centered= t('helpers.label.name_record.active')
+      %th= t('helpers.label.name_record.value')
+      %th= t('helpers.label.name_record.description')
+      %th= t('helpers.label.name_record.updated_at')
       - if can? :manage, NameRecord
-        %td.right
-          =link_to image_tag('edit.png'), edit_name_record_path(name_record), :title => t('actions.edit')
-          =link_to image_tag('delete.png'), name_record, :confirm => t('actions.confirm'), :method => :delete, :title => t('actions.delete'), :remote => true
+        %th= t('.actions')
+
+  %tbody
+    - @name_records.each do |name_record|
+      %tr{:id => "name_record-#{name_record.id}"}
+        %td= link_to name_record.host, edit_name_record_path(name_record)
+        %td
+          = name_record.type
+          = "(#{name_record.distance})" if name_record.type == 'MX'
+        %td.centered.status
+          = render :partial => 'active_toggle', :locals => {:name_record => name_record}
+        %td= name_record.value
+        %td= name_record.description
+        %td
+          %time{:datetime => name_record.updated_at, :class => 'relative'}= name_record.updated_at
+        - if can? :manage, NameRecord
+          %td.right
+            =link_to image_tag('edit.png'), edit_name_record_path(name_record), :title => t('.edit')
+            =link_to image_tag('delete.png'), name_record, :confirm => t('.confirm'), :method => :delete, :title => t('.delete'), :remote => true

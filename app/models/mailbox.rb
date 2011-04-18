@@ -24,11 +24,15 @@ class Mailbox
                                         {:active => self.active})
     a.destination = a.destination_array << self.email
     a.save
+  end
 
+  def quota=(new_quota)
+    return if new_quota.blank?
     # set default quota if nec
-    if self.quota.blank? || (self.quota == 0) || (self.quota > self.domain.email_max_quota)
-      self.quota = self.domain.email_max_quota
+    if new_quota.to_i > self.domain.email_max_quota
+      new_quota = self.domain.email_max_quota
     end
+    super(new_quota)
   end
 
   def passhash=(plain)
