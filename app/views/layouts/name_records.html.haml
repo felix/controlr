@@ -6,7 +6,7 @@
       - if can? :create, NameRecord
         %li= link_to t('.new'), new_name_record_path, :class => 'add button'
         %li
-          = form_tag defaults_name_records_path, :class => 'auto-submit add button' do
+          = form_tag generate_name_records_path, :class => 'auto-submit add button' do
             = t('actions.generate')
             %select{:name => 'type'}
               %option{:value => ''}= t('.generate.select')

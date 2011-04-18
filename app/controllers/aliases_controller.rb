@@ -128,4 +128,16 @@ class AliasesController < ApplicationController
       end
     end
   end
+
+  def generate
+    respond_to do |format|
+      if @domain.copy_default_aliases
+        flash[:notice] = t('aliases.generate.notice')
+        format.html { redirect_to(aliases_url) }
+      else
+        flash[:alert] = t('aliases.generate.alert')
+        format.html { redirect_to(aliases_url) }
+      end
+    end
+  end
 end

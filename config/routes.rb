@@ -29,7 +29,7 @@ Controlr::Application.routes.draw do
       post 'set_inactive'
     end
     collection do
-      post 'defaults'
+      post 'generate'
     end
   end
 
@@ -46,7 +46,7 @@ Controlr::Application.routes.draw do
       post 'set_inactive'
     end
     collection do
-      post 'defaults'
+      post 'generate'
     end
   end
 

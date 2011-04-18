@@ -15,53 +15,52 @@ class Account
 
   # default default_name_records for a new account
   def create_default_name_records
-    ns1 = self.default_name_records.first_or_create(
-      {:type => 'NS',
-      :value => CONFIG['nameserver1']},
-      {:active => true,
-      :description => 'Automatically generated entry'}
-    )
-    ns2 = self.default_name_records.first_or_create(
-      {:type => 'NS',
-      :value => CONFIG['nameserver2']},
-      {:active => true,
-      :description => 'Automatically generated entry'}
-    )
-    mx1 = self.default_name_records.first_or_create(
-      {:type => 'MX',
-      :value => CONFIG['mx1']},
-      {:active => false,
-      :distance => 10,
-      :description => 'Automatically generated entry'}
-    )
-    mx2 = self.default_name_records.first_or_create(
-      {:type => 'MX',
-      :value => CONFIG['mx2']},
-      {:active => false,
-      :distance => 20,
-      :description => 'Automatically generated entry'}
-    )
-    return ns1 && ns2 && mx1 && mx2
+    records = []
+    CONFIG['nameservers'].each do |ns|
+      records << self.default_name_records.first_or_create(
+        {:type => 'NS',
+          :value => ns},
+          {:active => true,
+            :description => 'Automatically generated entry'}
+      )
+    end
+    CONFIG['mx'].each_index do |idx|
+      records << self.default_name_records.first_or_create(
+        {:type => 'MX',
+          :value => CONFIG['mx'][idx]},
+          {:active => false,
+            :distance => (idx+1)*5,
+            :description => 'Automatically generated entry'}
+      )
+    end
+    # return true only if all created successfully
+    return records.inject(true){|memo,r| memo && !r.nil?}
   end
 
   def create_default_aliases
     hostmaster = self.default_aliases.first_or_create(
       {:source => 'hostmaster'},
       {:destination => CONFIG['hostmaster'],
-      :active => true,
-      :system => true}
+        :active => true,
+        :system => true}
     )
     postmaster = self.default_aliases.first_or_create(
       {:source => 'postmaster'},
       {:destination => CONFIG['postmaster'],
-      :active => true,
-      :system => true}
+        :active => true,
+        :system => true}
+    )
+    abuse = self.default_aliases.first_or_create(
+      {:source => 'abuse'},
+      {:destination => CONFIG['abuse'],
+        :active => true,
+        :system => true}
     )
     catchall = self.default_aliases.first_or_create(
       {:source => ''},
       {:destination => '',
-      :active => false,
-      :system => true}
+        :active => false,
+        :system => true}
     )
     return hostmaster && postmaster && catchall
   end

@@ -5,4 +5,10 @@
       %li= link_to t('.list'), aliases_path, :class => 'list button'
       - if can? :create, Alias
         %li= link_to t('.new'), new_alias_path, :class => 'add button'
+        %li
+          = form_tag generate_aliases_path, :class => 'auto-submit add button' do
+            = t('actions.generate')
+            %select{:name => 'type'}
+              %option{:value => ''}= t('.generate.select')
+              %option{:value => 'defaults'}= t('.generate.defaults')
 = render :file => 'layouts/application'

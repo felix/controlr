@@ -130,10 +130,10 @@ class NameRecordsController < ApplicationController
     end
   end
 
-  def defaults
+  def generate
     msg = 'Records already exist'
     if params[:type] == 'defaults'
-      if @domain.create_default_name_records
+      if @domain.copy_default_name_records
         msg = 'Records were successfully generated'
       end
     elsif params[:type] == 'gmail'
@@ -148,7 +148,6 @@ class NameRecordsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(name_records_url, :notice => msg) }
-      format.xml  { render :xml => @name_records }
     end
   end
 end

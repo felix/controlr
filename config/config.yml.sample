@@ -1,13 +1,24 @@
-
+# a sample configuration file for ControlR
+#
+# these are a bare minimum
 defaults: &defaults
   host_domain: example.com
   postmaster: postmaster@example.com
   hostmaster: hostmaster@example.com
-  nameserver1: ns1.example.com
-  nameserver2: ns2.example.com
-  mx1: mail.example.com
-  mx2: mx2.example.com
-  dns_service_type: tinydns
+  abuse: abuse@example.com
+  nameservers:
+    - ns1.example.com
+    - ns2.example.com
+# created with increasing distance values
+  mx:
+    - mail.example.com
+    - mx2.example.com
+
+# these are default values if not specified
+#  dns_service_type: tinydns
+#  config_file_base: File.join(Rails.root,'generated_configs')
+#  template_base: File.join(Rails.root,'app','views','templates')
+#  dns_min_ttl: 3600
 
 production:
   <<: *defaults
@@ -17,3 +28,4 @@ development:
 
 test:
   <<: *defaults
+#  vim: set ts=2 sw=2 tw=80 ft=yaml fdm=manual et fen :

@@ -1,4 +1,4 @@
-- if @account.domains.size > 0
+- if @account.domains.count > 0
   |
   = form_tag switch_domains_path, :class => 'auto-submit' do
     %select{:name => 'id'}
