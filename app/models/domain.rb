@@ -130,7 +130,7 @@ class Domain
     )
     webmail = self.name_records.first_or_create(
       {:type => 'CNAME',
-      :host => "webmail.#{self.name}",
+      :host => "mail.#{self.name}",
       :value => 'ghs.google.com'},
       {:active => false,
       :description => 'Google Apps record'}
