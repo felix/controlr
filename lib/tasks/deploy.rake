@@ -19,7 +19,7 @@ namespace :deploy do
 
   desc 'Migrate the database'
   task :migrate do
-    sh "ssh #{user}@#{host} 'cd #{deploy_to} && RAILS_ENV=production rake db:migrate'"
+    sh "ssh #{user}@#{host} 'cd #{deploy_to} && RAILS_ENV=production rake db:autoupgrade'"
   end
 
   desc 'Restart Passenger'

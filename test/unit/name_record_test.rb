@@ -77,5 +77,25 @@ class NameRecordTest < Test::Unit::TestCase
       end
     end
 
+    context 'when PTR record' do
+      setup do
+        @record.type = 'PTR'
+      end
+      should 'not allow IP address' do
+        @record.value = '192.168.1.1'
+        assert !@record.valid?
+      end
+
+      should 'not allow FQDN' do
+        @record.value = 'example.com'
+        assert !@record.valid?
+      end
+
+      should 'have some resemblance to a PTR record' do
+        @record.value = '1.2.168.192.in-addr.arpa.'
+        assert @record.valid?
+      end
+    end
+
   end
 end
