@@ -1,0 +1,82 @@
+
+Account
+id => {:primitive=>Integer, :min=>1, :serial=>true}
+name => {:primitive=>String, :required=>true, :unique=>true}
+active => {:primitive=>TrueClass}
+created_at => {:primitive=>DateTime}
+updated_at => {:primitive=>DateTime}
+
+Alias
+id => {:primitive=>Integer, :min=>1, :serial=>true}
+source => {:primitive=>String, :required=>true}
+destination => {:primitive=>String, :lazy=>true, :length=>65535}
+active => {:primitive=>TrueClass}
+system => {:primitive=>TrueClass, :default=>false}
+created_at => {:primitive=>DateTime}
+updated_at => {:primitive=>DateTime}
+domain_id => {:primitive=>Integer, :index=>:domain, :required=>true, :key=>false, :min=>1, :max=>2147483647}
+
+Domain
+id => {:primitive=>Integer, :min=>1, :serial=>true}
+name => {:primitive=>String, :unique=>true, :required=>true}
+active => {:primitive=>TrueClass}
+email_active => {:primitive=>TrueClass}
+email_alias => {:primitive=>String}
+email_max_quota => {:primitive=>Integer, :default=>"200000"}
+ftp_active => {:primitive=>TrueClass}
+ftp_quota => {:primitive=>Integer, :default=>0}
+dns_active => {:primitive=>TrueClass, :default=>0}
+dns_min_ttl => {:primitive=>Integer, :default=>"43200"}
+passhash => {:primitive=>String, :length=>32}
+created_at => {:primitive=>DateTime}
+updated_at => {:primitive=>DateTime}
+account_id => {:primitive=>Integer, :index=>:account, :required=>true, :key=>false, :min=>1, :max=>2147483647}
+
+DomainUser
+domain_id => {:primitive=>Integer, :required=>true, :key=>true, :min=>1, :max=>2147483647}
+user_id => {:primitive=>Integer, :required=>true, :key=>true, :min=>1, :max=>2147483647}
+
+Mailbox
+id => {:primitive=>Integer, :min=>1, :serial=>true}
+email => {:primitive=>String, :unique=>true, :required=>true}
+active => {:primitive=>TrueClass}
+passhash => {:primitive=>String, :length=>32, :required=>true}
+quota => {:primitive=>Integer}
+bytes => {:primitive=>Integer}
+messages => {:primitive=>Integer}
+created_at => {:primitive=>DateTime}
+updated_at => {:primitive=>DateTime}
+domain_id => {:primitive=>Integer, :index=>:domain, :required=>true, :key=>false, :min=>1, :max=>2147483647}
+
+NameRecord
+id => {:primitive=>Integer, :min=>1, :serial=>true}
+host => {:primitive=>String, :required=>true}
+description => {:primitive=>String}
+active => {:primitive=>TrueClass}
+type => {:primitive=>String, :required=>true, :length=>5, :default=>"A"}
+value => {:primitive=>String, :required=>true}
+distance => {:primitive=>Integer, :default=>0}
+ttl => {:primitive=>Integer}
+created_at => {:primitive=>DateTime}
+updated_at => {:primitive=>DateTime}
+domain_id => {:primitive=>Integer, :index=>:domain, :required=>true, :key=>false, :min=>1, :max=>2147483647}
+
+User
+email => {:primitive=>String, :required=>true, :unique=>true, :format=>:email_address}
+encrypted_password => {:primitive=>String, :default=>"", :required=>true, :length=>128}
+remember_token => {:primitive=>String, :length=>255, :required=>false}
+remember_created_at => {:primitive=>DateTime, :required=>false}
+reset_password_token => {:primitive=>String, :length=>255, :required=>false}
+sign_in_count => {:primitive=>Integer, :default=>0, :required=>false}
+current_sign_in_at => {:primitive=>DateTime, :required=>false}
+last_sign_in_at => {:primitive=>DateTime, :required=>false}
+current_sign_in_ip => {:primitive=>String, :length=>255, :required=>false}
+last_sign_in_ip => {:primitive=>String, :length=>255, :required=>false}
+id => {:primitive=>Integer, :min=>1, :serial=>true}
+firstname => {:primitive=>String}
+surname => {:primitive=>String}
+active => {:primitive=>TrueClass}
+role => {:primitive=>String, :required=>true, :default=>"user"}
+created_at => {:primitive=>DateTime}
+updated_at => {:primitive=>DateTime}
+account_id => {:primitive=>Integer, :index=>:account, :required=>true, :key=>false, :min=>1, :max=>2147483647}
