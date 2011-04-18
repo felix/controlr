@@ -26,7 +26,10 @@ class ApplicationController < ActionController::Base
     authenticate_user!
 
     if user_signed_in?
-      @account = Account.get(session[:current_account_id] ||= current_user.account.id)
+      session[:current_account_id] ||= current_user.account.id
+      @account = Account.get(session[:current_account_id])
+      return reset_session && redirect_to(root_path) unless @account
+
       if session[:current_domain_id]
         @domain = @account.domains.get(session[:current_domain_id])
         session[:current_domain_id] = nil unless @domain
