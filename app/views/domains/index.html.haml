@@ -2,12 +2,12 @@
 
 %table
   %tr
-    %th= t('attributes.name')
-    %th.centered= t('attributes.active')
+    %th= t('helpers.label.domain.name')
+    %th.centered= t('helpers.label.domain.active')
     %th.centered= t('.email_status')
     %th.centered= t('.dns_status')
     %th.centered= t('.ftp_status')
-    %th= t('attributes.updated_at')
+    %th= t('helpers.label.domain.updated_at')
     - if can? :manage, Domain
       %th
 

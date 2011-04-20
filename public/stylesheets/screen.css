@@ -274,10 +274,16 @@ td {
   padding: 5px 0;
   color: #888;
   font-weight: bold;
-  border-bottom: 1px dotted #eee;
+  border-bottom: 1px dotted #eaeaea;
 }
 .summary .warning {
   color: red;
+}
+.summary a {
+  color: inherit;
+}
+.summary td {
+  border-bottom: 1px solid #eee;
 }
 
 /*** forms ***/

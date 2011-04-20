@@ -43,4 +43,12 @@ class User
     end
   end
 
+  def self.active
+    all(:active => true)
+  end
+
+  def self.inactive
+    all(:active => false)
+  end
+
 end

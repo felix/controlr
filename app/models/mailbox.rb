@@ -39,4 +39,12 @@ class Mailbox
     super(Digest::MD5.hexdigest(plain)) unless plain.blank?
   end
 
+  def self.active
+    all(:active => true)
+  end
+
+  def self.inactive
+    all(:active => false)
+  end
+
 end

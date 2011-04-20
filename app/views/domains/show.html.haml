@@ -1,32 +1,66 @@
 %h1= t('.title', :name => @domain.name)
 
 .summary
-  %h2= t('.status.title')
-  %ul
-    %li{:class => @domain.active || 'warning'}
-      = @domain.active ? t('.status.active') : t('.status.inactive')
-    %li= t('activemodel.models.user', :count => @domain.users.count)
-    %li
-      = t('.status.created')
-      %time{:datetime => @domain.created_at, :class => 'relative'}= @domain.created_at
-    %li
-      = t('.status.updated')
-      %time{:datetime => @domain.updated_at, :class => 'relative'}= @domain.updated_at
+  %h2= t('.general.title')
+  %table
+    %tr
+      %td= link_to t('.general.status'), edit_domain_path
+      %td{:class => @domain.active || 'warning'}
+        = @domain.active ? t('.status.active') : t('.status.inactive')
+    %tr
+      %td= link_to t('.general.users'), users_path
+      %td
+        = @domain.users.active.count
+        \/
+        %span.warning
+          = @domain.users.inactive.count
+    %tr
+      %td= t('.general.created')
+      %td
+        %time{:datetime => @domain.created_at, :class => 'relative'}= @domain.created_at
+    %tr
+      %td= t('.general.updated')
+      %td
+        %time{:datetime => @domain.updated_at, :class => 'relative'}= @domain.updated_at
 .summary
   %h2= t('.email.title')
-  %ul
-    %li{:class => @domain.email_active || 'warning'}
-      = @domain.email_active ? t('.status.active') : t('.status.inactive')
-    %li= t('activemodel.models.alias', :count => @domain.aliases.count)
-    %li= t('activemodel.models.mailbox', :count => @domain.mailboxes.count)
+  %table
+    %tr
+      %td= link_to t('.email.status'), edit_domain_path
+      %td{:class => @domain.email_active || 'warning'}
+        = @domain.email_active ? t('.status.active') : t('.status.inactive')
+    %tr
+      %td= link_to t('.email.aliases'), aliases_path
+      %td
+        = @domain.aliases.active.count
+        \/
+        %span.warning
+          = @domain.aliases.inactive.count
+    %tr
+      %td= link_to t('.email.mailboxes'), mailboxes_path
+      %td
+        = @domain.mailboxes.active.count
+        \/
+        %span.warning
+          = @domain.mailboxes.inactive.count
 .summary
   %h2= t('.dns.title')
-  %ul
-    %li{:class => @domain.dns_active || 'warning'}
-      = @domain.dns_active ? t('.status.active') : t('.status.inactive')
-    %li= t('activemodel.models.name_record', :count => @domain.name_records.count)
+  %table
+    %tr
+      %td= link_to t('.dns.status'), edit_domain_path
+      %td{:class => @domain.dns_active || 'warning'}
+        = @domain.dns_active ? t('.status.active') : t('.status.inactive')
+    %tr
+      %td= link_to t('.dns.name_records'), name_records_path
+      %td
+        = @domain.name_records.active.count
+        \/
+        %span.warning
+          = @domain.name_records.inactive.count
 .summary
   %h2= t('.ftp.title')
-  %ul
-    %li{:class => @domain.ftp_active || 'warning'}
-      = @domain.ftp_active ? t('.status.active') : t('.status.inactive')
+  %table
+    %tr
+      %td= link_to t('.ftp.status'), edit_domain_path
+      %td{:class => @domain.ftp_active || 'warning'}
+        = @domain.ftp_active ? t('.status.active') : t('.status.inactive')

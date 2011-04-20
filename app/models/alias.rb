@@ -34,4 +34,12 @@ class Alias
     destination.split(',')
   end
 
+  def self.active
+    all(:active => true)
+  end
+
+  def self.inactive
+    all(:active => false)
+  end
+
 end

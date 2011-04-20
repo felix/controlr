@@ -4,11 +4,11 @@
 %table
   %tr
     %th= t('helpers.label.mailbox.email')
-    %th.centered= t('attributes.active')
+    %th.centered= t('helpers.label.mailbox.active')
     %th= t('helpers.label.mailbox.quota')
     %th= t('helpers.label.mailbox.bytes')
     %th= t('helpers.label.mailbox.messages')
-    %th= t('attributes.updated_at')
+    %th= t('helpers.label.mailbox.updated_at')
     - if can? :modify, Mailbox
       %th
 

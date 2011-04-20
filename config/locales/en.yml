@@ -152,16 +152,22 @@ en:
     tab: Domains
     home: Dashboard
     show:
+# common to most summaries
+      status: Status
       title: '%{name}'
-      status:
-        title: Status
+      general:
+        title: General
         inactive: Inactive
+        users: Users
       email:
         title: Email
+        aliases: Aliases
+        mailboxes: Mailboxes
       ftp:
         title: FTP
       dns:
         title: DNS
+        name_records: Records
     index:
       title: Domains
       email_status: Email
