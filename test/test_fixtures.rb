@@ -45,9 +45,16 @@ Mailbox.fixture {{
   :domain => Domain.gen
 }}
 NameRecord.fixture {{
-  :host => /\w+\.\w{3,6}\.\w{2}/.gen,
-  :description => /\w+/.gen,
+  :host => (fqdn = /\w+\.\w{3,6}\.\w{2}/.gen),
   :active => true,
   :value => /\d{2}\.\d{2}\.\d{2}\.\d{2}/.gen,
-  :domain => Domain.gen
+  :domain => Domain.gen(:name => fqdn)
+}}
+NameRecord.fixture(:mx) {{
+  :host => (fqdn = /\w+\.\w{3,6}\.\w{2}/.gen),
+  :active => true,
+  :type => 'MX',
+  :distance => '10',
+  :value => /\w+\.\w{3,6}\.\w{2}/.gen,
+  :domain => Domain.gen(:name => fqdn)
 }}

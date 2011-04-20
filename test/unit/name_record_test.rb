@@ -22,6 +22,16 @@ class NameRecordTest < Test::Unit::TestCase
     should belong_to(:domain)
     should allow_value(nil).for(:ttl)
 
+    should 'downcase host' do
+      @record.host = 'UPPERCASE'
+      assert @record.host == 'uppercase'
+    end
+
+    should 'downcase value' do
+      @record.value = 'UPPERCASE'
+      assert @record.value == 'uppercase'
+    end
+
     should 'default to type A' do
       assert @record.type == 'A'
     end
@@ -74,6 +84,18 @@ class NameRecordTest < Test::Unit::TestCase
       should 'allow FQDN' do
         @record.value = 'example.com'
         assert @record.valid?
+      end
+
+      should 'not allow another duplicate CNAME' do
+        @record.value = 'example.com'
+        dup = NameRecord.gen(:domain => @record.domain, :host => @record.host, :active => true)
+        assert !dup.valid?
+      end
+
+      should 'allow another duplicate CNAME if inactive' do
+        @record.value = 'example.com'
+        dup = NameRecord.gen(:domain => @record.domain, :host => @record.host, :active => false)
+        assert dup.valid?
       end
     end
 

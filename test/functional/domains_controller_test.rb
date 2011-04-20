@@ -145,7 +145,9 @@ class DomainsControllerTest < ActionController::TestCase
         should assign_to(:domains)
 
         should 'show ALL domains for account' do
-          assert_select 'form.auto-submit option', {:count => @domain.account.domains.size+1}
+          assert_select 'form.auto-submit option' do
+            assert_select '[value=?]', /\d+/, {:count => @domain.account.domains.size}
+          end
         end
       end
 
@@ -185,7 +187,9 @@ class DomainsControllerTest < ActionController::TestCase
         should assign_to(:domains)
 
         should 'show only domains for user' do
-          assert_select 'form.auto-submit option', {:count => @user.domains.size+1}
+          assert_select 'form.auto-submit option' do
+            assert_select '[value=?]', /\d+/, {:count => @user.domains.count}
+          end
         end
       end
     end

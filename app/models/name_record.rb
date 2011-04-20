@@ -17,20 +17,36 @@ class NameRecord
   belongs_to :domain, :required => true
 
   validates_presence_of :distance, :if => lambda {|r| r.type == 'MX'}
+
   validates_format_of :value,
-    :with => /\A([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\Z/,
+    :with => /^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$/,
     :if => lambda {|r| %w{NS MX CNAME}.include? r.type}
+
   validates_format_of :value,
-    :with => /(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/,
+    :with => /^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})$/,
     :if => lambda {|r| r.type == 'A'}
+
   validates_format_of :value,
     :with => /^.*\.in-addr.arpa\.*$/,
     :if => lambda {|r| r.type == 'PTR'}
+
+  # unique CNAME, A, PTR records
+  validates_uniqueness_of :host,
+    :scope => [:domain_id, :active, :type],
+    :if => lambda {|r| %w{CNAME A PTR}.include? r.type}
 
   before :save do
     if !self.host.end_with? self.domain.name
       self.host = "#{self.host.chomp('.')}.#{self.domain.name}"
     end
+  end
+
+  def host=(str)
+    super(str.downcase) unless str.nil?
+  end
+
+  def value=(str)
+    super(str.downcase) unless str.nil?
   end
 
   def ttl=(new_ttl)

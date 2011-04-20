@@ -25,6 +25,18 @@ class Domain
 
   validates_format_of :name, :with => %r{^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$}
 
+  validates_with_block :email_active do
+    if self.email_active && self.name_records.count({:type => 'MX', :active => true}) == 0
+      [false, 'You need some MX records first']
+    else
+      true
+    end
+  end
+
+  def name=(str)
+    super(str.downcase) unless str.nil?
+  end
+
   def passhash=(plain)
     super(Digest::MD5.hexdigest(plain)) unless plain.blank?
   end

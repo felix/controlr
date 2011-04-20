@@ -39,15 +39,28 @@ class DomainTest < Test::Unit::TestCase
     should_not allow_value('100Kb').for(:email_max_quota)
     should_not allow_value('100%').for(:email_max_quota)
 
+    should 'downcase name' do
+      @domain.name = 'UPPERCASE'
+      assert @domain.name == 'uppercase'
+    end
+
     should 'generate tinydns config file' do
       @domain.dns_active = true
-      NameRecord.gen(:domain => @domain)
+      @domain.sync_config_files
       assert File.exists?(File.join(CONFIG['config_file_base'],'tinydns',@domain.name))
+    end
+
+    should 'have one entry in config file for each active record' do
+      @domain.dns_active = true
+      @domain.sync_config_files
+      filename = File.join(CONFIG['config_file_base'],'tinydns',@domain.name)
+      count = %x{wc -l #{filename}}.split.first.to_i
+      assert @domain.name_records.count(:active => true) == count
     end
 
     should 'clear tinydns config file if dns is inactive' do
       @domain.dns_active = false
-      NameRecord.gen(:domain => @domain)
+      @domain.sync_config_files
       assert !File.exists?(File.join(CONFIG['config_file_base'],'tinydns',@domain.name))
     end
 
@@ -59,6 +72,20 @@ class DomainTest < Test::Unit::TestCase
     should 'have default name records created from account' do
       assert @domain.name_records.count > 0
       assert @domain.name_records.count == @domain.account.default_name_records.count
+    end
+
+    should 'require MX records if email is active' do
+      @domain.email_active = true
+      # assuming all MX records are inactive
+      assert !@domain.valid?
+    end
+
+    should 'be valid with at least one MX record and email active' do
+      @domain.email_active = true
+      # assuming all MX records are inactive
+      mx = @domain.name_records.first(:type => 'MX')
+      mx.active = true
+      assert @domain.valid?
     end
   end
 end
