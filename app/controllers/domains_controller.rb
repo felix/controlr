@@ -25,7 +25,6 @@ class DomainsController < ApplicationController
   def show
     @domain = @account.domains.get!(params[:id])
     session[:current_domain_id] = @domain.id if @domain
-    flash[:notice] = t('domains.switch.notice')
 
     respond_to do |format|
       format.html # show.html.erb
