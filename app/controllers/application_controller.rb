@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
 
     authenticate_user!
 
+    store_location
+
     if user_signed_in?
       session[:current_account_id] ||= current_user.account.id
       @account = Account.get(session[:current_account_id])
@@ -39,7 +41,7 @@ class ApplicationController < ActionController::Base
 
   def store_location
     #session[:return_to] = request.fullpath if request.get?
-    session[:return_to] = request.referrer if request.get?
+    session[:return_to] = request.referrer # if request.get?
   end
 
   def redirect_back_or_default(default)

@@ -76,6 +76,7 @@ en:
   layouts:
     application:
       admin: Admin
+      bugs: Found a bug? Please report it.
     dashboard:
       title: Shortcuts
     users:

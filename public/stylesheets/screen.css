@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  font-size: 90%;
   background-color: #efefef;
 }
 a {
@@ -17,10 +18,9 @@ header.page {
   background-color: #ff4010;
 }
 #top-bar {
-  line-height: 22px;
+  line-height: 1.75;
   font-size: .875em;
   color: white;
-  height: 22px;
   text-transform: lowercase;
   background-color: #f04010;
   border-bottom: 1px solid #ea3a08;
@@ -141,7 +141,7 @@ footer.page p {
 
 #flash {
   position: absolute;
-  top: 22px;
+  top: 0;
   left: 50%;
   width: 200px;
   margin-left: -100px;

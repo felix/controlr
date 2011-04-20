@@ -106,7 +106,11 @@ class DomainsController < ApplicationController
     else
       session[:current_domain_id] = params[:id]
       flash[:notice] = t('domains.switch.notice')
-      redirect_to(domain_path(session[:current_domain_id]))
+      if @domain
+        redirect_back_or_default(domain_path(session[:current_domain_id]))
+      else
+        redirect_to(domain_path(session[:current_domain_id]))
+      end
     end
   end
 

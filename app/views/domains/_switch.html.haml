@@ -3,6 +3,7 @@
   = form_tag switch_domains_path, :class => 'auto-submit' do
     %select{:name => 'id'}
       %option{:value => ''}= t('.switchdomain')
+      %option{:value => ''} ---
       - @account.domains.each do |domain|
         - unless domain.new? or !can?(:read, domain)
           %option{:value => domain.id, :selected => (@domain == domain) && 'selected'}= domain.name
