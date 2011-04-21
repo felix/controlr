@@ -2,7 +2,7 @@ jQuery.showFlash = function(type, flash) {
   var msg = $("<li />").addClass(type);
   msg.html(flash);
 
-  jQuery('#flash ul').append(msg);
+  jQuery('#flash ul').prepend(msg);
 
   msg.show('drop', {
     direction:'up'
