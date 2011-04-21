@@ -14,6 +14,17 @@
     /[if lt IE 9]
       %script{:src => 'https://html5shiv.googlecode.com/svn/trunk/html5.js'}
     = yield :head
+    - if flash
+      %script
+        jQuery(document).ready(function() {
+        jQuery('#flash li').each(function(){
+        // HTML placed flash, delete it and then display it!?!?!!
+        var type = $(this).attr('class').split(' ')[0]
+        var flash = $(this).html()
+        $(this).remove();
+        jQuery.showFlash(type,flash);
+        });
+        });
   %body{:class => controller.controller_name}
     %header.page
       #top-bar
@@ -38,18 +49,6 @@
           - else
             = render :partial => 'layouts/account_menu'
       #flash
-        - if flash
-          - content_for :head do
-            %script
-              jQuery(document).ready(function() {
-              jQuery('#flash li').each(function(){
-              // HTML placed flash, delete it and then display it!?!?!!
-              var type = $(this).attr('class').split(' ')[0]
-              var flash = $(this).html()
-              $(this).remove();
-              jQuery.showFlash(type,flash);
-              });
-              });
         %ul
           - flash.each do |t,m|
             %li{:class => t}= m
