@@ -1,24 +1,33 @@
-jQuery.fn.delayFade = function() {
-  return jQuery(this).delay(6000).slideUp();
-}
+jQuery.showFlash = function(type, flash) {
+  var msg = $("<li />").addClass(type);
+  msg.html(flash);
+
+  jQuery('#flash ul').append(msg);
+
+  msg.show('drop', {
+    direction:'up'
+  }, 300)
+  .delay(6000)
+  .hide('drop', {
+    direction: 'up'
+  }, 300, function(){
+    $(this).remove();
+  });
+  return msg;
+};
 
 // process AJAX flash
-jQuery(document).ajaxComplete(function(e, request, opts) { 
-  var flash = '';
+jQuery(document).ajaxComplete(function(e, request, opts) {
   if (flash_alert = request.getResponseHeader('X-Message-Alert')) {
-    flash += '<li class="alert">'+flash_alert+'</li>';
+    jQuery.showFlash('alert',flash_alert);
   }
   if (flash_notice = request.getResponseHeader('X-Message-Notice')) {
-    flash += '<li class="notice">'+flash_notice+'</li>';
+    jQuery.showFlash('notice',flash_notice);
   }
-  jQuery('#flash ul').append(jQuery(flash).delayFade());
 });
 
 jQuery(document).ready(function() {
   jQuery('time.relative').timeago();
-
-  // HTML placed flash
-  jQuery('#flash li').delayFade();
 
   // auto submit forms
   jQuery('form.auto-submit select').change(function(){

@@ -6,6 +6,7 @@
     = stylesheet_link_tag 'reset'
     = stylesheet_link_tag 'screen'
     %script{:src => 'https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'}
+    %script{:src => 'https://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js'}
     = javascript_include_tag :defaults
     = javascript_include_tag 'jquery.timeago'
     = csrf_meta_tag
@@ -37,6 +38,18 @@
           - else
             = render :partial => 'layouts/account_menu'
       #flash
+        - if flash
+          - content_for :head do
+            %script
+              jQuery(document).ready(function() {
+              jQuery('#flash li').each(function(){
+              // HTML placed flash, delete it and then display it!?!?!!
+              var type = $(this).attr('class').split(' ')[0]
+              var flash = $(this).html()
+              $(this).remove();
+              jQuery.showFlash(type,flash);
+              });
+              });
         %ul
           - flash.each do |t,m|
             %li{:class => t}= m
