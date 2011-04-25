@@ -14,8 +14,9 @@ class ApplicationController < ActionController::Base
   # accessed by JS later
   def flash_to_headers
     return unless request.xhr?
-    response.headers['X-Message-Notice'] = flash[:notice] unless flash[:notice].blank?
-    response.headers['X-Message-Alert'] = flash[:alert] unless flash[:alert].blank?
+    flash.keys.each do |type|
+      response.headers["X-Message-#{type.to_s.capitalize}"] = flash[type] unless flash[type].blank?
+    end
     flash.discard
   end
 

@@ -1,15 +1,13 @@
 source 'http://rubygems.org'
 
-RAILS_VERSION = '~> 3.0.6'
+RAILS_VERSION = '~> 3.0.7'
 DM_VERSION    = '~> 1.1.0'
 
 gem 'activesupport',      RAILS_VERSION, :require => 'active_support'
 gem 'actionpack',         RAILS_VERSION, :require => 'action_pack'
 gem 'actionmailer',       RAILS_VERSION, :require => 'action_mailer'
-gem 'rails',              RAILS_VERSION
-gem 'i18n'
-
-gem 'jquery-rails', '>= 0.2.6'
+gem 'activeresource',     RAILS_VERSION, :require => 'active_resource'
+gem 'railties',           RAILS_VERSION
 
 gem 'dm-rails',             DM_VERSION
 gem 'dm-mysql-adapter',     DM_VERSION
@@ -22,8 +20,8 @@ gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 
-gem 'devise'
-gem 'dm-devise' #, :git => 'git://github.com/dkubb/dm-devise.git'
+gem 'devise', '= 1.3.0'
+gem 'dm-devise'
 gem 'cancan'
 
 gem 'rails3-generators'
