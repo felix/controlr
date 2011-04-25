@@ -20,7 +20,7 @@ gem 'dm-aggregates',        DM_VERSION
 gem 'dm-timestamps',        DM_VERSION
 gem 'dm-observer',          DM_VERSION
 
-gem 'devise', '= 1.3.0'
+gem 'devise'
 gem 'dm-devise'
 gem 'cancan'
 

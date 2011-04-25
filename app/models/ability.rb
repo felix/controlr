@@ -17,7 +17,7 @@ class Ability
 
     elsif user.role? :administrator
       # can edit account
-      can :update, Account do |resource|
+      can [:show,:update], Account do |resource|
         resource == user.account
       end
 

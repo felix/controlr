@@ -9,7 +9,7 @@ require 'rails/test_help'
 
 require 'shoulda/datamapper'
 
-class ActiveSupport::TestCase
+class ActionController::TestCase
   include Devise::TestHelpers
 end
 

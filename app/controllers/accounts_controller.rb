@@ -1,6 +1,11 @@
 class AccountsController < ApplicationController
   authorize_resource
 
+  before_filter do
+    session[:current_domain_id] = nil
+    @domain = nil if @domain
+  end
+
   rescue_from DataMapper::ObjectNotFoundError do |exception|
     redirect_to root_path, :alert => t('accounts.missing')
   end
@@ -19,9 +24,9 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.xml
   def show
-    @account = Account.get!(params[:id])
     # this is the only action that selects the current account for super
     session[:current_account_id] = @account.id || current_user.account.id
+    @account = Account.get(session[:current_account_id])
 
     respond_to do |format|
       format.html # show.html.erb

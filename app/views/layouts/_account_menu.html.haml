@@ -1,9 +1,8 @@
 %ul
-  = create_tab t('dashboard.tab'), root_path
   - if can? :manage, Account
     = create_tab t('accounts.tab'), accounts_path
-  - elsif can? :update, Account
-    = create_tab t('accounts.tab'), edit_account_path(@account)
+  - else
+    = create_tab t('accounts.dashboard'), root_path
   - if can? :manage, User
     = create_tab t('users.tab'), users_path
   - if can? :read, Domain

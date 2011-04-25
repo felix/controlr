@@ -9,8 +9,6 @@ Controlr::Application.routes.draw do
     :sign_up => 'signup'
   }
 
-  resource :dashboard, :only => [:index]
-
   resources :accounts
 
   resources :domains do
@@ -71,6 +69,6 @@ Controlr::Application.routes.draw do
     end
   end
 
-  root :to => 'dashboard#index'
+  root :to => 'accounts#show'
 
 end

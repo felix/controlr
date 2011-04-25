@@ -18,6 +18,9 @@ en:
   empty: '[empty]'
 
   missing: The requested resource does not exist
+  devise:
+    failure:
+      unauthenticated: Please sign in first
   unauthorized:
     manage:
       all: 'Not authorized to %{action} %{subject}.'
@@ -77,8 +80,6 @@ en:
     application:
       admin: Admin
       bugs: Found a bug? Please report it.
-    dashboard:
-      title: Shortcuts
     users:
       title: User Actions
       new: New User
@@ -122,14 +123,6 @@ en:
       new: New Role
       report: Report
   # views
-  dashboard:
-    tab: Dashboard
-    index:
-      title: 'Welcome %{name}'
-      mail: Mail
-      aliases: '%{count} aliases'
-      mailboxes: '%{count} mailboxes'
-      size: '%{size} total bytes'
   roles:
     report:
       title: Permission report
@@ -150,7 +143,7 @@ en:
         role: Administrators can manage all domains. Users can manage selected domains.
   domains:
     tab: Domains
-    home: Dashboard
+    home: Domain
     show:
 # common to most summaries
       status: Status
@@ -250,12 +243,15 @@ en:
       notice: Mailbox de-activated
   accounts:
     tab: Account
+    dashboard: Dashboard
     index:
       title: Accounts
     new:
       title: New Account
     edit:
       title: 'Editing %{name}'
+    show:
+      title: Welcome
   name_records: &name_records
     tab: DNS
     index:

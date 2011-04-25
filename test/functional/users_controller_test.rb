@@ -15,7 +15,7 @@ class UsersControllerTest < ActionController::TestCase
 
     context 'while authed as admin' do
       setup do
-        sign_in @admin
+        sign_in :user, @admin
       end
 
       context 'on GET to :index' do
